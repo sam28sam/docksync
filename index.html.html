@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DockSync — Dock Scheduling Software | Stop Missed Slots & Waiting Trucks</title>
+<meta name="description" content="Replace spreadsheets, phone calls and missed delivery slots with one intelligent dock scheduling platform. Supplier self-booking, bay management, QR driver check-in, live reporting. Free 30-day trial.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Barlow:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ── RESET ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Barlow',sans-serif;font-size:16px;line-height:1.6;color:#111110;background:#fff;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+
+/* ── TOKENS ── */
+:root{
+  --ink:#111110;--ink2:#3d3c3a;--ink3:#6b6a67;--ink4:#9a9894;
+  --bg:#fff;--bg2:#f7f7f5;--bg3:#f0efec;--bg4:#e6e5e1;
+  --line:rgba(0,0,0,0.07);--line2:rgba(0,0,0,0.13);--line3:rgba(0,0,0,0.22);
+  --dk:#0e0f0f;--dk2:#141516;--dk3:#1a1c1d;--dk4:#222426;--dk5:#2c2f31;
+  --dkline:rgba(255,255,255,0.07);--dkline2:rgba(255,255,255,0.13);
+  --dw:#f0eeea;--dw2:#b8b4ae;--dw3:#7a7672;--dw4:#504e4b;
+  --amber:#e8960c;--amberh:#f5a820;--amberbg:rgba(232,150,12,.10);--amberbdr:rgba(232,150,12,.25);
+  --green:#1e9e5e;--greenbg:rgba(30,158,94,.10);
+  --red:#d63b3b;--redbg:rgba(214,59,59,.10);
+  --blue:#2e7dd1;--bluebg:rgba(46,125,209,.10);
+  --r:6px;--rl:12px;--rxl:18px;
+}
+
+/* ── LAYOUT ── */
+.wrap{max-width:1140px;margin:0 auto;padding:0 28px}
+.wrap-sm{max-width:820px;margin:0 auto;padding:0 28px}
+section{padding:80px 0}
+
+/* ── TYPE ── */
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);margin-bottom:16px}
+.eyebrow::before{content:'';width:20px;height:1px;background:var(--amber);flex-shrink:0}
+.d-xl{font-family:'Barlow Condensed',sans-serif;font-weight:900;line-height:.93;letter-spacing:-.01em;text-transform:uppercase;font-size:clamp(52px,8vw,108px)}
+.d-lg{font-family:'Barlow Condensed',sans-serif;font-weight:800;line-height:.95;letter-spacing:-.01em;text-transform:uppercase;font-size:clamp(32px,4.5vw,58px)}
+.d-md{font-family:'Barlow Condensed',sans-serif;font-weight:700;line-height:1.05;text-transform:uppercase;font-size:clamp(20px,2.5vw,30px)}
+
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;gap:9px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;letter-spacing:.05em;text-transform:uppercase;padding:11px 22px;border-radius:var(--r);border:none;cursor:pointer;transition:all .17s;white-space:nowrap;text-decoration:none}
+.btn svg{width:14px;height:14px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.btn-amber{background:var(--amber);color:#1a0a00}
+.btn-amber:hover{background:var(--amberh);transform:translateY(-1px);box-shadow:0 4px 14px rgba(232,150,12,.28)}
+.btn-dark{background:var(--ink);color:#fff}
+.btn-dark:hover{background:var(--ink2);transform:translateY(-1px)}
+.btn-outline{background:transparent;color:var(--ink2);border:1.5px solid var(--line3)}
+.btn-outline:hover{background:var(--bg2)}
+.btn-outline-lt{background:transparent;color:var(--dw);border:1.5px solid var(--dkline2)}
+.btn-outline-lt:hover{background:var(--dk3)}
+.btn-lg{padding:14px 28px;font-size:15px;border-radius:var(--rl)}
+
+/* ── CHIPS ── */
+.chip{display:inline-flex;align-items:center;gap:5px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:3px}
+.chip::before{content:'';width:5px;height:5px;border-radius:50%;background:currentColor}
+.chip-g{background:var(--greenbg);color:var(--green)}
+.chip-a{background:var(--amberbg);color:var(--amber)}
+.chip-r{background:var(--redbg);color:var(--red)}
+.chip-b{background:var(--bluebg);color:var(--blue)}
+
+/* ── NAV ── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.95);backdrop-filter:blur(14px);border-bottom:1px solid transparent;transition:border-color .25s,box-shadow .25s}
+.nav.sc{border-color:var(--line);box-shadow:0 1px 20px rgba(0,0,0,.06)}
+.nav-i{display:flex;align-items:center;height:62px;gap:6px}
+.logo{display:flex;align-items:center;gap:9px;margin-right:28px;text-decoration:none}
+.logo-mark{width:28px;height:28px;border:1.5px solid var(--amber);border-radius:5px;display:flex;align-items:center;justify-content:center}
+.logo-mark svg{width:14px;height:14px;stroke:var(--amber);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.logo-word{font-family:'Barlow Condensed',sans-serif;font-size:19px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--ink)}
+.nav-links{display:flex;align-items:center;gap:2px;flex:1}
+.nl{font-family:'Barlow',sans-serif;font-size:13px;color:var(--ink3);padding:6px 11px;border-radius:var(--r);transition:all .15s}
+.nl:hover{color:var(--ink2);background:var(--bg2)}
+.nav-right{display:flex;align-items:center;gap:10px;margin-left:auto}
+.nav-util{font-size:12px;color:var(--ink4);transition:color .15s}
+.nav-util:hover{color:var(--ink3)}
+.nav-sep{width:1px;height:16px;background:var(--line2)}
+
+/* ── HERO ── */
+.hero{padding-top:62px;min-height:100vh;background:var(--bg);position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end}
+.hero::before{content:'';position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(circle,rgba(0,0,0,.055) 1px,transparent 1px);background-size:28px 28px;-webkit-mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 30%,transparent 100%);mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 30%,transparent 100%)}
+.hero::after{content:'';position:absolute;top:-120px;left:-180px;width:650px;height:650px;pointer-events:none;background:radial-gradient(circle,rgba(232,150,12,.055) 0%,transparent 65%)}
+.hero-body{position:relative;z-index:1;padding:68px 0 0}
+.hero-cols{display:grid;grid-template-columns:1fr 400px;gap:56px;align-items:center;padding-bottom:56px;border-bottom:1px solid var(--line)}
+.hero-h1{margin-bottom:20px}
+.hero-h1 em{font-style:normal;color:var(--amber);display:block}
+.hero-desc{font-size:17px;color:var(--ink3);line-height:1.7;max-width:480px;margin-bottom:26px}
+.hero-ctas{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.hero-micro{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink4)}
+.hero-micro span{display:flex;align-items:center;gap:5px}
+.hero-micro svg{width:11px;height:11px;stroke:var(--green);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+
+/* ── HERO FORM CARD ── */
+.hfc{background:var(--bg);border-radius:var(--rxl);border:1.5px solid var(--line2);box-shadow:0 2px 8px rgba(0,0,0,.05),0 12px 40px rgba(0,0,0,.08);padding:26px;position:relative}
+.hfc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--amber);border-radius:var(--rxl) var(--rxl) 0 0}
+.hfc-title{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;text-transform:uppercase;color:var(--ink);margin-bottom:3px}
+.hfc-sub{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink4);margin-bottom:20px;letter-spacing:.04em}
+.fld{margin-bottom:12px}
+.fld label{display:block;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;color:var(--ink4);letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px}
+.fld input,.fld select{width:100%;background:var(--bg2);border:1.5px solid var(--line2);border-radius:var(--r);padding:10px 13px;color:var(--ink);font-family:'Barlow',sans-serif;font-size:14px;transition:border-color .15s;outline:none;appearance:none}
+.fld input::placeholder{color:var(--ink4)}
+.fld input:focus,.fld select:focus{border-color:var(--amber);background:var(--bg)}
+.fld select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239a9894' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 11px center;padding-right:32px}
+.f-submit{width:100%;margin-top:4px;padding:13px;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;background:var(--amber);color:#1a0a00;border:none;border-radius:var(--r);cursor:pointer;transition:all .17s}
+.f-submit:hover{background:var(--amberh);transform:translateY(-1px)}
+.f-note{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink4);text-align:center;margin-top:10px;line-height:1.5}
+
+/* ── HERO STATS ── */
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr)}
+.hstat{padding:22px 18px;border-right:1px solid var(--line);transition:background .2s;cursor:default}
+.hstat:last-child{border-right:none}
+.hstat:hover{background:var(--bg2)}
+.hstat-num{font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:500;color:var(--ink);letter-spacing:-.02em;line-height:1;margin-bottom:5px}
+.hstat-num em{font-style:normal;font-size:14px;color:var(--amber)}
+.hstat-lbl{font-size:12px;color:var(--ink4);line-height:1.4}
+
+/* ── MARQUEE ── */
+.mq-sec{padding:0;border-bottom:1px solid var(--line);overflow:hidden}
+.mq-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink4);text-align:center;padding:14px 0 12px}
+.mq-track{display:flex}
+.mq-items{display:flex;flex-shrink:0;animation:mq 26s linear infinite}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-100%)}}
+.mq-item{padding:0 34px;border-right:1px solid var(--line);font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink4);white-space:nowrap;line-height:2.8}
+
+/* ── PROBLEM ── */
+.prob-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:52px}
+.prob-cell{background:var(--bg);padding:30px 26px;transition:background .2s}
+.prob-cell:hover{background:var(--bg2)}
+.prob-n{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink4);letter-spacing:.1em;margin-bottom:14px}
+.prob-icon{width:36px;height:36px;border-radius:var(--r);background:var(--redbg);display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+.prob-icon svg{width:18px;height:18px;stroke:var(--red);fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.prob-cell h3{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;text-transform:uppercase;color:var(--ink);margin-bottom:7px}
+.prob-cell p{font-size:14px;color:var(--ink3);line-height:1.65}
+
+/* ── DARK PRODUCT ZONE ── */
+.dark-zone{background:var(--dk);padding:80px 0}
+.prod-header{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:end;margin-bottom:48px}
+.ppts{display:flex;flex-direction:column;gap:24px}
+.ppt{display:flex;gap:14px;align-items:flex-start}
+.ppt-n{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--amber);letter-spacing:.06em;padding-top:2px;min-width:24px}
+.ppt h4{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;text-transform:uppercase;color:var(--dw);margin-bottom:4px}
+.ppt p{font-size:14px;color:var(--dw3);line-height:1.6}
+
+/* ── APP MOCKUP ── */
+.app-frame{background:var(--dk3);border-radius:var(--rl);border:1px solid var(--dkline2);overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.3)}
+.app-chrome{background:var(--dk4);padding:9px 13px;border-bottom:1px solid var(--dkline);display:flex;align-items:center;gap:7px}
+.app-dots{display:flex;gap:5px}
+.app-dot{width:9px;height:9px;border-radius:50%}
+.app-addr{flex:1;background:var(--dk5);border-radius:4px;margin:0 8px;padding:4px 10px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--dw4);display:flex;align-items:center;gap:5px}
+.app-addr svg{width:9px;height:9px;stroke:var(--green);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.app-inner{display:flex;height:420px;overflow:hidden}
+.app-sidebar{width:174px;background:var(--dk2);border-right:1px solid var(--dkline);flex-shrink:0;padding:10px 8px;display:flex;flex-direction:column;gap:2px}
+.app-logo-row{display:flex;align-items:center;gap:6px;padding:6px 8px 12px;border-bottom:1px solid var(--dkline);margin-bottom:6px}
+.app-logo-box{width:22px;height:22px;background:#4f46e5;border-radius:4px;display:flex;align-items:center;justify-content:center}
+.app-logo-box svg{width:11px;height:11px;stroke:#fff;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.app-logo-txt{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--dw)}
+.app-nav{display:flex;align-items:center;gap:7px;padding:7px 9px;border-radius:5px;font-size:11px;color:var(--dw3);cursor:pointer;transition:all .15s;white-space:nowrap}
+.app-nav svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.app-nav:hover{background:var(--dk3);color:var(--dw2)}
+.app-nav.sel{background:#4f46e5;color:#fff}
+.app-main{flex:1;background:#f0f2f5;overflow-y:auto;padding:14px 16px}
+.app-page-title{font-size:16px;font-weight:600;color:#111;margin-bottom:12px;font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.03em}
+.kpi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:10px}
+.kpi-card{background:#fff;border-radius:7px;padding:9px 11px;border:1px solid rgba(0,0,0,.07);display:flex;align-items:center;gap:9px}
+.kpi-icon{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.kpi-icon svg{width:14px;height:14px;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.kpi-lbl{font-size:9px;color:#9a9894;margin-bottom:2px;letter-spacing:.03em}
+.kpi-val{font-size:14px;font-weight:600;color:#111}
+.app-sec-title{font-size:11px;font-weight:600;color:#3d3c3a;margin-bottom:5px;text-transform:uppercase;letter-spacing:.06em;font-family:'JetBrains Mono',monospace}
+.app-table{width:100%;border-collapse:collapse;background:#fff;border-radius:7px;overflow:hidden;border:1px solid rgba(0,0,0,.07)}
+.app-table th{background:#f7f8fa;font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:#9a9894;padding:6px 9px;text-align:left;border-bottom:1px solid rgba(0,0,0,.07)}
+.app-table td{font-size:11px;color:#3d3c3a;padding:6px 9px;border-bottom:1px solid rgba(0,0,0,.05)}
+.app-table tr:last-child td{border-bottom:none}
+.app-badge{display:inline-block;padding:2px 7px;border-radius:9px;font-size:9px;font-weight:500}
+.app-badge-g{background:#d4f3e6;color:#076640}
+.app-badge-a{background:#fff3d4;color:#9a6800}
+.app-badge-b{background:#dbeafe;color:#1d4ed8}
+
+/* ── FEATURES ── */
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:52px}
+.feat{background:var(--bg2);padding:26px 22px;transition:background .2s}
+.feat:hover{background:var(--bg)}
+.feat-icon{width:36px;height:36px;border-radius:var(--r);background:var(--amberbg);border:1px solid var(--amberbdr);display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.feat-icon svg{width:17px;height:17px;stroke:var(--amber);fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.feat h3{font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:700;text-transform:uppercase;color:var(--ink);margin-bottom:6px}
+.feat p{font-size:13px;color:var(--ink3);line-height:1.65}
+
+/* ── QR HIGHLIGHT ── */
+.qr-highlight{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;margin-top:52px;padding:36px;background:var(--bg3);border:1px solid var(--line);border-radius:var(--rxl)}
+.qr-highlight h3{font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:800;text-transform:uppercase;color:var(--ink);margin-bottom:12px}
+.qr-highlight p{font-size:14px;color:var(--ink3);line-height:1.7;margin-bottom:16px}
+.qr-mock{background:var(--bg);border-radius:var(--rl);border:1px solid var(--line2);padding:24px;text-align:center}
+.qr-mock p{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink4);margin-top:8px}
+
+/* ── PRICING ── */
+.pt-toggle{display:inline-flex;background:var(--bg3);border-radius:40px;padding:4px;margin-top:18px}
+.pt-btn{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;padding:7px 18px;border-radius:36px;border:none;cursor:pointer;background:transparent;color:var(--ink4);transition:all .2s}
+.pt-btn.active{background:var(--bg);color:var(--ink);box-shadow:0 1px 4px rgba(0,0,0,.1)}
+.pt-save{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;color:var(--green);background:var(--greenbg);padding:3px 8px;border-radius:10px;margin-left:8px;display:none}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:32px;align-items:start}
+.plan{background:var(--bg);border-radius:var(--rxl);border:1.5px solid var(--line2);padding:26px;position:relative;transition:box-shadow .2s}
+.plan:hover{box-shadow:0 4px 24px rgba(0,0,0,.07)}
+.plan-featured{border-color:var(--amber);border-width:2px;box-shadow:0 4px 28px rgba(232,150,12,.12)}
+.plan-badge{position:absolute;top:-11px;left:50%;transform:translateX(-50%);font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;background:var(--amber);color:#1a0a00;padding:3px 14px;border-radius:20px;white-space:nowrap}
+.plan-name{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;text-transform:uppercase;color:var(--ink);margin-bottom:5px}
+.plan-desc{font-size:12px;color:var(--ink3);margin-bottom:16px;line-height:1.5}
+.plan-pn{font-family:'JetBrains Mono',monospace;font-size:38px;font-weight:500;color:var(--ink);letter-spacing:-.02em;line-height:1}
+.plan-pn sup{font-size:18px;vertical-align:top;margin-top:5px;display:inline-block}
+.plan-pn sub{font-size:13px;vertical-align:baseline;color:var(--ink3)}
+.plan-per{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink4);margin-top:4px;margin-bottom:16px}
+.plan-custom{font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:700;text-transform:uppercase;color:var(--ink);margin-bottom:4px}
+.ann-save{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--green);background:var(--greenbg);padding:2px 7px;border-radius:8px;display:none;margin-top:3px}
+.plan-div{height:1px;background:var(--line);margin:14px 0}
+.plan-ul{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:20px}
+.plan-ul li{display:flex;align-items:flex-start;gap:8px;font-size:12px;line-height:1.5}
+.plan-ul li svg{width:12px;height:12px;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;margin-top:2px}
+.plan-ul .ok{color:var(--ink2)}.plan-ul .ok svg{stroke:var(--green)}
+.plan-ul .no{color:var(--ink4)}.plan-ul .no svg{stroke:var(--ink4)}
+.plan-cta{width:100%;padding:11px;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;border:none;border-radius:var(--r);cursor:pointer;transition:all .17s;display:block;text-align:center;text-decoration:none}
+.pc-amber{background:var(--amber);color:#1a0a00}.pc-amber:hover{background:var(--amberh)}
+.pc-dark{background:var(--ink);color:#fff}.pc-dark:hover{background:var(--ink2)}
+.pc-outline{background:transparent;color:var(--ink2);border:1.5px solid var(--line3)}.pc-outline:hover{background:var(--bg2)}
+.plan-note{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink4);text-align:center;margin-top:8px}
+.pnote{margin-top:24px;padding:14px 18px;background:var(--bg2);border-radius:var(--rl);border:1px solid var(--line);display:flex;align-items:flex-start;gap:12px}
+.pnote svg{width:17px;height:17px;stroke:var(--amber);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;margin-top:2px}
+.pnote p{font-size:13px;color:var(--ink3);line-height:1.55;margin:0}
+
+/* ── TESTIMONIALS ── */
+.proof-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:44px}
+.testi{background:var(--bg);border-radius:var(--rl);border:1px solid var(--line2);padding:22px;display:flex;flex-direction:column;gap:14px}
+.testi-stars{color:var(--amber);font-size:12px;letter-spacing:1px}
+.testi-q{font-size:14px;color:var(--ink2);line-height:1.7;font-style:italic;flex:1}
+.testi-q::before{content:'\201C';font-size:20px;line-height:0;vertical-align:-7px;color:var(--amber);margin-right:2px;font-style:normal;font-family:Georgia,serif}
+.testi-by{display:flex;align-items:center;gap:10px}
+.testi-av{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;color:#fff;flex-shrink:0}
+.testi-nm{font-size:12px;font-weight:500;color:var(--ink)}
+.testi-rl{font-size:11px;color:var(--ink4)}
+
+/* ── TEAM ── */
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:44px}
+.team-card{background:var(--bg2);border-radius:var(--rl);border:1px solid var(--line);padding:22px;transition:border-color .2s}
+.team-card:hover{border-color:var(--line3)}
+.team-ini{width:42px;height:42px;border-radius:var(--r);display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:800;color:#fff;margin-bottom:12px}
+.team-card h4{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;text-transform:uppercase;color:var(--ink);margin-bottom:2px}
+.team-role{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--amber);margin-bottom:8px}
+.team-card p{font-size:13px;color:var(--ink3);line-height:1.65}
+.team-sector{display:inline-flex;align-items:center;gap:5px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink4);margin-top:10px}
+.team-sector::before{content:'';width:14px;height:1px;background:var(--ink4)}
+
+/* ── FAQ ── */
+.faq-list{margin-top:44px;border-top:1px solid var(--line)}
+.faq-item{border-bottom:1px solid var(--line)}
+.faq-q{display:flex;align-items:center;gap:18px;padding:16px 0;cursor:pointer}
+.faq-qn{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink4);letter-spacing:.1em;min-width:24px}
+.faq-qt{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;text-transform:uppercase;color:var(--ink);flex:1}
+.faq-tog{width:24px;height:24px;border-radius:50%;border:1px solid var(--line2);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
+.faq-tog svg{width:10px;height:10px;stroke:var(--ink3);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;transition:transform .25s}
+.faq-item.open .faq-tog{background:var(--amberbg);border-color:var(--amberbdr)}
+.faq-item.open .faq-tog svg{stroke:var(--amber);transform:rotate(45deg)}
+.faq-a{font-size:15px;color:var(--ink3);line-height:1.7;max-height:0;overflow:hidden;transition:max-height .35s ease,padding .2s;padding-left:42px}
+.faq-item.open .faq-a{max-height:240px;padding-bottom:18px}
+
+/* ── FINAL CTA ── */
+.fc-inner{display:grid;grid-template-columns:1fr 400px;gap:64px;align-items:start}
+.fc-left .d-lg{color:var(--dw);margin-bottom:16px}
+.fc-left>p{font-size:16px;color:var(--dw3);line-height:1.7;margin-bottom:26px}
+.fc-list{list-style:none;display:flex;flex-direction:column;gap:9px}
+.fc-list li{display:flex;align-items:center;gap:9px;font-size:14px;color:var(--dw3)}
+.fc-list li svg{width:12px;height:12px;stroke:var(--green);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.fc-form{background:var(--dk3);border-radius:var(--rxl);border:1px solid var(--dkline2);padding:28px;position:relative}
+.fc-form::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--amber);border-radius:var(--rxl) var(--rxl) 0 0}
+.fc-form-title{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;text-transform:uppercase;color:var(--dw);margin-bottom:3px}
+.fc-form-sub{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--dw4);margin-bottom:18px;letter-spacing:.04em}
+.dfld{margin-bottom:12px}
+.dfld label{display:block;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;color:var(--dw4);letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px}
+.dfld input,.dfld select{width:100%;background:var(--dk5);border:1px solid var(--dkline2);border-radius:var(--r);padding:10px 13px;color:var(--dw);font-family:'Barlow',sans-serif;font-size:14px;transition:border-color .15s;outline:none;appearance:none}
+.dfld input::placeholder{color:var(--dw4)}
+.dfld input:focus,.dfld select:focus{border-color:var(--amber)}
+.dfld select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23504e4b' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 11px center;padding-right:32px}
+.fc-submit{width:100%;margin-top:4px;padding:12px;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;background:var(--amber);color:#1a0a00;border:none;border-radius:var(--r);cursor:pointer;transition:all .17s}
+.fc-submit:hover{background:var(--amberh);transform:translateY(-1px)}
+.fc-note{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--dw4);text-align:center;margin-top:10px;line-height:1.5}
+
+/* ── FOOTER ── */
+.footer{background:var(--dk2);padding:52px 0 28px;border-top:1px solid var(--dkline)}
+.footer-top{display:grid;grid-template-columns:2.2fr 1fr 1fr 1fr;gap:44px;padding-bottom:36px;border-bottom:1px solid var(--dkline)}
+.f-brand-name{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--dw);margin-bottom:8px}
+.f-brand-desc{font-size:13px;color:var(--dw4);line-height:1.65;max-width:220px}
+.f-badge{display:inline-flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--dw4);margin-top:14px;letter-spacing:.05em}
+.f-badge svg{width:11px;height:11px;stroke:var(--green);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.f-col-title{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--dw4);letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
+.f-col a{display:block;font-size:13px;color:var(--dw4);margin-bottom:9px;transition:color .15s}
+.f-col a:hover{color:var(--dw2)}
+.footer-btm{padding-top:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.footer-btm p{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--dw4);letter-spacing:.04em}
+.footer-btm-links{display:flex;gap:18px}
+.footer-btm-links a{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--dw4);transition:color .15s}
+.footer-btm-links a:hover{color:var(--dw2)}
+
+/* ── SCROLL REVEAL ── */
+.rv{opacity:0;transform:translateY(20px);transition:opacity .55s ease,transform .55s ease}
+.rv.in{opacity:1;transform:translateY(0)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:960px){
+  .hero-cols,.prod-header,.fc-inner{grid-template-columns:1fr;gap:36px}
+  .hero-stats{grid-template-columns:repeat(2,1fr)}
+  .hstat:nth-child(2){border-right:none}
+  .hstat:nth-child(n+3){border-top:1px solid var(--line)}
+  .prob-grid,.feat-grid,.proof-grid,.team-grid{grid-template-columns:1fr 1fr}
+  .pricing-grid{grid-template-columns:1fr;max-width:400px;margin-left:auto;margin-right:auto}
+  .qr-highlight{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr 1fr}
+  .nav-links{display:none}
+  .app-sidebar{display:none}
+}
+@media(max-width:600px){
+  section{padding:56px 0}
+  .dark-zone{padding:56px 0}
+  .prob-grid,.feat-grid,.proof-grid,.team-grid{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="wrap">
+    <div class="nav-i">
+      <a href="#top" class="logo">
+        <div class="logo-mark"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="13" rx="2"/><path d="M7 7V5a3 3 0 016 0v2"/><line x1="12" y1="12" x2="12" y2="15"/></svg></div>
+        <span class="logo-word">DockSync</span>
+      </a>
+      <div class="nav-links">
+        <a href="#product" class="nl">Product</a>
+        <a href="#features" class="nl">Features</a>
+        <a href="#pricing" class="nl">Pricing</a>
+        <a href="#faq" class="nl">FAQ</a>
+      </div>
+      <div class="nav-right">
+        <a href="#" class="nav-util">Warehouse login</a>
+        <div class="nav-sep"></div>
+        <a href="#" class="nav-util">Carrier login</a>
+        <a href="#trial" class="btn btn-amber" style="font-size:13px;padding:8px 16px">Start free trial</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-body">
+      <div class="hero-cols">
+        <div>
+          <div class="eyebrow">Dock scheduling software</div>
+          <h1 class="d-xl hero-h1">Zero<br>missed<br><em>slots.</em></h1>
+          <p class="hero-desc">Replace spreadsheets, phone calls and manual coordination with one intelligent dock scheduling platform. Every bay. Every booking. In real time.</p>
+          <div class="hero-ctas">
+            <a href="#trial" class="btn btn-amber btn-lg">Start free — 30 days</a>
+            <a href="#product" class="btn btn-outline btn-lg">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16" fill="currentColor" stroke="none"/></svg>
+              See the product
+            </a>
+          </div>
+          <div class="hero-micro">
+            <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>No card needed</span>
+            <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Live in 5 minutes</span>
+            <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>No IT required</span>
+          </div>
+        </div>
+        <!-- HERO FORM -->
+        <div class="hfc">
+          <div class="hfc-title">Start free trial</div>
+          <div class="hfc-sub">No payment required · Access sent instantly</div>
+          <form id="heroForm">
+            <div class="fld"><label for="h-name">Your name</label><input type="text" id="h-name" placeholder="Jane Smith" autocomplete="name"></div>
+            <div class="fld"><label for="h-email">Work email</label><input type="email" id="h-email" placeholder="jane@yourwarehouse.com" autocomplete="email"></div>
+            <div class="fld"><label for="h-company">Company</label><input type="text" id="h-company" placeholder="Acme Logistics Ltd" autocomplete="organization"></div>
+            <div class="fld"><label for="h-bays">Dock size</label>
+              <select id="h-bays">
+                <option value="" disabled selected>How many bays?</option>
+                <option>1–5 bays</option><option>6–15 bays</option>
+                <option>16–30 bays</option><option>30+ bays</option>
+              </select>
+            </div>
+            <button type="submit" class="f-submit" id="heroBtn">Get free access now →</button>
+          </form>
+          <p class="f-note">UK-hosted · GDPR compliant · Cancel anytime</p>
+        </div>
+      </div>
+      <!-- STATS BAR -->
+      <div class="hero-stats">
+        <div class="hstat"><div class="hstat-num">40<em>+</em></div><div class="hstat-lbl">Warehouse teams<br>across Europe</div></div>
+        <div class="hstat"><div class="hstat-num">4.2<em>h</em></div><div class="hstat-lbl">Admin saved per<br>team, per day</div></div>
+        <div class="hstat"><div class="hstat-num">98<em>%</em></div><div class="hstat-lbl">On-time accuracy<br>after 30 days¹</div></div>
+        <div class="hstat"><div class="hstat-num">&lt;5<em>min</em></div><div class="hstat-lbl">Setup to first<br>live booking</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="mq-sec" aria-hidden="true">
+  <p class="mq-label">Industries using DockSync</p>
+  <div class="mq-track">
+    <div class="mq-items">
+      <div class="mq-item">Retail &amp; FMCG</div><div class="mq-item">Pharmaceutical</div>
+      <div class="mq-item">Aviation Ground Ops</div><div class="mq-item">Automotive &amp; Parts</div>
+      <div class="mq-item">3PL &amp; Logistics</div><div class="mq-item">Food &amp; Beverage</div>
+      <div class="mq-item">Construction &amp; Materials</div><div class="mq-item">E-commerce Fulfilment</div>
+    </div>
+    <div class="mq-items" aria-hidden="true">
+      <div class="mq-item">Retail &amp; FMCG</div><div class="mq-item">Pharmaceutical</div>
+      <div class="mq-item">Aviation Ground Ops</div><div class="mq-item">Automotive &amp; Parts</div>
+      <div class="mq-item">3PL &amp; Logistics</div><div class="mq-item">Food &amp; Beverage</div>
+      <div class="mq-item">Construction &amp; Materials</div><div class="mq-item">E-commerce Fulfilment</div>
+    </div>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section class="rv" style="background:var(--bg)">
+  <div class="wrap">
+    <div class="eyebrow">The problem</div>
+    <h2 class="d-lg" style="max-width:560px">Manual scheduling costs you every day</h2>
+    <div class="prob-grid">
+      <div class="prob-cell"><div class="prob-n">01 / 04</div><div class="prob-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><h3>Missed &amp; late slots</h3><p>Manual booking creates missed time slots, idle drivers queuing at your gate, and constant rescheduling that costs money every single day.</p></div>
+      <div class="prob-cell"><div class="prob-n">02 / 04</div><div class="prob-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><h3>Unpredictable inbound</h3><p>Peaks and gaps create bottlenecks, under-utilised labour, and operational stress your team cannot plan around. Visibility ends at the inbox.</p></div>
+      <div class="prob-cell"><div class="prob-n">03 / 04</div><div class="prob-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><h3>Email &amp; phone chaos</h3><p>Your team is a human switchboard. Endless supplier back-and-forth wastes hours daily and creates errors no spreadsheet can catch in time.</p></div>
+      <div class="prob-cell"><div class="prob-n">04 / 04</div><div class="prob-icon"><svg viewBox="0 0 24 24"><path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z"/><polyline points="13 2 13 9 20 9"/></svg></div><h3>Zero data &amp; visibility</h3><p>No reporting. No KPIs. No way to know if today is better than last week. Your dock runs on instinct when it should run on data.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT — dark zone with real app mockup -->
+<div class="dark-zone rv" id="product">
+  <div class="wrap">
+    <div class="prod-header">
+      <div>
+        <div class="eyebrow" style="color:var(--amber)">The platform</div>
+        <h2 class="d-lg" style="color:var(--dw)">One screen.<br>Total control.</h2>
+      </div>
+      <div class="ppts">
+        <div class="ppt"><div class="ppt-n">01</div><div><h4>Live bay dashboard</h4><p>6 KPIs on login: avg unload time, bookings today, occupancy rate, pending actions, missed and delayed bookings.</p></div></div>
+        <div class="ppt"><div class="ppt-n">02</div><div><h4>Full booking management</h4><p>Every booking tracked by ID, supplier, bay, pallet count, date, time slot, approval status, and schedule track.</p></div></div>
+        <div class="ppt"><div class="ppt-n">03</div><div><h4>Supplier performance data</h4><p>On-time %, completion rates, and activity history for every supplier. Data for real conversations.</p></div></div>
+      </div>
+    </div>
+    <!-- APP MOCKUP — replicating real DockSync UI -->
+    <div class="app-frame">
+      <div class="app-chrome">
+        <div class="app-dots">
+          <div class="app-dot" style="background:#f06058"></div>
+          <div class="app-dot" style="background:#ffc130"></div>
+          <div class="app-dot" style="background:#27c840"></div>
+        </div>
+        <div class="app-addr">
+          <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+          app.docksync.io/dashboard
+        </div>
+      </div>
+      <div class="app-inner">
+        <div class="app-sidebar">
+          <div class="app-logo-row">
+            <div class="app-logo-box"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="13" rx="2"/><path d="M7 7V5a3 3 0 016 0v2"/><line x1="12" y1="12" x2="12" y2="15"/></svg></div>
+            <span class="app-logo-txt">DockSync</span>
+          </div>
+          <div class="app-nav sel"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Dashboard</div>
+          <div class="app-nav"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Bookings</div>
+          <div class="app-nav"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Calendar</div>
+          <div class="app-nav"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="1"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/></svg>Bay Mgmt</div>
+          <div class="app-nav"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/></svg>Suppliers</div>
+          <div class="app-nav"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Schedule</div>
+          <div class="app-nav"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Reports</div>
+          <div class="app-nav"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 10-16 0"/></svg>My Account</div>
+        </div>
+        <div class="app-main">
+          <div class="app-page-title">Dashboard</div>
+          <div class="kpi-grid">
+            <div class="kpi-card"><div class="kpi-icon" style="background:#e8f4fd"><svg viewBox="0 0 24 24" style="stroke:#2e7dd1"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><div class="kpi-lbl">Avg Unloading Time</div><div class="kpi-val">18 mins</div></div></div>
+            <div class="kpi-card"><div class="kpi-icon" style="background:#d4f3e6"><svg viewBox="0 0 24 24" style="stroke:#1e9e5e"><rect x="1" y="3" width="15" height="13" rx="1"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/></svg></div><div><div class="kpi-lbl">Incoming Today</div><div class="kpi-val">8</div></div></div>
+            <div class="kpi-card"><div class="kpi-icon" style="background:#f0e6fd"><svg viewBox="0 0 24 24" style="stroke:#7c3aed"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></div><div><div class="kpi-lbl">Occupancy Rate</div><div class="kpi-val">73.5%</div></div></div>
+          </div>
+          <div class="kpi-grid" style="margin-bottom:12px">
+            <div class="kpi-card"><div class="kpi-icon" style="background:#fff3d4"><svg viewBox="0 0 24 24" style="stroke:#d97706"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div><div class="kpi-lbl">Pending Actions</div><div class="kpi-val">3</div></div></div>
+            <div class="kpi-card"><div class="kpi-icon" style="background:#fee2e2"><svg viewBox="0 0 24 24" style="stroke:#d63b3b"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/></svg></div><div><div class="kpi-lbl">Missed Bookings</div><div class="kpi-val">0</div></div></div>
+            <div class="kpi-card"><div class="kpi-icon" style="background:#fff3d4"><svg viewBox="0 0 24 24" style="stroke:#e8960c"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><div class="kpi-lbl">Delayed Bookings</div><div class="kpi-val">1</div></div></div>
+          </div>
+          <div class="app-sec-title">Bay Status</div>
+          <table class="app-table">
+            <thead><tr><th>Bay</th><th>Bookings</th><th>Track Schedule</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>b1</td><td>3</td><td><span class="app-badge app-badge-g">On Track</span></td><td><span class="app-badge app-badge-g">Available</span></td></tr>
+              <tr><td>b2</td><td>2</td><td style="color:#9a9894;font-size:11px">N/A</td><td><span class="app-badge app-badge-g">Available</span></td></tr>
+              <tr><td>b3</td><td>4</td><td><span class="app-badge app-badge-g">On Track</span></td><td><span class="app-badge app-badge-g">Available</span></td></tr>
+              <tr><td>b4</td><td>1</td><td><span class="app-badge app-badge-a">Pending</span></td><td><span class="app-badge app-badge-g">Available</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <p style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--dw4);margin-top:12px;text-align:center">Live dashboard — bookings, bays, performance all in one view</p>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section class="rv" id="features" style="background:var(--bg2)">
+  <div class="wrap">
+    <div class="eyebrow">Capabilities</div>
+    <h2 class="d-lg" style="max-width:480px;margin-bottom:0">Built for dock operators</h2>
+    <div class="feat-grid">
+      <div class="feat"><div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/></svg></div><h3>Supplier self-booking</h3><p>Suppliers book their own slots via a dedicated portal. No emails, no calls. Your rules enforced automatically from day one.</p></div>
+      <div class="feat"><div class="feat-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><h3>Booking calendar</h3><p>Month, week and day views colour-coded by supplier. Instant visual overview of your entire inbound schedule.</p></div>
+      <div class="feat"><div class="feat-icon"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="1"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/></svg></div><h3>Bay management</h3><p>Add, name and toggle bays active or inactive in seconds. Inactive bays are hidden from suppliers automatically.</p></div>
+      <div class="feat"><div class="feat-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><h3>Supplier reports</h3><p>On-time %, completion rate, delivery count, and last activity for every supplier. Data-led supplier conversations.</p></div>
+      <div class="feat"><div class="feat-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><h3>Operating schedule</h3><p>Working days, open/close times, restricted hours, and blackout dates. Supplier reminders sent automatically.</p></div>
+      <div class="feat"><div class="feat-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div><h3>Browser-based</h3><p>Zero installation. Runs in Chrome, Edge or Safari. No app, no IT project. Live in under 5 minutes.</p></div>
+    </div>
+    <!-- QR CHECK-IN HIGHLIGHT -->
+    <div class="qr-highlight rv">
+      <div>
+        <div class="eyebrow">Unique feature</div>
+        <h3>QR code driver check-in</h3>
+        <p>Print your unique QR code at the gatehouse. Drivers scan on arrival — bay assigned instantly, check-in time logged, dashboard updated. No paperwork. No queues. No phone calls.</p>
+        <p style="font-size:13px;color:var(--ink4)">Generates from My Account → QR Code. Regenerate anytime. Works on any smartphone, no app required.</p>
+        <a href="#features" class="btn btn-dark">See all features</a>
+      </div>
+      <div class="qr-mock">
+        <svg viewBox="0 0 100 100" width="110" height="110" style="margin:0 auto 10px">
+          <rect x="5" y="5" width="35" height="35" rx="3" fill="none" stroke="#111" stroke-width="3"/>
+          <rect x="12" y="12" width="21" height="21" rx="1" fill="#111"/>
+          <rect x="60" y="5" width="35" height="35" rx="3" fill="none" stroke="#111" stroke-width="3"/>
+          <rect x="67" y="12" width="21" height="21" rx="1" fill="#111"/>
+          <rect x="5" y="60" width="35" height="35" rx="3" fill="none" stroke="#111" stroke-width="3"/>
+          <rect x="12" y="67" width="21" height="21" rx="1" fill="#111"/>
+          <rect x="47" y="5" width="7" height="7" fill="#111"/><rect x="5" y="47" width="7" height="7" fill="#111"/>
+          <rect x="47" y="19" width="7" height="7" fill="#111"/><rect x="19" y="47" width="7" height="7" fill="#111"/>
+          <rect x="47" y="33" width="7" height="7" fill="#111"/><rect x="33" y="47" width="7" height="7" fill="#111"/>
+          <rect x="61" y="47" width="7" height="7" fill="#111"/><rect x="75" y="47" width="7" height="7" fill="#111"/>
+          <rect x="89" y="47" width="7" height="7" fill="#111"/><rect x="47" y="61" width="7" height="7" fill="#111"/>
+          <rect x="61" y="61" width="7" height="7" fill="#111"/><rect x="75" y="75" width="7" height="7" fill="#111"/>
+          <rect x="89" y="89" width="7" height="7" fill="#111"/><rect x="47" y="75" width="7" height="7" fill="#111"/>
+          <rect x="61" y="89" width="7" height="7" fill="#111"/><rect x="75" y="61" width="7" height="7" fill="#111"/>
+        </svg>
+        <p>Your unique QR code</p>
+        <p style="font-size:12px;color:var(--ink3);margin-top:6px">Drivers scan on arrival.<br>Bay confirmed instantly.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="rv" id="pricing" style="background:var(--bg)">
+  <div class="wrap">
+    <div class="eyebrow">Pricing</div>
+    <h2 class="d-lg" style="margin-bottom:8px">Simple, bay-based pricing</h2>
+    <p style="font-size:16px;color:var(--ink3);max-width:500px;line-height:1.65">Pay for the bays you manage. No per-user fees. One warehouse per account. Every plan includes a free 30-day trial.</p>
+    <div style="display:flex;align-items:center;gap:10px;margin-top:18px">
+      <div class="pt-toggle">
+        <button class="pt-btn active" id="monthly-btn" onclick="setBilling('monthly')">Monthly</button>
+        <button class="pt-btn" id="annual-btn" onclick="setBilling('annual')">Annual</button>
+      </div>
+      <span id="save-badge" class="pt-save">Save 20% annually</span>
+    </div>
+    <div class="pricing-grid">
+      <!-- STARTER -->
+      <div class="plan">
+        <div class="plan-name">Starter</div>
+        <div class="plan-desc">Single site, up to 8 bays. Get off spreadsheets fast.</div>
+        <div class="plan-pn" id="starter-price"><sup>£</sup>79<sub>/mo</sub></div>
+        <div class="plan-per" id="starter-period">Billed monthly · up to 8 bays</div>
+        <div class="ann-save" id="starter-save">Save £190/year</div>
+        <div class="plan-div"></div>
+        <ul class="plan-ul">
+          <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>1 warehouse, up to 8 bays</li>
+          <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Supplier self-booking portal</li>
+          <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Booking calendar (month/week/day)</li>
+          <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>QR code driver check-in</li>
+          <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Live bay dashboard &amp; 6 KPIs</li>
+          <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Operating schedule &amp; blackouts</li>
+          <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Supplier performance reports</li>
+          <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Email support</li>
+          <li class="no"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Custom booking rules</li>
+          <li class="no"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>API access</li>
+        </ul>
+        <a href="#trial" class="plan-cta pc-outline">Start free trial</a>
+        <p class="plan-note">30-day trial · No card required</p>
+      </div>
+      <!-- GROWTH -->
+      <div class="plan plan-featured">
+        <div class="plan-badge">Most popular</div>
+        <div class="plan-name" style="color:var(--amber)">Growth</div>
+        <div class="plan-desc">Unlimited bays. Full control of inbound operations.</div>
+        <div class="plan-pn" id="growth-price"><sup>£</sup>179<sub>/mo</sub></div>
+        <div class="plan-per" id="growth-period">Billed monthly · unlimited bays</div>
+        <div class="ann-save" id="growth-save">Save £430/year</div>
+        <div class="plan-div"></div>
+        <ul class="plan-ul">
+          <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>1 warehouse, <strong>unlimited bays</strong></li>
+          <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Everything in Starter</li>
+          <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Custom booking rules &amp; windows</li>
+          <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>CSV export &amp; advanced reporting</li>
+          <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Bulk slot import via CSV</li>
+          <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Configurable supplier reminders</li>
+          <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Supplier completion rate scoring</li>
+          <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Priority email &amp; chat support</li>
+          <li class="no"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>API access</li>
+          <li class="no"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Multi-warehouse (roadmap)</li>
+        </ul>
+        <a href="#trial" class="plan-cta pc-amber">Start free trial</a>
+        <p class="plan-note">30-day trial · No card required</p>
+      </div>
+      <!-- ENTERPRISE -->
+      <div class="plan">
+        <div class="plan-name">Enterprise</div>
+        <div class="plan-desc">Multi-warehouse networks &amp; procurement-led deployments.</div>
+        <div class="plan-custom">Custom</div>
+        <div class="plan-per" style="margin-bottom:16px">Tailored to your operation</div>
+        <div class="plan-div"></div>
+        <ul class="plan-ul">
+          <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Multiple warehouses (volume pricing)</li>
+          <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Everything in Growth</li>
+          <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>API &amp; webhook access</li>
+          <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>SSO &amp; SAML integration</li>
+          <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Custom SLA &amp; uptime guarantee</li>
+          <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Dedicated customer success mgr</li>
+          <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>DPA, security review, ISO docs</li>
+          <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>PO-based billing available</li>
+        </ul>
+        <a href="mailto:hello@docksync.io" class="plan-cta pc-dark">Contact sales</a>
+        <p class="plan-note">Pilot available · Procurement-friendly</p>
+      </div>
+    </div>
+    <div class="pnote rv">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <p><strong style="color:var(--ink)">Every plan starts with a free 30-day trial</strong> — full access, no payment required, no auto-billing at the end. One warehouse per account; Enterprise covers multiple sites with volume pricing. All prices exclude VAT. ¹ Based on 90-day usage data across 40+ customer sites.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="rv" style="background:var(--bg2)">
+  <div class="wrap">
+    <div class="eyebrow">Customer results</div>
+    <h2 class="d-lg" style="margin-bottom:0">Real warehouses.<br>Real numbers.</h2>
+    <div class="proof-grid">
+      <div class="testi"><div class="testi-stars">★★★★★</div><p class="testi-q">Cut dock admin time by over 3 hours a day in the first week. Drivers no longer queue at the gate — they know exactly when and where to go before they leave the depot.</p><div class="testi-by"><div class="testi-av" style="background:#2e7dd1">TH</div><div><div class="testi-nm">Tom H.</div><div class="testi-rl">Warehouse Manager · Retail DC, Birmingham</div></div></div></div>
+      <div class="testi"><div class="testi-stars">★★★★★</div><p class="testi-q">The supplier self-booking portal alone was worth the switch. Team stopped playing phone tag immediately. Setup genuinely took less than 10 minutes start to finish.</p><div class="testi-by"><div class="testi-av" style="background:var(--amber);color:#1a0a00">MW</div><div><div class="testi-nm">Maria W.</div><div class="testi-rl">Operations Director · Pharma Distributor</div></div></div></div>
+      <div class="testi"><div class="testi-stars">★★★★★</div><p class="testi-q">Visibility across all 18 bays without chasing anyone. On-time rate went from 71% to 96% in 30 days. The QR check-in alone saved an hour of gatehouse admin every morning.</p><div class="testi-by"><div class="testi-av" style="background:var(--green)">DP</div><div><div class="testi-nm">Dave P.</div><div class="testi-rl">Head of Logistics · Automotive Parts, Coventry</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="rv" style="background:var(--bg)">
+  <div class="wrap">
+    <div class="eyebrow">Built by operators</div>
+    <h2 class="d-lg" style="max-width:540px">Warehouse experience<br>in our DNA</h2>
+    <p style="font-size:16px;color:var(--ink3);max-width:480px;margin-top:12px;line-height:1.7">Built by people who've stood on the dock floor — not software engineers guessing what warehouses need.</p>
+    <div class="team-grid">
+      <div class="team-card"><div class="team-ini" style="background:#2e7dd1">JM</div><h4>James Mitchell</h4><div class="team-role">Co-Founder · CEO</div><p>12 years managing inbound at a 400,000 sq ft retail DC. Built DockSync after a decade fighting spreadsheets.</p><div class="team-sector">Retail · Distribution</div></div>
+      <div class="team-card"><div class="team-ini" style="background:var(--green)">SK</div><h4>Sarah Kowalski</h4><div class="team-role">Co-Founder · COO</div><p>Led inbound compliance and scheduling across 6 EU pharmaceutical sites. Designed DockSync's compliance-first architecture.</p><div class="team-sector">Pharma · Compliance</div></div>
+      <div class="team-card"><div class="team-ini" style="background:var(--amber);color:#1a0a00">RP</div><h4>Rahul Patel</h4><div class="team-role">Co-Founder · CTO</div><p>8 years in ground operations technology at a major European airport. Applied aviation precision scheduling to warehouse logistics.</p><div class="team-sector">Aviation · Engineering</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="rv" id="faq" style="background:var(--bg2)">
+  <div class="wrap-sm">
+    <div class="eyebrow">FAQ</div>
+    <h2 class="d-lg" style="margin-bottom:0">Questions before<br>you start?</h2>
+    <div class="faq-list">
+      <div class="faq-item open"><div class="faq-q" onclick="toggleFaq(this)"><span class="faq-qn">01</span><span class="faq-qt">How long does it take to get started?</span><div class="faq-tog"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="faq-a">Under 5 minutes. Add your bays, set operating hours and booking rules, then share your supplier booking link. Most teams have their first live booking within an hour of signing up.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span class="faq-qn">02</span><span class="faq-qt">Will my suppliers need training?</span><div class="faq-tog"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="faq-a">No. The supplier portal requires no account or login, and takes under 2 minutes to use. We'll send your suppliers a one-page onboarding email on your behalf if you'd like.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span class="faq-qn">03</span><span class="faq-qt">Can I manage multiple warehouses?</span><div class="faq-tog"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="faq-a">Each warehouse runs as a separate account — which many operations managers prefer as it keeps each site focused. Enterprise customers with multiple sites get volume pricing. A unified multi-warehouse dashboard is on the roadmap.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span class="faq-qn">04</span><span class="faq-qt">Is the 30-day trial truly free?</span><div class="faq-tog"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="faq-a">Yes. Full access, no payment details required, no automatic billing at the end. You decide when you're ready to subscribe — no pressure, no sales calls.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span class="faq-qn">05</span><span class="faq-qt">Do I need IT support to set up DockSync?</span><div class="faq-tog"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="faq-a">No. DockSync runs entirely in your browser — Chrome, Edge, or Safari. Nothing to install or maintain. Your IT team doesn't need to be involved at all for the standard setup.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span class="faq-qn">06</span><span class="faq-qt">How does the QR code driver check-in work?</span><div class="faq-tog"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="faq-a">From My Account → QR Code, download your unique code and display or print it at the gatehouse. Drivers scan it on arrival (no app needed). The system logs check-in time, confirms their bay, and updates your dashboard in real time.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA + FORM -->
+<div class="dark-zone rv" id="trial">
+  <div class="wrap">
+    <div class="fc-inner">
+      <div class="fc-left">
+        <div class="eyebrow" style="color:var(--amber)">Get started today</div>
+        <h2 class="d-lg">Take control<br>of your dock</h2>
+        <p>Start your free 30-day trial and eliminate booking chaos from day one. Full access. No payment required. No commitment.</p>
+        <ul class="fc-list">
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Every feature included — not a limited demo</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Live in under 5 minutes</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>No credit card, no automatic billing</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>We'll help onboard your first suppliers</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Cancel anytime, no questions asked</li>
+        </ul>
+      </div>
+      <div class="fc-form">
+        <div class="fc-form-title">Start free trial</div>
+        <div class="fc-form-sub">No payment required · Access sent instantly</div>
+        <form id="trialForm">
+          <div class="dfld"><label for="t-name">Your name</label><input type="text" id="t-name" placeholder="Jane Smith" autocomplete="name"></div>
+          <div class="dfld"><label for="t-email">Work email</label><input type="email" id="t-email" placeholder="jane@yourwarehouse.com" autocomplete="email"></div>
+          <div class="dfld"><label for="t-company">Company name</label><input type="text" id="t-company" placeholder="Acme Logistics Ltd" autocomplete="organization"></div>
+          <div class="dfld"><label for="t-bays">Dock size</label>
+            <select id="t-bays">
+              <option value="" disabled selected>How many bays?</option>
+              <option>1–5 bays</option><option>6–15 bays</option>
+              <option>16–30 bays</option><option>30+ bays</option>
+            </select>
+          </div>
+          <button type="submit" class="fc-submit" id="trialBtn">Get free access now →</button>
+        </form>
+        <p class="fc-note">UK-hosted · GDPR compliant · Cancel anytime</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <div class="f-brand-name">DockSync</div>
+        <p class="f-brand-desc">Dock scheduling software for warehouses that want precision over chaos.</p>
+        <div class="f-badge"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>SSL · GDPR · UK-hosted</div>
+      </div>
+      <div>
+        <div class="f-col-title">Product</div>
+        <div class="f-col">
+          <a href="#product">Product overview</a>
+          <a href="#features">Features</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#faq">FAQ</a>
+        </div>
+      </div>
+      <div>
+        <div class="f-col-title">Industries</div>
+        <div class="f-col">
+          <a href="#">Retail &amp; FMCG</a>
+          <a href="#">Pharmaceutical</a>
+          <a href="#">Automotive</a>
+          <a href="#">3PL &amp; Logistics</a>
+        </div>
+      </div>
+      <div>
+        <div class="f-col-title">Company</div>
+        <div class="f-col">
+          <a href="#">About us</a>
+          <a href="mailto:hello@docksync.io">hello@docksync.io</a>
+          <a href="#">Privacy policy</a>
+          <a href="#">Terms of service</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-btm">
+      <p>© 2025 DockSync Ltd · Registered in England &amp; Wales · Co. No. 12345678</p>
+      <div class="footer-btm-links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Nav scroll
+var nav = document.getElementById('nav');
+window.addEventListener('scroll', function(){ nav.classList.toggle('sc', scrollY > 10); }, {passive:true});
+
+// Scroll reveal
+var ro = new IntersectionObserver(function(es){
+  es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); ro.unobserve(e.target); } });
+}, {threshold:0.06});
+document.querySelectorAll('.rv').forEach(function(el){ ro.observe(el); });
+
+// FAQ
+function toggleFaq(el){
+  var item = el.closest('.faq-item');
+  var open = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(function(i){ i.classList.remove('open'); });
+  if(!open) item.classList.add('open');
+}
+
+// Pricing toggle
+var pdata = {
+  starter:{ monthly:{p:'79',per:'Billed monthly · up to 8 bays'}, annual:{p:'63',per:'Billed annually · up to 8 bays'} },
+  growth:{ monthly:{p:'179',per:'Billed monthly · unlimited bays'}, annual:{p:'143',per:'Billed annually · unlimited bays'} }
+};
+function setBilling(mode){
+  ['monthly','annual'].forEach(function(m){
+    var b = document.getElementById(m+'-btn');
+    if(b){ b.classList.toggle('active', m===mode); }
+  });
+  var sb = document.getElementById('save-badge');
+  if(sb) sb.style.display = mode==='annual' ? 'inline' : 'none';
+  ['starter','growth'].forEach(function(plan){
+    var d = pdata[plan][mode];
+    var pp = document.getElementById(plan+'-price');
+    if(pp) pp.innerHTML = '<sup>£</sup>'+d.p+'<sub>/mo</sub>';
+    var per = document.getElementById(plan+'-period');
+    if(per) per.textContent = d.per;
+    var sv = document.getElementById(plan+'-save');
+    if(sv) sv.style.display = mode==='annual' ? 'inline-block' : 'none';
+  });
+}
+
+// Forms
+function handleForm(formId, btnId, msg){
+  var f = document.getElementById(formId); if(!f) return;
+  f.addEventListener('submit', function(e){
+    e.preventDefault();
+    var b = document.getElementById(btnId); if(!b) return;
+    b.textContent = 'Sending access...';
+    b.style.background = '#1e9e5e';
+    b.style.color = '#fff';
+    setTimeout(function(){ b.textContent = msg; }, 1400);
+  });
+}
+handleForm('heroForm','heroBtn','Check your inbox!');
+handleForm('trialForm','trialBtn','Check your inbox — access sent!');
+</script>
+</body>
+</html>
