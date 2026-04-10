@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy | DockSync — Dock Scheduling Software</title>
+<meta name="description" content="DockSync Privacy Policy. How we collect, store, protect and use your data. GDPR compliant, UK-hosted, ISO 27001 certified infrastructure via Bubble.">
+<link rel="canonical" href="https://www.docksync.app/privacy.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ffffff;--bg2:#f7f6f3;--bg3:#efede9;
+  --bdr:rgba(0,0,0,0.08);--bdr2:rgba(0,0,0,0.14);
+  --ink:#111010;--ink2:#3b3a37;--ink3:#6a6860;--ink4:#9a9790;
+  --dk:#0d0e0e;--dk2:#131415;--dkl:rgba(255,255,255,0.07);--dkl2:rgba(255,255,255,0.13);
+  --dw:#efede9;--dw2:#b6b2ac;--dw4:#4e4c49;
+  --amber:#e6920a;--amberh:#f4a21e;--abg:rgba(230,146,10,0.10);--abdr:rgba(230,146,10,0.25);
+  --green:#1a9958;--gbg:rgba(26,153,88,0.10);
+  --blue:#2b79cf;--bbg:rgba(43,121,207,0.10);
+  --disp:'Barlow Condensed',sans-serif;--body:'Barlow',sans-serif;--mono:'JetBrains Mono',monospace;
+  --r:6px;--rl:12px;--rxl:18px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:var(--body);color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;overflow-x:hidden;line-height:1.6}
+a{color:var(--amber);text-decoration:none}
+a:hover{text-decoration:underline}
+.w{max-width:1140px;margin:0 auto;padding:0 28px}
+.wc{max-width:760px;margin:0 auto;padding:0 28px}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(–bdr);box-shadow:0 1px 20px rgba(0,0,0,.06)}
+.nav-i{display:flex;align-items:center;height:62px;gap:6px}
+.logo{display:flex;align-items:center;gap:9px;margin-right:28px;text-decoration:none}
+.logo-box{width:28px;height:28px;border:1.5px solid var(–amber);border-radius:5px;display:flex;align-items:center;justify-content:center}
+.logo-box svg{width:14px;height:14px;stroke:var(–amber);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.logo-word{font-family:var(–disp);font-size:18px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(–ink)}
+.nav-links{display:flex;align-items:center;gap:2px;flex:1}
+.nl{font-family:var(–body);font-size:13px;color:var(–ink3);padding:6px 11px;border-radius:var(–r);transition:all .15s;cursor:pointer;text-decoration:none}
+.nl:hover{color:var(–ink2);background:var(–bg2)}
+.nav-right{display:flex;align-items:center;gap:10px;margin-left:auto}
+.nav-util{font-size:12px;color:var(–ink4);cursor:pointer;transition:color .15s;text-decoration:none}
+.nav-util:hover{color:var(–ink3)}
+.nav-sep{width:1px;height:16px;background:var(–bdr2)}
+.btn-nav{display:inline-flex;align-items:center;font-family:var(–disp);font-weight:700;font-size:13px;letter-spacing:.05em;text-transform:uppercase;padding:8px 16px;border-radius:var(–r);border:none;cursor:pointer;background:var(–amber);color:#1a0900;transition:all .17s;text-decoration:none}
+.btn-nav:hover{background:var(–amberh)}
+
+/* PAGE HERO */
+.page-hero{padding:110px 0 52px;background:var(–bg2);border-bottom:1px solid var(–bdr)}
+.bc{font-family:var(–mono);font-size:11px;color:var(–ink4);margin-bottom:16px;display:flex;align-items:center;gap:5px}
+.bc a{color:var(–amber);text-decoration:none}
+.bc a:hover{text-decoration:underline}
+.eye{display:inline-flex;align-items:center;gap:8px;font-family:var(–mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(–amber);margin-bottom:14px}
+.eye::before{content:’’;width:18px;height:1px;background:var(–amber);flex-shrink:0}
+.dlg{font-family:var(–disp);font-weight:800;line-height:.95;letter-spacing:-.01em;text-transform:uppercase;font-size:clamp(30px,4.5vw,52px)}
+.page-meta{font-family:var(–mono);font-size:11px;color:var(–ink4);margin-top:14px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.badge{display:inline-flex;align-items:center;gap:5px;font-family:var(–mono);font-size:10px;font-weight:500;padding:3px 9px;border-radius:20px}
+.badge svg{width:10px;height:10px;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.b-green{background:var(–gbg);color:var(–green)}
+.b-green svg{stroke:var(–green)}
+.b-blue{background:var(–bbg);color:var(–blue)}
+.b-blue svg{stroke:var(–blue)}
+
+/* CONTENT */
+.content{padding:60px 0 80px}
+.toc{background:var(–bg2);border:1px solid var(–bdr);border-radius:var(–rl);padding:24px 28px;margin-bottom:48px}
+.toc-title{font-family:var(–disp);font-size:16px;font-weight:700;text-transform:uppercase;color:var(–ink);margin-bottom:14px}
+.toc-list{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:4px 24px}
+.toc-list li a{font-size:13px;color:var(–amber);text-decoration:none;display:flex;align-items:center;gap:6px;padding:4px 0;transition:color .15s}
+.toc-list li a::before{content:’’;width:14px;height:1px;background:var(–amber);flex-shrink:0}
+.toc-list li a:hover{color:var(–amberh)}
+.section{margin-bottom:48px;scroll-margin-top:80px}
+.section h2{font-family:var(–disp);font-size:clamp(22px,2.5vw,30px);font-weight:800;text-transform:uppercase;color:var(–ink);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(–bdr)}
+.section h3{font-family:var(–disp);font-size:clamp(16px,1.8vw,20px);font-weight:700;text-transform:uppercase;color:var(–ink2);margin:20px 0 8px}
+.section p{font-size:15px;color:var(–ink3);line-height:1.75;margin-bottom:14px}
+.section p strong{color:var(–ink2);font-weight:500}
+.section ul{list-style:none;margin:0 0 16px;display:flex;flex-direction:column;gap:7px}
+.section ul li{display:flex;align-items:flex-start;gap:9px;font-size:14px;color:var(–ink3);line-height:1.6}
+.section ul li::before{content:’’;width:5px;height:5px;border-radius:50%;background:var(–amber);flex-shrink:0;margin-top:7px}
+.highlight{background:var(–bg2);border-left:3px solid var(–amber);border-radius:0 var(–r) var(–r) 0;padding:14px 18px;margin:16px 0}
+.highlight p{margin:0;font-size:14px;color:var(–ink2)}
+.data-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13px}
+.data-table th{background:var(–bg3);font-family:var(–disp);font-size:13px;font-weight:700;text-transform:uppercase;padding:10px 14px;text-align:left;border-bottom:1px solid var(–bdr2);color:var(–ink2)}
+.data-table td{padding:10px 14px;border-bottom:1px solid var(–bdr);color:var(–ink3);vertical-align:top;line-height:1.55}
+.data-table tr:last-child td{border-bottom:none}
+.data-table tr:nth-child(even) td{background:var(–bg2)}
+.contact-box{background:var(–dk2);border-radius:var(–rxl);padding:28px 32px;margin-top:32px}
+.contact-box h3{font-family:var(–disp);font-size:22px;font-weight:800;text-transform:uppercase;color:var(–dw);margin-bottom:8px}
+.contact-box p{font-size:14px;color:var(–dw2);line-height:1.7;margin-bottom:4px}
+.contact-box a{color:var(–amber)}
+
+/* FOOTER */
+.footer{background:var(–dk2);padding:52px 0 28px;border-top:1px solid var(–dkl)}
+.ftop{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:44px;padding-bottom:36px;border-bottom:1px solid var(–dkl)}
+.fbrand{font-family:var(–disp);font-size:20px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(–dw);margin-bottom:8px}
+.fdesc{font-size:13px;color:var(–dw4);line-height:1.65;max-width:220px}
+.fbadge{display:inline-flex;align-items:center;gap:6px;font-family:var(–mono);font-size:10px;color:var(–dw4);margin-top:14px;letter-spacing:.05em}
+.fbadge svg{width:11px;height:11px;stroke:var(–green);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.fcolt{font-family:var(–mono);font-size:10px;color:var(–dw4);letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
+.fcol a{display:block;font-size:13px;color:var(–dw4);margin-bottom:9px;transition:color .15s;text-decoration:none}
+.fcol a:hover{color:var(–dw2)}
+.fbtm{padding-top:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.fbtm p{font-family:var(–mono);font-size:11px;color:var(–dw4);letter-spacing:.04em}
+.flinks{display:flex;gap:18px}
+.flinks a{font-family:var(–mono);font-size:11px;color:var(–dw4);transition:color .15s;text-decoration:none}
+.flinks a:hover{color:var(–dw2)}
+
+@media(max-width:900px){.nav-links{display:none}.ftop{grid-template-columns:1fr 1fr}.toc-list{grid-template-columns:1fr}}
+@media(max-width:600px){.ftop{grid-template-columns:1fr}}
+</style>
+
+</head>
+<body>
+
+<nav class="nav">
+  <div class="w"><div class="nav-i">
+    <a href="index.html" class="logo">
+      <div class="logo-box"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="13" rx="2"/><path d="M7 7V5a3 3 0 016 0v2"/><line x1="12" y1="12" x2="12" y2="15"/></svg></div>
+      <span class="logo-word">DockSync</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html#prod" class="nl">Product</a>
+      <a href="index.html#feats" class="nl">Features</a>
+      <a href="index.html#pricing" class="nl">Pricing</a>
+      <a href="index.html#faq" class="nl">FAQ</a>
+    </div>
+    <div class="nav-right">
+      <a href="#" class="nav-util">Warehouse login</a>
+      <div class="nav-sep"></div>
+      <a href="#" class="nav-util">Carrier login</a>
+      <a href="index.html#trial" class="btn-nav">Start free trial</a>
+    </div>
+  </div></div>
+</nav>
+
+<div class="page-hero">
+  <div class="wc">
+    <div class="bc"><a href="index.html">Home</a> <span>/</span> Privacy Policy</div>
+    <div class="eye">Legal</div>
+    <h1 class="dlg">Privacy Policy</h1>
+    <div class="page-meta">
+      <span>Last updated: April 2025</span>
+      <span class="badge b-green"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>GDPR Compliant</span>
+      <span class="badge b-blue"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>UK-Hosted Data</span>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+  <div class="wc">
+
+```
+<div class="toc">
+  <div class="toc-title">Contents</div>
+  <ul class="toc-list">
+    <li><a href="#who-we-are">1. Who we are</a></li>
+    <li><a href="#data-we-collect">2. Data we collect</a></li>
+    <li><a href="#how-we-use">3. How we use your data</a></li>
+    <li><a href="#legal-basis">4. Legal basis</a></li>
+    <li><a href="#data-storage">5. Data storage & security</a></li>
+    <li><a href="#third-parties">6. Third-party processors</a></li>
+    <li><a href="#payments">7. Payments & Stripe</a></li>
+    <li><a href="#retention">8. Data retention</a></li>
+    <li><a href="#your-rights">9. Your rights</a></li>
+    <li><a href="#cookies">10. Cookies</a></li>
+    <li><a href="#children">11. Children's data</a></li>
+    <li><a href="#changes">12. Changes to this policy</a></li>
+    <li><a href="#contact">13. Contact & complaints</a></li>
+  </ul>
+</div>
+
+<div class="highlight">
+  <p><strong>Plain English summary:</strong> DockSync collects only the data we need to run your dock scheduling account. We do not sell your data to anyone. We do not use it for advertising. All data is stored in UK-based infrastructure. You can request deletion of your data at any time. If you have any question about how we handle your data, email us at <a href="mailto:privacy@docksync.app">privacy@docksync.app</a>.</p>
+</div>
+
+<div class="section" id="who-we-are">
+  <h2>1. Who we are</h2>
+  <p>DockSync ("DockSync", "we", "us", "our") operates the dock scheduling platform available at <strong>www.docksync.app</strong> and <strong>app.docksync.app</strong>.</p>
+  <p>DockSync is the data controller for personal data collected through our marketing website and sign-up process. For data entered into the DockSync application by warehouse operators and their suppliers, DockSync acts as data processor on behalf of the warehouse operator (our customer), who is the data controller for that data.</p>
+  <p>For any privacy-related questions, contact us at: <a href="mailto:privacy@docksync.app">privacy@docksync.app</a></p>
+</div>
+
+<div class="section" id="data-we-collect">
+  <h2>2. Data we collect</h2>
+  <h3>2.1 Data you provide directly</h3>
+  <table class="data-table">
+    <thead><tr><th>Category</th><th>Data collected</th><th>When collected</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Account registration</strong></td><td>Full name, work email address, company name, number of dock bays</td><td>When you sign up for a free trial or paid plan</td></tr>
+      <tr><td><strong>Profile information</strong></td><td>Job title, phone number (optional), warehouse address</td><td>When you complete your account profile</td></tr>
+      <tr><td><strong>Billing information</strong></td><td>Payment card details (handled entirely by Stripe — we never see or store raw card data), billing name and address</td><td>When you subscribe to a paid plan</td></tr>
+      <tr><td><strong>Supplier data</strong></td><td>Supplier company name, contact name, email address, booking history</td><td>When you add suppliers to your DockSync account</td></tr>
+      <tr><td><strong>Booking data</strong></td><td>Delivery slot details, bay assignments, pallet counts, vehicle information, driver arrival times via QR check-in</td><td>Throughout normal use of the platform</td></tr>
+      <tr><td><strong>Support communications</strong></td><td>Content of emails, messages, or support requests you send us</td><td>When you contact our support team</td></tr>
+    </tbody>
+  </table>
+  <h3>2.2 Data collected automatically</h3>
+  <ul>
+    <li>IP address and approximate geographic location (country/region level)</li>
+    <li>Browser type, version, and operating system</li>
+    <li>Device type (desktop, tablet, mobile)</li>
+    <li>Pages visited, features used, and time spent within the application</li>
+    <li>Referring URL (where you came from before visiting our site)</li>
+    <li>Session duration and click interaction data</li>
+  </ul>
+  <h3>2.3 Data we do not collect</h3>
+  <p>We do not collect any special category data as defined under UK GDPR Article 9 (including health data, racial or ethnic origin, political opinions, religious beliefs, biometric data, or sexual orientation). We do not collect data from children under 16.</p>
+</div>
+
+<div class="section" id="how-we-use">
+  <h2>3. How we use your data</h2>
+  <table class="data-table">
+    <thead><tr><th>Purpose</th><th>Data used</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Providing the DockSync service</strong></td><td>Account data, booking data, supplier data, usage data</td></tr>
+      <tr><td><strong>Processing payments and managing subscriptions</strong></td><td>Billing information (via Stripe), account data</td></tr>
+      <tr><td><strong>Sending service notifications</strong></td><td>Email address — booking confirmations, supplier reminders, system alerts</td></tr>
+      <tr><td><strong>Responding to support requests</strong></td><td>Account data, support communications</td></tr>
+      <tr><td><strong>Improving the platform</strong></td><td>Anonymised usage data and aggregated analytics</td></tr>
+      <tr><td><strong>Sending product updates</strong></td><td>Email address — only where you have opted in or are an active customer</td></tr>
+      <tr><td><strong>Fraud prevention and security</strong></td><td>IP address, usage patterns, account data</td></tr>
+      <tr><td><strong>Legal and regulatory compliance</strong></td><td>Any data required by applicable law</td></tr>
+    </tbody>
+  </table>
+  <p><strong>We do not:</strong> sell your data to third parties, use your data for advertising purposes, share your data with competitors, or use your booking or operational data for any purpose other than providing you with the DockSync service.</p>
+</div>
+
+<div class="section" id="legal-basis">
+  <h2>4. Legal basis for processing (UK GDPR)</h2>
+  <ul>
+    <li><strong>Contract performance (Article 6(1)(b)):</strong> Processing necessary to provide the DockSync service you have signed up for, including account management, booking operations, and billing.</li>
+    <li><strong>Legitimate interests (Article 6(1)(f)):</strong> Processing for fraud prevention, platform security, and improving our service — where these interests are not overridden by your rights.</li>
+    <li><strong>Legal obligation (Article 6(1)(c)):</strong> Processing required to comply with applicable UK and EU law, including tax and financial record-keeping obligations.</li>
+    <li><strong>Consent (Article 6(1)(a)):</strong> For optional marketing communications. You can withdraw consent at any time by clicking unsubscribe in any email or contacting us at <a href="mailto:privacy@docksync.app">privacy@docksync.app</a>.</li>
+  </ul>
+</div>
+
+<div class="section" id="data-storage">
+  <h2>5. Data storage and security</h2>
+  <h3>5.1 Infrastructure</h3>
+  <p>The DockSync application is built on <strong>Bubble.io</strong>, a no-code application development platform. Bubble provides enterprise-grade cloud infrastructure with the following security properties:</p>
+  <ul>
+    <li>All data is encrypted at rest using AES-256 encryption</li>
+    <li>All data in transit is encrypted using TLS 1.2 or higher</li>
+    <li>Bubble maintains SOC 2 Type II compliance</li>
+    <li>Infrastructure is hosted on AWS (Amazon Web Services) with data stored in EU/UK regions</li>
+    <li>Automatic daily backups with point-in-time recovery</li>
+    <li>Role-based access controls ensuring your data is isolated from other customers</li>
+    <li>Regular third-party penetration testing</li>
+  </ul>
+  <h3>5.2 Our security practices</h3>
+  <ul>
+    <li>Access to customer data is restricted to DockSync team members who need it to provide support</li>
+    <li>All team members are bound by confidentiality obligations</li>
+    <li>We conduct regular reviews of access permissions</li>
+    <li>We maintain an incident response plan for data breaches</li>
+    <li>We will notify you and the ICO within 72 hours of becoming aware of a personal data breach that poses a risk to your rights and freedoms</li>
+  </ul>
+  <h3>5.3 Data location</h3>
+  <p>Your data is stored within the United Kingdom and European Economic Area. We do not transfer personal data outside the UK/EEA unless adequate safeguards are in place as required by UK GDPR.</p>
+</div>
+
+<div class="section" id="third-parties">
+  <h2>6. Third-party data processors</h2>
+  <p>We use a small number of carefully selected third-party services to operate DockSync. Each is bound by a Data Processing Agreement and processes your data only on our instructions.</p>
+  <table class="data-table">
+    <thead><tr><th>Processor</th><th>Purpose</th><th>Data shared</th><th>Location</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Bubble.io</strong></td><td>Application infrastructure and hosting</td><td>All application data</td><td>AWS EU/UK</td></tr>
+      <tr><td><strong>Stripe Inc.</strong></td><td>Payment processing and subscription management</td><td>Billing name, email, payment card data</td><td>USA (SCCs in place)</td></tr>
+      <tr><td><strong>Email provider</strong> (e.g. Postmark/SendGrid)</td><td>Transactional email delivery (booking confirmations, reminders)</td><td>Email address, name</td><td>EU/USA (SCCs in place)</td></tr>
+      <tr><td><strong>Analytics</strong> (anonymised only)</td><td>Understanding how the platform is used to improve it</td><td>Anonymised usage data — no personally identifiable information</td><td>EU</td></tr>
+    </tbody>
+  </table>
+  <p>We do not use any third-party advertising networks, remarketing platforms, or data brokers.</p>
+</div>
+
+<div class="section" id="payments">
+  <h2>7. Payments and Stripe</h2>
+  <p>All payment processing for DockSync subscriptions is handled by <strong>Stripe, Inc.</strong>, a PCI DSS Level 1 certified payment processor — the highest level of payment security certification available.</p>
+  <p><strong>What this means for you:</strong></p>
+  <ul>
+    <li>DockSync never sees, stores, or has access to your full payment card number, CVV, or sensitive authentication data</li>
+    <li>When you enter payment details, they go directly and securely to Stripe via an encrypted connection</li>
+    <li>Stripe tokenises your card details and provides DockSync with only a non-sensitive token reference</li>
+    <li>Subscription management, upgrades, downgrades, and cancellations are processed entirely through Stripe's secure infrastructure</li>
+    <li>Stripe is registered with the Financial Conduct Authority (FCA) in the UK</li>
+  </ul>
+  <p>Stripe's privacy policy is available at <a href="https://stripe.com/gb/privacy" target="_blank" rel="noopener">stripe.com/gb/privacy</a>. For any billing disputes or payment queries, contact us at <a href="mailto:billing@docksync.app">billing@docksync.app</a>.</p>
+</div>
+
+<div class="section" id="retention">
+  <h2>8. Data retention</h2>
+  <table class="data-table">
+    <thead><tr><th>Data type</th><th>Retention period</th><th>Reason</th></tr></thead>
+    <tbody>
+      <tr><td>Account and profile data</td><td>Duration of account + 90 days after cancellation</td><td>To allow account reactivation and resolve any disputes</td></tr>
+      <tr><td>Booking and operational data</td><td>2 years from booking date</td><td>Operational reporting, audit trails, and supplier performance history</td></tr>
+      <tr><td>Billing and payment records</td><td>7 years from transaction date</td><td>Legal requirement under UK tax law (HMRC)</td></tr>
+      <tr><td>Support communications</td><td>3 years from last interaction</td><td>Quality assurance and dispute resolution</td></tr>
+      <tr><td>QR code check-in logs</td><td>2 years from check-in date</td><td>Operational reporting and dwell time analysis</td></tr>
+      <tr><td>Marketing opt-in records</td><td>Until consent is withdrawn + 1 year</td><td>Demonstrating compliance with consent requirements</td></tr>
+      <tr><td>Anonymised usage analytics</td><td>Indefinitely (not personal data)</td><td>Platform improvement</td></tr>
+    </tbody>
+  </table>
+  <p>When data reaches the end of its retention period, it is securely deleted or anonymised. You may request early deletion of your personal data — see Section 9 for your rights.</p>
+</div>
+
+<div class="section" id="your-rights">
+  <h2>9. Your rights under UK GDPR</h2>
+  <p>As a data subject under UK GDPR, you have the following rights. To exercise any of them, email <a href="mailto:privacy@docksync.app">privacy@docksync.app</a>. We will respond within 30 days.</p>
+  <ul>
+    <li><strong>Right of access:</strong> You can request a copy of all personal data we hold about you (Subject Access Request).</li>
+    <li><strong>Right to rectification:</strong> You can ask us to correct inaccurate or incomplete personal data.</li>
+    <li><strong>Right to erasure ("right to be forgotten"):</strong> You can ask us to delete your personal data, subject to our legal obligations (e.g. financial records we must retain).</li>
+    <li><strong>Right to restrict processing:</strong> You can ask us to pause processing of your data in certain circumstances.</li>
+    <li><strong>Right to data portability:</strong> You can request your data in a machine-readable format (JSON or CSV) to transfer to another service.</li>
+    <li><strong>Right to object:</strong> You can object to processing based on legitimate interests or for direct marketing purposes.</li>
+    <li><strong>Right to withdraw consent:</strong> Where processing is based on consent, you can withdraw it at any time without affecting the lawfulness of prior processing.</li>
+    <li><strong>Right not to be subject to automated decisions:</strong> DockSync does not make any automated decisions that produce legal or similarly significant effects about you.</li>
+  </ul>
+  <div class="highlight">
+    <p><strong>Account deletion:</strong> You can delete your DockSync account at any time from within the application under My Account → Account Settings. This initiates our data deletion process. Your account data will be fully deleted within 90 days, subject to legally required retention periods.</p>
+  </div>
+</div>
+
+<div class="section" id="cookies">
+  <h2>10. Cookies and tracking</h2>
+  <h3>10.1 What we use</h3>
+  <p>DockSync uses a minimal set of cookies necessary for the application to function. We do not use advertising cookies, cross-site tracking cookies, or third-party marketing pixels.</p>
+  <table class="data-table">
+    <thead><tr><th>Cookie type</th><th>Purpose</th><th>Duration</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Session cookies (essential)</strong></td><td>Keeps you logged in to your DockSync account during your session</td><td>Session (deleted when browser closes)</td></tr>
+      <tr><td><strong>Authentication cookies (essential)</strong></td><td>Remembers your login state so you don't have to log in on every page</td><td>30 days</td></tr>
+      <tr><td><strong>Preference cookies (functional)</strong></td><td>Remembers your display preferences (e.g. calendar view setting)</td><td>1 year</td></tr>
+      <tr><td><strong>Analytics cookies (optional)</strong></td><td>Anonymised data on how the application is used — no personal identification</td><td>13 months</td></tr>
+    </tbody>
+  </table>
+  <h3>10.2 Managing cookies</h3>
+  <p>You can manage or delete cookies through your browser settings. Blocking essential cookies will prevent you from logging in to DockSync. Blocking analytics cookies will not affect your use of the platform in any way.</p>
+</div>
+
+<div class="section" id="children">
+  <h2>11. Children's data</h2>
+  <p>DockSync is a business-to-business software platform intended for use by warehouse operations professionals. It is not directed at children. We do not knowingly collect personal data from anyone under the age of 16. If you believe a child has provided us with personal data, please contact us at <a href="mailto:privacy@docksync.app">privacy@docksync.app</a> and we will delete it promptly.</p>
+</div>
+
+<div class="section" id="changes">
+  <h2>12. Changes to this policy</h2>
+  <p>We may update this Privacy Policy from time to time to reflect changes in our practices, technology, legal requirements, or other factors. When we make material changes, we will:</p>
+  <ul>
+    <li>Update the "Last updated" date at the top of this page</li>
+    <li>Send an email notification to all active account holders</li>
+    <li>Display a notice within the DockSync application for 30 days following the change</li>
+  </ul>
+  <p>Your continued use of DockSync after a policy change constitutes your acceptance of the updated policy. If you do not agree to the changes, you may close your account.</p>
+</div>
+
+<div class="section" id="contact">
+  <h2>13. Contact and complaints</h2>
+  <p>For any privacy questions, Subject Access Requests, or to exercise any of your rights:</p>
+  <div class="contact-box">
+    <h3>Privacy contact</h3>
+    <p><strong style="color:var(--dw)">Email:</strong> <a href="mailto:privacy@docksync.app">privacy@docksync.app</a></p>
+    <p><strong style="color:var(--dw)">Response time:</strong> We aim to respond to all privacy requests within 30 days. For complex requests, we may extend this by a further 2 months and will notify you.</p>
+    <p style="margin-top:14px"><strong style="color:var(--dw)">Right to complain:</strong> If you are not satisfied with how we handle your personal data, you have the right to lodge a complaint with the UK Information Commissioner's Office (ICO) at <a href="https://ico.org.uk" target="_blank" rel="noopener">ico.org.uk</a> or by calling 0303 123 1113.</p>
+  </div>
+</div>
+```
+
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="w">
+    <div class="ftop">
+      <div>
+        <div class="fbrand">DockSync</div>
+        <p class="fdesc">Dock scheduling software for warehouses that want precision over chaos.</p>
+        <div class="fbadge"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>SSL · GDPR · UK-hosted</div>
+      </div>
+      <div><div class="fcolt">Product</div><div class="fcol"><a href="index.html#prod">Product overview</a><a href="index.html#feats">Features</a><a href="index.html#pricing">Pricing</a><a href="index.html#faq">FAQ</a></div></div>
+      <div><div class="fcolt">Industries</div><div class="fcol"><a href="#">Retail &amp; FMCG</a><a href="#">Pharmaceutical</a><a href="#">Automotive</a><a href="#">3PL &amp; Logistics</a></div></div>
+      <div><div class="fcolt">Company</div><div class="fcol"><a href="#">About us</a><a href="mailto:hello@docksync.app">hello@docksync.app</a><a href="privacy.html">Privacy policy</a><a href="terms.html">Terms of service</a></div></div>
+    </div>
+    <div class="fbtm">
+      <p>© 2025 DockSync Ltd · Registered in England &amp; Wales</p>
+      <div class="flinks"><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="#">Cookies</a></div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
