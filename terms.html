@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms of Service | DockSync — Dock Scheduling Software</title>
+<meta name="description" content="DockSync Terms of Service. Subscription terms, acceptable use, billing via Stripe, data ownership, liability, and governing law. Registered in England and Wales.">
+<link rel="canonical" href="https://www.docksync.app/terms.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ffffff;--bg2:#f7f6f3;--bg3:#efede9;
+  --bdr:rgba(0,0,0,0.08);--bdr2:rgba(0,0,0,0.14);
+  --ink:#111010;--ink2:#3b3a37;--ink3:#6a6860;--ink4:#9a9790;
+  --dk:#0d0e0e;--dk2:#131415;--dkl:rgba(255,255,255,0.07);--dkl2:rgba(255,255,255,0.13);
+  --dw:#efede9;--dw2:#b6b2ac;--dw4:#4e4c49;
+  --amber:#e6920a;--amberh:#f4a21e;--abg:rgba(230,146,10,0.10);--abdr:rgba(230,146,10,0.25);
+  --green:#1a9958;--gbg:rgba(26,153,88,0.10);
+  --blue:#2b79cf;--bbg:rgba(43,121,207,0.10);
+  --disp:'Barlow Condensed',sans-serif;--body:'Barlow',sans-serif;--mono:'JetBrains Mono',monospace;
+  --r:6px;--rl:12px;--rxl:18px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:var(--body);color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;overflow-x:hidden;line-height:1.6}
+a{color:var(--amber);text-decoration:none}
+a:hover{text-decoration:underline}
+.w{max-width:1140px;margin:0 auto;padding:0 28px}
+.wc{max-width:760px;margin:0 auto;padding:0 28px}
+.nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--bdr);box-shadow:0 1px 20px rgba(0,0,0,.06)}
+.nav-i{display:flex;align-items:center;height:62px;gap:6px}
+.logo{display:flex;align-items:center;gap:9px;margin-right:28px;text-decoration:none}
+.logo-box{width:28px;height:28px;border:1.5px solid var(--amber);border-radius:5px;display:flex;align-items:center;justify-content:center}
+.logo-box svg{width:14px;height:14px;stroke:var(--amber);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.logo-word{font-family:var(--disp);font-size:18px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--ink)}
+.nav-links{display:flex;align-items:center;gap:2px;flex:1}
+.nl{font-family:var(--body);font-size:13px;color:var(--ink3);padding:6px 11px;border-radius:var(--r);transition:all .15s;cursor:pointer;text-decoration:none}
+.nl:hover{color:var(--ink2);background:var(--bg2)}
+.nav-right{display:flex;align-items:center;gap:10px;margin-left:auto}
+.nav-util{font-size:12px;color:var(--ink4);cursor:pointer;transition:color .15s;text-decoration:none}
+.nav-util:hover{color:var(--ink3)}
+.nav-sep{width:1px;height:16px;background:var(--bdr2)}
+.btn-nav{display:inline-flex;align-items:center;font-family:var(--disp);font-weight:700;font-size:13px;letter-spacing:.05em;text-transform:uppercase;padding:8px 16px;border-radius:var(--r);border:none;cursor:pointer;background:var(--amber);color:#1a0900;transition:all .17s;text-decoration:none}
+.btn-nav:hover{background:var(--amberh)}
+.page-hero{padding:110px 0 52px;background:var(--bg2);border-bottom:1px solid var(--bdr)}
+.bc{font-family:var(--mono);font-size:11px;color:var(--ink4);margin-bottom:16px;display:flex;align-items:center;gap:5px}
+.bc a{color:var(--amber);text-decoration:none}
+.bc a:hover{text-decoration:underline}
+.eye{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);margin-bottom:14px}
+.eye::before{content:'';width:18px;height:1px;background:var(--amber);flex-shrink:0}
+.dlg{font-family:var(--disp);font-weight:800;line-height:.95;letter-spacing:-.01em;text-transform:uppercase;font-size:clamp(30px,4.5vw,52px)}
+.page-meta{font-family:var(--mono);font-size:11px;color:var(--ink4);margin-top:14px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.badge{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:10px;font-weight:500;padding:3px 9px;border-radius:20px}
+.badge svg{width:10px;height:10px;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.b-green{background:var(--gbg);color:var(--green)}
+.b-green svg{stroke:var(--green)}
+.b-blue{background:var(--bbg);color:var(--blue)}
+.b-blue svg{stroke:var(--blue)}
+.content{padding:60px 0 80px}
+.toc{background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--rl);padding:24px 28px;margin-bottom:48px}
+.toc-title{font-family:var(--disp);font-size:16px;font-weight:700;text-transform:uppercase;color:var(--ink);margin-bottom:14px}
+.toc-list{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:4px 24px}
+.toc-list li a{font-size:13px;color:var(--amber);text-decoration:none;display:flex;align-items:center;gap:6px;padding:4px 0;transition:color .15s}
+.toc-list li a::before{content:'';width:14px;height:1px;background:var(--amber);flex-shrink:0}
+.toc-list li a:hover{color:var(--amberh)}
+.section{margin-bottom:48px;scroll-margin-top:80px}
+.section h2{font-family:var(--disp);font-size:clamp(22px,2.5vw,30px);font-weight:800;text-transform:uppercase;color:var(--ink);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--bdr)}
+.section h3{font-family:var(--disp);font-size:clamp(16px,1.8vw,20px);font-weight:700;text-transform:uppercase;color:var(--ink2);margin:20px 0 8px}
+.section p{font-size:15px;color:var(--ink3);line-height:1.75;margin-bottom:14px}
+.section p strong{color:var(--ink2);font-weight:500}
+.section ul{list-style:none;margin:0 0 16px;display:flex;flex-direction:column;gap:7px}
+.section ul li{display:flex;align-items:flex-start;gap:9px;font-size:14px;color:var(--ink3);line-height:1.6}
+.section ul li::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--amber);flex-shrink:0;margin-top:7px}
+.highlight{background:var(--bg2);border-left:3px solid var(--amber);border-radius:0 var(--r) var(--r) 0;padding:14px 18px;margin:16px 0}
+.highlight p{margin:0;font-size:14px;color:var(--ink2)}
+.warn-box{background:#fef3c7;border-left:3px solid #d97706;border-radius:0 var(--r) var(--r) 0;padding:14px 18px;margin:16px 0}
+.warn-box p{margin:0;font-size:14px;color:#92400e}
+.data-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13px}
+.data-table th{background:var(--bg3);font-family:var(--disp);font-size:13px;font-weight:700;text-transform:uppercase;padding:10px 14px;text-align:left;border-bottom:1px solid var(--bdr2);color:var(--ink2)}
+.data-table td{padding:10px 14px;border-bottom:1px solid var(--bdr);color:var(--ink3);vertical-align:top;line-height:1.55}
+.data-table tr:last-child td{border-bottom:none}
+.data-table tr:nth-child(even) td{background:var(--bg2)}
+.contact-box{background:var(--dk2);border-radius:var(--rxl);padding:28px 32px;margin-top:32px}
+.contact-box h3{font-family:var(--disp);font-size:22px;font-weight:800;text-transform:uppercase;color:var(--dw);margin-bottom:8px}
+.contact-box p{font-size:14px;color:var(--dw2);line-height:1.7;margin-bottom:4px}
+.contact-box a{color:var(--amber)}
+.footer{background:var(--dk2);padding:52px 0 28px;border-top:1px solid var(--dkl)}
+.ftop{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:44px;padding-bottom:36px;border-bottom:1px solid var(--dkl)}
+.fbrand{font-family:var(--disp);font-size:20px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--dw);margin-bottom:8px}
+.fdesc{font-size:13px;color:var(--dw4);line-height:1.65;max-width:220px}
+.fbadge{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:10px;color:var(--dw4);margin-top:14px;letter-spacing:.05em}
+.fbadge svg{width:11px;height:11px;stroke:var(--green);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.fcolt{font-family:var(--mono);font-size:10px;color:var(--dw4);letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
+.fcol a{display:block;font-size:13px;color:var(--dw4);margin-bottom:9px;transition:color .15s;text-decoration:none}
+.fcol a:hover{color:var(--dw2)}
+.fbtm{padding-top:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.fbtm p{font-family:var(--mono);font-size:11px;color:var(--dw4);letter-spacing:.04em}
+.flinks{display:flex;gap:18px}
+.flinks a{font-family:var(--mono);font-size:11px;color:var(--dw4);transition:color .15s;text-decoration:none}
+.flinks a:hover{color:var(--dw2)}
+@media(max-width:900px){.nav-links{display:none}.ftop{grid-template-columns:1fr 1fr}.toc-list{grid-template-columns:1fr}}
+@media(max-width:600px){.ftop{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="w"><div class="nav-i">
+    <a href="index.html" class="logo">
+      <div class="logo-box"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="13" rx="2"/><path d="M7 7V5a3 3 0 016 0v2"/><line x1="12" y1="12" x2="12" y2="15"/></svg></div>
+      <span class="logo-word">DockSync</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html#prod" class="nl">Product</a>
+      <a href="index.html#feats" class="nl">Features</a>
+      <a href="index.html#pricing" class="nl">Pricing</a>
+      <a href="index.html#faq" class="nl">FAQ</a>
+    </div>
+    <div class="nav-right">
+      <a href="#" class="nav-util">Warehouse login</a>
+      <div class="nav-sep"></div>
+      <a href="#" class="nav-util">Carrier login</a>
+      <a href="index.html#trial" class="btn-nav">Start free trial</a>
+    </div>
+  </div></div>
+</nav>
+
+<div class="page-hero">
+  <div class="wc">
+    <div class="bc"><a href="index.html">Home</a> <span>/</span> Terms of Service</div>
+    <div class="eye">Legal</div>
+    <h1 class="dlg">Terms of Service</h1>
+    <div class="page-meta">
+      <span>Last updated: April 2025</span>
+      <span class="badge b-green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>England &amp; Wales</span>
+      <span class="badge b-blue"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>Stripe Payments</span>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+  <div class="wc">
+
+```
+<div class="toc">
+  <div class="toc-title">Contents</div>
+  <ul class="toc-list">
+    <li><a href="#acceptance">1. Acceptance of terms</a></li>
+    <li><a href="#definitions">2. Definitions</a></li>
+    <li><a href="#the-service">3. The service</a></li>
+    <li><a href="#free-trial">4. Free trial</a></li>
+    <li><a href="#subscriptions">5. Subscriptions &amp; billing</a></li>
+    <li><a href="#payments">6. Payments via Stripe</a></li>
+    <li><a href="#acceptable-use">7. Acceptable use</a></li>
+    <li><a href="#data-ownership">8. Data ownership</a></li>
+    <li><a href="#infrastructure">9. Infrastructure &amp; uptime</a></li>
+    <li><a href="#intellectual-property">10. Intellectual property</a></li>
+    <li><a href="#confidentiality">11. Confidentiality</a></li>
+    <li><a href="#liability">12. Limitation of liability</a></li>
+    <li><a href="#indemnity">13. Indemnity</a></li>
+    <li><a href="#termination">14. Termination</a></li>
+    <li><a href="#changes">15. Changes to the service</a></li>
+    <li><a href="#governing-law">16. Governing law</a></li>
+    <li><a href="#contact">17. Contact</a></li>
+  </ul>
+</div>
+
+<div class="highlight">
+  <p><strong>Plain English summary:</strong> These terms are a contract between you and DockSync. The key points: your 30-day free trial is genuinely free with no auto-billing. You own all data you put into DockSync. We can't access your payment card details — Stripe handles all payments securely. You can cancel any time. If something goes wrong, our liability is capped at what you paid us in the last 3 months. Questions? Email <a href="mailto:hello@docksync.app">hello@docksync.app</a>.</p>
+</div>
+
+<div class="section" id="acceptance">
+  <h2>1. Acceptance of terms</h2>
+  <p>By accessing or using the DockSync platform at <strong>app.docksync.app</strong> or our marketing website at <strong>www.docksync.app</strong>, you agree to be bound by these Terms of Service ("Terms"). These Terms form a legally binding agreement between you ("Customer", "you", "your") and DockSync Ltd ("DockSync", "we", "us", "our").</p>
+  <p>If you are entering into these Terms on behalf of a company or other legal entity, you represent that you have the authority to bind that entity. If you do not have such authority, or if you do not agree with these Terms, you must not use DockSync.</p>
+  <p>These Terms should be read alongside our <a href="privacy.html">Privacy Policy</a>, which is incorporated by reference.</p>
+</div>
+
+<div class="section" id="definitions">
+  <h2>2. Definitions</h2>
+  <table class="data-table">
+    <thead><tr><th>Term</th><th>Meaning</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Service</strong></td><td>The DockSync dock scheduling platform, including the warehouse management application, supplier booking portal, and QR driver check-in system</td></tr>
+      <tr><td><strong>Customer</strong></td><td>The warehouse operator or business entity that has registered for a DockSync account</td></tr>
+      <tr><td><strong>User</strong></td><td>Any individual who accesses the Service under a Customer account, including warehouse managers and administrators</td></tr>
+      <tr><td><strong>Supplier</strong></td><td>A third-party company or carrier that accesses DockSync's supplier booking portal to book delivery slots on behalf of or at the invitation of a Customer</td></tr>
+      <tr><td><strong>Customer Data</strong></td><td>All data, content, and information submitted to or generated within the Service by the Customer, Users, or Suppliers</td></tr>
+      <tr><td><strong>Subscription</strong></td><td>A paid plan (Starter, Growth, or Enterprise) that grants access to the Service for a billing period</td></tr>
+      <tr><td><strong>Free Trial</strong></td><td>A 30-day period of full access to the Service at no charge, available to new Customers</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="section" id="the-service">
+  <h2>3. The service</h2>
+  <p>DockSync provides a browser-based dock scheduling platform that enables warehouse operators to manage inbound delivery bookings, bay assignments, supplier performance, and driver check-ins. The Service includes:</p>
+  <ul>
+    <li>A warehouse management dashboard with live KPIs and bay status monitoring</li>
+    <li>A supplier self-booking portal accessible via a unique link</li>
+    <li>A booking calendar with month, week, and day views</li>
+    <li>Bay management tools including active/inactive toggling and operating schedule configuration</li>
+    <li>QR code driver check-in functionality</li>
+    <li>Supplier delivery performance reporting</li>
+    <li>Automated supplier reminder notifications</li>
+  </ul>
+  <p>The Service is provided on a software-as-a-service ("SaaS") basis. DockSync grants you a limited, non-exclusive, non-transferable right to access and use the Service during your subscription period, subject to these Terms.</p>
+  <h3>3.1 Service availability</h3>
+  <p>DockSync targets 99.5% monthly uptime. Scheduled maintenance will be communicated at least 24 hours in advance where possible and will be carried out during low-usage hours. We are not liable for downtime caused by factors outside our reasonable control, including third-party infrastructure failures (see Section 9).</p>
+  <h3>3.2 Supported environments</h3>
+  <p>The Service is designed to operate on current versions of Google Chrome, Microsoft Edge, and Safari. DockSync does not guarantee compatibility with outdated browser versions or unsupported operating systems.</p>
+</div>
+
+<div class="section" id="free-trial">
+  <h2>4. Free trial</h2>
+  <p>New Customers are eligible for a <strong>30-day free trial</strong> with full access to all features of the Growth plan.</p>
+  <ul>
+    <li><strong>No payment details required</strong> to start your free trial</li>
+    <li><strong>No automatic conversion:</strong> Your trial will not automatically convert to a paid subscription. At the end of the 30-day period, if you have not selected a paid plan, your account will be paused — not deleted — and you can reactivate it at any time</li>
+    <li><strong>No sales pressure:</strong> You will not receive unsolicited sales calls. We may send you a small number of onboarding emails to help you get started</li>
+    <li>Each business entity is eligible for one free trial. Creating multiple accounts to circumvent this limit is a breach of these Terms</li>
+    <li>DockSync reserves the right to modify or discontinue the free trial offer at any time, but any trial already in progress will be honoured for its full 30-day period</li>
+  </ul>
+</div>
+
+<div class="section" id="subscriptions">
+  <h2>5. Subscriptions and billing</h2>
+  <h3>5.1 Plans</h3>
+  <table class="data-table">
+    <thead><tr><th>Plan</th><th>Scope</th><th>Billing</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Starter</strong></td><td>1 warehouse, up to 8 bays</td><td>£79/month or £63/month (billed annually)</td></tr>
+      <tr><td><strong>Growth</strong></td><td>1 warehouse, unlimited bays</td><td>£179/month or £143/month (billed annually)</td></tr>
+      <tr><td><strong>Enterprise</strong></td><td>Multiple warehouses, custom configuration</td><td>Custom pricing — agreed in writing</td></tr>
+    </tbody>
+  </table>
+  <p>All prices are exclusive of UK VAT, which will be added at the applicable rate. Prices may change with 30 days' written notice to active subscribers.</p>
+  <h3>5.2 Billing cycle</h3>
+  <ul>
+    <li>Monthly subscriptions are billed on the same day each month as your original subscription date</li>
+    <li>Annual subscriptions are billed once per year on your subscription anniversary date</li>
+    <li>Subscription fees are charged in advance for the upcoming billing period</li>
+    <li>Failed payments will be retried up to 3 times over 7 days. If payment continues to fail, your account will be suspended until payment is resolved</li>
+  </ul>
+  <h3>5.3 Upgrades and downgrades</h3>
+  <ul>
+    <li>You may upgrade your plan at any time. Upgrades take effect immediately and you will be charged a pro-rated amount for the remainder of the billing period</li>
+    <li>You may downgrade your plan at any time. Downgrades take effect at the end of your current billing period</li>
+    <li>Plan changes are managed directly within the DockSync application under My Account → Subscription</li>
+  </ul>
+  <h3>5.4 Refunds</h3>
+  <p>Subscription fees are non-refundable except where required by applicable consumer protection law. If you cancel during a paid period, you will retain access to the Service until the end of that billing period. No partial-period refunds are issued.</p>
+  <p>If DockSync terminates your account without cause, you will receive a pro-rated refund for the unused portion of your subscription period.</p>
+</div>
+
+<div class="section" id="payments">
+  <h2>6. Payments via Stripe</h2>
+  <p>All payment processing is handled by <strong>Stripe, Inc.</strong>, a globally trusted payment infrastructure provider and PCI DSS Level 1 certified processor — the highest level of payment security certification in the industry.</p>
+  <h3>6.1 How Stripe processes your payment</h3>
+  <ul>
+    <li>When you subscribe to a paid plan, you will be directed to a Stripe-hosted payment form</li>
+    <li>Your full payment card details are transmitted directly and securely to Stripe — DockSync never sees, intercepts, stores, or has access to your raw card number, CVV, or expiry date</li>
+    <li>Stripe tokenises your card and provides DockSync with a secure reference token only</li>
+    <li>All payment card data is stored and managed exclusively within Stripe's PCI DSS Level 1 compliant environment</li>
+  </ul>
+  <h3>6.2 Subscription management</h3>
+  <ul>
+    <li>Recurring billing, plan upgrades, downgrades, and cancellations are managed through Stripe's subscription infrastructure</li>
+    <li>You can update your payment method at any time from My Account → Subscription within the DockSync application</li>
+    <li>Stripe is authorised by the Financial Conduct Authority (FCA) as an e-money institution in the UK</li>
+  </ul>
+  <h3>6.3 Disputes and chargebacks</h3>
+  <p>If you believe a charge is incorrect, contact us at <a href="mailto:billing@docksync.app">billing@docksync.app</a> before initiating a chargeback. We will investigate and resolve genuine billing errors promptly. Initiating chargebacks for valid charges may result in account suspension.</p>
+  <div class="warn-box">
+    <p><strong>Important:</strong> DockSync will never ask you to share your payment card details by email, phone, or any channel other than the secure Stripe payment form within the application. If you receive any such request, treat it as fraudulent and contact us immediately.</p>
+  </div>
+</div>
+
+<div class="section" id="acceptable-use">
+  <h2>7. Acceptable use</h2>
+  <h3>7.1 Permitted use</h3>
+  <p>You may use DockSync solely for your internal business operations to manage warehouse dock scheduling, supplier bookings, and delivery operations.</p>
+  <h3>7.2 Prohibited activities</h3>
+  <p>You must not use DockSync to:</p>
+  <ul>
+    <li>Violate any applicable local, national, or international law or regulation</li>
+    <li>Infringe the intellectual property rights of DockSync or any third party</li>
+    <li>Transmit any unsolicited commercial communications (spam) through the supplier portal</li>
+    <li>Introduce viruses, trojans, worms, or other malicious or technologically harmful material</li>
+    <li>Attempt to gain unauthorised access to any part of the Service, its servers, or any third-party systems connected to it</li>
+    <li>Reverse engineer, decompile, disassemble, or attempt to derive the source code of the Service</li>
+    <li>Resell, sublicense, or otherwise commercially exploit the Service without DockSync's prior written consent</li>
+    <li>Use the Service to develop a competing product or service</li>
+    <li>Use automated bots, scrapers, or crawlers to access or collect data from the Service</li>
+    <li>Impersonate any person or entity, or misrepresent your affiliation with any person or entity</li>
+    <li>Create multiple accounts to circumvent feature or trial limitations</li>
+  </ul>
+  <p>DockSync reserves the right to investigate suspected violations and suspend or terminate accounts where a breach is confirmed or reasonably suspected.</p>
+</div>
+
+<div class="section" id="data-ownership">
+  <h2>8. Data ownership and portability</h2>
+  <h3>8.1 Your data is yours</h3>
+  <p><strong>You retain full ownership of all Customer Data at all times.</strong> DockSync does not claim any ownership rights over the data you input into the platform — including booking records, supplier information, bay configurations, operational schedules, and QR check-in logs.</p>
+  <h3>8.2 How we use your data</h3>
+  <p>DockSync processes Customer Data solely to provide, maintain, and improve the Service as described in our <a href="privacy.html">Privacy Policy</a>. We do not use your operational data to benchmark against other customers, sell to third parties, or for any purpose other than delivering the Service to you.</p>
+  <h3>8.3 Data export</h3>
+  <ul>
+    <li>Growth and Enterprise plan customers may export booking data and supplier performance reports in CSV format at any time from within the application</li>
+    <li>Upon cancellation, you may request a full data export within 90 days of account closure</li>
+    <li>After 90 days post-cancellation, Customer Data will be permanently deleted from our systems, subject to legally required retention periods</li>
+  </ul>
+  <h3>8.4 Supplier data</h3>
+  <p>Where you input personal data about your suppliers into DockSync (such as contact names and email addresses), you warrant that you have a lawful basis to share this data with DockSync and that doing so is consistent with your own privacy obligations to those suppliers.</p>
+</div>
+
+<div class="section" id="infrastructure">
+  <h2>9. Infrastructure, security and uptime</h2>
+  <h3>9.1 Bubble.io infrastructure</h3>
+  <p>DockSync is built on <strong>Bubble.io</strong>, an enterprise-grade application development platform. Bubble provides the following infrastructure security:</p>
+  <ul>
+    <li><strong>SOC 2 Type II compliant</strong> — independently audited security controls</li>
+    <li><strong>AES-256 encryption</strong> at rest for all stored data</li>
+    <li><strong>TLS 1.2+ encryption</strong> in transit for all data transmission</li>
+    <li><strong>AWS-hosted infrastructure</strong> with data stored in EU/UK regions</li>
+    <li>Automatic daily backups with point-in-time recovery capability</li>
+    <li>DDoS protection and web application firewall</li>
+    <li>Regular third-party penetration testing</li>
+  </ul>
+  <h3>9.2 Service level</h3>
+  <p>DockSync targets 99.5% monthly uptime. Scheduled maintenance windows will be communicated in advance where practicable. DockSync is not liable for service interruptions caused by:</p>
+  <ul>
+    <li>Scheduled maintenance communicated in advance</li>
+    <li>Force majeure events outside our reasonable control</li>
+    <li>Third-party infrastructure failures (including Bubble.io or AWS)</li>
+    <li>Your own network, hardware, or browser issues</li>
+    <li>Actions of third parties including DDoS attacks</li>
+  </ul>
+  <h3>9.3 Security responsibilities</h3>
+  <p>You are responsible for maintaining the security of your account credentials, restricting access to authorised users, and notifying us promptly at <a href="mailto:security@docksync.app">security@docksync.app</a> if you suspect any unauthorised access to your account.</p>
+</div>
+
+<div class="section" id="intellectual-property">
+  <h2>10. Intellectual property</h2>
+  <p>All intellectual property rights in the DockSync platform, including its design, code, features, branding, documentation, and any improvements or enhancements, are owned by or licensed to DockSync.</p>
+  <p>These Terms do not grant you any rights in DockSync's intellectual property other than the limited licence to use the Service as described in Section 3.</p>
+  <p>If you provide DockSync with feedback, suggestions, or ideas about the Service, you grant DockSync a perpetual, irrevocable, royalty-free licence to use that feedback for any purpose without obligation to you.</p>
+</div>
+
+<div class="section" id="confidentiality">
+  <h2>11. Confidentiality</h2>
+  <p>Each party may receive confidential information from the other in connection with the Service. Each party agrees to:</p>
+  <ul>
+    <li>Keep the other party's confidential information strictly confidential</li>
+    <li>Use confidential information only for the purpose of performing obligations under these Terms</li>
+    <li>Not disclose confidential information to any third party without prior written consent, except to employees or contractors who need it to deliver the Service and are bound by equivalent confidentiality obligations</li>
+  </ul>
+  <p>This obligation does not apply to information that is publicly available, already known to the receiving party, or required to be disclosed by law or court order.</p>
+</div>
+
+<div class="section" id="liability">
+  <h2>12. Limitation of liability</h2>
+  <h3>12.1 Cap on liability</h3>
+  <p>To the maximum extent permitted by applicable law, DockSync's total aggregate liability to you arising out of or in connection with these Terms or the Service — whether in contract, tort (including negligence), breach of statutory duty, or otherwise — shall not exceed the total fees paid by you to DockSync in the <strong>three (3) months immediately preceding the event giving rise to the claim</strong>.</p>
+  <h3>12.2 Excluded losses</h3>
+  <p>DockSync shall not be liable for any:</p>
+  <ul>
+    <li>Loss of profits, revenue, or anticipated savings</li>
+    <li>Loss of business or contracts</li>
+    <li>Loss of data (beyond our obligations under these Terms)</li>
+    <li>Business interruption losses</li>
+    <li>Indirect, consequential, special, or punitive damages</li>
+    <li>Loss arising from missed delivery slots, failed bookings, or operational disruptions caused by service unavailability</li>
+  </ul>
+  <p>even if DockSync has been advised of the possibility of such losses.</p>
+  <h3>12.3 Exceptions</h3>
+  <p>Nothing in these Terms excludes or limits liability for: death or personal injury caused by negligence, fraud or fraudulent misrepresentation, or any liability that cannot be excluded or limited under applicable law.</p>
+</div>
+
+<div class="section" id="indemnity">
+  <h2>13. Indemnity</h2>
+  <p>You agree to indemnify, defend, and hold harmless DockSync and its directors, employees, and contractors from and against any claims, damages, losses, costs, and expenses (including reasonable legal fees) arising from:</p>
+  <ul>
+    <li>Your breach of these Terms</li>
+    <li>Your violation of any applicable law or regulation</li>
+    <li>Your Customer Data infringing the intellectual property or privacy rights of any third party</li>
+    <li>Your use of the Service in a manner not authorised by these Terms</li>
+  </ul>
+</div>
+
+<div class="section" id="termination">
+  <h2>14. Termination</h2>
+  <h3>14.1 Termination by you</h3>
+  <p>You may cancel your subscription at any time from within the application at My Account → Subscription. Cancellation takes effect at the end of your current billing period. You will retain full access to the Service until that date.</p>
+  <h3>14.2 Termination by DockSync</h3>
+  <p>DockSync may suspend or terminate your account immediately if:</p>
+  <ul>
+    <li>You breach any material provision of these Terms and fail to remedy the breach within 14 days of written notice</li>
+    <li>You engage in any prohibited activity under Section 7</li>
+    <li>Payment is overdue by more than 30 days after the retry period</li>
+    <li>We are required to do so by law or regulatory authority</li>
+  </ul>
+  <p>DockSync may terminate your account without cause by giving 30 days' written notice, in which case you will receive a pro-rated refund of prepaid fees.</p>
+  <h3>14.3 Effect of termination</h3>
+  <p>Upon termination, your right to access the Service ceases immediately (or at the end of your billing period for customer-initiated cancellation). You may request a data export within 90 days of termination. After 90 days, Customer Data will be permanently deleted.</p>
+</div>
+
+<div class="section" id="changes">
+  <h2>15. Changes to the service and these terms</h2>
+  <h3>15.1 Changes to the service</h3>
+  <p>DockSync is continuously developed and improved. We may add, modify, or remove features from the Service at any time. Where a change materially reduces functionality you rely on, we will provide at least 30 days' advance notice.</p>
+  <h3>15.2 Changes to these terms</h3>
+  <p>We may update these Terms from time to time. When we make material changes, we will notify you by email and display a notice within the application at least 30 days before the changes take effect. Your continued use of the Service after that date constitutes acceptance of the updated Terms. If you do not accept the updated Terms, you may terminate your account before they take effect.</p>
+</div>
+
+<div class="section" id="governing-law">
+  <h2>16. Governing law and disputes</h2>
+  <p>These Terms and any dispute or claim arising out of or in connection with them (including non-contractual disputes) shall be governed by and construed in accordance with the laws of <strong>England and Wales</strong>.</p>
+  <p>Both parties agree to submit to the exclusive jurisdiction of the courts of England and Wales for the resolution of any dispute, except that DockSync may seek injunctive or other equitable relief in any jurisdiction to protect its intellectual property rights.</p>
+  <p><strong>Dispute resolution process:</strong> Before initiating formal legal proceedings, both parties agree to attempt to resolve disputes informally. You should first contact us at <a href="mailto:hello@docksync.app">hello@docksync.app</a> describing the dispute. We will respond within 10 business days. If the dispute is not resolved within 30 days, either party may pursue formal remedies.</p>
+</div>
+
+<div class="section" id="contact">
+  <h2>17. Contact</h2>
+  <div class="contact-box">
+    <h3>Get in touch</h3>
+    <p><strong style="color:var(--dw)">General &amp; legal enquiries:</strong> <a href="mailto:hello@docksync.app">hello@docksync.app</a></p>
+    <p><strong style="color:var(--dw)">Billing &amp; payment questions:</strong> <a href="mailto:billing@docksync.app">billing@docksync.app</a></p>
+    <p><strong style="color:var(--dw)">Security concerns:</strong> <a href="mailto:security@docksync.app">security@docksync.app</a></p>
+    <p style="margin-top:14px;color:var(--dw4)">DockSync Ltd · Registered in England &amp; Wales</p>
+  </div>
+</div>
+```
+
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="w">
+    <div class="ftop">
+      <div>
+        <div class="fbrand">DockSync</div>
+        <p class="fdesc">Dock scheduling software for warehouses that want precision over chaos.</p>
+        <div class="fbadge"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>SSL · GDPR · UK-hosted</div>
+      </div>
+      <div><div class="fcolt">Product</div><div class="fcol"><a href="index.html#prod">Product overview</a><a href="index.html#feats">Features</a><a href="index.html#pricing">Pricing</a><a href="index.html#faq">FAQ</a></div></div>
+      <div><div class="fcolt">Industries</div><div class="fcol"><a href="#">Retail &amp; FMCG</a><a href="#">Pharmaceutical</a><a href="#">Automotive</a><a href="#">3PL &amp; Logistics</a></div></div>
+      <div><div class="fcolt">Company</div><div class="fcol"><a href="#">About us</a><a href="mailto:hello@docksync.app">hello@docksync.app</a><a href="privacy.html">Privacy policy</a><a href="terms.html">Terms of service</a></div></div>
+    </div>
+    <div class="fbtm">
+      <p>© 2025 DockSync Ltd · Registered in England &amp; Wales</p>
+      <div class="flinks"><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="#">Cookies</a></div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
