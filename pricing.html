@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DockSync Pricing — Bay-Based Dock Scheduling Plans | Free 30-Day Trial</title>
+<meta name="description" content="Simple bay-based pricing for dock scheduling software. Starter from £79/mo (up to 8 bays), Growth at £179/mo (unlimited bays), Enterprise custom. Free 30-day trial, no card required. Annual billing saves 20%.">
+<meta name="keywords" content="dock scheduling software pricing, warehouse management cost, bay scheduling software price, dock scheduling plans">
+<link rel="canonical" href="https://www.docksync.app/pricing.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Barlow',sans-serif;color:#111010;background:#ffffff;-webkit-font-smoothing:antialiased;overflow-x:hidden;line-height:1.6}
+a{color:#e6920a;text-decoration:none}
+a:hover{text-decoration:underline}
+.w{max-width:1140px;margin:0 auto;padding:0 28px}
+.wc{max-width:860px;margin:0 auto;padding:0 28px}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,0.96);backdrop-filter:blur(14px);border-bottom:1px solid rgba(0,0,0,0.08);box-shadow:0 1px 20px rgba(0,0,0,0.06)}
+.nav-i{display:flex;align-items:center;height:62px;gap:6px}
+.logo{display:flex;align-items:center;gap:9px;margin-right:28px;text-decoration:none}
+.logo-box{width:28px;height:28px;border:1.5px solid #e6920a;border-radius:5px;display:flex;align-items:center;justify-content:center;background:#fff}
+.logo-word{font-family:‘Barlow Condensed’,sans-serif;font-size:18px;font-weight:800;letter-spacing:0.05em;text-transform:uppercase;color:#111010}
+.nav-links{display:flex;align-items:center;gap:2px;flex:1}
+.nl{font-size:13px;color:#6a6860;padding:6px 11px;border-radius:6px;transition:all 0.15s;text-decoration:none;display:inline-block}
+.nl:hover{color:#3b3a37;background:#f7f6f3;text-decoration:none}
+.nl.active{color:#3b3a37;background:#f7f6f3;font-weight:500}
+.nav-right{display:flex;align-items:center;gap:10px;margin-left:auto}
+.nav-util{font-size:12px;color:#9a9790;transition:color 0.15s;text-decoration:none}
+.nav-util:hover{color:#6a6860}
+.nav-sep{width:1px;height:16px;background:rgba(0,0,0,0.14)}
+.btn-nav{display:inline-flex;align-items:center;font-family:‘Barlow Condensed’,sans-serif;font-weight:700;font-size:13px;letter-spacing:0.05em;text-transform:uppercase;padding:8px 16px;border-radius:6px;border:none;cursor:pointer;background:#e6920a;color:#1a0900;transition:all 0.17s;text-decoration:none}
+.btn-nav:hover{background:#f4a21e;text-decoration:none}
+
+/* SCROLL REVEAL */
+.rv{opacity:0;transform:translateY(18px);transition:opacity 0.55s ease,transform 0.55s ease}
+.rv.in{opacity:1;transform:translateY(0)}
+
+/* HERO */
+.hero{padding:110px 0 64px;background:#0d0e0e;position:relative;overflow:hidden}
+.hero-dots{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,0.025) 1px,transparent 1px);background-size:32px 32px;pointer-events:none}
+.hero-glow-l{position:absolute;top:-120px;left:-120px;width:600px;height:600px;background:radial-gradient(circle,rgba(230,146,10,0.07) 0%,transparent 65%);pointer-events:none}
+.hero-glow-r{position:absolute;bottom:-80px;right:-80px;width:400px;height:400px;background:radial-gradient(circle,rgba(43,121,207,0.05) 0%,transparent 65%);pointer-events:none}
+.hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.bc{font-family:‘JetBrains Mono’,monospace;font-size:11px;color:#4e4c49;margin-bottom:18px;display:flex;align-items:center;gap:5px}
+.bc a{color:#e6920a;text-decoration:none}
+.hero-eye{display:inline-flex;align-items:center;gap:8px;font-family:‘JetBrains Mono’,monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#e6920a;margin-bottom:14px}
+.hero-eye::before{content:’’;width:18px;height:1px;background:#e6920a;flex-shrink:0}
+.hero-h1{font-family:‘Barlow Condensed’,sans-serif;font-weight:900;line-height:0.93;letter-spacing:-0.01em;text-transform:uppercase;font-size:clamp(40px,6vw,80px);color:#efede9;margin-bottom:18px}
+.hero-h1 em{font-style:normal;color:#e6920a}
+.hero-desc{font-size:16px;color:#787470;line-height:1.7;margin-bottom:28px}
+.trust-badges{display:flex;flex-direction:column;gap:10px}
+.tbadge{display:flex;align-items:center;gap:10px;font-size:14px;color:#787470}
+.tbadge svg{width:16px;height:16px;stroke:#1a9958;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+
+/* HERO RIGHT — quick compare */
+.hero-compare{background:#191b1c;border-radius:18px;border:1px solid rgba(255,255,255,0.10);padding:28px;position:relative;overflow:hidden}
+.hero-compare::before{content:’’;position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#e6920a,#f4a21e)}
+.hc-title{font-family:‘Barlow Condensed’,sans-serif;font-size:18px;font-weight:700;text-transform:uppercase;color:#efede9;margin-bottom:4px}
+.hc-sub{font-family:‘JetBrains Mono’,monospace;font-size:11px;color:#4e4c49;margin-bottom:20px;letter-spacing:0.04em}
+.hc-plans{display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
+.hcp{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;background:#212325;border-radius:10px;border:1px solid rgba(255,255,255,0.07)}
+.hcp.pop{border-color:rgba(230,146,10,0.4);background:#252a22}
+.hcp-name{font-family:‘Barlow Condensed’,sans-serif;font-size:16px;font-weight:700;text-transform:uppercase}
+.hcp-name.amber{color:#e6920a}
+.hcp-name.light{color:#efede9}
+.hcp-scope{font-size:12px;color:#787470;margin-top:1px}
+.hcp-price{text-align:right}
+.hcp-num{font-family:‘JetBrains Mono’,monospace;font-size:22px;font-weight:500;color:#efede9;line-height:1}
+.hcp-num sup{font-size:13px;vertical-align:top;margin-top:3px;display:inline-block;font-weight:400}
+.hcp-num sub{font-size:11px;vertical-align:baseline;font-weight:400;color:#787470}
+.hcp-per{font-family:‘JetBrains Mono’,monospace;font-size:10px;color:#4e4c49;text-align:right;margin-top:2px}
+.hcp-badge{display:inline-block;background:rgba(230,146,10,0.15);color:#e6920a;font-family:‘JetBrains Mono’,monospace;font-size:9px;padding:2px 6px;border-radius:3px;margin-left:6px;letter-spacing:0.04em}
+.hc-note{font-family:‘JetBrains Mono’,monospace;font-size:10px;color:#4e4c49;text-align:center;line-height:1.5}
+
+/* BILLING TOGGLE */
+.tog-wrap{padding:48px 0 0;display:flex;flex-direction:column;align-items:center}
+.tog-label{font-family:‘JetBrains Mono’,monospace;font-size:11px;color:#9a9790;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:14px}
+.tog{display:inline-flex;background:#f7f6f3;border-radius:40px;padding:4px;border:1px solid rgba(0,0,0,0.08)}
+.tb{font-family:‘JetBrains Mono’,monospace;font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;padding:8px 22px;border-radius:36px;border:none;cursor:pointer;background:transparent;color:#9a9790;transition:all 0.2s}
+.tb.on{background:#ffffff;color:#111010;box-shadow:0 1px 6px rgba(0,0,0,0.12)}
+.save-pill{display:inline-flex;align-items:center;gap:6px;font-family:‘JetBrains Mono’,monospace;font-size:10px;font-weight:500;color:#1a9958;background:rgba(26,153,88,0.10);padding:4px 10px;border-radius:20px;margin-left:10px;border:1px solid rgba(26,153,88,0.2)}
+
+/* PLANS GRID */
+.plans-section{padding:32px 0 72px}
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch}
+.plan{background:#ffffff;border-radius:18px;border:1.5px solid rgba(0,0,0,0.14);padding:28px;position:relative;display:flex;flex-direction:column;transition:box-shadow 0.2s,transform 0.2s}
+.plan:hover{box-shadow:0 8px 32px rgba(0,0,0,0.08);transform:translateY(-2px)}
+.plan-pop{border-color:#e6920a;border-width:2px;box-shadow:0 4px 32px rgba(230,146,10,0.14);transform:translateY(-4px)}
+.plan-pop:hover{transform:translateY(-6px)}
+.plan-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);font-family:‘JetBrains Mono’,monospace;font-size:10px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;background:#e6920a;color:#1a0900;padding:4px 16px;border-radius:20px;white-space:nowrap}
+.plan-name{font-family:‘Barlow Condensed’,sans-serif;font-size:24px;font-weight:800;text-transform:uppercase;color:#111010;margin-bottom:4px}
+.plan-name.amber{color:#e6920a}
+.plan-desc{font-size:13px;color:#6a6860;line-height:1.5;margin-bottom:18px}
+.plan-price{font-family:‘JetBrains Mono’,monospace;font-size:42px;font-weight:500;color:#111010;letter-spacing:-0.02em;line-height:1}
+.plan-price sup{font-size:20px;vertical-align:top;margin-top:6px;display:inline-block;font-weight:400}
+.plan-price sub{font-size:14px;vertical-align:baseline;font-weight:400;color:#6a6860}
+.plan-per{font-family:‘JetBrains Mono’,monospace;font-size:11px;color:#9a9790;margin-top:5px;margin-bottom:6px}
+.plan-save{font-family:‘JetBrains Mono’,monospace;font-size:10px;color:#1a9958;background:rgba(26,153,88,0.10);padding:2px 8px;border-radius:8px;display:inline-block;margin-bottom:16px}
+.plan-custom{font-family:‘Barlow Condensed’,sans-serif;font-size:32px;font-weight:700;text-transform:uppercase;color:#111010;margin-bottom:4px}
+.plan-div{height:1px;background:rgba(0,0,0,0.08);margin:16px 0}
+.plan-ul{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:24px;flex:1}
+.plan-ul li{display:flex;align-items:flex-start;gap:9px;font-size:13px;color:#3b3a37;line-height:1.5}
+.plan-ul li svg{width:13px;height:13px;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;margin-top:2px}
+.li-ok svg{stroke:#1a9958}
+.li-no svg{stroke:#9a9790}
+.li-no{color:#9a9790}
+.plan-cta{width:100%;padding:12px;font-family:‘Barlow Condensed’,sans-serif;font-size:14px;font-weight:800;letter-spacing:0.05em;text-transform:uppercase;border:none;border-radius:8px;cursor:pointer;transition:all 0.17s;display:block;text-align:center;text-decoration:none;margin-top:auto}
+.pc-amber{background:#e6920a;color:#1a0900}.pc-amber:hover{background:#f4a21e;transform:translateY(-1px)}
+.pc-dark{background:#111010;color:#fff}.pc-dark:hover{background:#3b3a37}
+.pc-ol{background:transparent;color:#3b3a37;border:1.5px solid rgba(0,0,0,0.22)}.pc-ol:hover{background:#f7f6f3}
+.plan-note{font-family:‘JetBrains Mono’,monospace;font-size:10px;color:#9a9790;text-align:center;margin-top:8px}
+
+/* NOTICE BOX */
+.notice{background:#f7f6f3;border-radius:14px;border:1px solid rgba(0,0,0,0.08);padding:18px 22px;display:flex;align-items:flex-start;gap:14px;margin-top:24px}
+.notice svg{width:18px;height:18px;stroke:#e6920a;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;margin-top:2px}
+.notice p{font-size:14px;color:#6a6860;line-height:1.6}
+.notice strong{color:#3b3a37;font-weight:500}
+
+/* COMPARISON TABLE */
+.compare-section{padding:72px 0;background:#f7f6f3;border-top:1px solid rgba(0,0,0,0.08);border-bottom:1px solid rgba(0,0,0,0.08)}
+.sec-eye{display:inline-flex;align-items:center;gap:8px;font-family:‘JetBrains Mono’,monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#e6920a;margin-bottom:14px}
+.sec-eye::before{content:’’;width:18px;height:1px;background:#e6920a;flex-shrink:0}
+.sec-h2{font-family:‘Barlow Condensed’,sans-serif;font-weight:800;font-size:clamp(26px,3.5vw,42px);text-transform:uppercase;color:#111010;margin-bottom:32px;line-height:0.95}
+.ctbl{width:100%;border-collapse:collapse;font-size:13px}
+.ctbl thead th{background:#efede9;font-family:‘Barlow Condensed’,sans-serif;font-size:14px;font-weight:700;text-transform:uppercase;padding:14px 16px;text-align:left;border-bottom:1px solid rgba(0,0,0,0.14);color:#3b3a37;position:sticky;top:120px}
+.ctbl thead th:first-child{width:38%}
+.ctbl thead th.pop-col{background:#fff8ee;border-bottom-color:#e6920a}
+.ctbl td{padding:11px 16px;border-bottom:1px solid rgba(0,0,0,0.06);color:#6a6860;vertical-align:middle}
+.ctbl td.pop-col{background:#fffdf9}
+.ctbl tr:nth-child(even) td{background:#ffffff}
+.ctbl tr:nth-child(even) td.pop-col{background:#fffcf5}
+.ctbl tr:hover td{background:#f0efec}
+.ctbl tr:hover td.pop-col{background:#fff7e8}
+.cat-row td{background:#efede9 !important;font-family:‘JetBrains Mono’,monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:#9a9790;padding:8px 16px;font-weight:500}
+.ck{color:#1a9958;font-size:16px;font-weight:600}
+.cx{color:#9a9790}
+
+/* FAQ SECTION */
+.faq-section{padding:72px 0}
+.faq-list{margin-top:32px;border-top:1px solid rgba(0,0,0,0.08)}
+.faq-item{border-bottom:1px solid rgba(0,0,0,0.08)}
+.faq-q{display:flex;align-items:center;gap:16px;padding:18px 0;cursor:pointer}
+.faq-qn{font-family:‘JetBrains Mono’,monospace;font-size:11px;color:#9a9790;letter-spacing:0.1em;min-width:28px}
+.faq-qt{font-family:‘Barlow Condensed’,sans-serif;font-size:18px;font-weight:700;text-transform:uppercase;color:#111010;flex:1}
+.faq-tog{width:26px;height:26px;border-radius:50%;border:1px solid rgba(0,0,0,0.14);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.2s}
+.faq-tog svg{width:10px;height:10px;stroke:#6a6860;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;transition:transform 0.25s}
+.faq-item.op .faq-tog{background:rgba(230,146,10,0.10);border-color:rgba(230,146,10,0.25)}
+.faq-item.op .faq-tog svg{stroke:#e6920a;transform:rotate(45deg)}
+.faq-a{font-size:15px;color:#6a6860;line-height:1.75;max-height:0;overflow:hidden;transition:max-height 0.35s ease,padding 0.2s;padding-left:44px}
+.faq-item.op .faq-a{max-height:200px;padding-bottom:18px}
+
+/* TESTIMONIALS */
+.testi-section{padding:72px 0;background:#0d0e0e}
+.t-eye{display:inline-flex;align-items:center;gap:8px;font-family:‘JetBrains Mono’,monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#e6920a;margin-bottom:14px}
+.t-eye::before{content:’’;width:18px;height:1px;background:#e6920a;flex-shrink:0}
+.t-h2{font-family:‘Barlow Condensed’,sans-serif;font-weight:800;font-size:clamp(26px,3.5vw,42px);text-transform:uppercase;color:#efede9;margin-bottom:0;line-height:0.95}
+.tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+.tsti{background:#191b1c;border-radius:14px;border:1px solid rgba(255,255,255,0.07);padding:24px;display:flex;flex-direction:column;gap:14px}
+.tsts{color:#e6920a;font-size:12px;letter-spacing:1px}
+.tstq{font-size:14px;color:#b6b2ac;line-height:1.7;font-style:italic;flex:1}
+.tstq::before{content:’\201C’;font-size:20px;line-height:0;vertical-align:-7px;color:#e6920a;margin-right:2px;font-style:normal;font-family:Georgia,serif}
+.tstby{display:flex;align-items:center;gap:10px}
+.tstav{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:‘Barlow Condensed’,sans-serif;font-size:12px;font-weight:700;color:#fff;flex-shrink:0}
+.tstnm{font-size:12px;font-weight:500;color:#efede9}
+.tstrl{font-size:11px;color:#4e4c49}
+.tstat{font-family:‘JetBrains Mono’,monospace;font-size:10px;color:#e6920a;margin-top:4px}
+
+/* CTA STRIP */
+.cta-section{padding:80px 0;background:#ffffff;text-align:center}
+.cta-h2{font-family:‘Barlow Condensed’,sans-serif;font-weight:900;font-size:clamp(32px,5.5vw,72px);text-transform:uppercase;color:#111010;line-height:0.93;margin-bottom:14px}
+.cta-h2 em{font-style:normal;color:#e6920a}
+.cta-desc{font-size:17px;color:#6a6860;margin-bottom:32px;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.7}
+.cta-btns{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:20px}
+.btn-a{display:inline-flex;align-items:center;font-family:‘Barlow Condensed’,sans-serif;font-weight:700;font-size:15px;letter-spacing:0.05em;text-transform:uppercase;padding:15px 32px;border-radius:12px;border:none;cursor:pointer;background:#e6920a;color:#1a0900;transition:all 0.17s;text-decoration:none}
+.btn-a:hover{background:#f4a21e;transform:translateY(-1px);box-shadow:0 4px 14px rgba(230,146,10,0.28);text-decoration:none}
+.btn-dk{display:inline-flex;align-items:center;font-family:‘Barlow Condensed’,sans-serif;font-weight:700;font-size:15px;letter-spacing:0.05em;text-transform:uppercase;padding:15px 32px;border-radius:12px;cursor:pointer;background:#111010;color:#fff;border:none;transition:all 0.17s;text-decoration:none}
+.btn-dk:hover{background:#3b3a37;text-decoration:none}
+.cta-micro{display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap}
+.cta-m{display:flex;align-items:center;gap:6px;font-family:‘JetBrains Mono’,monospace;font-size:11px;color:#9a9790}
+.cta-m svg{width:11px;height:11px;stroke:#1a9958;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+
+/* FOOTER */
+.footer{background:#131415;padding:52px 0 28px;border-top:1px solid rgba(255,255,255,0.07)}
+.ftop{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:44px;padding-bottom:36px;border-bottom:1px solid rgba(255,255,255,0.07)}
+.fbrand{font-family:‘Barlow Condensed’,sans-serif;font-size:20px;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;color:#efede9;margin-bottom:8px}
+.fdesc{font-size:13px;color:#4e4c49;line-height:1.65;max-width:220px}
+.fbadge{display:inline-flex;align-items:center;gap:6px;font-family:‘JetBrains Mono’,monospace;font-size:10px;color:#4e4c49;margin-top:14px;letter-spacing:0.05em}
+.fbadge svg{width:11px;height:11px;stroke:#1a9958;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.fcolt{font-family:‘JetBrains Mono’,monospace;font-size:10px;color:#4e4c49;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:14px}
+.fcol a{display:block;font-size:13px;color:#4e4c49;margin-bottom:9px;transition:color 0.15s;text-decoration:none}
+.fcol a:hover{color:#b6b2ac}
+.fbtm{padding-top:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.fbtm p{font-family:‘JetBrains Mono’,monospace;font-size:11px;color:#4e4c49;letter-spacing:0.04em}
+.flinks{display:flex;gap:18px}
+.flinks a{font-family:‘JetBrains Mono’,monospace;font-size:11px;color:#4e4c49;transition:color 0.15s;text-decoration:none}
+.flinks a:hover{color:#b6b2ac}
+
+@media(max-width:900px){
+.nav-links{display:none}
+.hero-inner{grid-template-columns:1fr;gap:40px}
+.plans{grid-template-columns:1fr;max-width:420px;margin-left:auto;margin-right:auto}
+.plan-pop{transform:none}
+.plan-pop:hover{transform:translateY(-2px)}
+.tgrid{grid-template-columns:1fr}
+.ftop{grid-template-columns:1fr 1fr}
+}
+@media(max-width:600px){
+.ftop{grid-template-columns:1fr}
+.cta-btns{flex-direction:column}
+.hc-plans{gap:8px}
+}
+</style>
+
+</head>
+<body>
+
+<!-- NAV -->
+
+<nav class="nav" id="nav">
+  <div class="w"><div class="nav-i">
+    <a href="index.html" class="logo">
+      <div class="logo-box">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none">
+          <rect x="1" y="1" width="22" height="20" rx="1.5" fill="#0d1b2e"/>
+          <rect x="4" y="3" width="16" height="15" rx="1" fill="white"/>
+          <rect x="8" y="6" width="8" height="2" rx="1" fill="#2b79cf"/>
+          <rect x="6" y="10" width="10" height="2" rx="1" fill="#2b79cf"/>
+          <rect x="8" y="14" width="8" height="2" rx="1" fill="#2b79cf"/>
+        </svg>
+      </div>
+      <span class="logo-word">DockSync</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="nl">Product</a>
+      <a href="features.html" class="nl">Features</a>
+      <a href="pricing.html" class="nl active">Pricing</a>
+      <a href="index.html#faq" class="nl">FAQ</a>
+    </div>
+    <div class="nav-right">
+      <a href="#" class="nav-util">Warehouse login</a>
+      <div class="nav-sep"></div>
+      <a href="#" class="nav-util">Carrier login</a>
+      <a href="index.html#trial" class="btn-nav">Start free trial</a>
+    </div>
+  </div></div>
+</nav>
+
+<!-- HERO -->
+
+<div class="hero">
+  <div class="hero-dots"></div>
+  <div class="hero-glow-l"></div>
+  <div class="hero-glow-r"></div>
+  <div class="w">
+    <div class="hero-inner">
+      <div>
+        <div class="bc"><a href="index.html">Home</a> <span style="color:#4e4c49">/</span> Pricing</div>
+        <div class="hero-eye">Plans &amp; pricing</div>
+        <h1 class="hero-h1">Simple,<br>transparent<br><em>pricing.</em></h1>
+        <p class="hero-desc">Pay for the bays you manage. No per-user fees. No hidden costs. No contracts. One warehouse per account — built for focus and simplicity.</p>
+        <div class="trust-badges">
+          <div class="tbadge"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Free 30-day trial — no card required</div>
+          <div class="tbadge"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>No automatic billing at trial end</div>
+          <div class="tbadge"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Cancel anytime — no cancellation fees</div>
+          <div class="tbadge"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Annual billing saves 20%</div>
+        </div>
+      </div>
+      <div class="hero-compare">
+        <div class="hc-title">At a glance</div>
+        <div class="hc-sub">Monthly pricing · excluding VAT</div>
+        <div class="hc-plans">
+          <div class="hcp">
+            <div>
+              <div class="hcp-name light">Starter</div>
+              <div class="hcp-scope">1 warehouse · up to 8 bays</div>
+            </div>
+            <div class="hcp-price">
+              <div class="hcp-num" id="hc-s"><sup>£</sup>79<sub>/mo</sub></div>
+              <div class="hcp-per" id="hc-s-per">or £63/mo annual</div>
+            </div>
+          </div>
+          <div class="hcp pop">
+            <div>
+              <div class="hcp-name amber">Growth <span class="hcp-badge">Popular</span></div>
+              <div class="hcp-scope">1 warehouse · unlimited bays</div>
+            </div>
+            <div class="hcp-price">
+              <div class="hcp-num" id="hc-g"><sup>£</sup>179<sub>/mo</sub></div>
+              <div class="hcp-per" id="hc-g-per">or £143/mo annual</div>
+            </div>
+          </div>
+          <div class="hcp">
+            <div>
+              <div class="hcp-name light">Enterprise</div>
+              <div class="hcp-scope">Multiple warehouses</div>
+            </div>
+            <div class="hcp-price">
+              <div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:700;text-transform:uppercase;color:#efede9;line-height:1">Custom</div>
+              <div class="hcp-per">Talk to us</div>
+            </div>
+          </div>
+        </div>
+        <div class="hc-note">All prices exclude UK VAT · Free 30-day trial on all plans</div>
+      </div>
+    </div>
+
+```
+<!-- BILLING TOGGLE -->
+<div class="tog-wrap">
+  <div class="tog-label">Billing period</div>
+  <div style="display:flex;align-items:center">
+    <div class="tog">
+      <button class="tb on" id="bmo" onclick="setB('mo')">Monthly</button>
+      <button class="tb" id="byr" onclick="setB('yr')">Annual</button>
+    </div>
+    <span class="save-pill" id="save-pill" style="display:none">
+      <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="#1a9958" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      Save 20%
+    </span>
+  </div>
+</div>
+```
+
+  </div>
+</div>
+
+<!-- PLANS -->
+
+<div class="plans-section">
+  <div class="w">
+    <div class="plans">
+
+```
+  <!-- STARTER -->
+  <div class="plan rv">
+    <div class="plan-name">Starter</div>
+    <div class="plan-desc">Single site, up to 8 bays. The fastest way off spreadsheets.</div>
+    <div class="plan-price" id="sp"><sup>£</sup>79<sub>/mo</sub></div>
+    <div class="plan-per" id="sper">Billed monthly · up to 8 bays</div>
+    <div class="plan-save" id="ssave" style="display:none">Save £190/year</div>
+    <div class="plan-div"></div>
+    <ul class="plan-ul">
+      <li class="li-ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>1 warehouse, up to 8 bays</li>
+      <li class="li-ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Supplier self-booking portal</li>
+      <li class="li-ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Booking calendar (month/week/day)</li>
+      <li class="li-ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>QR code driver check-in</li>
+      <li class="li-ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Live bay dashboard &amp; 6 KPIs</li>
+      <li class="li-ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Bay management (add/toggle)</li>
+      <li class="li-ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Operating schedule &amp; blackouts</li>
+      <li class="li-ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Supplier performance reports</li>
+      <li class="li-ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Supplier reminders (fixed timing)</li>
+      <li class="li-ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Email support</li>
+      <li class="li-no"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Custom booking rules</li>
+      <li class="li-no"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>CSV export</li>
+      <li class="li-no"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>API access</li>
+    </ul>
+    <a href="index.html#trial" class="plan-cta pc-ol">Start free trial</a>
+    <p class="plan-note">30-day trial · No card required</p>
+  </div>
+
+  <!-- GROWTH -->
+  <div class="plan plan-pop rv">
+    <div class="plan-badge">Most popular</div>
+    <div class="plan-name amber">Growth</div>
+    <div class="plan-desc">Unlimited bays. Full control of inbound operations at any scale.</div>
+    <div class="plan-price" id="gp"><sup>£</sup>179<sub>/mo</sub></div>
+    <div class="plan-per" id="gper">Billed monthly · unlimited bays</div>
+    <div class="plan-save" id="gsave" style="display:none">Save £430/year</div>
+    <div class="plan-div"></div>
+    <ul class="plan-ul">
+      <li class="li-ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>1 warehouse, <strong>unlimited bays</strong></li>
+      <li class="li-ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Everything in Starter</li>
+      <li class="li-ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Custom booking rules &amp; windows</li>
+      <li class="li-ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>CSV export &amp; advanced reporting</li>
+      <li class="li-ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Bulk slot import via CSV</li>
+      <li class="li-ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Configurable supplier reminders</li>
+      <li class="li-ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Supplier completion rate scoring</li>
+      <li class="li-ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Priority email &amp; chat support</li>
+      <li class="li-ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Approval workflow controls</li>
+      <li class="li-ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Bay-level booking restrictions</li>
+      <li class="li-no"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>API access</li>
+      <li class="li-no"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Multi-warehouse (roadmap)</li>
+      <li class="li-no"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>SSO &amp; SAML</li>
+    </ul>
+    <a href="index.html#trial" class="plan-cta pc-amber">Start free trial</a>
+    <p class="plan-note">30-day trial · No card required</p>
+  </div>
+
+  <!-- ENTERPRISE -->
+  <div class="plan rv">
+    <div class="plan-name">Enterprise</div>
+    <div class="plan-desc">Multi-warehouse networks &amp; procurement-led deployments at scale.</div>
+    <div class="plan-custom">Custom</div>
+    <div class="plan-per" style="margin-bottom:16px">Tailored to your operation</div>
+    <div class="plan-div"></div>
+    <ul class="plan-ul">
+      <li class="li-ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Multiple warehouses (volume pricing)</li>
+      <li class="li-ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Everything in Growth</li>
+      <li class="li-ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>API &amp; webhook access</li>
+      <li class="li-ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>SSO &amp; SAML integration</li>
+      <li class="li-ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Custom SLA &amp; uptime guarantee</li>
+      <li class="li-ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Dedicated customer success manager</li>
+      <li class="li-ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Supplier onboarding service</li>
+      <li class="li-ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>DPA, security review, ISO docs</li>
+      <li class="li-ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>PO-based billing available</li>
+      <li class="li-ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Custom reporting &amp; BI exports</li>
+      <li class="li-ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Pilot programme available</li>
+      <li class="li-ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Dedicated onboarding call</li>
+      <li class="li-ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Contract billing available</li>
+    </ul>
+    <a href="mailto:hello@docksync.app" class="plan-cta pc-dark">Contact sales</a>
+    <p class="plan-note">Pilot available · Procurement-friendly</p>
+  </div>
+
+</div>
+
+<div class="notice rv">
+  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+  <p><strong>Every plan starts with a free 30-day trial</strong> — full access, no payment details required, no automatic billing at the end. Currently one warehouse per account; Enterprise customers with multiple sites get volume pricing across separate accounts. All prices exclude UK VAT. <a href="mailto:hello@docksync.app">Contact us</a> about multi-site requirements or PO-based billing.</p>
+</div>
+<p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9a9790;margin-top:12px;text-align:right">¹ Based on 90-day usage data across 40+ customer sites.</p>
+```
+
+  </div>
+</div>
+
+<!-- COMPARISON TABLE -->
+
+<div class="compare-section rv">
+  <div class="w">
+    <div class="sec-eye">Full comparison</div>
+    <h2 class="sec-h2">Every feature,<br>side by side</h2>
+    <div style="overflow-x:auto">
+    <table class="ctbl">
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th>Starter</th>
+          <th class="pop-col">Growth</th>
+          <th>Enterprise</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="cat-row"><td colspan="4">Core platform</td></tr>
+        <tr><td>Warehouse sites</td><td>1</td><td class="pop-col">1</td><td>Multiple</td></tr>
+        <tr><td>Bay management</td><td>Up to 8</td><td class="pop-col"><strong>Unlimited</strong></td><td>Unlimited</td></tr>
+        <tr><td>Supplier self-booking portal</td><td><span class="ck">✓</span></td><td class="pop-col"><span class="ck">✓</span></td><td><span class="ck">✓</span></td></tr>
+        <tr><td>Booking calendar (month/week/day)</td><td><span class="ck">✓</span></td><td class="pop-col"><span class="ck">✓</span></td><td><span class="ck">✓</span></td></tr>
+        <tr><td>QR code driver check-in</td><td><span class="ck">✓</span></td><td class="pop-col"><span class="ck">✓</span></td><td><span class="ck">✓</span></td></tr>
+        <tr><td>Live bay dashboard &amp; 6 KPIs</td><td><span class="ck">✓</span></td><td class="pop-col"><span class="ck">✓</span></td><td><span class="ck">✓</span></td></tr>
+        <tr><td>Pending actions &amp; approval workflow</td><td><span class="ck">✓</span></td><td class="pop-col"><span class="ck">✓</span></td><td><span class="ck">✓</span></td></tr>
+        <tr class="cat-row"><td colspan="4">Scheduling &amp; configuration</td></tr>
+        <tr><td>Operating hours &amp; working days</td><td><span class="ck">✓</span></td><td class="pop-col"><span class="ck">✓</span></td><td><span class="ck">✓</span></td></tr>
+        <tr><td>Restricted hours &amp; blackout dates</td><td><span class="ck">✓</span></td><td class="pop-col"><span class="ck">✓</span></td><td><span class="ck">✓</span></td></tr>
+        <tr><td>Supplier reminders</td><td>Fixed</td><td class="pop-col"><strong>Configurable</strong></td><td>Configurable</td></tr>
+        <tr><td>Custom booking rules &amp; time windows</td><td><span class="cx">—</span></td><td class="pop-col"><span class="ck">✓</span></td><td><span class="ck">✓</span></td></tr>
+        <tr><td>Bay-level booking restrictions</td><td><span class="cx">—</span></td><td class="pop-col"><span class="ck">✓</span></td><td><span class="ck">✓</span></td></tr>
+        <tr><td>Bulk slot import via CSV</td><td><span class="cx">—</span></td><td class="pop-col"><span class="ck">✓</span></td><td><span class="ck">✓</span></td></tr>
+        <tr class="cat-row"><td colspan="4">Reporting &amp; data</td></tr>
+        <tr><td>Supplier delivery performance reports</td><td><span class="ck">✓</span></td><td class="pop-col"><span class="ck">✓</span></td><td><span class="ck">✓</span></td></tr>
+        <tr><td>On-time %, completion rate, dwell time</td><td><span class="ck">✓</span></td><td class="pop-col"><span class="ck">✓</span></td><td><span class="ck">✓</span></td></tr>
+        <tr><td>CSV export</td><td><span class="cx">—</span></td><td class="pop-col"><span class="ck">✓</span></td><td><span class="ck">✓</span></td></tr>
+        <tr><td>Custom reporting &amp; BI exports</td><td><span class="cx">—</span></td><td class="pop-col"><span class="cx">—</span></td><td><span class="ck">✓</span></td></tr>
+        <tr class="cat-row"><td colspan="4">Security &amp; integrations</td></tr>
+        <tr><td>SSL, GDPR, UK-hosted data</td><td><span class="ck">✓</span></td><td class="pop-col"><span class="ck">✓</span></td><td><span class="ck">✓</span></td></tr>
+        <tr><td>SOC 2 Type II infrastructure (Bubble)</td><td><span class="ck">✓</span></td><td class="pop-col"><span class="ck">✓</span></td><td><span class="ck">✓</span></td></tr>
+        <tr><td>Stripe PCI DSS Level 1 payments</td><td><span class="ck">✓</span></td><td class="pop-col"><span class="ck">✓</span></td><td><span class="ck">✓</span></td></tr>
+        <tr><td>API &amp; webhook access</td><td><span class="cx">—</span></td><td class="pop-col"><span class="cx">—</span></td><td><span class="ck">✓</span></td></tr>
+        <tr><td>SSO &amp; SAML integration</td><td><span class="cx">—</span></td><td class="pop-col"><span class="cx">—</span></td><td><span class="ck">✓</span></td></tr>
+        <tr><td>Data processing agreement (DPA)</td><td><span class="cx">—</span></td><td class="pop-col"><span class="cx">—</span></td><td><span class="ck">✓</span></td></tr>
+        <tr class="cat-row"><td colspan="4">Support &amp; onboarding</td></tr>
+        <tr><td>Email support</td><td><span class="ck">✓</span></td><td class="pop-col"><span class="ck">✓</span></td><td><span class="ck">✓</span></td></tr>
+        <tr><td>Priority chat support</td><td><span class="cx">—</span></td><td class="pop-col"><span class="ck">✓</span></td><td><span class="ck">✓</span></td></tr>
+        <tr><td>Dedicated customer success manager</td><td><span class="cx">—</span></td><td class="pop-col"><span class="cx">—</span></td><td><span class="ck">✓</span></td></tr>
+        <tr><td>Supplier onboarding service</td><td><span class="cx">—</span></td><td class="pop-col"><span class="cx">—</span></td><td><span class="ck">✓</span></td></tr>
+        <tr><td>Dedicated onboarding call</td><td><span class="cx">—</span></td><td class="pop-col"><span class="cx">—</span></td><td><span class="ck">✓</span></td></tr>
+        <tr class="cat-row"><td colspan="4">Billing</td></tr>
+        <tr><td>Monthly billing</td><td><span class="ck">✓</span></td><td class="pop-col"><span class="ck">✓</span></td><td><span class="ck">✓</span></td></tr>
+        <tr><td>Annual billing (save 20%)</td><td><span class="ck">✓</span></td><td class="pop-col"><span class="ck">✓</span></td><td><span class="ck">✓</span></td></tr>
+        <tr><td>PO-based billing</td><td><span class="cx">—</span></td><td class="pop-col"><span class="cx">—</span></td><td><span class="ck">✓</span></td></tr>
+        <tr><td>Contract billing</td><td><span class="cx">—</span></td><td class="pop-col"><span class="cx">—</span></td><td><span class="ck">✓</span></td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9a9790;margin-top:14px">All prices exclude UK VAT. Annual billing saves 20% vs monthly.</p>
+  </div>
+</div>
+
+<!-- FAQ -->
+
+<div class="faq-section rv">
+  <div class="wc">
+    <div class="sec-eye">Pricing questions</div>
+    <h2 class="sec-h2">Everything you<br>need to know</h2>
+    <div class="faq-list">
+
+```
+  <div class="faq-item op">
+    <div class="faq-q" onclick="faqT(this)">
+      <span class="faq-qn">01</span>
+      <span class="faq-qt">Is the 30-day trial truly free?</span>
+      <div class="faq-tog"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+    </div>
+    <div class="faq-a">Yes. Full access to every feature on the Growth plan, no payment details required, no automatic billing at the end. When your trial ends your account is paused — not deleted — and you can reactivate it when you're ready. No pressure, no sales calls.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="faqT(this)">
+      <span class="faq-qn">02</span>
+      <span class="faq-qt">What happens when I upgrade from Starter to Growth?</span>
+      <div class="faq-tog"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+    </div>
+    <div class="faq-a">Upgrades take effect immediately. You'll be charged a pro-rated amount for the remainder of your current billing period. Your bays, bookings, and supplier data all carry over — nothing is lost or reset.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="faqT(this)">
+      <span class="faq-qn">03</span>
+      <span class="faq-qt">Can I manage multiple warehouses?</span>
+      <div class="faq-tog"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+    </div>
+    <div class="faq-a">Currently each warehouse runs as a separate account — which many operations managers prefer as it keeps each site focused and clean. Enterprise customers managing multiple sites get volume pricing. A unified multi-warehouse dashboard is on the roadmap. Contact us at hello@docksync.app to discuss multi-site requirements.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="faqT(this)">
+      <span class="faq-qn">04</span>
+      <span class="faq-qt">How does annual billing work?</span>
+      <div class="faq-tog"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+    </div>
+    <div class="faq-a">Annual plans are billed once per year in advance at the discounted rate. Starter annual is £63/mo (billed as £756/year, saving £190 vs monthly). Growth annual is £143/mo (billed as £1,716/year, saving £430 vs monthly). You can switch between monthly and annual at any time from My Account → Subscription.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="faqT(this)">
+      <span class="faq-qn">05</span>
+      <span class="faq-qt">How do I cancel?</span>
+      <div class="faq-tog"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+    </div>
+    <div class="faq-a">Cancel anytime from My Account → Subscription. No cancellation fees. Your access continues until the end of your current billing period. If you cancel during an annual plan, no partial refunds are issued — but you keep full access until the period ends.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="faqT(this)">
+      <span class="faq-qn">06</span>
+      <span class="faq-qt">Are there any setup fees or hidden costs?</span>
+      <div class="faq-tog"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+    </div>
+    <div class="faq-a">No. No setup fees. No per-user fees. No add-on charges. The price you see is the price you pay, plus UK VAT. Enterprise plans are custom-priced and agreed upfront in writing with no surprises.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="faqT(this)">
+      <span class="faq-qn">07</span>
+      <span class="faq-qt">What payment methods do you accept?</span>
+      <div class="faq-tog"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+    </div>
+    <div class="faq-a">All major credit and debit cards via Stripe (Visa, Mastercard, American Express). Enterprise customers can also pay by purchase order (PO) or bank transfer. All card payments are handled by Stripe, which is PCI DSS Level 1 certified — the highest payment security level available.</div>
+  </div>
+
+</div>
+
+<div style="margin-top:28px;background:#f7f6f3;border-radius:12px;border:1px solid rgba(0,0,0,0.08);padding:20px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px">
+  <div>
+    <p style="font-size:14px;font-weight:500;color:#3b3a37;margin-bottom:4px">Still have a question?</p>
+    <p style="font-size:13px;color:#6a6860">We respond within a few hours on business days.</p>
+  </div>
+  <a href="mailto:hello@docksync.app" style="display:inline-flex;align-items:center;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.05em;text-transform:uppercase;padding:10px 20px;border-radius:6px;background:#111010;color:#fff;text-decoration:none;transition:background 0.17s">Contact us</a>
+</div>
+```
+
+  </div>
+</div>
+
+<!-- TESTIMONIALS -->
+
+<div class="testi-section rv">
+  <div class="w">
+    <div class="t-eye">What customers say</div>
+    <h2 class="t-h2">Real results.<br>Real numbers.</h2>
+    <div class="tgrid">
+      <div class="tsti">
+        <div class="tsts">★★★★★</div>
+        <p class="tstq">Cut dock admin time by over 3 hours a day in the first week. Drivers no longer queue at the gate — they know exactly when and where to go before they leave the depot.</p>
+        <div class="tstby">
+          <div class="tstav" style="background:#2b79cf">TH</div>
+          <div>
+            <div class="tstnm">Tom H.</div>
+            <div class="tstrl">Warehouse Manager · Retail DC, Birmingham</div>
+            <div class="tstat">Growth plan</div>
+          </div>
+        </div>
+      </div>
+      <div class="tsti">
+        <div class="tsts">★★★★★</div>
+        <p class="tstq">The supplier self-booking portal alone was worth the switch. Team stopped playing phone tag immediately. Setup genuinely took less than 10 minutes start to finish.</p>
+        <div class="tstby">
+          <div class="tstav" style="background:#e6920a;color:#1a0900">MW</div>
+          <div>
+            <div class="tstnm">Maria W.</div>
+            <div class="tstrl">Operations Director · Pharma Distributor</div>
+            <div class="tstat">Growth plan</div>
+          </div>
+        </div>
+      </div>
+      <div class="tsti">
+        <div class="tsts">★★★★★</div>
+        <p class="tstq">On-time rate went from 71% to 96% in 30 days. The QR check-in alone saved an hour of gatehouse admin every morning. Finally have full visibility across all 18 bays.</p>
+        <div class="tstby">
+          <div class="tstav" style="background:#1a9958">DP</div>
+          <div>
+            <div class="tstnm">Dave P.</div>
+            <div class="tstrl">Head of Logistics · Automotive Parts, Coventry</div>
+            <div class="tstat">Growth plan · 18 bays</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+
+<div class="cta-section rv">
+  <div class="w">
+    <h2 class="cta-h2">Start your<br>free trial <em>today</em></h2>
+    <p class="cta-desc">Full access to every feature. No payment details. No commitment. Your dock live in under 5 minutes.</p>
+    <div class="cta-btns">
+      <a href="index.html#trial" class="btn-a">Get free access now</a>
+      <a href="mailto:hello@docksync.app" class="btn-dk">Talk to sales</a>
+    </div>
+    <div class="cta-micro">
+      <div class="cta-m"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>30-day free trial</div>
+      <div class="cta-m"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>No card required</div>
+      <div class="cta-m"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Live in 5 minutes</div>
+      <div class="cta-m"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Cancel anytime</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+
+<footer class="footer">
+  <div class="w">
+    <div class="ftop">
+      <div>
+        <div class="fbrand">DockSync</div>
+        <p class="fdesc">Dock scheduling software for warehouses that want precision over chaos.</p>
+        <div class="fbadge"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>SSL · GDPR · UK-hosted</div>
+      </div>
+      <div><div class="fcolt">Product</div><div class="fcol"><a href="index.html">Product overview</a><a href="features.html">Features</a><a href="pricing.html">Pricing</a><a href="index.html#faq">FAQ</a></div></div>
+      <div><div class="fcolt">Industries</div><div class="fcol"><a href="#">Retail &amp; FMCG</a><a href="#">Pharmaceutical</a><a href="#">Automotive</a><a href="#">3PL &amp; Logistics</a></div></div>
+      <div><div class="fcolt">Company</div><div class="fcol"><a href="#">About us</a><a href="mailto:hello@docksync.app">hello@docksync.app</a><a href="privacy.html">Privacy policy</a><a href="terms.html">Terms of service</a></div></div>
+    </div>
+    <div class="fbtm">
+      <p>© 2025 DockSync Ltd · Registered in England &amp; Wales</p>
+      <div class="flinks"><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="#">Cookies</a></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+var nav=document.getElementById('nav');
+window.addEventListener('scroll',function(){nav.classList.toggle('sc',scrollY>10);},{passive:true});
+var ro=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');ro.unobserve(e.target);}});},{threshold:0.06});
+document.querySelectorAll('.rv').forEach(function(el){ro.observe(el);});
+
+function faqT(el){
+  var item=el.closest('.faq-item');
+  var open=item.classList.contains('op');
+  document.querySelectorAll('.faq-item.op').forEach(function(i){i.classList.remove('op');});
+  if(!open)item.classList.add('op');
+}
+
+var pd={
+  s:{mo:{v:'79',per:'Billed monthly \u00b7 up to 8 bays',sv:''},yr:{v:'63',per:'Billed annually \u00b7 up to 8 bays',sv:'Save \u00a3190/year'}},
+  g:{mo:{v:'179',per:'Billed monthly \u00b7 unlimited bays',sv:''},yr:{v:'143',per:'Billed annually \u00b7 unlimited bays',sv:'Save \u00a3430/year'}}
+};
+
+function setB(m){
+  document.getElementById('bmo').classList.toggle('on',m==='mo');
+  document.getElementById('byr').classList.toggle('on',m==='yr');
+  document.getElementById('save-pill').style.display=m==='yr'?'inline-flex':'none';
+  var pairs=[['s','sp','sper','ssave'],['g','gp','gper','gsave']];
+  pairs.forEach(function(x){
+    var d=pd[x[0]][m];
+    document.getElementById(x[1]).innerHTML='<sup>\u00a3</sup>'+d.v+'<sub>/mo</sub>';
+    document.getElementById(x[2]).textContent=d.per;
+    var sv=document.getElementById(x[3]);
+    sv.textContent=d.sv;
+    sv.style.display=d.sv?'inline-block':'none';
+  });
+  var hcSPer=document.getElementById('hc-s-per');
+  var hcGPer=document.getElementById('hc-g-per');
+  if(hcSPer)hcSPer.textContent=m==='mo'?'or \u00a363/mo annual':'billed as \u00a3756/year';
+  if(hcGPer)hcGPer.textContent=m==='mo'?'or \u00a3143/mo annual':'billed as \u00a31,716/year';
+}
+</script>
+
+</body>
+</html>
