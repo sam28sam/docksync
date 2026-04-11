@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DockSync Industries — Dock Scheduling for Retail, Pharma, Automotive & Logistics</title>
+<meta name="description" content="How DockSync transforms dock scheduling across retail & FMCG, pharmaceutical, automotive, and 3PL logistics operations. Real results, real use cases.">
+<meta name="keywords" content="dock scheduling retail, warehouse management pharma, automotive logistics scheduling, 3PL dock management, FMCG warehouse scheduling">
+<link rel="canonical" href="https://www.docksync.app/industries.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Barlow',sans-serif;color:#111010;background:#ffffff;-webkit-font-smoothing:antialiased;overflow-x:hidden;line-height:1.6}
+a{color:#e6920a;text-decoration:none}
+a:hover{text-decoration:underline}
+.w{max-width:1140px;margin:0 auto;padding:0 28px}
+.wc{max-width:900px;margin:0 auto;padding:0 28px}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,0.96);backdrop-filter:blur(14px);border-bottom:1px solid rgba(0,0,0,0.08);box-shadow:0 1px 20px rgba(0,0,0,0.06)}
+.nav-i{display:flex;align-items:center;height:62px;gap:6px}
+.logo{display:flex;align-items:center;gap:9px;margin-right:28px;text-decoration:none}
+.logo-box{width:28px;height:28px;border:1.5px solid #e6920a;border-radius:5px;display:flex;align-items:center;justify-content:center;background:#fff}
+.logo-word{font-family:‘Barlow Condensed’,sans-serif;font-size:18px;font-weight:800;letter-spacing:0.05em;text-transform:uppercase;color:#111010}
+.nav-links{display:flex;align-items:center;gap:2px;flex:1}
+.nl{font-size:13px;color:#6a6860;padding:6px 11px;border-radius:6px;transition:all 0.15s;text-decoration:none;display:inline-block}
+.nl:hover{color:#3b3a37;background:#f7f6f3;text-decoration:none}
+.nav-right{display:flex;align-items:center;gap:10px;margin-left:auto}
+.nav-util{font-size:12px;color:#9a9790;transition:color 0.15s;text-decoration:none}
+.nav-util:hover{color:#6a6860}
+.nav-sep{width:1px;height:16px;background:rgba(0,0,0,0.14)}
+.btn-nav{display:inline-flex;align-items:center;font-family:‘Barlow Condensed’,sans-serif;font-weight:700;font-size:13px;letter-spacing:0.05em;text-transform:uppercase;padding:8px 16px;border-radius:6px;border:none;cursor:pointer;background:#e6920a;color:#1a0900;transition:all 0.17s;text-decoration:none}
+.btn-nav:hover{background:#f4a21e;text-decoration:none}
+
+/* SCROLL REVEAL */
+.rv{opacity:0;transform:translateY(18px);transition:opacity 0.55s ease,transform 0.55s ease}
+.rv.in{opacity:1;transform:translateY(0)}
+
+/* HERO */
+.hero{padding:110px 0 72px;background:#0d0e0e;position:relative;overflow:hidden}
+.hero-dots{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,0.025) 1px,transparent 1px);background-size:32px 32px;pointer-events:none}
+.hero-glow{position:absolute;top:-100px;left:-100px;width:600px;height:600px;background:radial-gradient(circle,rgba(230,146,10,0.07) 0%,transparent 65%);pointer-events:none}
+.bc{font-family:‘JetBrains Mono’,monospace;font-size:11px;color:#4e4c49;margin-bottom:18px;display:flex;align-items:center;gap:5px;position:relative;z-index:1}
+.bc a{color:#e6920a;text-decoration:none}
+.hero-eye{display:inline-flex;align-items:center;gap:8px;font-family:‘JetBrains Mono’,monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#e6920a;margin-bottom:14px;position:relative;z-index:1}
+.hero-eye::before{content:’’;width:18px;height:1px;background:#e6920a;flex-shrink:0}
+.hero-h1{font-family:‘Barlow Condensed’,sans-serif;font-weight:900;line-height:0.93;letter-spacing:-0.01em;text-transform:uppercase;font-size:clamp(40px,6vw,84px);color:#efede9;margin-bottom:18px;position:relative;z-index:1}
+.hero-h1 em{font-style:normal;color:#e6920a}
+.hero-desc{font-size:17px;color:#787470;line-height:1.7;max-width:600px;margin-bottom:40px;position:relative;z-index:1}
+
+/* INDUSTRY NAV CARDS */
+.ind-nav{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;position:relative;z-index:1}
+.inc{background:#191b1c;border-radius:14px;border:1px solid rgba(255,255,255,0.07);padding:20px;text-decoration:none;transition:all 0.2s;display:block;position:relative;overflow:hidden}
+.inc::before{content:’’;position:absolute;top:0;left:0;right:0;height:2px;opacity:0;transition:opacity 0.2s}
+.inc:hover{border-color:rgba(255,255,255,0.15);transform:translateY(-2px);text-decoration:none}
+.inc:hover::before{opacity:1}
+.inc-retail::before{background:#e6920a}
+.inc-pharma::before{background:#1a9958}
+.inc-auto::before{background:#2b79cf}
+.inc-logi::before{background:#9b59b6}
+.inc-ico{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+.inc-ico svg{width:18px;height:18px;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.inc-retail .inc-ico{background:rgba(230,146,10,0.15);stroke:#e6920a}
+.inc-retail .inc-ico svg{stroke:#e6920a}
+.inc-pharma .inc-ico{background:rgba(26,153,88,0.15)}
+.inc-pharma .inc-ico svg{stroke:#1a9958}
+.inc-auto .inc-ico{background:rgba(43,121,207,0.15)}
+.inc-auto .inc-ico svg{stroke:#2b79cf}
+.inc-logi .inc-ico{background:rgba(155,89,182,0.15)}
+.inc-logi .inc-ico svg{stroke:#9b59b6}
+.inc-name{font-family:‘Barlow Condensed’,sans-serif;font-size:16px;font-weight:700;text-transform:uppercase;color:#efede9;margin-bottom:4px}
+.inc-desc{font-size:12px;color:#4e4c49;line-height:1.5}
+.inc-arrow{position:absolute;bottom:16px;right:16px;font-size:16px;color:#4e4c49;transition:color 0.2s,transform 0.2s}
+.inc:hover .inc-arrow{color:#e6920a;transform:translate(2px,-2px)}
+
+/* STICKY INDUSTRY NAV */
+.ind-sticky{background:#ffffff;border-bottom:1px solid rgba(0,0,0,0.08);position:sticky;top:62px;z-index:100;overflow-x:auto}
+.ind-sticky-inner{display:flex;align-items:center;white-space:nowrap}
+.isn{font-family:‘JetBrains Mono’,monospace;font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:#9a9790;padding:14px 20px;border-bottom:2px solid transparent;transition:all 0.2s;white-space:nowrap;text-decoration:none;display:inline-block}
+.isn:hover{color:#3b3a37;text-decoration:none}
+.isn.on{border-bottom-width:2px}
+.isn-retail.on{color:#e6920a;border-bottom-color:#e6920a}
+.isn-pharma.on{color:#1a9958;border-bottom-color:#1a9958}
+.isn-auto.on{color:#2b79cf;border-bottom-color:#2b79cf}
+.isn-logi.on{color:#9b59b6;border-bottom-color:#9b59b6}
+
+/* INDUSTRY SECTION BASE */
+.ind-section{padding:80px 0;border-bottom:1px solid rgba(0,0,0,0.08);scroll-margin-top:120px}
+.ind-section:last-of-type{border-bottom:none}
+.ind-section-alt{background:#f7f6f3}
+
+/* SECTION HEADER */
+.ind-head{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;margin-bottom:56px}
+.ind-eye{display:inline-flex;align-items:center;gap:8px;font-family:‘JetBrains Mono’,monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:14px}
+.ind-eye::before{content:’’;width:18px;height:1px;flex-shrink:0}
+.eye-retail{color:#e6920a}.eye-retail::before{background:#e6920a}
+.eye-pharma{color:#1a9958}.eye-pharma::before{background:#1a9958}
+.eye-auto{color:#2b79cf}.eye-auto::before{background:#2b79cf}
+.eye-logi{color:#9b59b6}.eye-logi::before{background:#9b59b6}
+.ind-h2{font-family:‘Barlow Condensed’,sans-serif;font-weight:900;font-size:clamp(32px,5vw,60px);text-transform:uppercase;color:#111010;line-height:0.93;margin-bottom:16px}
+.ind-h2 em{font-style:normal}
+.em-retail{color:#e6920a}
+.em-pharma{color:#1a9958}
+.em-auto{color:#2b79cf}
+.em-logi{color:#9b59b6}
+.ind-intro{font-size:16px;color:#6a6860;line-height:1.75;margin-bottom:0}
+.ind-stats{display:flex;flex-direction:column;gap:16px}
+.istat{background:#ffffff;border-radius:12px;border:1px solid rgba(0,0,0,0.08);padding:18px 22px;display:flex;align-items:center;gap:16px}
+.istat-num{font-family:‘JetBrains Mono’,monospace;font-size:32px;font-weight:500;line-height:1;flex-shrink:0;min-width:80px}
+.istat-lbl{font-size:14px;color:#6a6860;line-height:1.5}
+.istat-lbl strong{display:block;color:#111010;font-weight:500;margin-bottom:2px}
+
+/* SCENARIO CARDS */
+.scenarios{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:40px}
+.scenario{border-radius:14px;padding:26px;border:1px solid rgba(0,0,0,0.08)}
+.scenario-light{background:#ffffff}
+.scenario-dark{background:#0d0e0e;border-color:rgba(255,255,255,0.07)}
+.sc-tag{display:inline-flex;align-items:center;gap:5px;font-family:‘JetBrains Mono’,monospace;font-size:10px;font-weight:500;padding:3px 9px;border-radius:20px;margin-bottom:14px;letter-spacing:0.06em;text-transform:uppercase}
+.sc-tag-r{background:rgba(230,146,10,0.10);color:#e6920a;border:1px solid rgba(230,146,10,0.2)}
+.sc-tag-g{background:rgba(26,153,88,0.10);color:#1a9958;border:1px solid rgba(26,153,88,0.2)}
+.sc-tag-b{background:rgba(43,121,207,0.10);color:#2b79cf;border:1px solid rgba(43,121,207,0.2)}
+.sc-tag-p{background:rgba(155,89,182,0.10);color:#9b59b6;border:1px solid rgba(155,89,182,0.2)}
+.sc-tag-dk{background:rgba(255,255,255,0.07);color:#b6b2ac;border:1px solid rgba(255,255,255,0.07)}
+.sc-h{font-family:‘Barlow Condensed’,sans-serif;font-size:20px;font-weight:700;text-transform:uppercase;color:#111010;margin-bottom:8px}
+.sc-h-dk{color:#efede9}
+.sc-body{font-size:14px;color:#6a6860;line-height:1.7}
+.sc-body-dk{color:#787470}
+.sc-result{margin-top:14px;padding-top:14px;border-top:1px solid rgba(0,0,0,0.08)}
+.sc-result-dk{border-top-color:rgba(255,255,255,0.07)}
+.sc-result-label{font-family:‘JetBrains Mono’,monospace;font-size:10px;color:#9a9790;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px}
+.sc-result-val{font-size:14px;color:#111010;font-weight:500}
+.sc-result-val-dk{color:#efede9}
+
+/* CAPABILITY LIST */
+.cap-list{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.cap{background:#ffffff;border-radius:10px;padding:16px 18px;border:1px solid rgba(0,0,0,0.08);display:flex;gap:12px;align-items:flex-start}
+.cap-ico{width:32px;height:32px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cap-ico svg{width:15px;height:15px;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.cap h4{font-family:‘Barlow Condensed’,sans-serif;font-size:15px;font-weight:700;text-transform:uppercase;color:#111010;margin-bottom:3px}
+.cap p{font-size:12px;color:#6a6860;line-height:1.6}
+
+/* TESTIMONIAL PULL QUOTE */
+.pull-quote{background:#0d0e0e;border-radius:18px;padding:36px 40px;margin:40px 0;position:relative;overflow:hidden}
+.pull-quote::before{content:’\201C’;position:absolute;top:-10px;left:24px;font-size:120px;color:rgba(230,146,10,0.12);font-family:Georgia,serif;line-height:1;pointer-events:none}
+.pq-text{font-size:clamp(17px,2vw,22px);color:#efede9;line-height:1.6;font-style:italic;margin-bottom:20px;position:relative;z-index:1}
+.pq-by{display:flex;align-items:center;gap:12px;position:relative;z-index:1}
+.pq-av{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:‘Barlow Condensed’,sans-serif;font-size:13px;font-weight:700;color:#fff;flex-shrink:0}
+.pq-name{font-size:13px;font-weight:500;color:#efede9}
+.pq-role{font-size:12px;color:#4e4c49}
+.pq-stat{font-family:‘JetBrains Mono’,monospace;font-size:10px;margin-top:2px}
+
+/* BENTO GRID */
+.bento{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:40px}
+.bento-cell{background:#f7f6f3;border-radius:12px;padding:22px;border:1px solid rgba(0,0,0,0.08)}
+.bento-cell.wide{grid-column:span 2}
+.bento-cell.dark{background:#0d0e0e;border-color:rgba(255,255,255,0.07)}
+.bn{font-family:‘JetBrains Mono’,monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px}
+.bn-r{color:#e6920a}.bn-g{color:#1a9958}.bn-b{color:#2b79cf}.bn-p{color:#9b59b6}
+.bv{font-family:‘JetBrains Mono’,monospace;font-size:28px;font-weight:500;color:#111010;line-height:1;margin-bottom:4px}
+.bv-dk{color:#efede9}
+.bl{font-size:13px;color:#6a6860;line-height:1.5}
+.bl-dk{color:#787470}
+
+/* CTA STRIP */
+.cta-strip{background:#0d0e0e;padding:72px 0;text-align:center}
+.cta-h2{font-family:‘Barlow Condensed’,sans-serif;font-weight:900;font-size:clamp(32px,5.5vw,72px);text-transform:uppercase;color:#efede9;line-height:0.93;margin-bottom:14px}
+.cta-h2 em{font-style:normal;color:#e6920a}
+.cta-desc{font-size:17px;color:#787470;margin-bottom:32px;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.7}
+.cta-btns{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:20px}
+.btn-a{display:inline-flex;align-items:center;font-family:‘Barlow Condensed’,sans-serif;font-weight:700;font-size:15px;letter-spacing:0.05em;text-transform:uppercase;padding:15px 32px;border-radius:12px;border:none;cursor:pointer;background:#e6920a;color:#1a0900;transition:all 0.17s;text-decoration:none}
+.btn-a:hover{background:#f4a21e;transform:translateY(-1px);text-decoration:none}
+.btn-g{display:inline-flex;align-items:center;font-family:‘Barlow Condensed’,sans-serif;font-weight:700;font-size:15px;letter-spacing:0.05em;text-transform:uppercase;padding:15px 32px;border-radius:12px;cursor:pointer;background:transparent;color:#efede9;border:1.5px solid rgba(255,255,255,0.13);transition:all 0.17s;text-decoration:none}
+.btn-g:hover{background:#191b1c;text-decoration:none}
+.cta-micro{display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap}
+.cta-m{display:flex;align-items:center;gap:6px;font-family:‘JetBrains Mono’,monospace;font-size:11px;color:#4e4c49}
+.cta-m svg{width:11px;height:11px;stroke:#1a9958;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+
+/* FOOTER */
+.footer{background:#131415;padding:52px 0 28px;border-top:1px solid rgba(255,255,255,0.07)}
+.ftop{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:44px;padding-bottom:36px;border-bottom:1px solid rgba(255,255,255,0.07)}
+.fbrand{font-family:‘Barlow Condensed’,sans-serif;font-size:20px;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;color:#efede9;margin-bottom:8px}
+.fdesc{font-size:13px;color:#4e4c49;line-height:1.65;max-width:220px}
+.fbadge{display:inline-flex;align-items:center;gap:6px;font-family:‘JetBrains Mono’,monospace;font-size:10px;color:#4e4c49;margin-top:14px;letter-spacing:0.05em}
+.fbadge svg{width:11px;height:11px;stroke:#1a9958;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.fcolt{font-family:‘JetBrains Mono’,monospace;font-size:10px;color:#4e4c49;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:14px}
+.fcol a{display:block;font-size:13px;color:#4e4c49;margin-bottom:9px;transition:color 0.15s;text-decoration:none}
+.fcol a:hover{color:#b6b2ac}
+.fbtm{padding-top:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.fbtm p{font-family:‘JetBrains Mono’,monospace;font-size:11px;color:#4e4c49;letter-spacing:0.04em}
+.flinks{display:flex;gap:18px}
+.flinks a{font-family:‘JetBrains Mono’,monospace;font-size:11px;color:#4e4c49;transition:color 0.15s;text-decoration:none}
+.flinks a:hover{color:#b6b2ac}
+
+@media(max-width:900px){
+.nav-links{display:none}
+.ind-nav{grid-template-columns:1fr 1fr}
+.ind-head{grid-template-columns:1fr;gap:32px}
+.scenarios{grid-template-columns:1fr}
+.cap-list{grid-template-columns:1fr}
+.bento{grid-template-columns:1fr}
+.bento-cell.wide{grid-column:span 1}
+.ftop{grid-template-columns:1fr 1fr}
+}
+@media(max-width:600px){
+.ind-nav{grid-template-columns:1fr}
+.ftop{grid-template-columns:1fr}
+.cta-btns{flex-direction:column}
+}
+</style>
+
+</head>
+<body>
+
+<!-- NAV -->
+
+<nav class="nav" id="nav">
+  <div class="w"><div class="nav-i">
+    <a href="index.html" class="logo">
+      <div class="logo-box">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none">
+          <rect x="1" y="1" width="22" height="20" rx="1.5" fill="#0d1b2e"/>
+          <rect x="4" y="3" width="16" height="15" rx="1" fill="white"/>
+          <rect x="8" y="6" width="8" height="2" rx="1" fill="#2b79cf"/>
+          <rect x="6" y="10" width="10" height="2" rx="1" fill="#2b79cf"/>
+          <rect x="8" y="14" width="8" height="2" rx="1" fill="#2b79cf"/>
+        </svg>
+      </div>
+      <span class="logo-word">DockSync</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="nl">Product</a>
+      <a href="features.html" class="nl">Features</a>
+      <a href="pricing.html" class="nl">Pricing</a>
+      <a href="index.html#faq" class="nl">FAQ</a>
+    </div>
+    <div class="nav-right">
+      <a href="#" class="nav-util">Warehouse login</a>
+      <div class="nav-sep"></div>
+      <a href="#" class="nav-util">Carrier login</a>
+      <a href="index.html#trial" class="btn-nav">Start free trial</a>
+    </div>
+  </div></div>
+</nav>
+
+<!-- HERO -->
+
+<div class="hero">
+  <div class="hero-dots"></div>
+  <div class="hero-glow"></div>
+  <div class="w">
+    <div class="bc"><a href="index.html">Home</a> <span style="color:#4e4c49">/</span> Industries</div>
+    <div class="hero-eye">Industry solutions</div>
+    <h1 class="hero-h1">Built for the<br>industries that<br><em>never stop.</em></h1>
+    <p class="hero-desc">From grocery distribution to pharmaceutical cold chains, automotive JIT lines to global 3PL networks — DockSync adapts to the specific demands of your sector. Every feature was shaped by real operational experience across these four industries.</p>
+    <div class="ind-nav">
+      <a href="#retail" class="inc inc-retail">
+        <div class="inc-ico"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></div>
+        <div class="inc-name">Retail &amp; FMCG</div>
+        <div class="inc-desc">High-volume inbound, promotional peaks, replenishment pressure</div>
+        <div class="inc-arrow">↗</div>
+      </a>
+      <a href="#pharma" class="inc inc-pharma">
+        <div class="inc-ico"><svg viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0016.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 002 8.5c0 2.3 1.5 4.05 3 5.5l7 7 7-7z"/></svg></div>
+        <div class="inc-name">Pharmaceutical</div>
+        <div class="inc-desc">Temperature-sensitive, compliance-critical, audit trail required</div>
+        <div class="inc-arrow">↗</div>
+      </a>
+      <a href="#automotive" class="inc inc-auto">
+        <div class="inc-ico"><svg viewBox="0 0 24 24"><path d="M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v5"/><circle cx="16" cy="17" r="2"/><circle cx="7" cy="17" r="2"/></svg></div>
+        <div class="inc-name">Automotive</div>
+        <div class="inc-desc">JIT precision, production line continuity, zero missed slots</div>
+        <div class="inc-arrow">↗</div>
+      </a>
+      <a href="#logistics" class="inc inc-logi">
+        <div class="inc-ico"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="1"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+        <div class="inc-name">3PL &amp; Logistics</div>
+        <div class="inc-desc">Multi-client operations, carrier coordination, SLA reporting</div>
+        <div class="inc-arrow">↗</div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- STICKY NAV -->
+
+<div class="ind-sticky">
+  <div class="w">
+    <div class="ind-sticky-inner">
+      <a href="#retail" class="isn isn-retail on">Retail &amp; FMCG</a>
+      <a href="#pharma" class="isn isn-pharma">Pharmaceutical</a>
+      <a href="#automotive" class="isn isn-auto">Automotive</a>
+      <a href="#logistics" class="isn isn-logi">3PL &amp; Logistics</a>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ RETAIL & FMCG ══════════════ -->
+
+<div class="ind-section rv" id="retail" style="scroll-margin-top:120px">
+  <div class="wc">
+
+```
+<div class="ind-head">
+  <div>
+    <div class="ind-eye eye-retail">Industry 01</div>
+    <h2 class="ind-h2">Retail &amp;<br><em class="em-retail">FMCG</em></h2>
+    <p class="ind-intro">Retail and FMCG warehouses run on speed and volume. Multiple suppliers delivering daily, promotional surges that double inbound capacity overnight, and replenishment windows that leave no room for a missed slot. When a delivery is late, shelves go empty. When a driver queues for 40 minutes, your team's morning disappears.</p>
+  </div>
+  <div class="ind-stats">
+    <div class="istat">
+      <div class="istat-num" style="color:#e6920a">3.2h</div>
+      <div class="istat-lbl"><strong>Admin time saved per day</strong>Average reduction in phone and email coordination for retail DC teams within the first week</div>
+    </div>
+    <div class="istat">
+      <div class="istat-num" style="color:#e6920a">94%</div>
+      <div class="istat-lbl"><strong>On-time slot accuracy</strong>Average after 30 days for retail operations running DockSync across 8+ bays</div>
+    </div>
+    <div class="istat">
+      <div class="istat-num" style="color:#e6920a">&lt;5m</div>
+      <div class="istat-lbl"><strong>Average setup time</strong>From sign-up to first live supplier booking for a typical grocery or FMCG site</div>
+    </div>
+  </div>
+</div>
+
+<!-- SCENARIOS -->
+<div class="scenarios">
+  <div class="scenario scenario-light">
+    <div class="sc-tag sc-tag-r">The challenge</div>
+    <div class="sc-h">Promotional surge chaos</div>
+    <p class="sc-body">A large UK grocery distribution centre receives 120+ deliveries per day during normal trading. During a promotional week — Easter, Christmas, key price events — that number jumps to 200+. With manual scheduling, the operations team spends three hours a day on the phone managing supplier arrival windows, resequencing slots, and chasing missed bookings. Drivers queue at the gate for up to 45 minutes. Labour is unpredictable because nobody knows when bays will fill.</p>
+    <div class="sc-result">
+      <div class="sc-result-label">With DockSync</div>
+      <div class="sc-result-val">Supplier portal opens promotional capacity windows in advance. Slots fill automatically. Labour is planned based on confirmed booking data. Gate queues eliminated. Operations team redirected from phones to the floor.</div>
+    </div>
+  </div>
+  <div class="scenario scenario-dark">
+    <div class="sc-tag sc-tag-dk">Success story</div>
+    <div class="sc-h sc-h-dk">Retail DC, Birmingham</div>
+    <p class="sc-body sc-body-dk">A warehouse manager at a national retail distribution centre was spending his first two hours every morning firefighting missed delivery slots and chasing suppliers by phone. His team had no visibility of what was arriving, when, or which bays were committed. After deploying DockSync, the first week reduced daily admin by over 3 hours. By week three, drivers were arriving pre-confirmed with bay assignments on their phones. The operations team used the time saved to implement a faster unloading workflow that further reduced average dwell time.</p>
+    <div class="sc-result sc-result-dk">
+      <div class="sc-result-label">Key result</div>
+      <div class="sc-result-val sc-result-val-dk">3+ hours admin saved per day from week one. Zero gate queues by week three. Supplier on-time rate improved from 68% to 94% in 30 days.</div>
+    </div>
+  </div>
+</div>
+
+<div class="pull-quote">
+  <p class="pq-text">Cut dock admin time by over 3 hours a day in the first week. Drivers no longer queue at the gate — they know exactly when and where to go before they leave the depot.</p>
+  <div class="pq-by">
+    <div class="pq-av" style="background:#e6920a;color:#1a0900">TH</div>
+    <div>
+      <div class="pq-name">Tom H.</div>
+      <div class="pq-role">Warehouse Manager · Retail DC, Birmingham</div>
+      <div class="pq-stat" style="color:#e6920a">DockSync Growth plan · 14 bays</div>
+    </div>
+  </div>
+</div>
+
+<div class="cap-list">
+  <div class="cap">
+    <div class="cap-ico" style="background:rgba(230,146,10,0.10)"><svg viewBox="0 0 24 24" style="stroke:#e6920a"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/></svg></div>
+    <div><h4>Supplier self-booking</h4><p>Suppliers book directly into your available windows. Capacity rules enforced automatically — no overbooking, no scheduling conflicts.</p></div>
+  </div>
+  <div class="cap">
+    <div class="cap-ico" style="background:rgba(230,146,10,0.10)"><svg viewBox="0 0 24 24" style="stroke:#e6920a"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+    <div><h4>Promotional surge scheduling</h4><p>Open additional booking windows before promotional periods. Suppliers can pre-book slots weeks in advance so you know exactly what's coming.</p></div>
+  </div>
+  <div class="cap">
+    <div class="cap-ico" style="background:rgba(230,146,10,0.10)"><svg viewBox="0 0 24 24" style="stroke:#e6920a"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+    <div><h4>Supplier completion rate tracking</h4><p>On-time percentage and completion rate for every supplier. Identify unreliable carriers before they affect shelf availability.</p></div>
+  </div>
+  <div class="cap">
+    <div class="cap-ico" style="background:rgba(230,146,10,0.10)"><svg viewBox="0 0 24 24" style="stroke:#e6920a"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+    <div><h4>Operating schedule restrictions</h4><p>Block picking windows, shift changes, and break periods so suppliers can never book into times that would disrupt your floor operations.</p></div>
+  </div>
+</div>
+```
+
+  </div>
+</div>
+
+<!-- ══════════════ PHARMACEUTICAL ══════════════ -->
+
+<div class="ind-section ind-section-alt rv" id="pharma" style="scroll-margin-top:120px">
+  <div class="wc">
+
+```
+<div class="ind-head">
+  <div>
+    <div class="ind-eye eye-pharma">Industry 02</div>
+    <h2 class="ind-h2">Pharma&shy;ceutical<br><em class="em-pharma">precision</em></h2>
+    <p class="ind-intro">Pharmaceutical and life sciences logistics is unforgiving. Temperature-controlled deliveries have hard arrival windows — a cold chain shipment sitting in a vehicle queue for 30 minutes is a compliance failure, not an inconvenience. GMP documentation requires a timestamped audit trail of every arrival. And with regulatory inspections, scheduled maintenance, and controlled access zones, blackout management is not optional.</p>
+  </div>
+  <div class="ind-stats">
+    <div class="istat">
+      <div class="istat-num" style="color:#1a9958">100%</div>
+      <div class="istat-lbl"><strong>Arrival time logging</strong>Every delivery timestamped automatically via QR check-in — no manual records, no gaps in the audit trail</div>
+    </div>
+    <div class="istat">
+      <div class="istat-num" style="color:#1a9958">0</div>
+      <div class="istat-lbl"><strong>Gate queues for pre-booked deliveries</strong>Drivers arrive pre-confirmed with bay assignment — no queuing, no cold chain risk at the gatehouse</div>
+    </div>
+    <div class="istat">
+      <div class="istat-num" style="color:#1a9958">72h</div>
+      <div class="istat-lbl"><strong>GDPR breach notification</strong>UK GDPR compliant, UK-hosted data, SOC 2 infrastructure — all documented in our Data Processing Agreement</div>
+    </div>
+  </div>
+</div>
+
+<div class="scenarios">
+  <div class="scenario scenario-light">
+    <div class="sc-tag sc-tag-g">The challenge</div>
+    <div class="sc-h">Cold chain compliance under pressure</div>
+    <p class="sc-body">A pharmaceutical distributor operating across multiple EU sites manages inbound deliveries of temperature-sensitive product — biologics, vaccines, refrigerated APIs. Every delivery has a strict arrival window. A vehicle waiting 25 minutes outside a cold dock risks product integrity and triggers a non-conformance investigation under GDP guidelines. The operations team was managing arrival windows by phone and email, with no systematic audit trail of actual arrival times versus scheduled windows.</p>
+    <div class="sc-result">
+      <div class="sc-result-label">With DockSync</div>
+      <div class="sc-result-val">Suppliers book restricted time windows in advance. QR check-in logs exact arrival time. Any gap between booked slot and actual arrival is automatically recorded — providing the documentation needed for GDP compliance without any manual data entry.</div>
+    </div>
+  </div>
+  <div class="scenario scenario-dark">
+    <div class="sc-tag sc-tag-dk">Success story</div>
+    <div class="sc-h sc-h-dk">Pharma Distributor, Rotterdam</div>
+    <p class="sc-body sc-body-dk">An operations director at a pharmaceutical distributor had been managing inbound scheduling across three warehouses manually, coordinating arrival windows via email. After a GDP audit flagged insufficient arrival time documentation, she needed a systematic solution immediately. DockSync was deployed across the primary UK warehouse in a single afternoon. Within 48 hours, every inbound delivery was being logged with a timestamped QR check-in. The audit trail was available in the reports section from day one. No custom integration, no IT project, no training for suppliers.</p>
+    <div class="sc-result sc-result-dk">
+      <div class="sc-result-label">Key result</div>
+      <div class="sc-result-val sc-result-val-dk">Full arrival time audit trail from day one. GDP documentation gap resolved without IT involvement. Setup took less than 10 minutes start to finish.</div>
+    </div>
+  </div>
+</div>
+
+<div class="pull-quote">
+  <p class="pq-text">The supplier self-booking portal alone was worth the switch. Team stopped playing phone tag immediately. Setup genuinely took less than 10 minutes start to finish.</p>
+  <div class="pq-by">
+    <div class="pq-av" style="background:#1a9958">MW</div>
+    <div>
+      <div class="pq-name">Maria W.</div>
+      <div class="pq-role">Operations Director · Pharmaceutical Distributor</div>
+      <div class="pq-stat" style="color:#1a9958">DockSync Growth plan · Cold chain operations</div>
+    </div>
+  </div>
+</div>
+
+<div class="cap-list">
+  <div class="cap">
+    <div class="cap-ico" style="background:rgba(26,153,88,0.10)"><svg viewBox="0 0 24 24" style="stroke:#1a9958"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+    <div><h4>Restricted arrival windows</h4><p>Set specific time windows for temperature-sensitive deliveries. Suppliers cannot book outside these windows — enforced automatically, no manual gatekeeping needed.</p></div>
+  </div>
+  <div class="cap">
+    <div class="cap-ico" style="background:rgba(26,153,88,0.10)"><svg viewBox="0 0 24 24" style="stroke:#1a9958"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+    <div><h4>GDP audit trail</h4><p>Every booking timestamped. Every QR check-in logged with exact arrival time. Departure from scheduled slot automatically flagged and recorded.</p></div>
+  </div>
+  <div class="cap">
+    <div class="cap-ico" style="background:rgba(26,153,88,0.10)"><svg viewBox="0 0 24 24" style="stroke:#1a9958"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+    <div><h4>Regulatory blackout dates</h4><p>Block inbound deliveries during GMP inspections, planned maintenance, and site audits. Suppliers notified automatically — no manual communication needed.</p></div>
+  </div>
+  <div class="cap">
+    <div class="cap-ico" style="background:rgba(26,153,88,0.10)"><svg viewBox="0 0 24 24" style="stroke:#1a9958"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+    <div><h4>GDPR-compliant infrastructure</h4><p>UK-hosted data, SOC 2 Type II infrastructure via Bubble.io, Data Processing Agreement available, ISO 27001 certified environment.</p></div>
+  </div>
+</div>
+```
+
+  </div>
+</div>
+
+<!-- ══════════════ AUTOMOTIVE ══════════════ -->
+
+<div class="ind-section rv" id="automotive" style="scroll-margin-top:120px">
+  <div class="wc">
+
+```
+<div class="ind-head">
+  <div>
+    <div class="ind-eye eye-auto">Industry 03</div>
+    <h2 class="ind-h2">Auto&shy;motive<br><em class="em-auto">&amp; parts</em></h2>
+    <p class="ind-intro">Automotive parts logistics operates on the hardest possible scheduling requirements. Just-in-time delivery means a missed slot isn't an inconvenience — it's a production line stoppage that costs thousands per minute. Sequenced delivery of specific components to specific bays, in specific order, at specific times, is the baseline expectation. Any deviation from schedule needs to be flagged and acted on before it reaches the line.</p>
+  </div>
+  <div class="ind-stats">
+    <div class="istat">
+      <div class="istat-num" style="color:#2b79cf">98%</div>
+      <div class="istat-lbl"><strong>On-time rate achieved</strong>After 30 days of DockSync deployment at an automotive parts warehouse in the West Midlands</div>
+    </div>
+    <div class="istat">
+      <div class="istat-num" style="color:#2b79cf">71→96%</div>
+      <div class="istat-lbl"><strong>On-time improvement</strong>Specific result achieved by a DockSync customer managing 18 bays across automotive and manufacturing inbound</div>
+    </div>
+    <div class="istat">
+      <div class="istat-num" style="color:#2b79cf">Real-time</div>
+      <div class="istat-lbl"><strong>Delay flagging</strong>Delayed booking KPI on the dashboard alerts the team the moment a delivery runs behind schedule</div>
+    </div>
+  </div>
+</div>
+
+<div class="scenarios">
+  <div class="scenario scenario-light">
+    <div class="sc-tag sc-tag-b">The challenge</div>
+    <div class="sc-h">JIT precision at scale</div>
+    <p class="sc-body">An automotive parts warehouse supplying a Tier 1 manufacturer manages inbound deliveries from 40+ carriers across a 24-hour operating window. Components are sequenced — certain parts must arrive before certain assembly stages begin. A missed delivery slot by a single carrier can cascade into a line stoppage worth £15,000 per minute. The logistics team had no systematic way to track whether carriers were on schedule versus running late until vehicles actually appeared at the gate.</p>
+    <div class="sc-result">
+      <div class="sc-result-label">With DockSync</div>
+      <div class="sc-result-val">Carriers book confirmed slots in advance. QR check-in logs exact arrival time versus booked slot. Delayed bookings flagged on the dashboard in real time — giving the team a 15–30 minute warning to contact the carrier or adjust sequencing before a stoppage occurs.</div>
+    </div>
+  </div>
+  <div class="scenario scenario-dark">
+    <div class="sc-tag sc-tag-dk">Success story</div>
+    <div class="sc-h sc-h-dk">Automotive Parts, Coventry</div>
+    <p class="sc-body sc-body-dk">The Head of Logistics at an automotive parts warehouse managing 18 bays was running on a 71% on-time rate despite having rigid booking windows in place. The problem was enforcement — carriers were phoning ahead to renegotiate slots, and the team was manually managing exceptions by phone. After deploying DockSync, the supplier portal removed the ability to informally renegotiate. Carriers either booked the right slot or flagged a problem in advance. The QR check-in created a timestamped record of every arrival. On-time rate reached 96% within 30 days. The team saved over an hour of gatehouse admin every morning.</p>
+    <div class="sc-result sc-result-dk">
+      <div class="sc-result-label">Key result</div>
+      <div class="sc-result-val sc-result-val-dk">71% to 96% on-time rate in 30 days. 1+ hour gatehouse admin saved per morning. Full arrival audit trail for carrier performance reviews.</div>
+    </div>
+  </div>
+</div>
+
+<div class="pull-quote">
+  <p class="pq-text">Visibility across all 18 bays without chasing anyone. On-time rate went from 71% to 96% in 30 days. The QR check-in alone saved an hour of gatehouse admin every single morning.</p>
+  <div class="pq-by">
+    <div class="pq-av" style="background:#2b79cf">DP</div>
+    <div>
+      <div class="pq-name">Dave P.</div>
+      <div class="pq-role">Head of Logistics · Automotive Parts, Coventry</div>
+      <div class="pq-stat" style="color:#2b79cf">DockSync Growth plan · 18 bays</div>
+    </div>
+  </div>
+</div>
+
+<div class="cap-list">
+  <div class="cap">
+    <div class="cap-ico" style="background:rgba(43,121,207,0.10)"><svg viewBox="0 0 24 24" style="stroke:#2b79cf"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+    <div><h4>JIT delivery window enforcement</h4><p>Set exact arrival windows per bay or delivery type. The system enforces them — no informal renegotiation by phone, no slot creep.</p></div>
+  </div>
+  <div class="cap">
+    <div class="cap-ico" style="background:rgba(43,121,207,0.10)"><svg viewBox="0 0 24 24" style="stroke:#2b79cf"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/></svg></div>
+    <div><h4>Real-time delay alerts</h4><p>Delayed bookings appear immediately on the dashboard KPI. The team sees a delay before it becomes a stoppage — time to intervene.</p></div>
+  </div>
+  <div class="cap">
+    <div class="cap-ico" style="background:rgba(43,121,207,0.10)"><svg viewBox="0 0 24 24" style="stroke:#2b79cf"><rect x="1" y="3" width="15" height="13" rx="1"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/></svg></div>
+    <div><h4>Bay-level routing</h4><p>Assign specific carriers to specific bays based on delivery type, vehicle size, or component category. Enforced automatically in the booking portal.</p></div>
+  </div>
+  <div class="cap">
+    <div class="cap-ico" style="background:rgba(43,121,207,0.10)"><svg viewBox="0 0 24 24" style="stroke:#2b79cf"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+    <div><h4>Carrier performance scoring</h4><p>On-time percentage and completion rate for every carrier. Data for quarterly performance reviews and supplier development conversations.</p></div>
+  </div>
+</div>
+```
+
+  </div>
+</div>
+
+<!-- ══════════════ 3PL & LOGISTICS ══════════════ -->
+
+<div class="ind-section ind-section-alt rv" id="logistics" style="scroll-margin-top:120px">
+  <div class="wc">
+
+```
+<div class="ind-head">
+  <div>
+    <div class="ind-eye eye-logi">Industry 04</div>
+    <h2 class="ind-h2">3PL &amp;<br><em class="em-logi">logistics</em></h2>
+    <p class="ind-intro">Third-party logistics operators manage inbound complexity that most single-client warehouses never face. Multiple clients, each with different supplier networks, delivery windows, bay requirements, and SLA expectations — all running through the same dock. Manual scheduling breaks down at scale, and the back-office cost of coordinating carriers by phone and email eats directly into margin. Visibility means nothing if it lives in someone's inbox.</p>
+  </div>
+  <div class="ind-stats">
+    <div class="istat">
+      <div class="istat-num" style="color:#9b59b6">40+</div>
+      <div class="istat-lbl"><strong>Suppliers manageable per account</strong>DockSync handles large supplier networks with individual tokens, completion rates, and booking histories per supplier</div>
+    </div>
+    <div class="istat">
+      <div class="istat-num" style="color:#9b59b6">4.2h</div>
+      <div class="istat-lbl"><strong>Back-office time saved per day</strong>Average across 3PL and logistics teams — time previously spent on phone, email, and manual scheduling coordination</div>
+    </div>
+    <div class="istat">
+      <div class="istat-num" style="color:#9b59b6">Live</div>
+      <div class="istat-lbl"><strong>SLA-ready reporting</strong>On-time %, completion rates, and booking history per supplier — shareable with clients as proof of inbound performance</div>
+    </div>
+  </div>
+</div>
+
+<div class="scenarios">
+  <div class="scenario scenario-light">
+    <div class="sc-tag sc-tag-p">The challenge</div>
+    <div class="sc-h">Multi-client dock coordination</div>
+    <p class="sc-body">A 3PL operator managing inbound for four client accounts runs 60+ deliveries per day through a 12-bay dock. Each client has different carrier networks, different delivery windows, and different reporting requirements. The back-office team was spending half their day on the phone coordinating arrivals, rescheduling missed slots, and producing manual reports for client SLA reviews. Bay utilisation was unpredictable because there was no single view of what was booked versus what had actually arrived.</p>
+    <div class="sc-result">
+      <div class="sc-result-label">With DockSync</div>
+      <div class="sc-result-val">Each client's carriers are added as suppliers with unique booking links. Bay allocation rules route specific carriers to specific bays. The reports section provides per-supplier on-time rates and completion data — client SLA reports generated automatically from real operational data.</div>
+    </div>
+  </div>
+  <div class="scenario scenario-dark">
+    <div class="sc-tag sc-tag-dk">Success story</div>
+    <div class="sc-h sc-h-dk">National Logistics Consultant</div>
+    <p class="sc-body sc-body-dk">A national logistics consultant working across multiple DC sites was brought in to reduce inbound dwell time and improve carrier reliability across a 3PL operation. The existing scheduling process relied entirely on a shared Excel spreadsheet and a dedicated back-office coordinator. After a six-week analysis, the recommendation was to replace the manual process with a structured booking system. DockSync was deployed as the solution. Within two weeks, back-office coordination calls had reduced by 70%. Carrier on-time performance, which had been entirely untracked, was now measured and reported weekly. Clients received performance dashboards showing their carriers' reliability for the first time.</p>
+    <div class="sc-result sc-result-dk">
+      <div class="sc-result-label">Key result</div>
+      <div class="sc-result-val sc-result-val-dk">70% reduction in back-office coordination calls in two weeks. First-ever carrier performance data for client SLA reporting. Deployed without IT involvement or carrier training.</div>
+    </div>
+  </div>
+</div>
+
+<div class="bento">
+  <div class="bento-cell">
+    <div class="bn bn-p">Carrier self-booking</div>
+    <div class="bv">Zero</div>
+    <div class="bl">phone calls required once carriers are added to the portal — they book, confirm, and receive reminders automatically</div>
+  </div>
+  <div class="bento-cell wide dark">
+    <div class="bn bn-p">Client SLA reporting</div>
+    <div class="bv bv-dk">Per-supplier on-time %, completion rate &amp; delivery history</div>
+    <div class="bl bl-dk">Every metric tracked automatically via booking data and QR check-in timestamps — no manual data entry, no spreadsheet consolidation</div>
+  </div>
+  <div class="bento-cell">
+    <div class="bn bn-p">Bay allocation</div>
+    <div class="bv">Client-dedicated</div>
+    <div class="bl">bays or shared bays — configured per operating schedule with full flexibility for multi-client operations</div>
+  </div>
+  <div class="bento-cell">
+    <div class="bn bn-p">Dispute resolution</div>
+    <div class="bv">Timestamped</div>
+    <div class="bl">arrival record for every delivery — QR check-in provides irrefutable evidence for carrier disputes and SLA conversations</div>
+  </div>
+  <div class="bento-cell wide">
+    <div class="bn bn-p">Scale without headcount</div>
+    <div class="bv" style="color:#9b59b6">4.2h</div>
+    <div class="bl">average daily admin saved per 3PL operations team — equivalent to more than half an FTE redirected from phones to value-adding work</div>
+  </div>
+</div>
+
+<div class="cap-list" style="margin-top:24px">
+  <div class="cap">
+    <div class="cap-ico" style="background:rgba(155,89,182,0.10)"><svg viewBox="0 0 24 24" style="stroke:#9b59b6"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
+    <div><h4>Multi-carrier portal</h4><p>Each carrier gets a unique booking link. No shared logins, no cross-client visibility — each supplier sees only their own available slots.</p></div>
+  </div>
+  <div class="cap">
+    <div class="cap-ico" style="background:rgba(155,89,182,0.10)"><svg viewBox="0 0 24 24" style="stroke:#9b59b6"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+    <div><h4>Client SLA reporting</h4><p>On-time %, completion rates, and delivery counts per supplier — ready to share with clients as proof of inbound performance.</p></div>
+  </div>
+  <div class="cap">
+    <div class="cap-ico" style="background:rgba(155,89,182,0.10)"><svg viewBox="0 0 24 24" style="stroke:#9b59b6"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+    <div><h4>Configurable operating windows</h4><p>Different booking rules for different client time slots. Restricted hours per client requirement — all managed in one operating schedule.</p></div>
+  </div>
+  <div class="cap">
+    <div class="cap-ico" style="background:rgba(155,89,182,0.10)"><svg viewBox="0 0 24 24" style="stroke:#9b59b6"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+    <div><h4>Dispute evidence</h4><p>Timestamped QR check-in records for every delivery. Irrefutable arrival data for carrier disputes, claims, and SLA conversations.</p></div>
+  </div>
+</div>
+```
+
+  </div>
+</div>
+
+<!-- CTA -->
+
+<div class="cta-strip rv">
+  <div class="w">
+    <h2 class="cta-h2">Your industry.<br>Your <em>dock.</em><br>In control.</h2>
+    <p class="cta-desc">Start your free 30-day trial. Full access. No payment details. No commitment. Your dock live in under 5 minutes.</p>
+    <div class="cta-btns">
+      <a href="index.html#trial" class="btn-a">Start free trial</a>
+      <a href="pricing.html" class="btn-g">View pricing</a>
+    </div>
+    <div class="cta-micro">
+      <div class="cta-m"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>30-day free trial</div>
+      <div class="cta-m"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>No card required</div>
+      <div class="cta-m"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Live in 5 minutes</div>
+      <div class="cta-m"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Cancel anytime</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+
+<footer class="footer">
+  <div class="w">
+    <div class="ftop">
+      <div>
+        <div class="fbrand">DockSync</div>
+        <p class="fdesc">Dock scheduling software for warehouses that want precision over chaos.</p>
+        <div class="fbadge"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>SSL · GDPR · UK-hosted</div>
+      </div>
+      <div><div class="fcolt">Product</div><div class="fcol"><a href="index.html">Product overview</a><a href="features.html">Features</a><a href="pricing.html">Pricing</a><a href="index.html#faq">FAQ</a></div></div>
+      <div><div class="fcolt">Industries</div><div class="fcol"><a href="industries.html#retail">Retail &amp; FMCG</a><a href="industries.html#pharma">Pharmaceutical</a><a href="industries.html#automotive">Automotive</a><a href="industries.html#logistics">3PL &amp; Logistics</a></div></div>
+      <div><div class="fcolt">Company</div><div class="fcol"><a href="#">About us</a><a href="mailto:hello@docksync.app">hello@docksync.app</a><a href="privacy.html">Privacy policy</a><a href="terms.html">Terms of service</a></div></div>
+    </div>
+    <div class="fbtm">
+      <p>© 2025 DockSync Ltd · Registered in England &amp; Wales</p>
+      <div class="flinks"><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="#">Cookies</a></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+var nav=document.getElementById('nav');
+window.addEventListener('scroll',function(){nav.classList.toggle('sc',scrollY>10);},{passive:true});
+var ro=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');ro.unobserve(e.target);}});},{threshold:0.06});
+document.querySelectorAll('.rv').forEach(function(el){ro.observe(el);});
+
+var ids=['retail','pharma','automotive','logistics'];
+var isns=document.querySelectorAll('.isn');
+window.addEventListener('scroll',function(){
+  var pos=scrollY+140;
+  for(var i=ids.length-1;i>=0;i--){
+    var el=document.getElementById(ids[i]);
+    if(el&&el.offsetTop<=pos){
+      isns.forEach(function(n){n.classList.remove('on');});
+      var match=document.querySelector('.isn[href="#'+ids[i]+'"]');
+      if(match)match.classList.add('on');
+      break;
+    }
+  }
+},{passive:true});
+</script>
+
+</body>
+</html>
