@@ -377,11 +377,11 @@ section{padding:80px 0}
           <div class="hfc-sub">No payment required · Access sent instantly</div>
           <form id="heroForm" action="https://formspree.io/f/meevqrad" method="POST">
             <input type="hidden" name="_next" value="https://www.docksync.app/thankyou.html"/>
-            <div class="fld"><label for="h-name">Your name</label><input type="text" id="h-name" placeholder="Jane Smith" autocomplete="name"></div>
-            <div class="fld"><label for="h-email">Work email</label><input type="email" id="h-email" placeholder="jane@yourwarehouse.com" autocomplete="email"></div>
-            <div class="fld"><label for="h-company">Company</label><input type="text" id="h-company" placeholder="Acme Logistics Ltd" autocomplete="organization"></div>
+            <div class="fld"><label for="h-name">Your name</label><input type="text" id="h-name" name="name" placeholder="Jane Smith" autocomplete="name"></div>
+            <div class="fld"><label for="h-email">Work email</label><input type="email" id="h-email" name="email" placeholder="jane@yourwarehouse.com" autocomplete="email"></div>
+            <div class="fld"><label for="h-company">Company</label><input type="text" id="h-company" name="company" placeholder="Acme Logistics Ltd" autocomplete="organization"></div>
             <div class="fld"><label for="h-bays">Dock size</label>
-              <select id="h-bays">
+              <select id="h-bays" name="bays">
                 <option value="" disabled selected>How many bays?</option>
                 <option>1–5 bays</option><option>6–15 bays</option>
                 <option>16–30 bays</option><option>30+ bays</option>
@@ -706,11 +706,11 @@ section{padding:80px 0}
         <div class="fc-form-sub">No payment required · Access sent instantly</div>
         <form id="heroForm" action="https://formspree.io/f/meevqrad" method="POST">
           <input type="hidden" name="_next" value="https://www.docksync.app/thankyou.html"/>
-          <div class="dfld"><label for="t-name">Your name</label><input type="text" id="t-name" placeholder="Jane Smith" autocomplete="name"></div>
-          <div class="dfld"><label for="t-email">Work email</label><input type="email" id="t-email" placeholder="jane@yourwarehouse.com" autocomplete="email"></div>
-          <div class="dfld"><label for="t-company">Company name</label><input type="text" id="t-company" placeholder="Acme Logistics Ltd" autocomplete="organization"></div>
+          <div class="dfld"><label for="t-name">Your name</label><input type="text" id="h-name" name="name" placeholder="Jane Smith" autocomplete="name"></div>
+          <div class="dfld"><label for="t-email">Work email</label><input type="email" id="h-email" name="email" placeholder="jane@yourwarehouse.com" autocomplete="email"></div>
+          <div class="dfld"><label for="t-company">Company name</label><input type="text" id="h-company" name="company" placeholder="Acme Logistics Ltd" autocomplete="organization"></div>
           <div class="dfld"><label for="t-bays">Dock size</label>
-            <select id="t-bays">
+            <select id="t-bays" name="bays">
               <option value="" disabled selected>How many bays?</option>
               <option>1–5 bays</option><option>6–15 bays</option>
               <option>16–30 bays</option><option>30+ bays</option>
