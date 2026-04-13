@@ -814,20 +814,6 @@ function setBilling(mode){
   });
 }
 
-// Forms
-function handleForm(formId, btnId, msg){
-  var f = document.getElementById(formId); if(!f) return;
-  f.addEventListener('submit', function(e){
-    e.preventDefault();
-    var b = document.getElementById(btnId); if(!b) return;
-    b.textContent = 'Sending access...';
-    b.style.background = '#1e9e5e';
-    b.style.color = '#fff';
-    setTimeout(function(){ b.textContent = msg; }, 1400);
-  });
-}
-handleForm('heroForm','heroBtn','Check your inbox!');
-handleForm('trialForm','trialBtn','Check your inbox — access sent!');
 </script>
 </body>
 </html>
