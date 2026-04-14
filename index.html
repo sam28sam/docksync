@@ -814,6 +814,19 @@ function setBilling(mode){
   });
 }
 
+  // Forms
+document.querySelectorAll('form').forEach(function(form){
+  form.addEventListener('submit', function(){
+    setTimeout(function(){
+      var popup = document.createElement('div');
+      popup.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);z-index:9999;display:flex;align-items:center;justify-content:center';
+      popup.innerHTML = '<div style="background:#fff;border-radius:18px;padding:40px;max-width:420px;text-align:center;margin:20px"><div style="width:56px;height:56px;background:rgba(26,153,88,0.12);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#1a9958" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div style="font-family:Barlow Condensed,sans-serif;font-size:28px;font-weight:800;text-transform:uppercase;color:#111010;margin-bottom:10px">Request received</div><p style="font-size:15px;color:#6a6860;line-height:1.7;margin-bottom:20px">The DockSync team will send your personalised setup link within the hour. Please check your inbox — and your spam folder just in case.</p><div style="font-family:JetBrains Mono,monospace;font-size:11px;color:#9a9790">hello@docksync.app</div></div>';
+      popup.addEventListener('click', function(e){ if(e.target===popup) document.body.removeChild(popup); });
+      document.body.appendChild(popup);
+    }, 500);
+  });
+});
+
 </script>
 </body>
 </html>
