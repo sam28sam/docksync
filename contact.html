@@ -17,10 +17,11 @@ html{scroll-behavior:smooth}
 body{font-family:'Barlow',sans-serif;color:#111010;background:#fff;-webkit-font-smoothing:antialiased;overflow-x:hidden;line-height:1.6}
 a{color:#e6920a;text-decoration:none}
 a:hover{text-decoration:underline}
+.w{max-width:1140px;margin:0 auto;padding:0 28px}
 
 /* NAV */
 .nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,0.96);backdrop-filter:blur(14px);border-bottom:1px solid rgba(0,0,0,0.08);box-shadow:0 1px 20px rgba(0,0,0,0.06)}
-.nav-i{display:flex;align-items:center;height:62px;gap:6px;max-width:1140px;margin:0 auto;padding:0 28px}
+.nav-i{display:flex;align-items:center;height:62px;gap:6px}
 .logo{display:flex;align-items:center;gap:9px;margin-right:28px;text-decoration:none}
 .logo-box{width:28px;height:28px;border:1.5px solid #e6920a;border-radius:5px;display:flex;align-items:center;justify-content:center;background:#fff}
 .logo-word{font-family:‘Barlow Condensed’,sans-serif;font-size:18px;font-weight:800;letter-spacing:0.05em;text-transform:uppercase}
@@ -38,79 +39,79 @@ a:hover{text-decoration:underline}
 .hero{padding:110px 0 60px;background:#0d0e0e;position:relative;overflow:hidden}
 .hero::before{content:’’;position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,0.025) 1px,transparent 1px);background-size:32px 32px;pointer-events:none}
 .hero::after{content:’’;position:absolute;top:-80px;right:-80px;width:500px;height:500px;background:radial-gradient(circle,rgba(230,146,10,0.09) 0%,transparent 65%);pointer-events:none}
-.hw{max-width:1140px;margin:0 auto;padding:0 28px;position:relative;z-index:1}
+.hz{position:relative;z-index:1}
 .bc{font-family:‘JetBrains Mono’,monospace;font-size:11px;color:#4e4c49;margin-bottom:18px;display:flex;align-items:center;gap:5px}
 .bc a{color:#e6920a}
 .eye{display:inline-flex;align-items:center;gap:8px;font-family:‘JetBrains Mono’,monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#e6920a;margin-bottom:14px}
 .eye::before{content:’’;width:18px;height:1px;background:#e6920a;flex-shrink:0}
-.hero h1{font-family:‘Barlow Condensed’,sans-serif;font-weight:900;line-height:0.93;letter-spacing:-0.01em;text-transform:uppercase;font-size:clamp(44px,6vw,84px);color:#efede9;margin-bottom:16px}
-.hero h1 em{font-style:normal;color:#e6920a}
-.hero p{font-size:16px;color:#787470;line-height:1.75;max-width:520px}
+.h1{font-family:‘Barlow Condensed’,sans-serif;font-weight:900;line-height:0.93;letter-spacing:-0.01em;text-transform:uppercase;font-size:clamp(44px,6vw,80px);color:#efede9;margin-bottom:16px}
+.h1 em{font-style:normal;color:#e6920a}
+.hdesc{font-size:16px;color:#787470;line-height:1.75;max-width:560px}
 
-/* FULL WIDTH TWO COLUMN — no wrapper, bleeds full width */
-.page-body{display:grid;grid-template-columns:1fr 1fr;min-height:600px}
-.left-col{background:#f7f6f3;padding:60px calc((100vw - 1140px) / 2 + 28px) 60px calc((100vw - 1140px) / 2 + 28px)}
-.right-col{background:#ffffff;padding:60px calc((100vw - 1140px) / 2 + 28px) 60px 52px;border-left:1px solid rgba(0,0,0,0.07)}
+/* MAIN SECTION */
+.main{padding:64px 0;background:#fff}
 
-/* SECTION TITLES */
-.sec-title{font-family:‘Barlow Condensed’,sans-serif;font-size:30px;font-weight:800;text-transform:uppercase;color:#111010;margin-bottom:4px}
-.sec-sub{font-family:‘JetBrains Mono’,monospace;font-size:11px;color:#9a9790;margin-bottom:28px;letter-spacing:0.04em}
+/* GRID — form left, contact right */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
 
-/* FORM */
+/* FORM CARD */
+.form-card{background:#f7f6f3;border-radius:16px;padding:36px;border:1px solid rgba(0,0,0,0.07)}
+.card-title{font-family:‘Barlow Condensed’,sans-serif;font-size:26px;font-weight:800;text-transform:uppercase;color:#111010;margin-bottom:4px}
+.card-sub{font-family:‘JetBrains Mono’,monospace;font-size:11px;color:#9a9790;margin-bottom:24px;letter-spacing:0.04em}
 .fld{margin-bottom:13px}
 .fld label{display:block;font-family:‘JetBrains Mono’,monospace;font-size:10px;font-weight:500;color:#6a6860;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:5px}
-.fld input,.fld select{width:100%;background:#ffffff;border:1.5px solid rgba(0,0,0,0.12);border-radius:6px;padding:11px 13px;color:#111010;font-family:‘Barlow’,sans-serif;font-size:14px;transition:border-color 0.15s;outline:none;appearance:none}
+.fld input,.fld select{width:100%;background:#fff;border:1.5px solid rgba(0,0,0,0.12);border-radius:6px;padding:11px 13px;color:#111010;font-family:‘Barlow’,sans-serif;font-size:14px;transition:border-color 0.15s;outline:none;appearance:none}
 .fld input::placeholder{color:#9a9790}
-.fld input:focus,.fld select:focus{border-color:#e6920a;background:#fff}
+.fld input:focus,.fld select:focus{border-color:#e6920a}
 .fld select{background-image:url(“data:image/svg+xml,%3Csvg xmlns=‘http://www.w3.org/2000/svg’ width=‘12’ height=‘12’ viewBox=‘0 0 24 24’ fill=‘none’ stroke=’%239a9790’ stroke-width=‘2.5’ stroke-linecap=‘round’ stroke-linejoin=‘round’%3E%3Cpolyline points=‘6 9 12 15 18 9’/%3E%3C/svg%3E”);background-repeat:no-repeat;background-position:right 12px center;padding-right:36px}
-.f-submit{width:100%;margin-top:6px;padding:14px;font-family:‘Barlow Condensed’,sans-serif;font-size:16px;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;background:#e6920a;color:#1a0900;border:none;border-radius:8px;cursor:pointer;transition:all 0.17s}
+.f-submit{width:100%;margin-top:4px;padding:14px;font-family:‘Barlow Condensed’,sans-serif;font-size:16px;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;background:#e6920a;color:#1a0900;border:none;border-radius:8px;cursor:pointer;transition:all 0.17s}
 .f-submit:hover{background:#f4a21e;transform:translateY(-1px)}
 .f-note{font-family:‘JetBrains Mono’,monospace;font-size:10px;color:#9a9790;text-align:center;margin-top:10px;line-height:1.5}
 
-/* WHAT HAPPENS NEXT */
-.whn{background:#ffffff;border-radius:12px;border:1px solid rgba(0,0,0,0.08);padding:20px 22px;margin-top:24px}
-.whn-label{font-family:‘JetBrains Mono’,monospace;font-size:10px;color:#9a9790;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:14px}
-.whn-row{display:flex;gap:12px;margin-bottom:12px}
-.whn-row:last-child{margin-bottom:0}
-.whn-n{font-family:‘JetBrains Mono’,monospace;font-size:11px;color:#e6920a;min-width:20px;flex-shrink:0;padding-top:1px}
-.whn-t{font-size:13px;font-weight:500;color:#111010;margin-bottom:2px}
-.whn-d{font-size:12px;color:#6a6860;line-height:1.55}
+/* STEPS */
+.steps{margin-top:20px;display:flex;flex-direction:column;gap:12px}
+.step{display:flex;gap:14px;align-items:flex-start}
+.step-n{font-family:‘JetBrains Mono’,monospace;font-size:11px;color:#e6920a;min-width:20px;flex-shrink:0;padding-top:2px}
+.step-t{font-size:13px;font-weight:500;color:#111010;margin-bottom:2px}
+.step-d{font-size:12px;color:#6a6860;line-height:1.55}
+
+/* CONTACT COLUMN */
+.contact-title{font-family:‘Barlow Condensed’,sans-serif;font-size:26px;font-weight:800;text-transform:uppercase;color:#111010;margin-bottom:4px}
+.contact-sub{font-family:‘JetBrains Mono’,monospace;font-size:11px;color:#9a9790;margin-bottom:24px;letter-spacing:0.04em}
 
 /* EMAIL CARDS */
-.ecard{display:flex;align-items:flex-start;gap:13px;padding:14px 16px;border-radius:10px;border:1px solid rgba(0,0,0,0.08);margin-bottom:9px;transition:all 0.15s;text-decoration:none;background:#fff}
-.ecard:hover{border-color:#e6920a;background:#fffdf8;transform:translateX(3px);text-decoration:none}
-.eicon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.eicon svg{width:15px;height:15px;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.ecard{display:flex;align-items:flex-start;gap:14px;padding:16px;border-radius:10px;border:1px solid rgba(0,0,0,0.08);margin-bottom:8px;transition:all 0.15s;text-decoration:none;background:#fff;cursor:pointer}
+.ecard:hover{border-color:#e6920a;background:#fffdf8;transform:translateX(4px);text-decoration:none}
+.eicon{width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.eicon svg{width:16px;height:16px;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
 .ei-a{background:rgba(230,146,10,0.10)}.ei-a svg{stroke:#e6920a}
 .ei-g{background:rgba(26,153,88,0.10)}.ei-g svg{stroke:#1a9958}
 .ei-b{background:rgba(43,121,207,0.10)}.ei-b svg{stroke:#2b79cf}
 .ei-r{background:rgba(212,53,53,0.10)}.ei-r svg{stroke:#d43535}
 .ei-x{background:rgba(0,0,0,0.05)}.ei-x svg{stroke:#6a6860}
-.ep{font-size:13px;font-weight:500;color:#111010;margin-bottom:1px}
+.ep{font-size:13px;font-weight:500;color:#111010;margin-bottom:2px}
 .ea{font-family:‘JetBrains Mono’,monospace;font-size:11px;color:#e6920a}
-.ed{font-size:12px;color:#9a9790;margin-top:2px;line-height:1.45}
+.ed{font-size:12px;color:#9a9790;margin-top:3px;line-height:1.45}
 
 /* RESPONSE BOX */
-.rbox{background:#0d0e0e;border-radius:12px;padding:20px 22px;margin-top:16px}
-.rbox-t{font-family:‘Barlow Condensed’,sans-serif;font-size:18px;font-weight:700;text-transform:uppercase;color:#efede9;margin-bottom:12px}
-.rrow{display:flex;align-items:flex-start;gap:10px;margin-bottom:8px}
+.rbox{background:#0d0e0e;border-radius:12px;padding:22px 24px;margin-top:12px}
+.rbox-t{font-family:‘Barlow Condensed’,sans-serif;font-size:18px;font-weight:700;text-transform:uppercase;color:#efede9;margin-bottom:14px}
+.rrow{display:flex;align-items:flex-start;gap:10px;margin-bottom:9px}
 .rrow:last-child{margin-bottom:0}
 .rdot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:6px}
 .rtxt{font-size:13px;color:#787470;line-height:1.5}
 
 /* FAQ */
-.faq{background:#f7f6f3;padding:60px 0;border-top:1px solid rgba(0,0,0,0.07)}
-.fw{max-width:1140px;margin:0 auto;padding:0 28px}
+.faq-sec{background:#f7f6f3;padding:64px 0;border-top:1px solid rgba(0,0,0,0.07)}
 .faq-eye{font-family:‘JetBrains Mono’,monospace;font-size:10px;color:#9a9790;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:8px}
-.faq-title{font-family:‘Barlow Condensed’,sans-serif;font-size:clamp(26px,3.5vw,42px);font-weight:900;text-transform:uppercase;color:#111010;margin-bottom:32px}
+.faq-h{font-family:‘Barlow Condensed’,sans-serif;font-size:clamp(26px,3.5vw,42px);font-weight:900;text-transform:uppercase;color:#111010;margin-bottom:32px}
 .faq-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.fcard{background:#fff;border-radius:12px;border:1px solid rgba(0,0,0,0.07);padding:22px}
-.fq{font-family:‘Barlow Condensed’,sans-serif;font-size:17px;font-weight:700;text-transform:uppercase;color:#111010;margin-bottom:8px;line-height:1.1}
+.fcard{background:#fff;border-radius:12px;border:1px solid rgba(0,0,0,0.07);padding:24px}
+.fq{font-family:‘Barlow Condensed’,sans-serif;font-size:17px;font-weight:700;text-transform:uppercase;color:#111010;margin-bottom:9px;line-height:1.1}
 .fa{font-size:13px;color:#6a6860;line-height:1.7}
 
 /* FOOTER */
 .footer{background:#131415;padding:52px 0 28px;border-top:1px solid rgba(255,255,255,0.07)}
-.fw2{max-width:1140px;margin:0 auto;padding:0 28px}
 .ftop{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:44px;padding-bottom:36px;border-bottom:1px solid rgba(255,255,255,0.07)}
 .fbrand{font-family:‘Barlow Condensed’,sans-serif;font-size:20px;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;color:#efede9;margin-bottom:8px}
 .fdesc{font-size:13px;color:#4e4c49;line-height:1.65;max-width:220px}
@@ -136,14 +137,7 @@ a:hover{text-decoration:underline}
 .pop-note{font-family:‘JetBrains Mono’,monospace;font-size:11px;color:#9a9790}
 .pop-close{margin-top:20px;font-family:‘Barlow Condensed’,sans-serif;font-weight:700;font-size:13px;letter-spacing:0.05em;text-transform:uppercase;padding:10px 24px;border-radius:6px;border:1.5px solid rgba(0,0,0,0.14);background:transparent;color:#6a6860;cursor:pointer}
 
-@media(max-width:960px){
-.nav-links{display:none}
-.page-body{grid-template-columns:1fr}
-.left-col{padding:48px 28px}
-.right-col{padding:48px 28px;border-left:none;border-top:1px solid rgba(0,0,0,0.07)}
-.faq-grid{grid-template-columns:1fr}
-.ftop{grid-template-columns:1fr 1fr}
-}
+@media(max-width:900px){.nav-links{display:none}.grid{grid-template-columns:1fr;gap:40px}.faq-grid{grid-template-columns:1fr}.ftop{grid-template-columns:1fr 1fr}}
 @media(max-width:600px){.ftop{grid-template-columns:1fr}}
 </style>
 
@@ -153,7 +147,7 @@ a:hover{text-decoration:underline}
 <!-- NAV -->
 
 <nav class="nav">
-  <div class="nav-i">
+  <div class="w"><div class="nav-i">
     <a href="index.html" class="logo">
       <div class="logo-box"><svg viewBox="0 0 60 60" width="22" height="22" fill="none"><rect x="4" y="4" width="52" height="52" rx="4" fill="#e6920a"/><rect x="12" y="10" width="36" height="38" rx="2" fill="#0d1b2e"/><rect x="4" y="46" width="52" height="10" rx="2" fill="#0d1b2e"/></svg></div>
       <span class="logo-word"><span style="color:#111010">DOCK</span><span style="color:#e6920a">SYNC</span></span>
@@ -168,133 +162,109 @@ a:hover{text-decoration:underline}
       <a href="#" class="nav-util">Warehouse login</a>
       <div class="nav-sep"></div>
       <a href="#" class="nav-util">Carrier login</a>
-      <a href="#form" class="btn-nav">Start free trial</a>
+      <a href="#main" class="btn-nav">Start free trial</a>
     </div>
-  </div>
+  </div></div>
 </nav>
 
 <!-- HERO -->
 
 <div class="hero">
-  <div class="hw">
+  <div class="w hz">
     <div class="bc"><a href="index.html">Home</a><span style="color:#4e4c49"> / </span>Get Started</div>
     <div class="eye">Free 30-day trial</div>
-    <h1>Start free.<br>Or get <em>in touch.</em></h1>
-    <p>Request your free 30-day trial and the DockSync team will send your personalised setup link within the hour. Full access. No payment required. No commitment.</p>
+    <h1 class="h1">Start free.<br>Or get <em>in touch.</em></h1>
+    <p class="hdesc">Request your free 30-day trial and the DockSync team will send your personalised setup link within the hour. Full access. No payment required. No commitment.</p>
   </div>
 </div>
 
-<!-- TWO COLUMN BODY -->
+<!-- MAIN -->
 
-<div class="page-body" id="form">
-
-  <!-- LEFT — FORM -->
-
-  <div class="left-col">
-    <div class="sec-title">Request free trial</div>
-    <div class="sec-sub">No payment required · Access sent within the hour</div>
+<div class="main" id="main">
+  <div class="w">
+    <div class="grid">
 
 ```
-<form id="contactForm" action="https://formspree.io/f/meevqrad" method="POST">
-  <input type="hidden" name="_next" value="https://www.docksync.app/thankyou.html"/>
-  <div class="fld">
-    <label for="c-name">Your name</label>
-    <input type="text" id="c-name" name="name" placeholder="Jane Smith" autocomplete="name" required>
-  </div>
-  <div class="fld">
-    <label for="c-email">Work email</label>
-    <input type="email" id="c-email" name="email" placeholder="jane@yourwarehouse.com" autocomplete="email" required>
-  </div>
-  <div class="fld">
-    <label for="c-company">Company name</label>
-    <input type="text" id="c-company" name="company" placeholder="Acme Logistics Ltd" autocomplete="organization">
-  </div>
-  <div class="fld">
-    <label for="c-bays">Dock size</label>
-    <select id="c-bays" name="bays">
-      <option value="" disabled selected>How many bays?</option>
-      <option>1–8 bays</option>
-      <option>8+ bays</option>
-    </select>
-  </div>
-  <div class="fld">
-    <label for="c-msg">Anything else? (optional)</label>
-    <input type="text" id="c-msg" name="message" placeholder="Questions or specific requirements...">
-  </div>
-  <button type="submit" class="f-submit" id="contactBtn">Get free access now →</button>
-</form>
-<p class="f-note">UK-hosted · GDPR compliant · Cancel anytime · No auto-billing</p>
+  <!-- FORM -->
+  <div>
+    <div class="form-card">
+      <div class="card-title">Request free trial</div>
+      <div class="card-sub">No payment required · Access sent within the hour</div>
+      <form id="contactForm" action="https://formspree.io/f/meevqrad" method="POST">
+        <input type="hidden" name="_next" value="https://www.docksync.app/thankyou.html"/>
+        <div class="fld"><label for="c-name">Your name</label><input type="text" id="c-name" name="name" placeholder="Jane Smith" autocomplete="name" required></div>
+        <div class="fld"><label for="c-email">Work email</label><input type="email" id="c-email" name="email" placeholder="jane@yourwarehouse.com" autocomplete="email" required></div>
+        <div class="fld"><label for="c-company">Company name</label><input type="text" id="c-company" name="company" placeholder="Acme Logistics Ltd" autocomplete="organization"></div>
+        <div class="fld"><label for="c-bays">Dock size</label>
+          <select id="c-bays" name="bays">
+            <option value="" disabled selected>How many bays?</option>
+            <option>1–8 bays</option>
+            <option>8+ bays</option>
+          </select>
+        </div>
+        <div class="fld"><label for="c-msg">Anything else? (optional)</label><input type="text" id="c-msg" name="message" placeholder="Questions or specific requirements..."></div>
+        <button type="submit" class="f-submit" id="contactBtn">Get free access now →</button>
+      </form>
+      <p class="f-note">UK-hosted · GDPR compliant · Cancel anytime · No auto-billing</p>
+    </div>
 
-<div class="whn">
-  <div class="whn-label">What happens after you submit</div>
-  <div class="whn-row">
-    <div class="whn-n">01</div>
-    <div><div class="whn-t">Personal invitation within the hour</div><div class="whn-d">A direct email from the DockSync team with your unique setup link — not a generic automated email.</div></div>
-  </div>
-  <div class="whn-row">
-    <div class="whn-n">02</div>
-    <div><div class="whn-t">Live in under 5 minutes</div><div class="whn-d">Set your password, add bays and schedule. First live booking within the hour.</div></div>
-  </div>
-  <div class="whn-row">
-    <div class="whn-n">03</div>
-    <div><div class="whn-t">30 days full access, no pressure</div><div class="whn-d">Every feature included. No card. No auto-billing. You decide when to subscribe.</div></div>
-  </div>
-</div>
-```
-
+    <div style="margin-top:20px;padding:0 4px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9a9790;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:14px">What happens next</div>
+      <div class="steps">
+        <div class="step"><div class="step-n">01</div><div><div class="step-t">Personal invitation within the hour</div><div class="step-d">A direct email from the DockSync team with your unique setup link.</div></div></div>
+        <div class="step"><div class="step-n">02</div><div><div class="step-t">Live in under 5 minutes</div><div class="step-d">Set your password, add bays and schedule. First live booking within the hour.</div></div></div>
+        <div class="step"><div class="step-n">03</div><div><div class="step-t">30 days full access, no pressure</div><div class="step-d">Every feature included. No card. No auto-billing. You decide when to subscribe.</div></div></div>
+      </div>
+    </div>
   </div>
 
-  <!-- RIGHT — CONTACT -->
+  <!-- CONTACT -->
+  <div>
+    <div class="contact-title">Get in touch</div>
+    <div class="contact-sub">The right inbox for every question</div>
 
-  <div class="right-col">
-    <div class="sec-title">Get in touch</div>
-    <div class="sec-sub">The right inbox for every question</div>
+    <a href="mailto:hello@docksync.app" class="ecard">
+      <div class="eicon ei-a"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+      <div><div class="ep">General enquiries</div><div class="ea">hello@docksync.app</div><div class="ed">Questions, partnerships, press, or anything else.</div></div>
+    </a>
+    <a href="mailto:support@docksync.app" class="ecard">
+      <div class="eicon ei-g"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><div class="ep">Customer support</div><div class="ea">support@docksync.app</div><div class="ed">Technical issues, how-to questions, or help getting set up.</div></div>
+    </a>
+    <a href="mailto:billing@docksync.app" class="ecard">
+      <div class="eicon ei-b"><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
+      <div><div class="ep">Billing &amp; subscriptions</div><div class="ea">billing@docksync.app</div><div class="ed">Invoices, plan changes, and subscription management.</div></div>
+    </a>
+    <a href="mailto:privacy@docksync.app" class="ecard">
+      <div class="eicon ei-x"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <div><div class="ep">Privacy &amp; data requests</div><div class="ea">privacy@docksync.app</div><div class="ed">GDPR requests, subject access requests, data deletion.</div></div>
+    </a>
+    <a href="mailto:security@docksync.app" class="ecard">
+      <div class="eicon ei-r"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+      <div><div class="ep">Security</div><div class="ea">security@docksync.app</div><div class="ed">Vulnerability reports and responsible disclosure.</div></div>
+    </a>
 
-```
-<a href="mailto:hello@docksync.app" class="ecard">
-  <div class="eicon ei-a"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-  <div><div class="ep">General enquiries</div><div class="ea">hello@docksync.app</div><div class="ed">Questions, partnerships, press, or anything else.</div></div>
-</a>
+    <div class="rbox">
+      <div class="rbox-t">Response times</div>
+      <div class="rrow"><div class="rdot" style="background:#1a9958"></div><div class="rtxt"><strong style="color:#efede9">Trial requests</strong> — within the hour on business days</div></div>
+      <div class="rrow"><div class="rdot" style="background:#e6920a"></div><div class="rtxt"><strong style="color:#efede9">Support</strong> — same business day response</div></div>
+      <div class="rrow"><div class="rdot" style="background:#2b79cf"></div><div class="rtxt"><strong style="color:#efede9">Billing</strong> — within 24 hours</div></div>
+      <div class="rrow"><div class="rdot" style="background:#787470"></div><div class="rtxt"><strong style="color:#efede9">Privacy requests</strong> — within 30 days as required by UK GDPR</div></div>
+    </div>
+  </div>
 
-<a href="mailto:support@docksync.app" class="ecard">
-  <div class="eicon ei-g"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
-  <div><div class="ep">Customer support</div><div class="ea">support@docksync.app</div><div class="ed">Technical issues, how-to questions, or help getting set up.</div></div>
-</a>
-
-<a href="mailto:billing@docksync.app" class="ecard">
-  <div class="eicon ei-b"><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
-  <div><div class="ep">Billing &amp; subscriptions</div><div class="ea">billing@docksync.app</div><div class="ed">Invoices, plan changes, and subscription management.</div></div>
-</a>
-
-<a href="mailto:privacy@docksync.app" class="ecard">
-  <div class="eicon ei-x"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-  <div><div class="ep">Privacy &amp; data requests</div><div class="ea">privacy@docksync.app</div><div class="ed">GDPR requests, subject access requests, data deletion.</div></div>
-</a>
-
-<a href="mailto:security@docksync.app" class="ecard">
-  <div class="eicon ei-r"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
-  <div><div class="ep">Security</div><div class="ea">security@docksync.app</div><div class="ed">Vulnerability reports and responsible disclosure.</div></div>
-</a>
-
-<div class="rbox">
-  <div class="rbox-t">Response times</div>
-  <div class="rrow"><div class="rdot" style="background:#1a9958"></div><div class="rtxt"><strong style="color:#efede9">Trial requests</strong> — within the hour on business days</div></div>
-  <div class="rrow"><div class="rdot" style="background:#e6920a"></div><div class="rtxt"><strong style="color:#efede9">Support</strong> — same business day response</div></div>
-  <div class="rrow"><div class="rdot" style="background:#2b79cf"></div><div class="rtxt"><strong style="color:#efede9">Billing</strong> — within 24 hours</div></div>
-  <div class="rrow"><div class="rdot" style="background:#787470"></div><div class="rtxt"><strong style="color:#efede9">Privacy requests</strong> — within 30 days as required by UK GDPR</div></div>
 </div>
 ```
 
   </div>
-
 </div>
 
 <!-- FAQ -->
 
-<div class="faq">
-  <div class="fw">
+<div class="faq-sec">
+  <div class="w">
     <div class="faq-eye">Quick answers</div>
-    <div class="faq-title">Common questions</div>
+    <div class="faq-h">Common questions</div>
     <div class="faq-grid">
       <div class="fcard">
         <div class="fq">Is the 30-day trial really free?</div>
@@ -315,7 +285,7 @@ a:hover{text-decoration:underline}
 <!-- FOOTER -->
 
 <footer class="footer">
-  <div class="fw2">
+  <div class="w">
     <div class="ftop">
       <div>
         <div class="fbrand">DockSync</div>
