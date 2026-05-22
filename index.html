@@ -786,7 +786,6 @@ section{padding:80px 0}
 <script>
 // Nav scroll
   (function(){var locale=navigator.language||navigator.userLanguage;var currencies={'en-US':{symbol:'$',starter:'99',growth:'229'},'en-AU':{symbol:'A$',starter:'119',growth:'279'},'en-CA':{symbol:'CA$',starter:'119',growth:'279'},'de-DE':{symbol:'€',starter:'89',growth:'199'},'en-GB':{symbol:'£',starter:'79',growth:'179'}};var currency=currencies[locale]||currencies['en-GB'];document.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('[data-price="starter"]').forEach(function(el){el.innerHTML=currency.symbol+currency.starter;});document.querySelectorAll('[data-price="growth"]').forEach(function(el){el.innerHTML=currency.symbol+currency.growth;});});})();
-
 var nav = document.getElementById('nav');
 window.addEventListener('scroll', function(){ nav.classList.toggle('sc', scrollY > 10); }, {passive:true});
 
