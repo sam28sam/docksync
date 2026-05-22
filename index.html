@@ -805,8 +805,8 @@ function toggleFaq(el){
 
 // Pricing toggle
 var pdata = {
-  starter:{ monthly:{p:'79',per:'Billed monthly · up to 8 bays'}, annual:{p:'63',per:'Billed annually · up to 8 bays'} },
-  growth:{ monthly:{p:'179',per:'Billed monthly · unlimited bays'}, annual:{p:'143',per:'Billed annually · unlimited bays'} }
+      starter:{ monthly:{p:(({'en-US':'$99','en-AU':'A$119','en-CA':'CA$119','de-DE':'€89'})[navigator.language]||'£79'),per:'Billed monthly · up to 8 bays'}, annual:{p:(({'en-US':'$79','en-AU':'A$95','en-CA':'CA$95','de-DE':'€71'})[navigator.language]||'£63'),per:'Billed annually · up to 8 bays'} },
+      growth:{ monthly:{p:(({'en-US':'$229','en-AU':'A$279','en-CA':'CA$279','de-DE':'€199'})[navigator.language]||'£179'),per:'Billed monthly · unlimited bays'}, annual:{p:(({'en-US':'$183','en-AU':'A$223','en-CA':'CA$223','de-DE':'€159'})[navigator.language]||'£143'),per:'Billed annually · unlimited bays'} }
 };
 function setBilling(mode){
   ['monthly','annual'].forEach(function(m){
