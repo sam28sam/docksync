@@ -784,18 +784,48 @@ section{padding:80px 0}
 </footer>
 
 <script>
-// Nav scroll
-  (function(){var locale=navigator.language||navigator.userLanguage;var currencies={'en-US':{symbol:'$',starter:'99',growth:'229'},'en-AU':{symbol:'A$',starter:'119',growth:'279'},'en-CA':{symbol:'CA$',starter:'119',growth:'279'},'de-DE':{symbol:'€',starter:'89',growth:'199'},'en-GB':{symbol:'£',starter:'79',growth:'179'}};var currency=currencies[locale]||currencies['en-GB'];document.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('[data-price="starter"]').forEach(function(el){el.innerHTML=currency.symbol+currency.starter;});document.querySelectorAll('[data-price="growth"]').forEach(function(el){el.innerHTML=currency.symbol+currency.growth;});});})();
+// ── CURRENCY DETECTION ──────────────────────────────────────────────
+// Region-based detection. Falls back to USD for rest of world.
+function detectCurrency(){
+  var loc = (navigator.language || navigator.userLanguage || 'en-US').toLowerCase();
+  var region = loc.split('-')[1] || '';
+  var lang   = loc.split('-')[0] || '';
+
+  var euroZone  = ['de','fr','it','es','nl','be','at','ie','pt','fi','gr','lu','sk','si','ee','lv','lt','mt','cy','hr'];
+  var euroLangs = ['de','fr','it','es','nl','pt','fi','el','sk','sl','et','lv','lt','mt','hr'];
+
+  if (region === 'gb' || lang === 'cy') {
+    return { symbol:'£', starter:'79', growth:'179', starterAnnual:'63', growthAnnual:'143', starterSave:'£190', growthSave:'£430' };
+  }
+  if (region === 'us') {
+    return { symbol:'$', starter:'99', growth:'229', starterAnnual:'79', growthAnnual:'183', starterSave:'$240', growthSave:'$552' };
+  }
+  if (region === 'au') {
+    return { symbol:'A$', starter:'119', growth:'279', starterAnnual:'95', growthAnnual:'223', starterSave:'A$288', growthSave:'A$672' };
+  }
+  if (region === 'ca') {
+    return { symbol:'CA$', starter:'119', growth:'279', starterAnnual:'95', growthAnnual:'223', starterSave:'CA$288', growthSave:'CA$672' };
+  }
+  if (euroZone.indexOf(region) !== -1 || euroLangs.indexOf(lang) !== -1) {
+    return { symbol:'€', starter:'89', growth:'199', starterAnnual:'71', growthAnnual:'159', starterSave:'€216', growthSave:'€480' };
+  }
+  // Default: rest of world → USD
+  return { symbol:'$', starter:'99', growth:'229', starterAnnual:'79', growthAnnual:'183', starterSave:'$240', growthSave:'$552' };
+}
+
+var CUR = detectCurrency();
+
+// ── NAV SCROLL ──
 var nav = document.getElementById('nav');
 window.addEventListener('scroll', function(){ nav.classList.toggle('sc', scrollY > 10); }, {passive:true});
 
-// Scroll reveal
+// ── SCROLL REVEAL ──
 var ro = new IntersectionObserver(function(es){
   es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); ro.unobserve(e.target); } });
 }, {threshold:0.06});
 document.querySelectorAll('.rv').forEach(function(el){ ro.observe(el); });
 
-// FAQ
+// ── FAQ ──
 function toggleFaq(el){
   var item = el.closest('.faq-item');
   var open = item.classList.contains('open');
@@ -803,11 +833,7 @@ function toggleFaq(el){
   if(!open) item.classList.add('open');
 }
 
-// Pricing toggle
-var pdata = {
-      starter:{ monthly:{p:(({'en-US':'$99','en-AU':'A$119','en-CA':'CA$119','de-DE':'€89'})[navigator.language]||'£79'),per:'Billed monthly · up to 8 bays'}, annual:{p:(({'en-US':'$79','en-AU':'A$95','en-CA':'CA$95','de-DE':'€71'})[navigator.language]||'£63'),per:'Billed annually · up to 8 bays'} },
-      growth:{ monthly:{p:(({'en-US':'$229','en-AU':'A$279','en-CA':'CA$279','de-DE':'€199'})[navigator.language]||'£179'),per:'Billed monthly · unlimited bays'}, annual:{p:(({'en-US':'$183','en-AU':'A$223','en-CA':'CA$223','de-DE':'€159'})[navigator.language]||'£143'),per:'Billed annually · unlimited bays'} }
-};
+// ── PRICING TOGGLE (currency-aware) ──
 function setBilling(mode){
   ['monthly','annual'].forEach(function(m){
     var b = document.getElementById(m+'-btn');
@@ -815,18 +841,36 @@ function setBilling(mode){
   });
   var sb = document.getElementById('save-badge');
   if(sb) sb.style.display = mode==='annual' ? 'inline' : 'none';
+
+  var plans = {
+    starter: {
+      monthly: { price: CUR.starter, per: 'Billed monthly · up to 8 bays' },
+      annual:  { price: CUR.starterAnnual, per: 'Billed annually · up to 8 bays', save: 'Save '+CUR.starterSave+'/year' }
+    },
+    growth: {
+      monthly: { price: CUR.growth, per: 'Billed monthly · unlimited bays' },
+      annual:  { price: CUR.growthAnnual, per: 'Billed annually · unlimited bays', save: 'Save '+CUR.growthSave+'/year' }
+    }
+  };
+
   ['starter','growth'].forEach(function(plan){
-    var d = pdata[plan][mode];
+    var d = plans[plan][mode];
     var pp = document.getElementById(plan+'-price');
-    if(pp) pp.innerHTML = '<sup>£</sup>'+d.p+'<sub>/mo</sub>';
+    if(pp) pp.innerHTML = '<sup>'+CUR.symbol+'</sup>'+d.price+'<sub>/mo</sub>';
     var per = document.getElementById(plan+'-period');
     if(per) per.textContent = d.per;
     var sv = document.getElementById(plan+'-save');
-    if(sv) sv.style.display = mode==='annual' ? 'inline-block' : 'none';
+    if(sv){
+      sv.style.display = mode==='annual' ? 'inline-block' : 'none';
+      if(mode==='annual') sv.textContent = d.save;
+    }
   });
 }
 
-  // Forms
+// Run on load so prices reflect detected currency immediately
+document.addEventListener('DOMContentLoaded', function(){ setBilling('monthly'); });
+
+// ── FORMS ──
 document.querySelectorAll('form').forEach(function(form){
   form.addEventListener('submit', function(){
     setTimeout(function(){
