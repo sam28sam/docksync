@@ -658,41 +658,97 @@ a:hover{text-decoration:underline}
 </footer>
 
 <script>
-var nav=document.getElementById('nav');
-window.addEventListener('scroll',function(){nav.classList.toggle('sc',scrollY>10);},{passive:true});
-var ro=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');ro.unobserve(e.target);}});},{threshold:0.06});
-document.querySelectorAll('.rv').forEach(function(el){ro.observe(el);});
+// ── CURRENCY DETECTION ──
+function detectCurrency(){
+  var loc = (navigator.language || navigator.userLanguage || 'en-US').toLowerCase();
+  var region = loc.split('-')[1] || '';
+  var lang   = loc.split('-')[0] || '';
 
+  var euroZone  = ['de','fr','it','es','nl','be','at','ie','pt','fi','gr','lu','sk','si','ee','lv','lt','mt','cy','hr'];
+  var euroLangs = ['de','fr','it','es','nl','pt','fi','el','sk','sl','et','lv','lt','mt','hr'];
+
+  if (region === 'gb' || lang === 'cy') {
+    return { symbol:'\u00a3', sMo:'79', gMo:'179', sYr:'63', gYr:'143', sSave:'\u00a3190', gSave:'\u00a3430', sYrTotal:'\u00a3756', gYrTotal:'\u00a31,716' };
+  }
+  if (region === 'us') {
+    return { symbol:'$', sMo:'99', gMo:'229', sYr:'79', gYr:'183', sSave:'$240', gSave:'$552', sYrTotal:'$948', gYrTotal:'$2,196' };
+  }
+  if (region === 'au') {
+    return { symbol:'A$', sMo:'119', gMo:'279', sYr:'95', gYr:'223', sSave:'A$288', gSave:'A$672', sYrTotal:'A$1,140', gYrTotal:'A$2,676' };
+  }
+  if (region === 'ca') {
+    return { symbol:'CA$', sMo:'119', gMo:'279', sYr:'95', gYr:'223', sSave:'CA$288', gSave:'CA$672', sYrTotal:'CA$1,140', gYrTotal:'CA$2,676' };
+  }
+  if (euroZone.indexOf(region) !== -1 || euroLangs.indexOf(lang) !== -1) {
+    return { symbol:'\u20ac', sMo:'89', gMo:'199', sYr:'71', gYr:'159', sSave:'\u20ac216', gSave:'\u20ac480', sYrTotal:'\u20ac852', gYrTotal:'\u20ac1,908' };
+  }
+  return { symbol:'$', sMo:'99', gMo:'229', sYr:'79', gYr:'183', sSave:'$240', gSave:'$552', sYrTotal:'$948', gYrTotal:'$2,196' };
+}
+
+var CUR = detectCurrency();
+
+// ── NAV SCROLL ──
+var nav = document.getElementById('nav');
+window.addEventListener('scroll', function(){ nav.classList.toggle('sc', scrollY > 10); }, {passive:true});
+
+// ── SCROLL REVEAL ──
+var ro = new IntersectionObserver(function(es){
+  es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); ro.unobserve(e.target); } });
+}, {threshold:0.06});
+document.querySelectorAll('.rv').forEach(function(el){ ro.observe(el); });
+
+// ── FAQ ──
 function faqT(el){
-  var item=el.closest('.faq-item');
-  var open=item.classList.contains('op');
-  document.querySelectorAll('.faq-item.op').forEach(function(i){i.classList.remove('op');});
-  if(!open)item.classList.add('op');
+  var item = el.closest('.faq-item');
+  var open = item.classList.contains('op');
+  document.querySelectorAll('.faq-item.op').forEach(function(i){ i.classList.remove('op'); });
+  if(!open) item.classList.add('op');
 }
 
-var pd={
-  s:{mo:{v:'79',per:'Billed monthly \u00b7 up to 8 bays',sv:''},yr:{v:'63',per:'Billed annually \u00b7 up to 8 bays',sv:'Save \u00a3190/year'}},
-  g:{mo:{v:'179',per:'Billed monthly \u00b7 unlimited bays',sv:''},yr:{v:'143',per:'Billed annually \u00b7 unlimited bays',sv:'Save \u00a3430/year'}}
-};
-
+// ── PRICING TOGGLE (currency-aware) ──
 function setB(m){
-  document.getElementById('bmo').classList.toggle('on',m==='mo');
-  document.getElementById('byr').classList.toggle('on',m==='yr');
-  document.getElementById('save-pill').style.display=m==='yr'?'inline-flex':'none';
-  var pairs=[['s','sp','sper','ssave'],['g','gp','gper','gsave']];
-  pairs.forEach(function(x){
-    var d=pd[x[0]][m];
-    document.getElementById(x[1]).innerHTML='<sup>\u00a3</sup>'+d.v+'<sub>/mo</sub>';
-    document.getElementById(x[2]).textContent=d.per;
-    var sv=document.getElementById(x[3]);
-    sv.textContent=d.sv;
-    sv.style.display=d.sv?'inline-block':'none';
-  });
-  var hcSPer=document.getElementById('hc-s-per');
-  var hcGPer=document.getElementById('hc-g-per');
-  if(hcSPer)hcSPer.textContent=m==='mo'?'or \u00a363/mo annual':'billed as \u00a3756/year';
-  if(hcGPer)hcGPer.textContent=m==='mo'?'or \u00a3143/mo annual':'billed as \u00a31,716/year';
+  var bmo = document.getElementById('bmo');
+  var byr = document.getElementById('byr');
+  if(bmo) bmo.classList.toggle('on', m==='mo');
+  if(byr) byr.classList.toggle('on', m==='yr');
+  var sp = document.getElementById('save-pill');
+  if(sp) sp.style.display = m==='yr' ? 'inline-flex' : 'none';
+
+  // Starter card
+  var spEl = document.getElementById('sp');
+  if(spEl) spEl.innerHTML = '<sup>'+CUR.symbol+'</sup>'+(m==='mo'?CUR.sMo:CUR.sYr)+'<sub>/mo</sub>';
+  var sper = document.getElementById('sper');
+  if(sper) sper.textContent = m==='mo' ? 'Billed monthly \u00b7 up to 8 bays' : 'Billed annually \u00b7 up to 8 bays';
+  var ssave = document.getElementById('ssave');
+  if(ssave){
+    ssave.textContent = 'Save '+CUR.sSave+'/year';
+    ssave.style.display = m==='yr' ? 'inline-block' : 'none';
+  }
+
+  // Growth card
+  var gpEl = document.getElementById('gp');
+  if(gpEl) gpEl.innerHTML = '<sup>'+CUR.symbol+'</sup>'+(m==='mo'?CUR.gMo:CUR.gYr)+'<sub>/mo</sub>';
+  var gper = document.getElementById('gper');
+  if(gper) gper.textContent = m==='mo' ? 'Billed monthly \u00b7 unlimited bays' : 'Billed annually \u00b7 unlimited bays';
+  var gsave = document.getElementById('gsave');
+  if(gsave){
+    gsave.textContent = 'Save '+CUR.gSave+'/year';
+    gsave.style.display = m==='yr' ? 'inline-block' : 'none';
+  }
+
+  // "At a glance" hero compare cards
+  var hcS = document.getElementById('hc-s');
+  if(hcS) hcS.innerHTML = '<sup>'+CUR.symbol+'</sup>'+(m==='mo'?CUR.sMo:CUR.sYr)+'<sub>/mo</sub>';
+  var hcG = document.getElementById('hc-g');
+  if(hcG) hcG.innerHTML = '<sup>'+CUR.symbol+'</sup>'+(m==='mo'?CUR.gMo:CUR.gYr)+'<sub>/mo</sub>';
+  var hcSPer = document.getElementById('hc-s-per');
+  var hcGPer = document.getElementById('hc-g-per');
+  if(hcSPer) hcSPer.textContent = m==='mo' ? 'or '+CUR.symbol+CUR.sYr+'/mo annual' : 'billed as '+CUR.sYrTotal+'/year';
+  if(hcGPer) hcGPer.textContent = m==='mo' ? 'or '+CUR.symbol+CUR.gYr+'/mo annual' : 'billed as '+CUR.gYrTotal+'/year';
 }
+
+// Run on load so prices reflect detected currency immediately
+document.addEventListener('DOMContentLoaded', function(){ setB('mo'); });
 </script>
 <script type="text/javascript">
 _linkedin_partner_id = "9025874";
