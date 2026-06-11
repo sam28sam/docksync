@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — DockSync Assessment Results</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Barlow:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Barlow',sans-serif;background:#0d1b2e;color:#efede9;-webkit-font-smoothing:antialiased;padding:32px 20px;min-height:100vh}
+.w{max-width:1300px;margin:0 auto}
+h1{font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:800;text-transform:uppercase;margin-bottom:4px}
+.sub{font-family:'JetBrains Mono',monospace;font-size:11px;color:#787470;margin-bottom:28px}
+.stats{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-bottom:24px}
+.stat{background:#111f30;border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:14px}
+.stat-n{font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:500;color:#e6920a;margin-bottom:3px;line-height:1}
+.stat-l{font-size:11px;color:#787470;margin-top:2px}
+.acts{display:flex;gap:10px;margin-bottom:22px;flex-wrap:wrap}
+.btn{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.05em;text-transform:uppercase;padding:9px 16px;border-radius:6px;border:none;cursor:pointer;transition:all 0.15s;display:inline-flex;align-items:center;gap:7px}
+.btn svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.btn-a{background:#e6920a;color:#1a0900}.btn-a:hover{background:#f4a21e}
+.btn-o{background:transparent;color:#b8b4ae;border:1.5px solid rgba(255,255,255,0.12)}.btn-o:hover{color:#efede9}
+.btn-r{background:rgba(214,59,59,0.1);color:#d63b3b;border:1.5px solid rgba(214,59,59,0.22)}.btn-r:hover{background:rgba(214,59,59,0.2)}
+.tw{overflow-x:auto;border-radius:10px;border:1px solid rgba(255,255,255,0.07)}
+table{width:100%;border-collapse:collapse;font-size:12px;min-width:1100px}
+thead th{background:#111f30;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.09em;text-transform:uppercase;color:#787470;padding:10px 12px;text-align:left;border-bottom:1px solid rgba(255,255,255,0.07);white-space:nowrap}
+tbody tr{border-bottom:1px solid rgba(255,255,255,0.05);transition:background 0.1s}
+tbody tr:hover{background:rgba(255,255,255,0.03)}
+td{padding:10px 12px;color:#b8b4ae;vertical-align:middle}
+.sc{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;color:#fff;flex-shrink:0}
+.tag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:9px;padding:3px 7px;border-radius:3px;font-weight:500}
+.tS{background:rgba(43,121,207,0.15);color:#2b79cf}
+.tG{background:rgba(230,146,10,0.15);color:#e6920a}
+.tE{background:rgba(26,153,88,0.15);color:#1a9958}
+.lq{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:500;padding:3px 8px;border-radius:3px;text-transform:uppercase}
+.lqC{background:rgba(120,116,112,0.15);color:#787470}
+.lqW{background:rgba(230,122,10,0.15);color:#e67a0a}
+.lqH{background:rgba(214,59,59,0.15);color:#d63b3b}
+.lqE{background:rgba(26,153,88,0.15);color:#1a9958}
+.ssbars{display:flex;gap:2px;align-items:flex-end;height:18px}
+.ssb{width:8px;border-radius:1px;transition:height 0.3s}
+.empty{text-align:center;padding:60px;color:#4e4c49;font-family:'JetBrains Mono',monospace;font-size:12px}
+.risks-cell{font-size:11px;color:#787470;line-height:1.4}
+@media(max-width:800px){.stats{grid-template-columns:repeat(3,1fr)}}
+</style>
+</head>
+<body>
+<div class="w">
+  <h1>Assessment Results</h1>
+  <div class="sub" id="lastUpd">Loading…</div>
+
+  <div class="stats">
+    <div class="stat"><div class="stat-n" id="stT">0</div><div class="stat-l">Total assessments</div></div>
+    <div class="stat"><div class="stat-n" id="stS" style="color:#2b79cf">0</div><div class="stat-l">Starter recommendations</div></div>
+    <div class="stat"><div class="stat-n" id="stG">0</div><div class="stat-l">Growth recommendations</div></div>
+    <div class="stat"><div class="stat-n" id="stE" style="color:#1a9958">0</div><div class="stat-l">Enterprise recommendations</div></div>
+    <div class="stat"><div class="stat-n" id="stH" style="color:#d63b3b">0</div><div class="stat-l">Hot leads</div></div>
+    <div class="stat"><div class="stat-n" id="stEL" style="color:#1a9958">0</div><div class="stat-l">Enterprise leads</div></div>
+  </div>
+
+  <div class="acts">
+    <button class="btn btn-a" onclick="exportCSV()">
+      <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Export full CSV
+    </button>
+    <button class="btn btn-a" onclick="exportHotCSV()">
+      <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Export hot leads only
+    </button>
+    <button class="btn btn-o" onclick="load()">
+      <svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg>
+      Refresh
+    </button>
+    <button class="btn btn-r" onclick="clearAll()">Clear all data</button>
+  </div>
+
+  <div class="tw">
+    <table>
+      <thead>
+        <tr>
+          <th>Date/Time</th>
+          <th>Name</th>
+          <th>Title</th>
+          <th>Company</th>
+          <th>Email</th>
+          <th>Score</th>
+          <th>Maturity</th>
+          <th>Sub-scores (BC·AV·SD·AE·SR)</th>
+          <th>Plan</th>
+          <th>Est. Cost</th>
+          <th>Top Risks</th>
+          <th>Lead</th>
+          <th>Next Action</th>
+          <th>Consent</th>
+        </tr>
+      </thead>
+      <tbody id="tbody">
+        <tr><td colspan="14" class="empty">No results yet. Complete an assessment to see data here.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+function sc(s){return s>=70?'#1a9958':s>=50?'#e6920a':'#d63b3b';}
+
+function load(){
+  const R=JSON.parse(localStorage.getItem('ds_r')||'[]');
+  document.getElementById('stT').textContent=R.length;
+  if(!R.length){
+    document.getElementById('lastUpd').textContent='No results stored yet.';
+    document.getElementById('tbody').innerHTML='<tr><td colspan="14" class="empty">No results yet.</td></tr>';
+    return;
+  }
+  const pc={Starter:0,Growth:0,Enterprise:0};
+  R.forEach(r=>{if(pc[r.plan]!==undefined)pc[r.plan]++;});
+  document.getElementById('stS').textContent=pc.Starter;
+  document.getElementById('stG').textContent=pc.Growth;
+  document.getElementById('stE').textContent=pc.Enterprise;
+  document.getElementById('stH').textContent=R.filter(r=>r.leadQuality==='Hot').length;
+  document.getElementById('stEL').textContent=R.filter(r=>r.leadQuality==='Enterprise').length;
+  const last=new Date(R[R.length-1].timestamp);
+  document.getElementById('lastUpd').textContent='Last submission: '+last.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'});
+
+  document.getElementById('tbody').innerHTML=R.slice().reverse().map(r=>{
+    const d=new Date(r.timestamp);
+    const ds=d.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+    const ts=d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
+    const col=sc(r.score);
+    const ss=r.subScores||{};
+    const bars=['bc','av','sd','ae','sr'].map(k=>{
+      const v=ss[k]||50,c=sc(v),h=Math.max(4,Math.round(v/100*18));
+      return`<div class="ssb" style="height:${h}px;background:${c}" title="${k.toUpperCase()}: ${v}"></div>`;
+    }).join('');
+    const risks=(r.topRisks||[]).join('<br>');
+    const lqCls={Cold:'lqC',Warm:'lqW',Hot:'lqH',Enterprise:'lqE'}[r.leadQuality]||'lqC';
+    const planCls={Starter:'tS',Growth:'tG',Enterprise:'tE'}[r.plan]||'tS';
+    return`<tr>
+      <td style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#4e4c49;white-space:nowrap">${ds}<br>${ts}</td>
+      <td style="color:#efede9;font-weight:500;white-space:nowrap">${r.contact.name}</td>
+      <td style="font-size:11px;color:#4e4c49">${r.contact.title||'—'}</td>
+      <td style="white-space:nowrap">${r.contact.company}</td>
+      <td style="font-family:'JetBrains Mono',monospace;font-size:10px"><a href="mailto:${r.contact.email}" style="color:#e6920a;text-decoration:none">${r.contact.email}</a></td>
+      <td><div class="sc" style="background:${col}">${r.score}</div></td>
+      <td style="font-size:11px">${r.maturity||'—'}</td>
+      <td><div class="ssbars" title="BC·AV·SD·AE·SR">${bars}</div><div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#4e4c49;margin-top:3px">${['bc','av','sd','ae','sr'].map(k=>ss[k]||'?').join('·')}</div></td>
+      <td><span class="tag ${planCls}">${r.plan}</span></td>
+      <td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#e6920a">${r.monthlyEst||'—'}</td>
+      <td class="risks-cell">${risks||'—'}</td>
+      <td><span class="lq ${lqCls}">${r.leadQuality||'—'}</span></td>
+      <td style="font-size:11px;color:#b8b4ae">${r.suggestedAction||'—'}</td>
+      <td style="color:${r.contact.consent?'#1a9958':'#4e4c49'}">${r.contact.consent?'✓':'—'}</td>
+    </tr>`;
+  }).join('');
+}
+
+function buildCSV(rows){
+  const hdrs=['Timestamp','Name','Title','Company','Email','Score','Maturity',
+    'Booking Control','Arrival Visibility','Supplier Discipline','Admin Efficiency','Scalability',
+    'Plan','Monthly Est','Top Risk 1','Top Risk 2','Top Risk 3',
+    'Lead Quality','Suggested Action','Consent',
+    'Q1 Sites','Q2 Bays','Q3 Booking','Q4 Visibility','Q5 Arrivals',
+    'Q6 Admin Time','Q7 Self-Book','Q8 Check-In','Q9 Reporting','Q10 Context'];
+  const body=rows.map(r=>{
+    const ss=r.subScores||{};
+    const tr=r.topRisks||[];
+    const aq=r.answers||[];
+    return[
+      r.timestamp,r.contact.name,r.contact.title||'',r.contact.company,r.contact.email,
+      r.score,r.maturity||'',
+      ss.bc||'',ss.av||'',ss.sd||'',ss.ae||'',ss.sr||'',
+      r.plan,r.monthlyEst||'',
+      tr[0]||'',tr[1]||'',tr[2]||'',
+      r.leadQuality||'',r.suggestedAction||'',r.contact.consent?'Yes':'No',
+      ...aq.map(a=>a.a||'')
+    ];
+  });
+  return[hdrs,...body].map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(',')).join('\n');
+}
+
+function exportCSV(){
+  const R=JSON.parse(localStorage.getItem('ds_r')||'[]');
+  if(!R.length){alert('No results to export.');return;}
+  dl(buildCSV(R),`docksync-assessments-${new Date().toISOString().slice(0,10)}.csv`);
+}
+function exportHotCSV(){
+  const R=JSON.parse(localStorage.getItem('ds_r')||'[]').filter(r=>r.leadQuality==='Hot'||r.leadQuality==='Enterprise');
+  if(!R.length){alert('No hot or enterprise leads to export.');return;}
+  dl(buildCSV(R),`docksync-hot-leads-${new Date().toISOString().slice(0,10)}.csv`);
+}
+function dl(csv,name){
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
+  a.download=name;a.click();
+}
+function clearAll(){
+  if(confirm('Delete ALL stored assessment results? This cannot be undone.')){
+    localStorage.removeItem('ds_r');load();
+  }
+}
+load();
+</script>
+</body>
+</html>
