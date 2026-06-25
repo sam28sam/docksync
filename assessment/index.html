@@ -709,20 +709,29 @@ function sendReport(){
   }
 
   const r=lastReport||{};
+  const risks=r.risks||[];
+  const focus=r.focus||[];
+  const sCol=(r.score>=70?'#1a9958':(r.score>=50?'#e6920a':'#d63b3b'));
+  /* ASCII-only subject so it stays clean (EmailJS escapes the subject line) */
+  const subject='Your DockSync Readiness Report - score '+(r.score!=null?r.score:'');
   const params={
     to_email:email,
-    email:email,        /* belt-and-braces: works whether the template uses {{to_email}} or {{email}} */
+    email:email,        /* sent under both names in case the template uses either */
     reply_to:email,
-    to_name:contact.name||'',
-    name:contact.name||'',
-    company:contact.company||'',
-    subject:'Your DockSync Readiness Report'+(r.score!=null?' — '+r.score+'/100':''),
-    title:'Your DockSync Readiness Report'+(r.score!=null?' — '+r.score+'/100':''),
+    to_name:contact.name||'there',
+    name:contact.name||'there',
+    company:contact.company||'your operation',
+    subject:subject,
+    title:subject,
     score:String(r.score!=null?r.score:''),
+    score_color:sCol,
     maturity:r.maturity||'',
-    plan:r.planName||'',
-    plan_price:r.planPrice||'',
-    message:buildEmailMessage(email)
+    urgency:r.urgency||'',
+    risk1:risks[0]||'', risk2:risks[1]||'', risk3:risks[2]||'',
+    opp:r.opp||'', opp_desc:r.oppDesc||'',
+    plan:r.planName||'', plan_price:r.planPrice||'',
+    focus1:focus[0]||'', focus2:focus[1]||'', focus3:focus[2]||'',
+    action:r.action||''
   };
 
   const orig=btn.textContent;btn.disabled=true;btn.textContent='Sending…';
