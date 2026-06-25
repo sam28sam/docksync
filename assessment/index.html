@@ -711,9 +711,13 @@ function sendReport(){
   const r=lastReport||{};
   const params={
     to_email:email,
+    email:email,        /* belt-and-braces: works whether the template uses {{to_email}} or {{email}} */
+    reply_to:email,
     to_name:contact.name||'',
+    name:contact.name||'',
     company:contact.company||'',
     subject:'Your DockSync Readiness Report'+(r.score!=null?' — '+r.score+'/100':''),
+    title:'Your DockSync Readiness Report'+(r.score!=null?' — '+r.score+'/100':''),
     score:String(r.score!=null?r.score:''),
     maturity:r.maturity||'',
     plan:r.planName||'',
@@ -731,7 +735,8 @@ function sendReport(){
   }).catch(function(err){
     btn.disabled=false;btn.textContent=orig;
     status.style.color='var(--red)';
-    status.textContent='Sorry — something went wrong sending the email. Please try again, or use Save PDF.';
+    var detail=(err&&(err.text||err.message))?(' ('+(err.status?err.status+': ':'')+(err.text||err.message)+')'):'';
+    status.textContent='Couldn\u2019t send'+detail+'. Try again, or use Save PDF.';
     console.error('EmailJS error:',err);
   });
 }
