@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DockSync — The Living Dock</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'><rect x='4' y='4' width='52' height='52' rx='4' fill='%23e6920a'/><rect x='12' y='10' width='36' height='38' rx='2' fill='%230d1b2e'/><rect x='4' y='46' width='52' height='10' rx='2' fill='%230d1b2e'/></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+:root{
+  --am:#e6920a;--amh:#f4a21e;--amdim:rgba(230,146,10,0.12);--amline:rgba(230,146,10,0.32);
+  --navy:#0d1b2e;--navy2:#13243a;--navy3:#1b3150;--navyln:rgba(255,255,255,0.08);
+  --ink:#111010;--ink2:#3d3c3a;--ink3:#6a6860;--ink4:#9a9894;
+  --bg:#f7f6f3;--bg2:#efede9;--bg3:#e6e4e0;
+  --green:#1a9958;--red:#d63b3b;--blue:#2b79cf;--amber:#e6920a;
+  --line:rgba(0,0,0,0.08);--line2:rgba(0,0,0,0.14);
+  --cd:'Barlow Condensed',sans-serif;--bd:'Barlow',sans-serif;--mo:'JetBrains Mono',monospace;
+}
+body{font-family:var(--bd);background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.w{max-width:1180px;margin:0 auto;padding:0 28px}
+.eyebrow{font-family:var(--mo);font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--am);display:inline-flex;align-items:center;gap:9px}
+.eyebrow::before{content:'';width:22px;height:1px;background:var(--am)}
+h2.sec-h{font-family:var(--cd);font-weight:900;font-size:clamp(30px,5vw,56px);line-height:0.96;text-transform:uppercase;letter-spacing:-0.01em;margin:14px 0 0}
+h2.sec-h em{font-style:normal;color:var(--am)}
+.sec-lead{font-size:17px;color:var(--ink3);line-height:1.7;max-width:600px;margin-top:18px}
+.on-dark h2.sec-h{color:#f3f1ec}.on-dark .sec-lead{color:#9fb0c4}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:300;backdrop-filter:blur(16px);background:rgba(13,27,46,0.82);border-bottom:1px solid var(--navyln);transition:transform .35s ease}
+.nav.hide{transform:translateY(-100%)}
+.nav-i{display:flex;align-items:center;justify-content:space-between;height:66px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-box{width:30px;height:30px;border-radius:6px;background:#fff;display:flex;align-items:center;justify-content:center}
+.logo-word{font-family:var(--cd);font-size:22px;font-weight:800;letter-spacing:0.04em;text-transform:uppercase;color:#fff}
+.logo-word span{color:var(--am)}
+.nav-links{display:flex;align-items:center;gap:30px}
+.nav-links a{font-family:var(--mo);font-size:12px;letter-spacing:0.05em;text-transform:uppercase;color:#9fb0c4;text-decoration:none;transition:color .15s}
+.nav-links a:hover{color:#fff}
+.nav-cta{font-family:var(--cd);font-weight:800;font-size:14px;letter-spacing:0.04em;text-transform:uppercase;background:var(--am);color:#1a0900;padding:11px 20px;border-radius:7px;text-decoration:none;transition:all .15s}
+.nav-cta:hover{background:var(--amh);transform:translateY(-1px)}
+.nav-burger{display:none;background:none;border:none;cursor:pointer;width:30px;height:30px;flex-direction:column;justify-content:center;gap:5px}
+.nav-burger span{display:block;height:2px;background:#fff;border-radius:2px}
+@media(max-width:860px){.nav-links{display:none}.nav-burger{display:flex}}
+
+/* progress rail */
+.scroll-prog{position:fixed;top:0;left:0;height:3px;background:var(--am);width:0;z-index:301;transition:width .1s linear}
+
+/* HERO */
+.hero{position:relative;background:var(--navy);color:#fff;padding:128px 0 0;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(1100px 520px at 78% -8%,rgba(230,146,10,0.16),transparent 60%);pointer-events:none}
+.hero-grid{position:relative;z-index:2}
+.hero-eye{color:var(--am)}
+.hero-h1{font-family:var(--cd);font-weight:900;font-size:clamp(48px,11vw,128px);line-height:0.86;text-transform:uppercase;letter-spacing:-0.02em;margin:20px 0 0}
+.hero-h1 .wp{display:inline-block;opacity:0;transform:translateY(26px);animation:wordup .7s cubic-bezier(.2,.7,.2,1) forwards}
+.hero-h1 em{font-style:normal;color:var(--am)}
+@keyframes wordup{to{opacity:1;transform:translateY(0)}}
+.hero-sub{font-size:19px;line-height:1.65;color:#a9b8ca;max-width:560px;margin:26px 0 0;opacity:0;animation:wordup .7s ease .5s forwards}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px;opacity:0;animation:wordup .7s ease .65s forwards}
+.btn-am{font-family:var(--cd);font-weight:800;font-size:17px;letter-spacing:0.04em;text-transform:uppercase;background:var(--am);color:#1a0900;border:none;padding:16px 30px;border-radius:9px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:10px;transition:all .16s}
+.btn-am:hover{background:var(--amh);transform:translateY(-2px);box-shadow:0 12px 30px rgba(230,146,10,0.3)}
+.btn-ghost{font-family:var(--cd);font-weight:700;font-size:17px;letter-spacing:0.04em;text-transform:uppercase;background:transparent;color:#cdd8e4;border:1.5px solid rgba(255,255,255,0.22);padding:16px 28px;border-radius:9px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:9px;transition:all .16s}
+.btn-ghost:hover{border-color:#fff;color:#fff}
+.btn-am svg,.btn-ghost svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.hero-note{font-family:var(--mo);font-size:11px;color:#6c7d90;margin-top:20px;letter-spacing:0.04em;opacity:0;animation:wordup .7s ease .8s forwards}
+
+/* LIVE DOCK */
+.dock-wrap{position:relative;z-index:2;margin-top:54px;opacity:0;animation:wordup .9s ease .85s forwards}
+.dock-frame{background:linear-gradient(180deg,#0a1626,#0c1a2c);border:1px solid var(--navyln);border-radius:18px 18px 0 0;border-bottom:none;padding:18px 20px 0;box-shadow:0 -10px 60px rgba(0,0,0,0.4)}
+.dock-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:10px}
+.dock-title{font-family:var(--mo);font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#7d8fa3;display:flex;align-items:center;gap:9px}
+.live-dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 0 rgba(26,153,88,.6);animation:pulse 1.8s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(26,153,88,.5)}70%{box-shadow:0 0 0 7px rgba(26,153,88,0)}100%{box-shadow:0 0 0 0 rgba(26,153,88,0)}}
+.kpi-strip{display:flex;gap:22px;flex-wrap:wrap}
+.kpi{display:flex;flex-direction:column}
+.kpi-n{font-family:var(--mo);font-size:18px;font-weight:700;color:#fff;line-height:1}
+.kpi-n .u{color:var(--am);font-size:12px}
+.kpi-l{font-size:10px;color:#6c7d90;text-transform:uppercase;letter-spacing:0.08em;margin-top:3px}
+.floor{position:relative;height:230px;background:repeating-linear-gradient(90deg,transparent,transparent 78px,rgba(255,255,255,0.03) 78px,rgba(255,255,255,0.03) 79px);border-top:1px solid var(--navyln);overflow:hidden}
+.bays{display:flex;gap:10px;padding:14px 6px 0;height:128px}
+.bay{flex:1;background:#0e1f34;border:1px solid var(--navyln);border-radius:8px 8px 0 0;border-bottom:none;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-start}
+.bay-id{font-family:var(--mo);font-size:10px;color:#5f7187;padding:7px 9px;letter-spacing:0.1em}
+.bay-door{position:absolute;left:8px;right:8px;bottom:0;height:62px;background:repeating-linear-gradient(0deg,#16273d 0,#16273d 7px,#1b2f49 7px,#1b2f49 9px);border-radius:4px 4px 0 0;transform-origin:bottom;transition:transform .5s ease}
+.bay.open .bay-door{transform:scaleY(0.12)}
+.bay-fill{position:absolute;left:0;bottom:0;height:3px;width:0;background:var(--am);transition:width .2s linear}
+.bay-status{position:absolute;top:8px;right:9px;width:7px;height:7px;border-radius:50%;background:#3a4d63;transition:background .3s}
+.bay.occupied .bay-status{background:var(--am)}
+.bay.done .bay-status{background:var(--green)}
+.road{position:absolute;left:0;right:0;bottom:0;height:80px;background:linear-gradient(180deg,#0a1525,#07111e);border-top:2px dashed rgba(255,255,255,0.07)}
+.road::after{content:'';position:absolute;top:50%;left:0;right:0;height:2px;background:repeating-linear-gradient(90deg,rgba(230,146,10,.35) 0,rgba(230,146,10,.35) 22px,transparent 22px,transparent 44px)}
+.truck{position:absolute;bottom:20px;width:96px;height:44px;will-change:transform;z-index:4}
+.truck svg{width:100%;height:100%;display:block;filter:drop-shadow(0 6px 10px rgba(0,0,0,.5))}
+
+/* generic section */
+section{position:relative}
+.pad{padding:96px 0}
+.on-dark{background:var(--navy);color:#dfe7ef}
+.sec-head{max-width:760px}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+
+/* STATS band */
+.stats{background:var(--navy2);border-top:1px solid var(--navyln);border-bottom:1px solid var(--navyln)}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+.stat{padding:44px 26px;border-right:1px solid var(--navyln);text-align:center}
+.stat:last-child{border-right:none}
+.stat-n{font-family:var(--cd);font-weight:900;font-size:clamp(40px,5vw,60px);line-height:1;color:#fff}
+.stat-n .u{color:var(--am);font-size:0.55em;font-weight:800}
+.stat-l{font-size:13px;color:#8ea0b4;margin-top:8px;line-height:1.5}
+@media(max-width:760px){.stats-grid{grid-template-columns:repeat(2,1fr)}.stat:nth-child(2){border-right:none}.stat:nth-child(1),.stat:nth-child(2){border-bottom:1px solid var(--navyln)}}
+
+/* TOUR */
+.tour-top{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.tour-ctrl{display:flex;gap:10px;align-items:center}
+.btn-play{font-family:var(--cd);font-weight:800;font-size:14px;letter-spacing:0.04em;text-transform:uppercase;background:var(--am);color:#1a0900;border:none;padding:12px 22px;border-radius:8px;cursor:pointer;display:inline-flex;align-items:center;gap:9px;transition:all .15s}
+.btn-play:hover{background:var(--amh)}
+.btn-play svg{width:13px;height:13px;fill:currentColor;stroke:none}
+.tour{display:grid;grid-template-columns:300px 1fr;gap:30px;margin-top:42px}
+.rail{display:flex;flex-direction:column;gap:2px;position:relative}
+.rail::before{content:'';position:absolute;left:19px;top:18px;bottom:18px;width:2px;background:var(--line2)}
+.rail-fill{content:'';position:absolute;left:19px;top:18px;width:2px;background:var(--am);height:0;transition:height .5s ease;z-index:1}
+.step{display:flex;align-items:center;gap:14px;padding:11px 12px;border-radius:10px;cursor:pointer;background:transparent;border:none;text-align:left;width:100%;position:relative;z-index:2;transition:background .15s}
+.step:hover{background:var(--bg2)}
+.step.active{background:#fff;box-shadow:0 4px 18px rgba(0,0,0,0.06)}
+.step-dot{width:38px;height:38px;border-radius:50%;background:#fff;border:2px solid var(--line2);display:flex;align-items:center;justify-content:center;font-family:var(--mo);font-size:13px;font-weight:700;color:var(--ink3);flex-shrink:0;transition:all .2s}
+.step.active .step-dot{background:var(--am);border-color:var(--am);color:#1a0900}
+.step.done .step-dot{background:var(--navy);border-color:var(--navy);color:#fff}
+.step-tx{display:flex;flex-direction:column;gap:2px}
+.step-k{font-family:var(--mo);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink4)}
+.step-t{font-family:var(--cd);font-weight:700;font-size:16px;text-transform:uppercase;color:var(--ink2);line-height:1.05}
+.step.active .step-t{color:var(--ink)}
+
+/* console */
+.console{position:sticky;top:90px;align-self:start}
+.cs-chrome{background:#e9e7e2;border-radius:14px 14px 0 0;padding:11px 16px;display:flex;align-items:center;gap:8px;border:1px solid var(--line2);border-bottom:none}
+.cs-dots{display:flex;gap:6px}
+.cs-dots i{width:11px;height:11px;border-radius:50%;display:block}
+.cs-url{flex:1;background:#fff;border-radius:6px;font-family:var(--mo);font-size:11px;color:var(--ink3);padding:6px 12px;text-align:center;border:1px solid var(--line)}
+.cs-body{background:#fff;border:1px solid var(--line2);border-top:none;border-radius:0 0 14px 14px;min-height:430px;overflow:hidden;position:relative}
+.screen{padding:22px;animation:scin .45s ease}
+@keyframes scin{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.token-chip{position:absolute;top:-15px;right:18px;z-index:5;background:var(--navy);color:#fff;font-family:var(--mo);font-size:11px;padding:8px 14px;border-radius:20px;display:flex;align-items:center;gap:8px;box-shadow:0 6px 18px rgba(0,0,0,0.2)}
+.token-chip b{color:var(--am)}
+@media(max-width:860px){.tour{grid-template-columns:1fr}.rail{flex-direction:row;overflow-x:auto;gap:8px;padding-bottom:6px}.rail::before,.rail-fill{display:none}.step{flex-direction:column;min-width:84px;align-items:center;text-align:center}.step-tx{align-items:center}.step-t{font-size:12px}.console{position:static}}
+
+/* app-screen primitives */
+.appbar{display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--line);padding-bottom:13px;margin-bottom:16px;flex-wrap:wrap}
+.appbar .b{font-family:var(--cd);font-weight:800;text-transform:uppercase;font-size:13px;color:var(--navy)}
+.appbar .b span{color:var(--am)}
+.tabs{display:flex;gap:5px;flex-wrap:wrap;margin-left:auto}
+.tab{font-family:var(--mo);font-size:9px;text-transform:uppercase;letter-spacing:0.06em;color:var(--ink4);padding:4px 8px;border-radius:5px;background:var(--bg2)}
+.tab.on{background:var(--navy);color:#fff}
+.sc-h{font-family:var(--cd);font-weight:800;font-size:20px;text-transform:uppercase;color:var(--ink);margin-bottom:14px}
+.kgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.kc{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px}
+.kc-l{font-size:10px;text-transform:uppercase;letter-spacing:0.06em;color:var(--ink4)}
+.kc-n{font-family:var(--mo);font-weight:700;font-size:21px;color:var(--ink);margin-top:5px}
+.kc-n.g{color:var(--green)}.kc-n.r{color:var(--red)}.kc-n.a{color:var(--am)}
+.row{display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--line);border-radius:9px;margin-bottom:7px;font-size:13px;background:#fff}
+.row .id{font-family:var(--mo);font-weight:700;color:var(--navy);font-size:12px}
+.pill{font-family:var(--mo);font-size:9px;text-transform:uppercase;letter-spacing:.05em;padding:3px 8px;border-radius:20px;font-weight:500}
+.pill.ok{background:rgba(26,153,88,.12);color:var(--green)}
+.pill.pend{background:rgba(230,146,10,.14);color:var(--am)}
+.pill.miss{background:rgba(214,59,59,.12);color:var(--red)}
+.pill.appr{background:rgba(43,121,207,.12);color:var(--blue)}
+.mut{color:var(--ink3)}
+.btn-ap{font-family:var(--cd);font-weight:800;text-transform:uppercase;font-size:11px;letter-spacing:.04em;border:none;border-radius:7px;padding:8px 13px;cursor:pointer;transition:all .15s}
+.btn-ap.y{background:var(--green);color:#fff}.btn-ap.y:hover{filter:brightness(1.08)}
+.btn-ap.n{background:#fff;color:var(--red);border:1.5px solid rgba(214,59,59,.4)}.btn-ap.n:hover{background:rgba(214,59,59,.07)}
+.emailcard{border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.emailcard .eh{background:var(--navy);color:#fff;padding:14px 18px;font-family:var(--cd);font-weight:800;letter-spacing:.04em;font-size:15px}
+.emailcard .eh span{color:var(--am)}
+.emailcard .eb{padding:18px;font-size:13px;line-height:1.65;color:var(--ink2)}
+.emailcard .btn-e{display:inline-block;background:var(--am);color:#1a0900;font-family:var(--cd);font-weight:800;text-transform:uppercase;font-size:12px;padding:10px 18px;border-radius:7px;margin-top:10px}
+.tokbox{font-family:var(--mo);font-weight:700;font-size:18px;letter-spacing:.16em;color:var(--navy);background:var(--amdim);border:1px dashed var(--amline);border-radius:8px;padding:10px 16px;display:inline-block;margin:8px 0}
+.days{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.day{font-family:var(--mo);font-size:11px;width:40px;height:34px;display:flex;align-items:center;justify-content:center;border-radius:7px;background:var(--bg2);color:var(--ink4)}
+.day.on{background:var(--navy);color:#fff}
+.slots{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:12px 0}
+.slot{font-family:var(--mo);font-size:12px;padding:8px 0;text-align:center;border-radius:7px;background:var(--bg);border:1px solid var(--line);cursor:pointer;transition:all .12s;color:var(--ink2)}
+.slot:hover{border-color:var(--amline)}
+.slot.sel{background:var(--am);color:#1a0900;border-color:var(--am);font-weight:700}
+.field{margin-bottom:11px}
+.field .fl{font-family:var(--mo);font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink4);margin-bottom:4px}
+.field .fv{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:14px;color:var(--ink)}
+.confirm{display:flex;align-items:center;gap:10px;background:rgba(26,153,88,.1);border:1px solid rgba(26,153,88,.25);border-radius:9px;padding:12px 14px;color:var(--green);font-weight:600;font-size:13px;margin-top:12px}
+.confirm svg{width:18px;height:18px;stroke:var(--green);fill:none;stroke-width:2.5}
+.baytiles{display:flex;gap:8px;flex-wrap:wrap}
+.bt{flex:1;min-width:60px;border:1px solid var(--line);border-radius:9px;padding:13px 10px;text-align:center}
+.bt .n{font-family:var(--mo);font-weight:700;color:var(--navy)}
+.bt .s{font-size:9px;text-transform:uppercase;letter-spacing:.06em;color:var(--green);margin-top:3px}
+.bt.off .s{color:var(--ink4)}.bt.off{opacity:.55}
+.qrbox{width:120px;height:120px;margin:0 auto 14px;border-radius:12px;background:
+  conic-gradient(#0d1b2e 0 25%,#fff 0 50%,#0d1b2e 0 75%,#fff 0);background-size:18px 18px;border:6px solid var(--navy);position:relative}
+.qrbox::after{content:'';position:absolute;inset:34px;background:var(--am);border-radius:5px}
+
+/* CAPABILITIES */
+.caps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:42px}
+.cap{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px;transition:transform .2s ease,box-shadow .2s ease;position:relative;overflow:hidden}
+.cap:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,0.08)}
+.cap-tag{font-family:var(--mo);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--am);position:absolute;top:18px;right:18px}
+.cap-ic{width:46px;height:46px;border-radius:11px;background:var(--navy);display:flex;align-items:center;justify-content:center;margin-bottom:15px}
+.cap-ic svg{width:21px;height:21px;stroke:var(--am);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.cap-t{font-family:var(--cd);font-weight:800;font-size:19px;text-transform:uppercase;color:var(--ink);line-height:1.05;margin-bottom:7px}
+.cap-d{font-size:13.5px;color:var(--ink3);line-height:1.6}
+.cap.feature{grid-column:span 2;background:var(--navy);color:#fff;display:grid;grid-template-columns:1fr 230px;gap:22px;align-items:center}
+.cap.feature .cap-t{color:#fff}.cap.feature .cap-d{color:#9fb0c4}
+.cap.feature .cap-ic{background:rgba(255,255,255,0.07)}
+@media(max-width:860px){.caps-grid{grid-template-columns:1fr 1fr}.cap.feature{grid-column:span 2;grid-template-columns:1fr}}
+@media(max-width:560px){.caps-grid{grid-template-columns:1fr}.cap.feature{grid-column:span 1}}
+
+/* phone (SMS demo) */
+.phone{width:210px;background:#0a1422;border-radius:26px;padding:12px 12px 16px;border:1px solid rgba(255,255,255,0.1);margin:0 auto}
+.phone-top{height:18px;display:flex;justify-content:center;align-items:center}
+.phone-notch{width:64px;height:5px;background:#2a3a4d;border-radius:5px}
+.phone-screen{background:#101e30;border-radius:14px;padding:12px;min-height:200px;display:flex;flex-direction:column;gap:8px}
+.sms-from{font-family:var(--mo);font-size:9px;color:#7d8fa3;text-align:center;text-transform:uppercase;letter-spacing:.08em;margin-bottom:2px}
+.bub{max-width:85%;font-size:12px;line-height:1.45;padding:9px 12px;border-radius:13px}
+.bub.in{background:#1c2f47;color:#dbe5f0;align-self:flex-start;border-bottom-left-radius:4px}
+.bub.out{background:var(--am);color:#1a0900;align-self:flex-end;border-bottom-right-radius:4px;font-weight:500}
+.bub .tick{font-size:9px;opacity:.7;margin-top:3px;display:block}
+.sms-ctrl{display:flex;gap:8px;margin-top:16px}
+.sms-ctrl input{flex:1;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:8px;color:#fff;font-family:var(--bd);font-size:14px;padding:11px 13px;outline:none}
+.sms-ctrl input::placeholder{color:#6c7d90}
+.sms-ctrl input:focus{border-color:var(--am)}
+.sms-send{background:var(--am);color:#1a0900;border:none;border-radius:8px;font-family:var(--cd);font-weight:800;text-transform:uppercase;font-size:13px;padding:0 18px;cursor:pointer}
+.sms-send:hover{background:var(--amh)}
+
+/* PRICING */
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:42px}
+.plan{background:#fff;border:1px solid var(--line);border-radius:18px;padding:28px;display:flex;flex-direction:column}
+.plan.pop{border:2px solid var(--am);position:relative;box-shadow:0 20px 50px rgba(230,146,10,0.12)}
+.plan-badge{position:absolute;top:-12px;left:28px;background:var(--am);color:#1a0900;font-family:var(--mo);font-size:9px;text-transform:uppercase;letter-spacing:.1em;padding:5px 11px;border-radius:6px;font-weight:700}
+.plan-n{font-family:var(--cd);font-weight:800;font-size:24px;text-transform:uppercase;color:var(--ink)}
+.plan-d{font-size:13px;color:var(--ink3);margin:6px 0 16px;line-height:1.5;min-height:38px}
+.plan-p{font-family:var(--cd);font-weight:900;font-size:46px;color:var(--ink);line-height:1}
+.plan-p .per{font-family:var(--bd);font-weight:500;font-size:15px;color:var(--ink4)}
+.plan-feats{list-style:none;margin:18px 0;display:flex;flex-direction:column;gap:9px;flex:1}
+.plan-feats li{font-size:13px;color:var(--ink2);display:flex;gap:9px;align-items:flex-start;line-height:1.45}
+.plan-feats svg{width:13px;height:13px;stroke:var(--green);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;margin-top:3px}
+.plan-cta{font-family:var(--cd);font-weight:800;text-transform:uppercase;font-size:14px;letter-spacing:.04em;text-align:center;padding:13px;border-radius:9px;text-decoration:none;transition:all .15s}
+.plan-cta.fill{background:var(--am);color:#1a0900}.plan-cta.fill:hover{background:var(--amh)}
+.plan-cta.out{background:transparent;color:var(--navy);border:1.5px solid var(--line2)}.plan-cta.out:hover{border-color:var(--navy)}
+@media(max-width:860px){.price-grid{grid-template-columns:1fr}}
+
+/* CTA */
+.cta-fin{background:var(--navy);text-align:center;padding:110px 0}
+.cta-fin h2{font-family:var(--cd);font-weight:900;font-size:clamp(36px,6vw,68px);text-transform:uppercase;color:#fff;line-height:0.95}
+.cta-fin h2 em{font-style:normal;color:var(--am)}
+.cta-fin p{color:#9fb0c4;font-size:17px;margin:18px auto 30px;max-width:520px;line-height:1.6}
+
+/* footer */
+.foot{background:#081120;color:#6c7d90;padding:40px 0;border-top:1px solid var(--navyln);font-size:12px;text-align:center;line-height:1.8}
+.foot a{color:var(--am);text-decoration:none}
+
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.001ms!important;transition-duration:.001ms!important}
+  .hero-h1 .wp,.hero-sub,.hero-cta,.hero-note,.dock-wrap{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<div class="scroll-prog" id="scrollProg"></div>
+
+<nav class="nav" id="nav">
+  <div class="w nav-i">
+    <a href="#top" class="logo">
+      <span class="logo-box"><svg viewBox="0 0 60 60" width="22" height="22"><rect x="4" y="4" width="52" height="52" rx="4" fill="#e6920a"/><rect x="12" y="10" width="36" height="38" rx="2" fill="#0d1b2e"/><rect x="4" y="46" width="52" height="10" rx="2" fill="#0d1b2e"/></svg></span>
+      <span class="logo-word">DOCK<span>SYNC</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="#tour">The flow</a>
+      <a href="#dock">Live dock</a>
+      <a href="#new">What's new</a>
+      <a href="#pricing">Pricing</a>
+    </div>
+    <a href="https://www.docksync.app/contact.html" class="nav-cta">Start free</a>
+    <button class="nav-burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="w hero-grid">
+    <span class="eyebrow hero-eye">Dock scheduling, end to end</span>
+    <h1 class="hero-h1"><span class="wp" style="animation-delay:.1s">Watch</span> <span class="wp" style="animation-delay:.2s">a</span> <span class="wp" style="animation-delay:.3s">delivery</span><br><span class="wp" style="animation-delay:.4s"><em>run itself.</em></span></h1>
+    <p class="hero-sub">From supplier booking to QR check-in to the unload marked complete — every truck, every bay, every booking moving in real time. This is the whole DockSync flow, live.</p>
+    <div class="hero-cta">
+      <a href="#tour" class="btn-am">Take the tour <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      <a href="#dock" class="btn-ghost">See the live dock</a>
+    </div>
+    <div class="hero-note">No card needed · Live in 5 minutes · UK-hosted · GDPR compliant</div>
+  </div>
+
+  <div class="w dock-wrap" id="dock">
+    <div class="dock-frame">
+      <div class="dock-bar">
+        <div class="dock-title"><span class="live-dot"></span> Acme Warehouse · live bay floor</div>
+        <div class="kpi-strip">
+          <div class="kpi"><div class="kpi-n" id="kIn">0</div><div class="kpi-l">Incoming today</div></div>
+          <div class="kpi"><div class="kpi-n" id="kOcc">0<span class="u">%</span></div><div class="kpi-l">Occupancy</div></div>
+          <div class="kpi"><div class="kpi-n" id="kUn">18<span class="u">m</span></div><div class="kpi-l">Avg unload</div></div>
+          <div class="kpi"><div class="kpi-n" id="kDone">0</div><div class="kpi-l">Completed</div></div>
+        </div>
+      </div>
+      <div class="floor">
+        <div class="bays" id="bays"></div>
+        <div class="road" id="road"></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- STATS -->
+<section class="stats on-dark">
+  <div class="w"><div class="stats-grid">
+    <div class="stat rv"><div class="stat-n" data-count="400" data-suffix="+">0</div><div class="stat-l">EMEA warehouse teams consulted</div></div>
+    <div class="stat rv"><div class="stat-n" data-count="4.2" data-suffix="h" data-dec="1">0</div><div class="stat-l">Admin saved per team, per day</div></div>
+    <div class="stat rv"><div class="stat-n" data-count="98" data-suffix="%">0</div><div class="stat-l">On-time accuracy after 30 days</div></div>
+    <div class="stat rv"><div class="stat-n" data-count="5" data-prefix="&lt;" data-suffix="min">0</div><div class="stat-l">Setup to first live booking</div></div>
+  </div></div>
+</section>
+
+<!-- TOUR -->
+<section class="pad" id="tour">
+  <div class="w">
+    <div class="tour-top">
+      <div class="sec-head rv">
+        <span class="eyebrow">The full workflow</span>
+        <h2 class="sec-h">One delivery,<br><em>nine steps.</em></h2>
+        <p class="sec-lead">Follow booking <b>BK-61</b> from Boxes LTD as it moves through every stage of DockSync — the exact screens your team and your suppliers see.</p>
+      </div>
+      <div class="tour-ctrl rv">
+        <button class="btn-play" id="playBtn"><svg id="playIcon" viewBox="0 0 24 24"><polygon points="6 4 20 12 6 20 6 4"/></svg> <span id="playTxt">Play tour</span></button>
+      </div>
+    </div>
+
+    <div class="tour">
+      <div class="rail" id="rail"><div class="rail-fill" id="railFill"></div></div>
+      <div class="console rv">
+        <div class="cs-chrome">
+          <div class="cs-dots"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i></div>
+          <div class="cs-url" id="csUrl">app.docksync.app</div>
+        </div>
+        <div class="cs-body">
+          <div class="token-chip">BK-61 · Boxes LTD · <b>Dg3Z95gk</b></div>
+          <div id="screen"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEW CAPABILITIES -->
+<section class="pad on-dark" id="new">
+  <div class="w">
+    <div class="sec-head rv">
+      <span class="eyebrow">Just shipped &amp; on the roadmap</span>
+      <h2 class="sec-h">The dock keeps<br><em>getting smarter.</em></h2>
+      <p class="sec-lead">The platform grows with how warehouses really work — from standing weekly slots to live SMS to the driver at the gate.</p>
+    </div>
+
+    <div class="caps-grid">
+      <div class="cap feature rv">
+        <div>
+          <div class="cap-ic"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 5L2 7"/></svg></div>
+          <div class="cap-tag">Live SMS</div>
+          <div class="cap-t">SMS the driver to a bay</div>
+          <div class="cap-d">At QR check-in the driver leaves a mobile number. Send a one-tap text from the dashboard the moment a bay frees up. Try it →</div>
+        </div>
+        <div class="phone">
+          <div class="phone-top"><div class="phone-notch"></div></div>
+          <div class="phone-screen" id="smsScreen">
+            <div class="sms-from">DockSync · Acme Warehouse</div>
+            <div class="bub in">Checked in 06:04. Please wait in the holding area — we'll text your bay shortly.</div>
+          </div>
+          <div class="sms-ctrl">
+            <input id="bayInput" type="text" inputmode="numeric" placeholder="Bay no. (e.g. 18)" value="18" aria-label="Bay number">
+            <button class="sms-send" id="smsSend">Send</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="cap rv"><div class="cap-ic"><svg viewBox="0 0 24 24"><path d="M3 7h18M3 12h18M3 17h18"/><circle cx="7" cy="7" r="1.4" fill="#e6920a" stroke="none"/></svg></div><div class="cap-tag">New</div><div class="cap-t">Warehouse-side bookings</div><div class="cap-d">Create a booking on behalf of any invited supplier. They get an email to accept or reject — control stays with the dock.</div></div>
+
+      <div class="cap rv"><div class="cap-ic"><svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 00-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 01-3.4 0"/></svg></div><div class="cap-tag">New</div><div class="cap-t">Booking notifications</div><div class="cap-d">The warehouse admin gets an email the instant a supplier submits a booking — no dashboard-watching required.</div></div>
+
+      <div class="cap rv"><div class="cap-ic"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></div><div class="cap-tag">New</div><div class="cap-t">PO number on every booking</div><div class="cap-d">Suppliers add a PO at booking. It's stored on the record and visible to the warehouse — finance and goods-in finally agree.</div></div>
+
+      <div class="cap rv"><div class="cap-ic"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 20a5.5 5.5 0 0111 0"/><circle cx="17.5" cy="9" r="2.6"/><path d="M16 20a4.5 4.5 0 015.5-4.4"/></svg></div><div class="cap-tag">Enterprise</div><div class="cap-t">Multi-user warehouses</div><div class="cap-d">Several logins under one site, every action logged to the person who did it — and no one ever sees another warehouse.</div></div>
+
+      <div class="cap rv"><div class="cap-ic"><svg viewBox="0 0 24 24"><path d="M12 2l2.5 5 5.5.8-4 3.9.9 5.5L12 20l-4.9 2.6.9-5.5-4-3.9 5.5-.8z"/></svg></div><div class="cap-tag">Super admin</div><div class="cap-t">Seat control</div><div class="cap-d">Set exactly how many user seats each account is allowed — 1, 3, 5 — enforced automatically across the platform.</div></div>
+
+      <div class="cap rv"><div class="cap-ic"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div><div class="cap-tag">New</div><div class="cap-t">CSV export</div><div class="cap-d">Pull bookings and supplier performance straight out to CSV from the dashboard — drop it into any report in seconds.</div></div>
+
+      <div class="cap rv"><div class="cap-ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/><path d="M8.5 14l2 2 4-4"/></svg></div><div class="cap-tag">New</div><div class="cap-t">Recurring bookings</div><div class="cap-d">Standing slots that repeat on their own — same supplier, every Tuesday 10am — created once by the warehouse admin.</div></div>
+
+      <div class="cap rv"><div class="cap-ic"><svg viewBox="0 0 24 24"><path d="M3 12h13l-3-3M16 12l-3 3"/><rect x="18" y="6" width="3" height="12" rx="1"/></svg></div><div class="cap-tag">New</div><div class="cap-t">Outbound collections</div><div class="cap-d">Schedule a collection and send the details. Invited carriers book the outbound slot through their existing portal link.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pad" id="pricing">
+  <div class="w">
+    <div class="sec-head rv">
+      <span class="eyebrow">Bay-based pricing</span>
+      <h2 class="sec-h">Pay for the bays<br><em>you manage.</em></h2>
+      <p class="sec-lead">No per-user fees. One warehouse per account. Every plan includes a free 30-day trial — full access, no card.</p>
+    </div>
+    <div class="price-grid">
+      <div class="plan rv">
+        <div class="plan-n">Starter</div>
+        <div class="plan-d">Single site, up to 8 bays. Get off spreadsheets fast.</div>
+        <div class="plan-p">£79<span class="per">/mo</span></div>
+        <ul class="plan-feats">
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>1 warehouse, up to 8 bays</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Supplier self-booking portal</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>QR code driver check-in</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Live dashboard &amp; 6 KPIs</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Supplier performance reports</li>
+        </ul>
+        <a href="https://www.docksync.app/contact.html" class="plan-cta out">Start free trial</a>
+      </div>
+      <div class="plan pop rv">
+        <div class="plan-badge">Most popular</div>
+        <div class="plan-n">Growth</div>
+        <div class="plan-d">Unlimited bays. Full control of inbound operations.</div>
+        <div class="plan-p">£179<span class="per">/mo</span></div>
+        <ul class="plan-feats">
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>1 warehouse, <b>unlimited bays</b></li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Everything in Starter</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Custom booking rules &amp; windows</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Configurable supplier reminders</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Completion-rate scoring &amp; CSV export</li>
+        </ul>
+        <a href="https://www.docksync.app/contact.html" class="plan-cta fill">Start free trial</a>
+      </div>
+      <div class="plan rv">
+        <div class="plan-n">Enterprise</div>
+        <div class="plan-d">Multiple warehouses &amp; large-scale operations.</div>
+        <div class="plan-p">Custom</div>
+        <ul class="plan-feats">
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Multiple warehouses, volume pricing</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Multi-user with per-user logging</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Super-admin seat control</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>API &amp; webhook access, SSO/SAML</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Custom SLA &amp; dedicated success mgr</li>
+        </ul>
+        <a href="mailto:hello@docksync.app" class="plan-cta out">Contact sales</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="cta-fin">
+  <div class="w">
+    <h2 class="rv">Run your dock<br><em>like this.</em></h2>
+    <p class="rv">Start your free 30-day trial and watch the chaos disappear from day one. Full access. No card. Live in under five minutes.</p>
+    <div class="rv" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+      <a href="https://www.docksync.app/contact.html" class="btn-am">Start free — 30 days <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      <a href="https://www.docksync.app/pricing.html" class="btn-ghost">View pricing</a>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="w">
+    Built by DockSync — dock scheduling software for warehouses that want precision over chaos.<br>
+    <a href="https://www.docksync.app">www.docksync.app</a> · UK-hosted · GDPR compliant<br>
+    <span style="color:#3a4a5d">© 2026 DockSync Ltd · Interactive product tour</span>
+  </div>
+</footer>
+
+<script>
+const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- scroll progress + nav hide ---------- */
+let lastY=0;
+const nav=document.getElementById('nav'), prog=document.getElementById('scrollProg');
+window.addEventListener('scroll',()=>{
+  const y=window.scrollY, h=document.documentElement.scrollHeight-window.innerHeight;
+  prog.style.width=(y/h*100)+'%';
+  if(y>lastY&&y>400)nav.classList.add('hide');else nav.classList.remove('hide');
+  lastY=y;
+},{passive:true});
+document.getElementById('burger').addEventListener('click',()=>{
+  document.querySelector('.nav-links').style.display='flex';
+  document.querySelector('.nav-links').style.cssText='display:flex;position:absolute;top:66px;left:0;right:0;background:#0d1b2e;flex-direction:column;padding:18px 28px;gap:16px;border-bottom:1px solid rgba(255,255,255,.08)';
+});
+
+/* ---------- reveal on scroll ---------- */
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.14});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+/* ---------- count up ---------- */
+const cio=new IntersectionObserver((es)=>{es.forEach(e=>{
+  if(!e.isIntersecting)return; const el=e.target; cio.unobserve(el);
+  const tgt=parseFloat(el.dataset.count), dec=parseInt(el.dataset.dec||'0'), pre=el.dataset.prefix||'', suf=el.dataset.suffix||'';
+  let t0=null, dur=1300;
+  function tick(ts){if(!t0)t0=ts;const p=Math.min((ts-t0)/dur,1);const ease=1-Math.pow(1-p,3);const v=(tgt*ease).toFixed(dec);
+    el.innerHTML=pre+v+'<span class="u">'+suf+'</span>';if(p<1)requestAnimationFrame(tick);}
+  requestAnimationFrame(tick);
+},{threshold:.5}));
+document.querySelectorAll('.stat-n[data-count]').forEach(el=>cio.observe(el));
+
+/* ============ LIVE DOCK ANIMATION ============ */
+const BAYN=5, baysEl=document.getElementById('bays'), roadEl=document.getElementById('road');
+const bayState=[]; let incoming=0, completed=0;
+const kIn=document.getElementById('kIn'),kOcc=document.getElementById('kOcc'),kDone=document.getElementById('kDone');
+for(let i=0;i<BAYN;i++){
+  const b=document.createElement('div'); b.className='bay';
+  b.innerHTML='<div class="bay-id">b'+(i+1)+'</div><div class="bay-status"></div><div class="bay-door"></div><div class="bay-fill"></div>';
+  baysEl.appendChild(b); bayState.push({el:b,busy:false});
+}
+function truckSVG(){return '<svg viewBox="0 0 120 56"><rect x="2" y="10" width="74" height="34" rx="3" fill="#16273d" stroke="#27405d"/><rect x="76" y="20" width="30" height="24" rx="3" fill="#0d1b2e" stroke="#27405d"/><rect x="82" y="24" width="18" height="11" rx="2" fill="#21384f"/><rect x="8" y="16" width="62" height="6" rx="2" fill="#e6920a"/><circle cx="24" cy="46" r="7" fill="#0a1422" stroke="#3a4d63" stroke-width="2"/><circle cx="62" cy="46" r="7" fill="#0a1422" stroke="#3a4d63" stroke-width="2"/><circle cx="94" cy="46" r="7" fill="#0a1422" stroke="#3a4d63" stroke-width="2"/></svg>';}
+function updKpi(){kIn.textContent=incoming;kDone.textContent=completed;const busy=bayState.filter(b=>b.busy).length;kOcc.innerHTML=Math.round(busy/BAYN*100)+'<span class="u">%</span>';}
+
+function spawnTruck(){
+  const free=bayState.findIndex(b=>!b.busy);
+  if(free<0){return;}
+  bayState[free].busy=true; incoming++; updKpi();
+  const bayEl=bayState[free].el;
+  const frame=document.querySelector('.dock-frame');
+  const truck=document.createElement('div'); truck.className='truck'; truck.innerHTML=truckSVG();
+  roadEl.appendChild(truck);
+  const fw=frame.clientWidth;
+  // position of target bay centre
+  const bayRect=bayEl.getBoundingClientRect(), floorRect=document.querySelector('.floor').getBoundingClientRect();
+  const targetX=bayRect.left-floorRect.left+bayRect.width/2-48;
+  const startX=fw+40;
+  // drive in
+  const a1=truck.animate([{transform:'translateX('+startX+'px)'},{transform:'translateX('+targetX+'px)'}],{duration:2600,easing:'cubic-bezier(.3,0,.3,1)',fill:'forwards'});
+  a1.onfinish=()=>{
+    bayEl.classList.add('open','occupied');
+    // back up into bay (rise)
+    truck.animate([{transform:'translateX('+targetX+'px) translateY(0)'},{transform:'translateX('+targetX+'px) translateY(-30px)'}],{duration:700,easing:'ease-in-out',fill:'forwards'});
+    // unload fill
+    const fill=bayEl.querySelector('.bay-fill'); let p=0;
+    const unloadMs=2600+Math.random()*1500;
+    const iv=setInterval(()=>{p+=100/(unloadMs/60);fill.style.width=Math.min(p,100)+'%';if(p>=100){clearInterval(iv);
+      bayEl.classList.remove('occupied');bayEl.classList.add('done');completed++;updKpi();
+      // drive out left
+      truck.animate([{transform:'translateX('+targetX+'px) translateY(-30px)'},{transform:'translateX('+targetX+'px) translateY(0)'}],{duration:500,fill:'forwards'}).onfinish=()=>{
+        truck.animate([{transform:'translateX('+targetX+'px)'},{transform:'translateX(-160px)'}],{duration:2200,easing:'cubic-bezier(.4,0,.6,1)',fill:'forwards'}).onfinish=()=>{
+          truck.remove(); bayEl.classList.remove('open','done'); fill.style.width='0';
+          bayEl.querySelector('.bay-status').style.background=''; bayState[free].busy=false; updKpi();
+        };
+      };
+    }},60);
+  };
+}
+if(!reduce){
+  // stagger initial trucks then keep a steady flow
+  setTimeout(()=>spawnTruck(),600);
+  setTimeout(()=>spawnTruck(),1900);
+  setTimeout(()=>spawnTruck(),3400);
+  setInterval(()=>{ if(Math.random()<0.75) spawnTruck(); }, 2600);
+} else {
+  // static representation
+  incoming=8;completed=6;bayState[0].busy=bayState[1].busy=bayState[2].busy=true;
+  bayState.forEach((b,i)=>{if(i<3){b.el.classList.add('open','occupied');b.el.querySelector('.bay-fill').style.width=(40+i*20)+'%';}});
+  updKpi();
+}
+
+/* ============ PRODUCT TOUR ============ */
+const tk='<b>Dg3Z95gk</b>';
+const STEPS=[
+ {k:'Step 01',t:'Sign up',url:'app.docksync.app/welcome',html:`
+  <div class="sc-h">Welcome aboard</div>
+  <div class="emailcard"><div class="eh">DOCK<span>SYNC</span></div>
+   <div class="eb">Hi there,<br><br>Your DockSync account is ready. Set your password and your warehouse dashboard is live — full access, 30-day free trial, no payment.<br>
+   <span class="btn-e">Set up my account →</span><br><br><span class="mut" style="font-size:11px">Link expires in 48 hours · hello@docksync.app</span></div></div>`},
+ {k:'Step 02',t:'Schedule',url:'app.docksync.app/schedule',html:`
+  <div class="appbar"><span class="b">DOCK<span>SYNC</span></span><div class="tabs"><span class="tab">Dashboard</span><span class="tab on">Schedule</span><span class="tab">Bays</span></div></div>
+  <div class="sc-h">Operating schedule</div>
+  <div class="field"><div class="fl">Working days</div></div>
+  <div class="days"><div class="day on">Mon</div><div class="day on">Tue</div><div class="day on">Wed</div><div class="day on">Thu</div><div class="day on">Fri</div><div class="day">Sat</div><div class="day">Sun</div></div>
+  <div class="kgrid"><div class="kc"><div class="kc-l">Open</div><div class="kc-n">04:00</div></div><div class="kc"><div class="kc-l">Close</div><div class="kc-n">12:00</div></div><div class="kc"><div class="kc-l">Restricted</div><div class="kc-n a" style="font-size:13px">Lunch 08:00–08:30</div></div></div>
+  <div class="mut" style="font-size:12.5px">Rules are enforced automatically — suppliers can never book outside your windows.</div>`},
+ {k:'Step 03',t:'Bays',url:'app.docksync.app/bays',html:`
+  <div class="appbar"><span class="b">DOCK<span>SYNC</span></span><div class="tabs"><span class="tab">Schedule</span><span class="tab on">Bays</span><span class="tab">Suppliers</span></div></div>
+  <div class="sc-h">Bay management</div>
+  <div class="kgrid"><div class="kc"><div class="kc-l">Total bays</div><div class="kc-n">5</div></div><div class="kc"><div class="kc-l">Active</div><div class="kc-n g">4</div></div><div class="kc"><div class="kc-l">Inactive</div><div class="kc-n">1</div></div></div>
+  <div class="baytiles"><div class="bt"><div class="n">b1</div><div class="s">Available</div></div><div class="bt"><div class="n">b2</div><div class="s">Available</div></div><div class="bt"><div class="n">b3</div><div class="s">Available</div></div><div class="bt"><div class="n">b4</div><div class="s">Available</div></div><div class="bt off"><div class="n">b5</div><div class="s">Inactive</div></div></div>
+  <div class="mut" style="font-size:12.5px;margin-top:12px">Inactive bays vanish from the supplier portal automatically — no manual messaging.</div>`},
+ {k:'Step 04',t:'Suppliers',url:'app.docksync.app/suppliers',html:`
+  <div class="appbar"><span class="b">DOCK<span>SYNC</span></span><div class="tabs"><span class="tab on">Suppliers</span></div></div>
+  <div class="sc-h">Invite suppliers</div>
+  <div class="row"><span class="id">Boxes LTD</span><span class="mut">John Dalton</span><span class="pill ok" style="margin-left:auto">Active</span></div>
+  <div class="row"><span class="id">Surya Electronics</span><span class="mut">Suraj S.</span><span class="pill ok" style="margin-left:auto">Active</span></div>
+  <div class="row"><span class="id">Tesla Logistics</span><span class="mut">Mike Shaw</span><span class="pill pend" style="margin-left:auto">Invited</span></div>
+  <div class="mut" style="font-size:12px;margin:12px 0 6px">Each supplier gets a unique booking token — no shared login.</div>
+  <div class="tokbox">Dg3Z95gk</div>`},
+ {k:'Step 05',t:'Booking',url:'book.docksync.app/acme',html:`
+  <div class="appbar"><span class="b">DOCK<span>SYNC</span></span><span class="mut" style="font-size:11px">Supplier portal</span></div>
+  <div class="sc-h">Book a delivery slot</div>
+  <div class="kgrid"><div class="kc"><div class="kc-l">Token</div><div class="kc-n" style="font-size:14px">Dg3Z95gk</div></div><div class="kc"><div class="kc-l">Pallets</div><div class="kc-n">24</div></div><div class="kc"><div class="kc-l">PO number</div><div class="kc-n a" style="font-size:14px">PO-4471</div></div></div>
+  <div class="field"><div class="fl">Date</div><div class="fv">Wednesday, 16 April 2026</div></div>
+  <div class="fl" style="font-family:var(--mo);font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink4)">Time slots — 30-min windows</div>
+  <div class="slots" id="tourSlots"></div>
+  <div class="mut" id="slotMsg" style="font-size:12px">Select your windows — longer deliveries pick multiple.</div>`},
+ {k:'Step 06',t:'Approval',url:'app.docksync.app/bookings',html:`
+  <div class="appbar"><span class="b">DOCK<span>SYNC</span></span><div class="tabs"><span class="tab on">Bookings</span></div></div>
+  <div class="sc-h">Pending actions</div>
+  <div id="apprBox"><div class="row" style="flex-direction:column;align-items:stretch;gap:9px">
+   <div style="display:flex;align-items:center;gap:10px"><span class="id">BK-61 — Boxes LTD</span><span class="pill pend" style="margin-left:auto">Pending</span></div>
+   <div class="mut" style="font-size:12px">b2 · 24 pallets · PO-4471 · 16 Apr 06:00–08:00 · delivery-note.pdf</div>
+   <div style="display:flex;gap:8px"><button class="btn-ap y" id="apprY">✓ Approve</button><button class="btn-ap n" id="apprN">✕ Reject</button></div>
+  </div></div>
+  <div class="mut" style="font-size:12px;margin-top:6px">The supplier is notified the instant you decide.</div>`},
+ {k:'Step 07',t:'QR check-in',url:'check-in · gatehouse',html:`
+  <div style="text-align:center"><div class="sc-h" style="text-align:left">Driver QR check-in</div>
+  <div class="qrbox"></div>
+  <div class="mut" style="font-size:12px;margin-bottom:14px">Scan at the gate — no app needed.</div></div>
+  <div class="field"><div class="fl">Driver name</div><div class="fv">John Smith</div></div>
+  <div class="field"><div class="fl">Vehicle reg</div><div class="fv">AB21 XYZ</div></div>
+  <div class="field"><div class="fl">Booking token</div><div class="fv">Dg3Z95gk</div></div>
+  <div class="confirm"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Bay b2 confirmed · arrival logged 06:04 AM</div>`},
+ {k:'Step 08',t:'Dashboard',url:'app.docksync.app/dashboard',html:`
+  <div class="appbar"><span class="b">DOCK<span>SYNC</span></span><div class="tabs"><span class="tab on">Dashboard</span></div></div>
+  <div class="sc-h">Live, the moment they arrive</div>
+  <div class="kgrid"><div class="kc"><div class="kc-l">Avg unload</div><div class="kc-n">18m</div></div><div class="kc"><div class="kc-l">Incoming today</div><div class="kc-n">3</div></div><div class="kc"><div class="kc-l">Occupancy</div><div class="kc-n a">66%</div></div></div>
+  <div class="row"><span class="id">BK-61</span><span>Boxes LTD · b2</span><span class="mut">John Smith</span><span class="pill ok" style="margin-left:auto">06:04 ✓</span></div>
+  <div class="row"><span class="id">BK-54</span><span>Boxes LTD · b3</span><span class="mut">—</span><span class="pill appr" style="margin-left:auto">Not in</span></div>
+  <div class="mut" style="font-size:12px;margin-top:6px">Click the tick to mark the unload complete — every metric updates instantly.</div>`},
+ {k:'Step 09',t:'Reports',url:'app.docksync.app/reports',html:`
+  <div class="appbar"><span class="b">DOCK<span>SYNC</span></span><div class="tabs"><span class="tab on">Reports</span></div></div>
+  <div class="sc-h">Supplier performance</div>
+  <div class="row"><span class="id">Boxes LTD</span><span class="mut">4 deliveries</span><span class="pill ok" style="margin-left:auto">75% on-time</span></div>
+  <div class="row"><span class="id">Surya Electronics</span><span class="mut">3 deliveries</span><span class="pill appr" style="margin-left:auto">—</span></div>
+  <div class="row"><span class="id">Tesla Logistics</span><span class="mut">0 deliveries</span><span class="pill" style="margin-left:auto;background:var(--bg2);color:var(--ink4)">New</span></div>
+  <div class="mut" style="font-size:12px;margin-top:8px">On-time %, completion rate and full history — export to CSV in a click.</div>`}
+];
+
+let cur=-1, playing=false, timer=null;
+const rail=document.getElementById('rail'), railFill=document.getElementById('railFill');
+const screen=document.getElementById('screen'), csUrl=document.getElementById('csUrl');
+STEPS.forEach((s,i)=>{
+  const b=document.createElement('button'); b.className='step'; b.setAttribute('aria-label',s.t);
+  b.innerHTML='<span class="step-dot">'+(i+1)+'</span><span class="step-tx"><span class="step-k">'+s.k+'</span><span class="step-t">'+s.t+'</span></span>';
+  b.onclick=()=>{stopPlay();goTo(i);}; rail.appendChild(b);
+});
+const stepEls=[...rail.querySelectorAll('.step')];
+
+function bindScreen(i){
+  if(i===4){ // booking slots
+    const wrap=document.getElementById('tourSlots'); if(!wrap)return;
+    const times=['04:00','04:30','05:00','05:30','06:00','06:30','07:00','07:30','08:00','08:30','09:00','09:30'];
+    const preset=['06:00','06:30','07:00','07:30'];
+    times.forEach(t=>{const s=document.createElement('div');s.className='slot'+(preset.includes(t)?' sel':'');s.textContent=t;
+      s.onclick=()=>{s.classList.toggle('sel');const n=wrap.querySelectorAll('.slot.sel').length;
+        document.getElementById('slotMsg').textContent=n?(n+' slot'+(n>1?'s':'')+' selected · '+(n*0.5)+'h delivery'):'Select your windows.';};
+      wrap.appendChild(s);});
+  }
+  if(i===5){ // approval
+    const y=document.getElementById('apprY'), n=document.getElementById('apprN'), box=document.getElementById('apprBox');
+    if(y)y.onclick=()=>{box.innerHTML='<div class="confirm"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Approved — BK-61 confirmed for b2, 06:00–08:00. Supplier notified.</div>';};
+    if(n)n.onclick=()=>{box.innerHTML='<div class="confirm" style="background:rgba(214,59,59,.09);border-color:rgba(214,59,59,.25);color:var(--red)"><svg viewBox="0 0 24 24" style="stroke:var(--red)"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Rejected — supplier notified and asked to rebook.</div>';};
+  }
+}
+function goTo(i){
+  cur=i;
+  screen.innerHTML=STEPS[i].html;
+  csUrl.textContent=STEPS[i].url;
+  bindScreen(i);
+  stepEls.forEach((el,j)=>{el.classList.toggle('active',j===i);el.classList.toggle('done',j<i);});
+  railFill.style.height=(i/(STEPS.length-1)*100)+'%';
+}
+function stopPlay(){playing=false;clearTimeout(timer);document.getElementById('playIcon').innerHTML='<polygon points="6 4 20 12 6 20 6 4"/>';document.getElementById('playTxt').textContent='Play tour';}
+function startPlay(){
+  playing=true;document.getElementById('playIcon').innerHTML='<rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/>';document.getElementById('playTxt').textContent='Pause';
+  if(cur>=STEPS.length-1)goTo(0);
+  const advance=()=>{ if(!playing)return; if(cur<STEPS.length-1){goTo(cur+1);timer=setTimeout(advance,3600);}else{stopPlay();} };
+  timer=setTimeout(advance,3600);
+}
+document.getElementById('playBtn').onclick=()=>{playing?stopPlay():startPlay();};
+goTo(0);
+// auto-start the tour when it scrolls into view (once)
+const tio=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting&&!reduce){startPlay();tio.disconnect();}})},{threshold:.4});
+tio.observe(document.getElementById('tour'));
+
+/* ============ SMS DEMO ============ */
+const smsScreen=document.getElementById('smsScreen'), bayInput=document.getElementById('bayInput');
+document.getElementById('smsSend').onclick=()=>{
+  let bay=(bayInput.value||'').replace(/[^0-9]/g,'')||'18';
+  const b=document.createElement('div'); b.className='bub out';
+  b.innerHTML='Please proceed to Bay '+bay+'. Reverse onto the dock and check in with the team. — Acme Warehouse<span class="tick">Delivered ✓</span>';
+  smsScreen.appendChild(b); smsScreen.scrollTop=smsScreen.scrollHeight;
+  setTimeout(()=>{const r=document.createElement('div');r.className='bub in';r.textContent='On my way 👍';smsScreen.appendChild(r);smsScreen.scrollTop=smsScreen.scrollHeight;},1100);
+};
+</script>
+</body>
+</html>
