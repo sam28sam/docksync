@@ -139,11 +139,25 @@ section{position:relative}
 .cs-dots{display:flex;gap:6px}
 .cs-dots i{width:11px;height:11px;border-radius:50%;display:block}
 .cs-url{flex:1;background:#fff;border-radius:6px;font-family:var(--mo);font-size:11px;color:var(--ink3);padding:6px 12px;text-align:center;border:1px solid var(--line)}
-.cs-body{background:#fff;border:1px solid var(--line2);border-top:none;border-radius:0 0 14px 14px;min-height:430px;overflow:hidden;position:relative}
+.cs-body{background:#fff;border:1px solid var(--line2);border-top:none;border-radius:0 0 14px 14px;min-height:430px;position:relative}
 .screen{padding:22px;animation:scin .45s ease}
 @keyframes scin{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-.token-chip{position:absolute;top:-15px;right:18px;z-index:5;background:var(--navy);color:#fff;font-family:var(--mo);font-size:11px;padding:8px 14px;border-radius:20px;display:flex;align-items:center;gap:8px;box-shadow:0 6px 18px rgba(0,0,0,0.2)}
-.token-chip b{color:var(--am)}
+.cs-track{display:flex;align-items:center;gap:9px;background:var(--navy);color:#cdd8e4;font-family:var(--mo);font-size:11px;padding:9px 16px;border-left:1px solid var(--line2);border-right:1px solid var(--line2);flex-wrap:wrap}
+.cs-track .lbl{color:#7d8fa3;text-transform:uppercase;letter-spacing:.12em;font-size:9px}
+.cs-track b{color:var(--am)}
+.cs-track .live-dot{width:7px;height:7px}
+/* tour interactive bits */
+.toggle{display:inline-flex;align-items:center;gap:11px;cursor:pointer;user-select:none}
+.tg-sw{width:44px;height:25px;border-radius:20px;background:var(--bg3);position:relative;transition:background .2s;flex-shrink:0}
+.tg-sw::after{content:'';position:absolute;top:3px;left:3px;width:19px;height:19px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:left .2s}
+.toggle.on .tg-sw{background:var(--am)}
+.toggle.on .tg-sw::after{left:22px}
+.seatmeter{height:8px;border-radius:6px;background:var(--bg3);overflow:hidden;margin:8px 0 4px}
+.seatmeter > i{display:block;height:100%;background:var(--am);border-radius:6px}
+.toast{display:flex;align-items:center;gap:9px;background:var(--navy);color:#fff;border-radius:9px;padding:11px 14px;font-size:13px;margin-top:12px;animation:scin .35s ease}
+.toast svg{width:16px;height:16px;stroke:var(--am);fill:none;stroke-width:2.5;flex-shrink:0}
+.note-new{display:inline-flex;align-items:center;gap:6px;font-family:var(--mo);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--am);background:var(--amdim);border:1px solid var(--amline);border-radius:5px;padding:3px 8px;margin-left:8px}
+.step-badge{font-family:var(--mo);font-size:8px;letter-spacing:.06em;text-transform:uppercase;color:var(--am);border:1px solid var(--amline);border-radius:4px;padding:1px 5px;margin-top:3px;display:inline-block}
 @media(max-width:860px){.tour{grid-template-columns:1fr}.rail{flex-direction:row;overflow-x:auto;gap:8px;padding-bottom:6px}.rail::before,.rail-fill{display:none}.step{flex-direction:column;min-width:84px;align-items:center;text-align:center}.step-tx{align-items:center}.step-t{font-size:12px}.console{position:static}}
 
 /* app-screen primitives */
@@ -184,7 +198,7 @@ section{position:relative}
 .slot:hover{border-color:var(--amline)}
 .slot.sel{background:var(--am);color:#1a0900;border-color:var(--am);font-weight:700}
 .field{margin-bottom:11px}
-.field .fl{font-family:var(--mo);font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink4);margin-bottom:4px}
+.fl{font-family:var(--mo);font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink4);margin-bottom:4px}
 .field .fv{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:14px;color:var(--ink)}
 .confirm{display:flex;align-items:center;gap:10px;background:rgba(26,153,88,.1);border:1px solid rgba(26,153,88,.25);border-radius:9px;padding:12px 14px;color:var(--green);font-weight:600;font-size:13px;margin-top:12px}
 .confirm svg{width:18px;height:18px;stroke:var(--green);fill:none;stroke-width:2.5}
@@ -213,20 +227,20 @@ section{position:relative}
 @media(max-width:560px){.caps-grid{grid-template-columns:1fr}.cap.feature{grid-column:span 1}}
 
 /* phone (SMS demo) */
-.phone{width:210px;background:#0a1422;border-radius:26px;padding:12px 12px 16px;border:1px solid rgba(255,255,255,0.1);margin:0 auto}
-.phone-top{height:18px;display:flex;justify-content:center;align-items:center}
-.phone-notch{width:64px;height:5px;background:#2a3a4d;border-radius:5px}
-.phone-screen{background:#101e30;border-radius:14px;padding:12px;min-height:200px;display:flex;flex-direction:column;gap:8px}
-.sms-from{font-family:var(--mo);font-size:9px;color:#7d8fa3;text-align:center;text-transform:uppercase;letter-spacing:.08em;margin-bottom:2px}
-.bub{max-width:85%;font-size:12px;line-height:1.45;padding:9px 12px;border-radius:13px}
-.bub.in{background:#1c2f47;color:#dbe5f0;align-self:flex-start;border-bottom-left-radius:4px}
-.bub.out{background:var(--am);color:#1a0900;align-self:flex-end;border-bottom-right-radius:4px;font-weight:500}
-.bub .tick{font-size:9px;opacity:.7;margin-top:3px;display:block}
+.phone{width:238px;background:#0a1422;border-radius:30px;padding:14px 14px 18px;border:1px solid rgba(255,255,255,0.12);margin:0 auto;box-shadow:0 18px 50px rgba(0,0,0,0.35)}
+.phone-top{height:20px;display:flex;justify-content:center;align-items:center}
+.phone-notch{width:74px;height:6px;background:#2a3a4d;border-radius:6px}
+.phone-screen{background:#0f1d2e;border-radius:16px;padding:14px;min-height:220px;max-height:300px;overflow-y:auto;display:flex;flex-direction:column;gap:10px}
+.sms-from{font-family:var(--mo);font-size:9px;color:#7d8fa3;text-align:center;text-transform:uppercase;letter-spacing:.1em;padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.06)}
+.bub{max-width:82%;font-size:13px;line-height:1.5;padding:10px 13px;border-radius:15px;word-wrap:break-word}
+.bub.in{background:#1c2f47;color:#dce6f1;align-self:flex-start;border-bottom-left-radius:5px}
+.bub.out{background:var(--am);color:#1a0900;align-self:flex-end;border-bottom-right-radius:5px;font-weight:500}
+.bub .tick{font-size:10px;opacity:.75;margin-top:4px;display:block}
 .sms-ctrl{display:flex;gap:8px;margin-top:16px}
-.sms-ctrl input{flex:1;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:8px;color:#fff;font-family:var(--bd);font-size:14px;padding:11px 13px;outline:none}
+.sms-ctrl input{flex:1;min-width:0;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.14);border-radius:9px;color:#fff;font-family:var(--bd);font-size:15px;padding:12px 14px;outline:none}
 .sms-ctrl input::placeholder{color:#6c7d90}
 .sms-ctrl input:focus{border-color:var(--am)}
-.sms-send{background:var(--am);color:#1a0900;border:none;border-radius:8px;font-family:var(--cd);font-weight:800;text-transform:uppercase;font-size:13px;padding:0 18px;cursor:pointer}
+.sms-send{background:var(--am);color:#1a0900;border:none;border-radius:9px;font-family:var(--cd);font-weight:800;text-transform:uppercase;font-size:13px;padding:0 20px;cursor:pointer;flex-shrink:0}
 .sms-send:hover{background:var(--amh)}
 
 /* PRICING */
@@ -345,8 +359,8 @@ section{position:relative}
           <div class="cs-dots"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i></div>
           <div class="cs-url" id="csUrl">app.docksync.app</div>
         </div>
+        <div class="cs-track"><span class="live-dot"></span><span class="lbl">Tracking</span> BK-61 · Boxes LTD · token <b>Dg3Z95gk</b></div>
         <div class="cs-body">
-          <div class="token-chip">BK-61 · Boxes LTD · <b>Dg3Z95gk</b></div>
           <div id="screen"></div>
         </div>
       </div>
@@ -546,7 +560,7 @@ function spawnTruck(){
       bayEl.classList.remove('occupied');bayEl.classList.add('done');completed++;updKpi();
       // drive out left
       truck.animate([{transform:'translateX('+targetX+'px) translateY(-30px)'},{transform:'translateX('+targetX+'px) translateY(0)'}],{duration:500,fill:'forwards'}).onfinish=()=>{
-        truck.animate([{transform:'translateX('+targetX+'px)'},{transform:'translateX(-160px)'}],{duration:2200,easing:'cubic-bezier(.4,0,.6,1)',fill:'forwards'}).onfinish=()=>{
+        truck.animate([{transform:'translateX('+targetX+'px)'},{transform:'translateX('+(fw+180)+'px)'}],{duration:2200,easing:'cubic-bezier(.4,0,.6,1)',fill:'forwards'}).onfinish=()=>{
           truck.remove(); bayEl.classList.remove('open','done'); fill.style.width='0';
           bayEl.querySelector('.bay-status').style.background=''; bayState[free].busy=false; updKpi();
         };
@@ -568,27 +582,26 @@ if(!reduce){
 }
 
 /* ============ PRODUCT TOUR ============ */
-const tk='<b>Dg3Z95gk</b>';
 const STEPS=[
- {k:'Step 01',t:'Sign up',url:'app.docksync.app/welcome',html:`
+ {id:'signup',k:'Step 01',t:'Sign up',url:'app.docksync.app/welcome',html:`
   <div class="sc-h">Welcome aboard</div>
   <div class="emailcard"><div class="eh">DOCK<span>SYNC</span></div>
    <div class="eb">Hi there,<br><br>Your DockSync account is ready. Set your password and your warehouse dashboard is live — full access, 30-day free trial, no payment.<br>
    <span class="btn-e">Set up my account →</span><br><br><span class="mut" style="font-size:11px">Link expires in 48 hours · hello@docksync.app</span></div></div>`},
- {k:'Step 02',t:'Schedule',url:'app.docksync.app/schedule',html:`
+ {id:'schedule',k:'Step 02',t:'Schedule',url:'app.docksync.app/schedule',html:`
   <div class="appbar"><span class="b">DOCK<span>SYNC</span></span><div class="tabs"><span class="tab">Dashboard</span><span class="tab on">Schedule</span><span class="tab">Bays</span></div></div>
   <div class="sc-h">Operating schedule</div>
-  <div class="field"><div class="fl">Working days</div></div>
+  <div class="fl" style="margin-bottom:8px">Working days</div>
   <div class="days"><div class="day on">Mon</div><div class="day on">Tue</div><div class="day on">Wed</div><div class="day on">Thu</div><div class="day on">Fri</div><div class="day">Sat</div><div class="day">Sun</div></div>
   <div class="kgrid"><div class="kc"><div class="kc-l">Open</div><div class="kc-n">04:00</div></div><div class="kc"><div class="kc-l">Close</div><div class="kc-n">12:00</div></div><div class="kc"><div class="kc-l">Restricted</div><div class="kc-n a" style="font-size:13px">Lunch 08:00–08:30</div></div></div>
   <div class="mut" style="font-size:12.5px">Rules are enforced automatically — suppliers can never book outside your windows.</div>`},
- {k:'Step 03',t:'Bays',url:'app.docksync.app/bays',html:`
+ {id:'bays',k:'Step 03',t:'Bays',url:'app.docksync.app/bays',html:`
   <div class="appbar"><span class="b">DOCK<span>SYNC</span></span><div class="tabs"><span class="tab">Schedule</span><span class="tab on">Bays</span><span class="tab">Suppliers</span></div></div>
   <div class="sc-h">Bay management</div>
   <div class="kgrid"><div class="kc"><div class="kc-l">Total bays</div><div class="kc-n">5</div></div><div class="kc"><div class="kc-l">Active</div><div class="kc-n g">4</div></div><div class="kc"><div class="kc-l">Inactive</div><div class="kc-n">1</div></div></div>
   <div class="baytiles"><div class="bt"><div class="n">b1</div><div class="s">Available</div></div><div class="bt"><div class="n">b2</div><div class="s">Available</div></div><div class="bt"><div class="n">b3</div><div class="s">Available</div></div><div class="bt"><div class="n">b4</div><div class="s">Available</div></div><div class="bt off"><div class="n">b5</div><div class="s">Inactive</div></div></div>
   <div class="mut" style="font-size:12.5px;margin-top:12px">Inactive bays vanish from the supplier portal automatically — no manual messaging.</div>`},
- {k:'Step 04',t:'Suppliers',url:'app.docksync.app/suppliers',html:`
+ {id:'suppliers',k:'Step 04',t:'Suppliers',url:'app.docksync.app/suppliers',html:`
   <div class="appbar"><span class="b">DOCK<span>SYNC</span></span><div class="tabs"><span class="tab on">Suppliers</span></div></div>
   <div class="sc-h">Invite suppliers</div>
   <div class="row"><span class="id">Boxes LTD</span><span class="mut">John Dalton</span><span class="pill ok" style="margin-left:auto">Active</span></div>
@@ -596,45 +609,75 @@ const STEPS=[
   <div class="row"><span class="id">Tesla Logistics</span><span class="mut">Mike Shaw</span><span class="pill pend" style="margin-left:auto">Invited</span></div>
   <div class="mut" style="font-size:12px;margin:12px 0 6px">Each supplier gets a unique booking token — no shared login.</div>
   <div class="tokbox">Dg3Z95gk</div>`},
- {k:'Step 05',t:'Booking',url:'book.docksync.app/acme',html:`
-  <div class="appbar"><span class="b">DOCK<span>SYNC</span></span><span class="mut" style="font-size:11px">Supplier portal</span></div>
-  <div class="sc-h">Book a delivery slot</div>
-  <div class="kgrid"><div class="kc"><div class="kc-l">Token</div><div class="kc-n" style="font-size:14px">Dg3Z95gk</div></div><div class="kc"><div class="kc-l">Pallets</div><div class="kc-n">24</div></div><div class="kc"><div class="kc-l">PO number</div><div class="kc-n a" style="font-size:14px">PO-4471</div></div></div>
+ {id:'booking',k:'Step 05',t:'Booking + PO',url:'book.docksync.app/acme',html:`
+  <div class="appbar"><span class="b">DOCK<span>SYNC</span></span><span class="mut" style="font-size:11px;margin-left:auto">Supplier portal</span></div>
+  <div class="sc-h">Supplier books a slot</div>
+  <div class="kgrid"><div class="kc"><div class="kc-l">Token</div><div class="kc-n" style="font-size:14px">Dg3Z95gk</div></div><div class="kc"><div class="kc-l">Pallets</div><div class="kc-n">24</div></div><div class="kc"><div class="kc-l">PO number <span class="note-new">New</span></div><div class="kc-n a" style="font-size:14px">PO-4471</div></div></div>
   <div class="field"><div class="fl">Date</div><div class="fv">Wednesday, 16 April 2026</div></div>
-  <div class="fl" style="font-family:var(--mo);font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink4)">Time slots — 30-min windows</div>
+  <div class="fl">Time slots — 30-min windows</div>
   <div class="slots" id="tourSlots"></div>
   <div class="mut" id="slotMsg" style="font-size:12px">Select your windows — longer deliveries pick multiple.</div>`},
- {k:'Step 06',t:'Approval',url:'app.docksync.app/bookings',html:`
-  <div class="appbar"><span class="b">DOCK<span>SYNC</span></span><div class="tabs"><span class="tab on">Bookings</span></div></div>
-  <div class="sc-h">Pending actions</div>
+ {id:'whbooking',k:'Step 06',t:'Book for supplier',badge:'New',url:'app.docksync.app/bookings/new',html:`
+  <div class="appbar"><span class="b">DOCK<span>SYNC</span></span><div class="tabs"><span class="tab on">Bookings</span></div><span class="note-new" style="margin-left:auto">New</span></div>
+  <div class="sc-h">Book on behalf of a supplier</div>
+  <div class="field"><div class="fl">Supplier</div><div class="fv">Boxes LTD — John Dalton</div></div>
+  <div class="kgrid"><div class="kc"><div class="kc-l">Date</div><div class="kc-n" style="font-size:13px">16 Apr</div></div><div class="kc"><div class="kc-l">Slot</div><div class="kc-n" style="font-size:13px">06:00–08:00</div></div><div class="kc"><div class="kc-l">Bay</div><div class="kc-n">b2</div></div></div>
+  <div id="whBox"><button class="btn-ap y" id="whSend" style="padding:11px 18px">Send to supplier →</button>
+  <div class="mut" style="font-size:12px;margin-top:10px">They get an email to accept or reject — control stays with the dock.</div></div>`},
+ {id:'approval',k:'Step 07',t:'Notify + approve',badge:'New',url:'app.docksync.app/bookings',html:`
+  <div class="appbar"><span class="b">DOCK<span>SYNC</span></span><div class="tabs"><span class="tab on">Bookings</span></div><span class="note-new" style="margin-left:auto">New · Alerts</span></div>
+  <div class="sc-h">Instant alert, one-click approve</div>
+  <div class="row" style="background:var(--amdim);border-color:var(--amline)"><span style="font-size:12.5px;line-height:1.45"><b>Email: new booking — Boxes LTD</b><br><span class="mut">24 pallets · b2 · 16 Apr 06:00–08:00 · PO-4471</span></span></div>
   <div id="apprBox"><div class="row" style="flex-direction:column;align-items:stretch;gap:9px">
    <div style="display:flex;align-items:center;gap:10px"><span class="id">BK-61 — Boxes LTD</span><span class="pill pend" style="margin-left:auto">Pending</span></div>
-   <div class="mut" style="font-size:12px">b2 · 24 pallets · PO-4471 · 16 Apr 06:00–08:00 · delivery-note.pdf</div>
    <div style="display:flex;gap:8px"><button class="btn-ap y" id="apprY">✓ Approve</button><button class="btn-ap n" id="apprN">✕ Reject</button></div>
-  </div></div>
-  <div class="mut" style="font-size:12px;margin-top:6px">The supplier is notified the instant you decide.</div>`},
- {k:'Step 07',t:'QR check-in',url:'check-in · gatehouse',html:`
+  </div></div>`},
+ {id:'recurring',k:'Step 08',t:'Recurring slot',badge:'New',url:'app.docksync.app/bookings/BK-61',html:`
+  <div class="appbar"><span class="b">DOCK<span>SYNC</span></span><div class="tabs"><span class="tab on">Bookings</span></div><span class="note-new" style="margin-left:auto">New</span></div>
+  <div class="sc-h">Make it a standing slot</div>
+  <div class="row"><span class="id">BK-61 — Boxes LTD</span><span class="mut" style="margin-left:auto">b2 · 06:00–08:00</span></div>
+  <div class="toggle" id="recToggle" style="margin-top:10px"><div class="tg-sw"></div><div><div style="font-weight:600;font-size:14px">Repeat weekly</div><div class="mut" id="recMsg" style="font-size:12px">Off — one-time booking</div></div></div>`},
+ {id:'qr',k:'Step 09',t:'QR check-in',url:'check-in · gatehouse',html:`
   <div style="text-align:center"><div class="sc-h" style="text-align:left">Driver QR check-in</div>
   <div class="qrbox"></div>
-  <div class="mut" style="font-size:12px;margin-bottom:14px">Scan at the gate — no app needed.</div></div>
+  <div class="mut" style="font-size:12px;margin-bottom:14px">Scan at the gate — no app needed. Driver leaves a mobile number.</div></div>
   <div class="field"><div class="fl">Driver name</div><div class="fv">John Smith</div></div>
   <div class="field"><div class="fl">Vehicle reg</div><div class="fv">AB21 XYZ</div></div>
-  <div class="field"><div class="fl">Booking token</div><div class="fv">Dg3Z95gk</div></div>
+  <div class="field"><div class="fl">Mobile</div><div class="fv">+44 7700 900521</div></div>
   <div class="confirm"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Bay b2 confirmed · arrival logged 06:04 AM</div>`},
- {k:'Step 08',t:'Dashboard',url:'app.docksync.app/dashboard',html:`
+ {id:'sms',k:'Step 10',t:'SMS to driver',badge:'New',url:'app.docksync.app/dashboard',html:`
+  <div class="appbar"><span class="b">DOCK<span>SYNC</span></span><div class="tabs"><span class="tab on">Dashboard</span></div><span class="note-new" style="margin-left:auto">New</span></div>
+  <div class="sc-h">Text the driver to a bay</div>
+  <div class="row"><span class="id">John Smith</span><span class="mut">AB21 XYZ</span><span class="pill pend" style="margin-left:auto">In holding</span></div>
+  <div class="field"><div class="fl">Bay just freed</div><div class="fv">b2</div></div>
+  <div id="smsBox"><button class="btn-ap y" id="tourSmsSend" style="padding:11px 18px">Send “Proceed to bay b2” →</button></div>`},
+ {id:'dashboard',k:'Step 11',t:'Live dashboard',url:'app.docksync.app/dashboard',html:`
   <div class="appbar"><span class="b">DOCK<span>SYNC</span></span><div class="tabs"><span class="tab on">Dashboard</span></div></div>
   <div class="sc-h">Live, the moment they arrive</div>
   <div class="kgrid"><div class="kc"><div class="kc-l">Avg unload</div><div class="kc-n">18m</div></div><div class="kc"><div class="kc-l">Incoming today</div><div class="kc-n">3</div></div><div class="kc"><div class="kc-l">Occupancy</div><div class="kc-n a">66%</div></div></div>
-  <div class="row"><span class="id">BK-61</span><span>Boxes LTD · b2</span><span class="mut">John Smith</span><span class="pill ok" style="margin-left:auto">06:04 ✓</span></div>
-  <div class="row"><span class="id">BK-54</span><span>Boxes LTD · b3</span><span class="mut">—</span><span class="pill appr" style="margin-left:auto">Not in</span></div>
-  <div class="mut" style="font-size:12px;margin-top:6px">Click the tick to mark the unload complete — every metric updates instantly.</div>`},
- {k:'Step 09',t:'Reports',url:'app.docksync.app/reports',html:`
+  <div id="dashRow" class="row" style="background:var(--amdim);border-color:var(--amline)"><span class="id">BK-61</span><span style="font-size:12px">Boxes LTD · b2 · unloading…</span><button class="btn-ap y" id="dashDone" style="margin-left:auto;padding:6px 11px">Mark complete</button></div>
+  <div class="mut" style="font-size:12px;margin-top:6px">Click to mark the unload complete — metrics update instantly.</div>`},
+ {id:'outbound',k:'Step 12',t:'Outbound',badge:'New',url:'app.docksync.app/schedule/outbound',html:`
+  <div class="appbar"><span class="b">DOCK<span>SYNC</span></span><div class="tabs"><span class="tab on">Schedule</span></div><span class="note-new" style="margin-left:auto">New</span></div>
+  <div class="sc-h">Schedule an outbound collection</div>
+  <div class="field"><div class="fl">Carrier</div><div class="fv">Surya Electronics — Suraj S.</div></div>
+  <div class="kgrid"><div class="kc"><div class="kc-l">Date</div><div class="kc-n" style="font-size:13px">17 Apr</div></div><div class="kc"><div class="kc-l">Window</div><div class="kc-n" style="font-size:13px">13:00–14:00</div></div><div class="kc"><div class="kc-l">Bay</div><div class="kc-n">b4</div></div></div>
+  <div id="outBox"><button class="btn-ap y" id="outSend" style="padding:11px 18px">Send collection details →</button>
+  <div class="mut" style="font-size:12px;margin-top:10px">Invited carriers book the outbound slot through their existing portal link.</div></div>`},
+ {id:'reports',k:'Step 13',t:'Reports + CSV',badge:'New',url:'app.docksync.app/reports',html:`
   <div class="appbar"><span class="b">DOCK<span>SYNC</span></span><div class="tabs"><span class="tab on">Reports</span></div></div>
   <div class="sc-h">Supplier performance</div>
   <div class="row"><span class="id">Boxes LTD</span><span class="mut">4 deliveries</span><span class="pill ok" style="margin-left:auto">75% on-time</span></div>
   <div class="row"><span class="id">Surya Electronics</span><span class="mut">3 deliveries</span><span class="pill appr" style="margin-left:auto">—</span></div>
   <div class="row"><span class="id">Tesla Logistics</span><span class="mut">0 deliveries</span><span class="pill" style="margin-left:auto;background:var(--bg2);color:var(--ink4)">New</span></div>
-  <div class="mut" style="font-size:12px;margin-top:8px">On-time %, completion rate and full history — export to CSV in a click.</div>`}
+  <div id="csvBox" style="margin-top:10px"><button class="btn-ap y" id="csvBtn" style="padding:11px 18px">⤓ Export CSV</button></div>`},
+ {id:'team',k:'Step 14',t:'Team & seats',badge:'Enterprise',url:'app.docksync.app/team',html:`
+  <div class="appbar"><span class="b">DOCK<span>SYNC</span></span><div class="tabs"><span class="tab on">Team</span></div><span class="note-new" style="margin-left:auto">Enterprise</span></div>
+  <div class="sc-h">Team &amp; seats</div>
+  <div class="row"><span class="id">Sam M.</span><span class="mut">Super admin</span><span class="pill ok" style="margin-left:auto">Active</span></div>
+  <div class="row"><span class="id">Priya K.</span><span class="mut" style="font-size:11px">Goods-in · approved BK-61 06:05</span><span class="pill appr" style="margin-left:auto">Logged</span></div>
+  <div class="row"><span class="id">Dan O.</span><span class="mut" style="font-size:11px">Gatehouse · checked in AB21 XYZ</span><span class="pill appr" style="margin-left:auto">Logged</span></div>
+  <div style="margin-top:12px"><div class="fl">Seats used</div><div class="seatmeter"><i style="width:60%"></i></div><div class="mut" style="font-size:12px">3 of 5 seats · set by super admin · no one ever sees another warehouse.</div></div>`}
 ];
 
 let cur=-1, playing=false, timer=null;
@@ -642,13 +685,13 @@ const rail=document.getElementById('rail'), railFill=document.getElementById('ra
 const screen=document.getElementById('screen'), csUrl=document.getElementById('csUrl');
 STEPS.forEach((s,i)=>{
   const b=document.createElement('button'); b.className='step'; b.setAttribute('aria-label',s.t);
-  b.innerHTML='<span class="step-dot">'+(i+1)+'</span><span class="step-tx"><span class="step-k">'+s.k+'</span><span class="step-t">'+s.t+'</span></span>';
+  b.innerHTML='<span class="step-dot">'+(i+1)+'</span><span class="step-tx"><span class="step-k">'+s.k+'</span><span class="step-t">'+s.t+'</span>'+(s.badge?'<span class="step-badge">'+s.badge+'</span>':'')+'</span>';
   b.onclick=()=>{stopPlay();goTo(i);}; rail.appendChild(b);
 });
 const stepEls=[...rail.querySelectorAll('.step')];
 
-function bindScreen(i){
-  if(i===4){ // booking slots
+function bindScreen(id){
+  if(id==='booking'){
     const wrap=document.getElementById('tourSlots'); if(!wrap)return;
     const times=['04:00','04:30','05:00','05:30','06:00','06:30','07:00','07:30','08:00','08:30','09:00','09:30'];
     const preset=['06:00','06:30','07:00','07:30'];
@@ -657,17 +700,23 @@ function bindScreen(i){
         document.getElementById('slotMsg').textContent=n?(n+' slot'+(n>1?'s':'')+' selected · '+(n*0.5)+'h delivery'):'Select your windows.';};
       wrap.appendChild(s);});
   }
-  if(i===5){ // approval
-    const y=document.getElementById('apprY'), n=document.getElementById('apprN'), box=document.getElementById('apprBox');
+  if(id==='whbooking'){const b=document.getElementById('whSend');if(b)b.onclick=()=>{document.getElementById('whBox').innerHTML='<div class="confirm"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Sent to Boxes LTD — emailed to accept or reject.</div>';};}
+  if(id==='approval'){
+    const y=document.getElementById('apprY'),n=document.getElementById('apprN'),box=document.getElementById('apprBox');
     if(y)y.onclick=()=>{box.innerHTML='<div class="confirm"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Approved — BK-61 confirmed for b2, 06:00–08:00. Supplier notified.</div>';};
-    if(n)n.onclick=()=>{box.innerHTML='<div class="confirm" style="background:rgba(214,59,59,.09);border-color:rgba(214,59,59,.25);color:var(--red)"><svg viewBox="0 0 24 24" style="stroke:var(--red)"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Rejected — supplier notified and asked to rebook.</div>';};
+    if(n)n.onclick=()=>{box.innerHTML='<div class="confirm" style="background:rgba(214,59,59,.09);border-color:rgba(214,59,59,.25);color:var(--red)"><svg viewBox="0 0 24 24" style="stroke:var(--red)"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Rejected — supplier notified to rebook.</div>';};
   }
+  if(id==='recurring'){const tg=document.getElementById('recToggle');if(tg)tg.onclick=()=>{tg.classList.toggle('on');document.getElementById('recMsg').textContent=tg.classList.contains('on')?'On — repeats every Wednesday 06:00, auto-created':'Off — one-time booking';};}
+  if(id==='sms'){const b=document.getElementById('tourSmsSend');if(b)b.onclick=()=>{document.getElementById('smsBox').innerHTML='<div class="confirm"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Sent to +44 7700 900521 — “Proceed to bay b2.” Delivered.</div>';};}
+  if(id==='dashboard'){const b=document.getElementById('dashDone');if(b)b.onclick=()=>{const row=document.getElementById('dashRow');row.innerHTML='<span class="id">BK-61</span><span style="font-size:12px">Boxes LTD · b2</span><span class="pill ok" style="margin-left:auto">Completed · 18m</span>';row.style.background='rgba(26,153,88,.08)';row.style.borderColor='rgba(26,153,88,.25)';};}
+  if(id==='outbound'){const b=document.getElementById('outSend');if(b)b.onclick=()=>{document.getElementById('outBox').innerHTML='<div class="confirm"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Collection details sent to Surya Electronics.</div>';};}
+  if(id==='reports'){const b=document.getElementById('csvBtn');if(b)b.onclick=()=>{document.getElementById('csvBox').innerHTML='<div class="toast"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> docksync-report.csv exported — 7 bookings, 3 suppliers.</div>';};}
 }
 function goTo(i){
   cur=i;
   screen.innerHTML=STEPS[i].html;
   csUrl.textContent=STEPS[i].url;
-  bindScreen(i);
+  bindScreen(STEPS[i].id);
   stepEls.forEach((el,j)=>{el.classList.toggle('active',j===i);el.classList.toggle('done',j<i);});
   railFill.style.height=(i/(STEPS.length-1)*100)+'%';
 }
