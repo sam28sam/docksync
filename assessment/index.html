@@ -233,9 +233,11 @@ body{font-family:'Barlow',sans-serif;background:#f7f6f3;color:#111010;-webkit-fo
 .modal-fld label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink4);letter-spacing:0.1em;text-transform:uppercase}
 .modal-fld input{background:var(--bg);border:1.5px solid var(--line2);border-radius:var(--r);padding:12px 14px;color:var(--ink);font-family:'Barlow',sans-serif;font-size:15px;outline:none;transition:border-color 0.15s;width:100%}
 .modal-fld input:focus{border-color:var(--am)}
+.modal-status{font-family:'JetBrains Mono',monospace;font-size:11px;line-height:1.5;min-height:16px;margin-bottom:14px;color:var(--ink3)}
 .modal-btns{display:flex;gap:10px}
 .btn-mp{flex:1;padding:12px;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;letter-spacing:0.05em;text-transform:uppercase;background:var(--am);color:#1a0900;border:none;border-radius:var(--r);cursor:pointer;transition:all 0.15s}
 .btn-mp:hover{background:var(--amh)}
+.btn-mp:disabled{opacity:0.55;cursor:not-allowed}
 .btn-ms{padding:12px 18px;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;background:transparent;color:var(--ink3);border:1.5px solid var(--line3);border-radius:var(--r);cursor:pointer;transition:all 0.15s}
 .btn-ms:hover{color:var(--ink)}
 
@@ -256,6 +258,8 @@ body{font-family:'Barlow',sans-serif;background:#f7f6f3;color:#111010;-webkit-fo
   .rptbody{background:#fff}
 }
 </style>
+<!-- EmailJS — client-side email sending, no server required. https://www.emailjs.com -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
 
@@ -429,8 +433,9 @@ body{font-family:'Barlow',sans-serif;background:#f7f6f3;color:#111010;-webkit-fo
 <div class="modal-bg" id="emailModal">
   <div class="modal">
     <div class="modal-t">Send me my report</div>
-    <div class="modal-s">Enter your email and we'll send a copy of your Readiness Report within the hour.</div>
+    <div class="modal-s">Enter your email and we'll send a copy of your Readiness Report straight to your inbox.</div>
     <div class="modal-fld"><label>Email address</label><input type="email" id="modal-email" placeholder="jane@yourwarehouse.com"></div>
+    <div class="modal-status" id="modal-status"></div>
     <div class="modal-btns">
       <button class="btn-mp" onclick="sendReport()">Send report</button>
       <button class="btn-ms" onclick="closeEmailModal()">Cancel</button>
@@ -439,6 +444,26 @@ body{font-family:'Barlow',sans-serif;background:#f7f6f3;color:#111010;-webkit-fo
 </div>
 
 <script>
+/* ════════════════════════════════════════════════════════════════
+   EMAILJS CONFIGURATION  —  fill these three values in
+   ────────────────────────────────────────────────────────────────
+   1. Create a free account at https://www.emailjs.com
+   2. Add an Email Service (Gmail, Outlook, etc.)  → copy its Service ID
+   3. Create an Email Template                      → copy its Template ID
+   4. Account ▸ General / API Keys                  → copy your Public Key
+
+   In the EmailJS template, set:
+     • "To Email" field   →  {{to_email}}
+     • Subject            →  {{subject}}
+     • Body (to start)    →  {{message}}        (plain-text summary)
+   You can later use {{to_name}}, {{company}}, {{score}}, {{maturity}},
+   {{plan}} and {{plan_price}} to design a branded HTML email instead.
+   ════════════════════════════════════════════════════════════════ */
+const EMAILJS_PUBLIC_KEY  = "q9ib-iWBxQ6Bpb4B8";
+const EMAILJS_SERVICE_ID  = "service_34sbfkg";
+const EMAILJS_TEMPLATE_ID = "template_s1ewmxr";
+if (window.emailjs) { try { emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY }); } catch(e){} }
+
 const Qs=[
   {id:1,text:"How many warehouse sites do you currently manage?",opts:[{l:"A",t:"1 site"},{l:"B",t:"2–3 sites"},{l:"C",t:"4+ sites"},{l:"D",t:"Assessing centrally across a network"}]},
   {id:2,text:"How many active loading/unloading bays do you manage at this site?",opts:[{l:"A",t:"1–4 bays"},{l:"B",t:"5–8 bays"},{l:"C",t:"9–20 bays"},{l:"D",t:"21+ bays"}]},
@@ -452,14 +477,14 @@ const Qs=[
   {id:10,text:"Which best describes your current operation?",opts:[{l:"A",t:'"Small — we just need something simple to get organised."'},{l:"B",t:'"Growing — the current process is starting to creak."'},{l:"C",t:'"Already feeling delay, congestion or admin pressure."'},{l:"D",t:'"Operating at scale — need a formal multi-site solution."'}]}
 ];
 
-let curQ=0,ans=new Array(10).fill(null),contact={};
+let curQ=0,ans=new Array(10).fill(null),contact={},lastReport=null;
 
 window.addEventListener('offline',()=>document.getElementById('offlineBanner').classList.add('on'));
 window.addEventListener('online',()=>document.getElementById('offlineBanner').classList.remove('on'));
 if(!navigator.onLine)document.getElementById('offlineBanner').classList.add('on');
 
 function show(id){document.querySelectorAll('.scr').forEach(s=>s.classList.remove('on'));document.getElementById('scr-'+id).classList.add('on');window.scrollTo(0,0);}
-function goHome(){ans=new Array(10).fill(null);curQ=0;contact={};document.getElementById('progBar').style.display='none';document.getElementById('progRow').style.display='none';show('land');}
+function goHome(){ans=new Array(10).fill(null);curQ=0;contact={};lastReport=null;document.getElementById('progBar').style.display='none';document.getElementById('progRow').style.display='none';show('land');}
 
 function updProg(){
   document.getElementById('progFill').style.width=(curQ/10*100)+'%';
@@ -556,6 +581,9 @@ function buildReport(){
   if(plan.name==='Enterprise'){ctaEl.innerHTML=`<div class="cta-t">Ready to discuss a pilot?</div><div class="cta-d">Your operation suggests multi-site or procurement-led requirements. Our team can structure a pilot discussion.</div><div class="cta-bs"><a href="mailto:hello@docksync.app?subject=Enterprise%20Pilot%20-%20${encodeURIComponent(contact.company)}" class="btn-p">Discuss a multi-site pilot</a><a href="https://www.docksync.app/contact.html" class="btn-sec">Start a free trial instead</a></div><div class="cta-note">hello@docksync.app · Response within one business day</div>`;}
   else{ctaEl.innerHTML=`<div class="cta-t">Your next step</div><div class="cta-d">Start a free 30-day trial — full access, no payment required, no automatic billing.</div><div class="cta-bs"><a href="https://www.docksync.app/contact.html" class="btn-p">Start free 30-day trial</a><a href="mailto:hello@docksync.app?subject=15-min%20Walkthrough%20-%20${encodeURIComponent(contact.company)}" class="btn-sec">Book a 15-minute walkthrough</a></div><div class="cta-note">30-day trial · No card required · No automatic billing</div>`;}
 
+  /* keep a structured snapshot for the email + admin store */
+  lastReport={score:score,maturity:mat.label,planName:plan.name,planPrice:(plan.name==='Enterprise'?'Custom pricing':(plan.price+' '+plan.priceSub)),urgency:urgency(score),fit:plan.fit,risks:risks.map(r=>r.t),opp:opp.t,oppDesc:opp.d,focus:focus.map(f=>f.w+': '+f.t),action:plan.action,subs:subs};
+
   try{const r={timestamp:new Date().toISOString(),contact,score,subScores:subs,maturity:mat.label,plan:plan.name,monthlyEst:plan.monthlyEst,leadQuality:lq,topRisks:risks.slice(0,3).map(r=>r.t),suggestedAction:plan.action,answers:ans.map((a,i)=>({q:Qs[i].text,a:a!==null?Qs[i].opts[a].t:'—'}))};const ex=JSON.parse(localStorage.getItem('ds_r')||'[]');ex.push(r);localStorage.setItem('ds_r',JSON.stringify(ex));}catch(e){}
 
   document.getElementById('progBar').style.display='none';
@@ -563,9 +591,151 @@ function buildReport(){
   show('rpt');
 }
 
-function openEmailModal(){document.getElementById('modal-email').value=contact.email||'';document.getElementById('emailModal').classList.add('on');}
+function openEmailModal(){
+  document.getElementById('modal-email').value=contact.email||'';
+  const st=document.getElementById('modal-status');st.textContent='';st.style.color='var(--ink3)';
+  document.getElementById('emailModal').classList.add('on');
+}
 function closeEmailModal(){document.getElementById('emailModal').classList.remove('on');}
-function sendReport(){const e=document.getElementById('modal-email').value.trim();if(!e){alert('Please enter an email address.');return;}closeEmailModal();alert(`Report noted for ${e}. Our team will send your report within the hour.\n\nYou can also save it now using the PDF button.`);}
+
+/* Build the branded HTML report body emailed to the visitor.
+   Uses inline styles + a table layout so it renders consistently
+   across Gmail, Outlook, Apple Mail, etc. */
+function buildEmailMessage(email){
+  const r=lastReport||{};
+  const esc=s=>String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const sCol=(r.score>=70?'#1a9958':(r.score>=50?'#e6920a':'#d63b3b'));
+  const company=contact.company?(' for '+esc(contact.company)):'';
+  const heading=(t)=>'<div style="font-family:Arial,Helvetica,sans-serif;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#e6920a;font-weight:bold;border-bottom:1px solid #efede9;padding-bottom:6px;margin:0 0 10px 0;">'+t+'</div>';
+  const risksHtml=(r.risks||[]).map((t,i)=>'<tr><td style="padding:5px 0;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.5;color:#3d3c3a;"><span style="color:#d63b3b;font-weight:bold;">'+(i+1)+'.</span>&nbsp;'+esc(t)+'</td></tr>').join('');
+  const focusHtml=(r.focus||[]).map(f=>'<tr><td style="padding:4px 0;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.5;color:#3d3c3a;">&bull;&nbsp;'+esc(f)+'</td></tr>').join('');
+
+  return ''+
+  '<div style="background:#f7f6f3;padding:24px 12px;font-family:Arial,Helvetica,sans-serif;">'+
+   '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:600px;margin:0 auto;background:#ffffff;border-radius:12px;overflow:hidden;border:1px solid #e6e4e0;">'+
+
+    /* Header */
+    '<tr><td style="background:#0d1b2e;padding:26px 32px;">'+
+      '<div style="font-family:Arial,Helvetica,sans-serif;font-size:22px;font-weight:bold;letter-spacing:1px;color:#ffffff;">DOCK<span style="color:#e6920a;">SYNC</span></div>'+
+      '<div style="font-family:Arial,Helvetica,sans-serif;color:#e6920a;font-size:11px;letter-spacing:2px;text-transform:uppercase;margin-top:6px;">Yard &amp; Dock Readiness Report</div>'+
+    '</td></tr>'+
+
+    /* Greeting */
+    '<tr><td style="padding:26px 32px 6px 32px;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.6;color:#3d3c3a;">'+
+      'Hi '+esc(contact.name||'there')+',<br><br>'+
+      'Thank you for completing the DockSync Yard &amp; Dock Readiness Check'+company+'. Here is your personalised operational health check.'+
+    '</td></tr>'+
+
+    /* Score */
+    '<tr><td style="padding:14px 32px;">'+
+      '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f7f6f3;border-radius:10px;"><tr>'+
+        '<td style="padding:18px 22px;width:120px;vertical-align:middle;text-align:center;">'+
+          '<span style="font-family:Arial,Helvetica,sans-serif;font-size:46px;font-weight:bold;color:'+sCol+';">'+esc(r.score)+'</span>'+
+          '<span style="font-family:Arial,Helvetica,sans-serif;font-size:15px;color:#9a9894;">/100</span><br>'+
+          '<span style="font-family:Arial,Helvetica,sans-serif;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#9a9894;">Readiness Score</span>'+
+        '</td>'+
+        '<td style="padding:18px 22px;vertical-align:middle;border-left:1px solid #e6e4e0;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.7;color:#3d3c3a;">'+
+          '<strong style="color:#111010;">Operational maturity:</strong> '+esc(r.maturity)+'<br>'+
+          '<strong style="color:#111010;">Urgency:</strong> '+esc(r.urgency)+
+        '</td>'+
+      '</tr></table>'+
+    '</td></tr>'+
+
+    /* Top risks */
+    '<tr><td style="padding:14px 32px 4px 32px;">'+heading('Top 3 Risk Areas')+
+      '<table role="presentation" width="100%" cellpadding="0" cellspacing="0">'+risksHtml+'</table>'+
+    '</td></tr>'+
+
+    /* Opportunity */
+    '<tr><td style="padding:14px 32px 4px 32px;">'+heading('Fastest Improvement Opportunity')+
+      '<div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.6;color:#3d3c3a;"><strong style="color:#111010;">'+esc(r.opp)+'</strong>'+(r.oppDesc?'<br>'+esc(r.oppDesc):'')+'</div>'+
+    '</td></tr>'+
+
+    /* Recommended plan */
+    '<tr><td style="padding:14px 32px;">'+
+      '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:2px solid #e6920a;border-radius:12px;"><tr><td style="padding:18px 22px;font-family:Arial,Helvetica,sans-serif;">'+
+        '<div style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#e6920a;font-weight:bold;margin-bottom:4px;">Recommended Plan</div>'+
+        '<div style="font-size:24px;font-weight:bold;color:#111010;">'+esc(r.planName)+'</div>'+
+        '<div style="font-size:15px;color:#e6920a;font-weight:bold;margin-top:2px;">'+esc(r.planPrice)+'</div>'+
+      '</td></tr></table>'+
+    '</td></tr>'+
+
+    /* First 30 days */
+    '<tr><td style="padding:4px 32px;">'+heading('Suggested First 30 Days')+
+      '<table role="presentation" width="100%" cellpadding="0" cellspacing="0">'+focusHtml+'</table>'+
+    '</td></tr>'+
+
+    /* Next step */
+    '<tr><td style="padding:14px 32px 0 32px;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.6;color:#3d3c3a;">'+
+      '<strong style="color:#111010;">Recommended next step:</strong> '+esc(r.action)+
+    '</td></tr>'+
+
+    /* CTA */
+    '<tr><td style="padding:22px 32px 28px 32px;text-align:center;">'+
+      '<a href="https://www.docksync.app" style="display:inline-block;background:#e6920a;color:#1a0900;text-decoration:none;font-family:Arial,Helvetica,sans-serif;font-weight:bold;font-size:15px;padding:14px 34px;border-radius:8px;">Start your free 30-day trial &rarr;</a>'+
+    '</td></tr>'+
+
+    /* Footer */
+    '<tr><td style="background:#f7f6f3;padding:20px 32px;border-top:1px solid #e6e4e0;text-align:center;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:1.6;color:#9a9894;">'+
+      'Built by DockSync &mdash; dock scheduling software for warehouses that want precision over chaos.<br>'+
+      '<a href="https://www.docksync.app" style="color:#e6920a;text-decoration:none;">www.docksync.app</a>'+
+    '</td></tr>'+
+
+   '</table>'+
+  '</div>';
+}
+
+function sendReport(){
+  const email=document.getElementById('modal-email').value.trim();
+  const status=document.getElementById('modal-status');
+  const btn=document.querySelector('#emailModal .btn-mp');
+
+  if(!email||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){
+    status.style.color='var(--red)';status.textContent='Please enter a valid email address.';return;
+  }
+  contact.email=email;
+
+  // Guard: keys not yet filled in
+  if(typeof emailjs==='undefined'||EMAILJS_PUBLIC_KEY==='YOUR_PUBLIC_KEY'||EMAILJS_SERVICE_ID==='YOUR_SERVICE_ID'||EMAILJS_TEMPLATE_ID==='YOUR_TEMPLATE_ID'){
+    status.style.color='var(--red)';
+    status.textContent='Email isn\'t configured yet — add your EmailJS keys in the code. For now, use the Save PDF button.';
+    return;
+  }
+  // Guard: offline
+  if(!navigator.onLine){
+    status.style.color='var(--red)';
+    status.textContent='No internet connection. Your details are saved and DockSync will follow up — or use Save PDF now.';
+    return;
+  }
+
+  const r=lastReport||{};
+  const params={
+    to_email:email,
+    to_name:contact.name||'',
+    company:contact.company||'',
+    subject:'Your DockSync Readiness Report'+(r.score!=null?' — '+r.score+'/100':''),
+    score:String(r.score!=null?r.score:''),
+    maturity:r.maturity||'',
+    plan:r.planName||'',
+    plan_price:r.planPrice||'',
+    message:buildEmailMessage(email)
+  };
+
+  const orig=btn.textContent;btn.disabled=true;btn.textContent='Sending…';
+  status.style.color='var(--ink3)';status.textContent='Sending your report…';
+
+  emailjs.send(EMAILJS_SERVICE_ID,EMAILJS_TEMPLATE_ID,params).then(function(){
+    btn.disabled=false;btn.textContent=orig;
+    closeEmailModal();
+    alert('Your report is on its way to '+email+'.\n\nPlease check your inbox (and your spam folder, just in case).');
+  }).catch(function(err){
+    btn.disabled=false;btn.textContent=orig;
+    status.style.color='var(--red)';
+    status.textContent='Sorry — something went wrong sending the email. Please try again, or use Save PDF.';
+    console.error('EmailJS error:',err);
+  });
+}
+
 document.getElementById('emailModal').addEventListener('click',function(ev){if(ev.target===this)closeEmailModal();});
 </script>
 </body>
