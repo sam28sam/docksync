@@ -505,7 +505,7 @@ const cio=new IntersectionObserver((es)=>{es.forEach(e=>{
   function tick(ts){if(!t0)t0=ts;const p=Math.min((ts-t0)/dur,1);const ease=1-Math.pow(1-p,3);const v=(tgt*ease).toFixed(dec);
     el.innerHTML=pre+v+'<span class="u">'+suf+'</span>';if(p<1)requestAnimationFrame(tick);}
   requestAnimationFrame(tick);
-},{threshold:.5}));
+});},{threshold:.5});
 document.querySelectorAll('.stat-n[data-count]').forEach(el=>cio.observe(el));
 
 /* ============ LIVE DOCK ANIMATION ============ */
