@@ -2,741 +2,203 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Yard & Dock Readiness Check — DockSync</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'><rect x='4' y='4' width='52' height='52' rx='4' fill='%23e6920a'/><rect x='12' y='10' width='36' height='38' rx='2' fill='%230d1b2e'/><rect x='4' y='46' width='52' height='10' rx='2' fill='%230d1b2e'/></svg>">
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — DockSync Assessment Results</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Barlow:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{font-size:16px}
-body{font-family:'Barlow',sans-serif;background:#f7f6f3;color:#111010;-webkit-font-smoothing:antialiased;overflow-x:hidden;min-height:100vh}
-:root{
-  --am:#e6920a;--amh:#f4a21e;--amdim:rgba(230,146,10,0.10);--ambdr:rgba(230,146,10,0.25);
-  --ink:#111010;--ink2:#3d3c3a;--ink3:#6a6860;--ink4:#9a9894;
-  --bg:#f7f6f3;--bg2:#efede9;--bg3:#e6e4e0;
-  --line:rgba(0,0,0,0.08);--line2:rgba(0,0,0,0.14);--line3:rgba(0,0,0,0.22);
-  --green:#1a9958;--greenbg:rgba(26,153,88,0.08);
-  --red:#d63b3b;--redbg:rgba(214,59,59,0.08);
-  --blue:#2b79cf;--bluebg:rgba(43,121,207,0.08);
-  --r:8px;--rl:14px;--rxl:20px;
-}
-.w{max-width:680px;margin:0 auto;padding:0 24px}
-.ww{max-width:980px;margin:0 auto;padding:0 24px}
-
-/* NAV */
-.nav{position:sticky;top:0;z-index:200;background:rgba(255,255,255,0.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);box-shadow:0 1px 16px rgba(0,0,0,0.05)}
-.nav-i{display:flex;align-items:center;justify-content:space-between;height:62px}
-.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
-.logo-box{width:28px;height:28px;border:1.5px solid var(--am);border-radius:5px;display:flex;align-items:center;justify-content:center;background:#fff}
-.logo-word{font-family:'Barlow Condensed',sans-serif;font-size:19px;font-weight:800;letter-spacing:0.05em;text-transform:uppercase;color:var(--ink)}
-.logo-word span{color:var(--am)}
-.nav-tag{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink4);letter-spacing:0.08em;text-transform:uppercase}
-
-/* PROGRESS */
-.prog{height:3px;background:var(--line);display:none}
-.prog-f{height:100%;background:var(--am);transition:width 0.4s ease;border-radius:0 2px 2px 0}
-.prog-row{display:none;align-items:center;justify-content:space-between;padding:10px 24px;background:#fff;border-bottom:1px solid var(--line);font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink4)}
-.dots{display:flex;gap:4px}
-.dot{width:7px;height:7px;border-radius:50%;background:var(--bg3);transition:all 0.3s}
-.dot.d{background:var(--am)}
-.dot.c{background:var(--am);box-shadow:0 0 6px rgba(230,146,10,0.5)}
-
-/* SCREENS */
-.scr{display:none;animation:up 0.3s ease}
-.scr.on{display:block}
-@keyframes up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-
-/* OFFLINE */
-.offline{background:var(--red);color:#fff;text-align:center;padding:8px 16px;font-family:'JetBrains Mono',monospace;font-size:11px;display:none}
-.offline.on{display:block}
-
-/* ── LANDING ─────────────────────────────────────── */
-.land{padding:64px 0 80px;text-align:center}
-.eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--am);margin-bottom:18px}
-.eyebrow::before,.eyebrow::after{content:'';width:18px;height:1px;background:var(--am);flex-shrink:0}
-.land-h1{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(36px,7vw,72px);line-height:0.93;text-transform:uppercase;color:var(--ink);margin-bottom:20px}
-.land-h1 em{font-style:normal;color:var(--am);display:block}
-.land-sub{font-size:17px;color:var(--ink3);line-height:1.72;max-width:520px;margin:0 auto 32px}
-.land-chips{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:36px}
-.chip{display:inline-flex;align-items:center;gap:5px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;padding:5px 11px;border-radius:4px;background:#fff;border:1px solid var(--line2);color:var(--ink3)}
-.chip svg{width:9px;height:9px;stroke:var(--green);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
-.btn-start{display:inline-flex;align-items:center;gap:12px;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:20px;letter-spacing:0.05em;text-transform:uppercase;padding:18px 44px;border-radius:var(--r);border:none;cursor:pointer;background:var(--am);color:#1a0900;transition:all 0.17s;margin-bottom:14px}
-.btn-start:hover{background:var(--amh);transform:translateY(-2px);box-shadow:0 8px 24px rgba(230,146,10,0.28)}
-.btn-start svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
-.land-note{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink4);margin-bottom:56px}
-.land-footer{padding-top:28px;border-top:1px solid var(--line);font-size:13px;color:var(--ink4);line-height:1.6}
-.land-footer a{color:var(--am);text-decoration:none}
-.land-footer a:hover{text-decoration:underline}
-
-/* ── QUESTIONS ───────────────────────────────────── */
-.qwrap{padding:40px 0 80px}
-.qn{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--am);letter-spacing:0.1em;margin-bottom:12px}
-.qt{font-family:'Barlow Condensed',sans-serif;font-size:clamp(22px,4.5vw,34px);font-weight:800;text-transform:uppercase;color:var(--ink);line-height:1.1;margin-bottom:28px}
-.opts{display:flex;flex-direction:column;gap:10px;margin-bottom:32px}
-.opt{display:flex;align-items:center;gap:14px;padding:16px 18px;background:#fff;border:1.5px solid var(--line2);border-radius:var(--rl);cursor:pointer;transition:all 0.15s;text-align:left;width:100%;min-height:60px}
-.opt:hover{border-color:var(--ambdr);background:var(--amdim)}
-.opt.sel{border-color:var(--am);background:var(--amdim)}
-.opt-l{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;color:var(--ink4);min-width:18px;flex-shrink:0;transition:color 0.15s}
-.opt.sel .opt-l{color:var(--am)}
-.opt-t{font-size:15px;color:var(--ink2);line-height:1.4;flex:1;transition:color 0.15s}
-.opt.sel .opt-t{color:var(--ink)}
-.opt-check{margin-left:auto;width:22px;height:22px;border-radius:50%;border:1.5px solid var(--line2);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.15s}
-.opt.sel .opt-check{background:var(--am);border-color:var(--am)}
-.opt-check svg{width:10px;height:10px;fill:none;stroke:#1a0900;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;opacity:0;transition:opacity 0.15s}
-.opt.sel .opt-check svg{opacity:1}
-.qnav{display:flex;align-items:center;justify-content:space-between}
-.btn-back{display:inline-flex;align-items:center;gap:7px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;letter-spacing:0.05em;text-transform:uppercase;padding:12px 20px;border-radius:var(--r);border:1.5px solid var(--line3);cursor:pointer;background:transparent;color:var(--ink3);transition:all 0.15s}
-.btn-back:hover{color:var(--ink);border-color:var(--ink)}
-.btn-next{display:inline-flex;align-items:center;gap:7px;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:14px;letter-spacing:0.05em;text-transform:uppercase;padding:13px 26px;border-radius:var(--r);border:none;cursor:pointer;background:var(--am);color:#1a0900;transition:all 0.15s;opacity:0.3;pointer-events:none}
-.btn-next.on{opacity:1;pointer-events:auto}
-.btn-next.on:hover{background:var(--amh)}
-.btn-back svg,.btn-next svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
-
-/* ── CONTACT ─────────────────────────────────────── */
-.ctwrap{padding:40px 0 80px}
-.ct-h{font-family:'Barlow Condensed',sans-serif;font-size:30px;font-weight:800;text-transform:uppercase;color:var(--ink);margin-bottom:6px}
-.ct-s{font-size:15px;color:var(--ink3);margin-bottom:28px}
-.fg{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
-.fld{display:flex;flex-direction:column;gap:6px}
-.fld label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink4);letter-spacing:0.1em;text-transform:uppercase}
-.fld input{background:#fff;border:1.5px solid var(--line2);border-radius:var(--r);padding:12px 14px;color:var(--ink);font-family:'Barlow',sans-serif;font-size:15px;outline:none;transition:border-color 0.15s;-webkit-appearance:none}
-.fld input::placeholder{color:var(--ink4)}
-.fld input:focus{border-color:var(--am);background:#fff}
-.consent{display:flex;align-items:flex-start;gap:12px;padding:14px;background:#fff;border:1px solid var(--line2);border-radius:var(--r);margin-bottom:22px;cursor:pointer}
-.consent input[type=checkbox]{width:18px;height:18px;min-width:18px;accent-color:var(--am);margin-top:1px;cursor:pointer}
-.consent-t{font-size:13px;color:var(--ink3);line-height:1.55}
-.btn-gen{width:100%;padding:15px;font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;background:var(--am);color:#1a0900;border:none;border-radius:var(--r);cursor:pointer;transition:all 0.17s}
-.btn-gen:hover{background:var(--amh);transform:translateY(-1px)}
-
-/* ── LOADING ─────────────────────────────────────── */
-.ldwrap{padding:100px 0;text-align:center}
-.ld-sp{width:52px;height:52px;border:3px solid var(--line2);border-top-color:var(--am);border-radius:50%;animation:spin 0.7s linear infinite;margin:0 auto 24px}
-@keyframes spin{to{transform:rotate(360deg)}}
-.ld-t{font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:800;text-transform:uppercase;color:var(--ink);margin-bottom:6px}
-.ld-s{font-size:14px;color:var(--ink3)}
-
-/* ── REPORT ──────────────────────────────────────── */
-.rpt-hdr{background:#fff;border-bottom:1px solid var(--line);padding:20px 0}
-.rhi{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
-.rh-sup{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--am);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:3px}
-.rh-nm{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;text-transform:uppercase;color:var(--ink)}
-.rpt-acts{display:flex;gap:8px;flex-wrap:wrap}
-.btn-sm{display:inline-flex;align-items:center;gap:6px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;letter-spacing:0.05em;text-transform:uppercase;padding:8px 14px;border-radius:var(--r);border:1.5px solid var(--line3);cursor:pointer;background:transparent;color:var(--ink3);transition:all 0.15s;white-space:nowrap}
-.btn-sm:hover{color:var(--ink);border-color:var(--am)}
-.btn-sm svg{width:11px;height:11px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.btn-sm-am{background:var(--am);color:#1a0900;border-color:var(--am)}
-.btn-sm-am:hover{background:var(--amh);color:#1a0900;border-color:var(--amh)}
-
-.rptbody{padding:32px 0 80px;background:var(--bg)}
-
-/* Score hero */
-.sc-hero{display:grid;grid-template-columns:160px 1fr;gap:36px;align-items:center;margin-bottom:28px}
-.sc-wrap{display:flex;flex-direction:column;align-items:center;gap:8px}
-.sc-ring{position:relative;width:150px;height:150px}
-.sc-ring svg{width:150px;height:150px;transform:rotate(-90deg)}
-.sc-bg{fill:none;stroke:var(--bg3);stroke-width:12}
-.sc-fill{fill:none;stroke-width:12;stroke-linecap:round;transition:stroke-dashoffset 1.4s cubic-bezier(0.4,0,0.2,1)}
-.sc-in{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center}
-.sc-n{font-family:'JetBrains Mono',monospace;font-size:42px;font-weight:500;color:var(--ink);line-height:1}
-.sc-mx{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink4)}
-.sc-lb{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink4);letter-spacing:0.08em;text-transform:uppercase}
-.sc-dets{display:flex;flex-direction:column;gap:14px}
-.scd-lb{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink4);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:3px}
-.scd-v{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;text-transform:uppercase;color:var(--ink)}
-
-/* Tiles */
-.tiles{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:28px}
-.tile{background:#fff;border:1px solid var(--line);border-radius:var(--rl);padding:16px;position:relative;overflow:hidden}
-.tile::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
-.ta::before{background:var(--am)}.tg::before{background:var(--green)}.tr::before{background:var(--red)}.tb::before{background:var(--blue)}
-.tile-lb{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink4);letter-spacing:0.07em;text-transform:uppercase;margin-bottom:5px}
-.tile-v{font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;text-transform:uppercase;color:var(--ink);line-height:1.2}
-.tile-s{font-size:11px;color:var(--ink3);margin-top:3px}
-
-/* Sub-scores */
-.ss-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:28px}
-.ss{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:12px 8px;text-align:center}
-.ss-n{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:500;line-height:1;margin-bottom:6px}
-.ss-bar{height:3px;background:var(--bg3);border-radius:2px;margin-bottom:6px;overflow:hidden}
-.ss-bar-f{height:100%;border-radius:2px;transition:width 1s ease}
-.ss-lb{font-size:10px;color:var(--ink3);line-height:1.3}
-
-/* Sections */
-.sec{margin-bottom:28px}
-.sec-ey{display:flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--am);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:14px}
-.sec-ey::after{content:'';flex:1;height:1px;background:var(--line2)}
-
-/* Diagnosis */
-.diag p{font-size:14px;color:var(--ink2);line-height:1.75;margin-bottom:12px}
-.diag p:last-child{margin-bottom:0}
-.diag strong{color:var(--ink);font-weight:600}
-
-/* Risk cards */
-.rg{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.rc{background:#fff;border:1px solid var(--line);border-top:2px solid var(--red);border-radius:var(--rl);padding:16px}
-.rc-icon{width:28px;height:28px;background:var(--redbg);border-radius:6px;display:flex;align-items:center;justify-content:center;margin-bottom:9px}
-.rc-icon svg{width:13px;height:13px;stroke:var(--red);fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
-.rc-t{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;text-transform:uppercase;color:var(--ink);margin-bottom:4px}
-.rc-d{font-size:11px;color:var(--ink3);line-height:1.55}
-
-/* Opportunity */
-.opp{background:var(--greenbg);border:1px solid rgba(26,153,88,0.2);border-radius:var(--rl);padding:18px;display:flex;gap:14px;align-items:flex-start}
-.opp-ic{width:34px;height:34px;background:rgba(26,153,88,0.15);border-radius:var(--r);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.opp-ic svg{width:14px;height:14px;stroke:var(--green);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.opp-t{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;text-transform:uppercase;color:var(--green);margin-bottom:4px}
-.opp-d{font-size:13px;color:var(--ink2);line-height:1.6}
-
-/* Plan */
-.plan{background:#fff;border:2px solid var(--am);border-radius:var(--rxl);padding:22px;position:relative;overflow:hidden}
-.plan::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--am)}
-.plan-badge{display:inline-flex;align-items:center;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.07em;text-transform:uppercase;background:var(--am);color:#1a0900;padding:4px 10px;border-radius:4px;margin-bottom:12px}
-.plan-n{font-family:'Barlow Condensed',sans-serif;font-size:32px;font-weight:800;text-transform:uppercase;color:var(--ink);margin-bottom:4px}
-.plan-p{font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:500;color:var(--am);margin-bottom:10px;line-height:1}
-.plan-p sub{font-size:12px;color:var(--ink3)}
-.plan-why{font-size:13px;color:var(--ink2);line-height:1.65;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--line)}
-.plan-fs{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
-.pf{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--ink2)}
-.pf svg{width:10px;height:10px;stroke:var(--green);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
-.plan-com{font-size:12px;color:var(--ink3);line-height:1.6;font-style:italic;padding:10px 12px;background:var(--amdim);border-radius:var(--r);border-left:2px solid var(--am)}
-
-/* Focus */
-.focus{background:#fff;border:1px solid var(--line);border-radius:var(--rl);padding:18px}
-.focus-steps{display:flex;flex-direction:column;gap:14px}
-.fstep{display:flex;gap:12px;align-items:flex-start}
-.fstep-w{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--am);min-width:60px;padding-top:3px;flex-shrink:0}
-.fstep-t{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;text-transform:uppercase;color:var(--ink);margin-bottom:2px}
-.fstep-d{font-size:12px;color:var(--ink3);line-height:1.55}
-
-/* ROI */
-.roi{background:var(--bg2);border:1px solid var(--line);border-radius:var(--rl);padding:16px}
-.roi-t{font-size:13px;color:var(--ink2);line-height:1.72;font-style:italic}
-
-/* CTA */
-.cta{background:var(--ink);border-radius:var(--rxl);padding:28px;text-align:center}
-.cta-t{font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800;text-transform:uppercase;color:#efede9;margin-bottom:6px}
-.cta-d{font-size:13px;color:#787470;margin-bottom:22px;line-height:1.55}
-.cta-bs{display:flex;flex-direction:column;gap:10px;align-items:center}
-.btn-p{display:inline-flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:15px;letter-spacing:0.05em;text-transform:uppercase;padding:14px 32px;border-radius:var(--r);border:none;cursor:pointer;background:var(--am);color:#1a0900;transition:all 0.17s;text-decoration:none;width:100%;max-width:380px}
-.btn-p:hover{background:var(--amh);transform:translateY(-1px)}
-.btn-sec{display:inline-flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;letter-spacing:0.05em;text-transform:uppercase;padding:12px 28px;border-radius:var(--r);border:1.5px solid rgba(255,255,255,0.2);cursor:pointer;background:transparent;color:#9a9894;transition:all 0.15s;text-decoration:none;width:100%;max-width:380px}
-.btn-sec:hover{color:#efede9;border-color:rgba(255,255,255,0.5)}
-.cta-note{font-family:'JetBrains Mono',monospace;font-size:10px;color:#4e4c49;margin-top:12px}
-
-/* Email modal */
-.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:500;display:none;align-items:center;justify-content:center;padding:20px}
-.modal-bg.on{display:flex}
-.modal{background:#fff;border-radius:var(--rxl);padding:32px;width:100%;max-width:440px;box-shadow:0 20px 60px rgba(0,0,0,0.2)}
-.modal::before{content:'';display:block;height:4px;background:var(--am);border-radius:var(--rxl) var(--rxl) 0 0;margin:-32px -32px 28px}
-.modal-t{font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:800;text-transform:uppercase;color:var(--ink);margin-bottom:6px}
-.modal-s{font-size:14px;color:var(--ink3);margin-bottom:22px}
-.modal-fld{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
-.modal-fld label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink4);letter-spacing:0.1em;text-transform:uppercase}
-.modal-fld input{background:var(--bg);border:1.5px solid var(--line2);border-radius:var(--r);padding:12px 14px;color:var(--ink);font-family:'Barlow',sans-serif;font-size:15px;outline:none;transition:border-color 0.15s;width:100%}
-.modal-fld input:focus{border-color:var(--am)}
-.modal-status{font-family:'JetBrains Mono',monospace;font-size:11px;line-height:1.5;min-height:16px;margin-bottom:14px;color:var(--ink3)}
-.modal-btns{display:flex;gap:10px}
-.btn-mp{flex:1;padding:12px;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;letter-spacing:0.05em;text-transform:uppercase;background:var(--am);color:#1a0900;border:none;border-radius:var(--r);cursor:pointer;transition:all 0.15s}
-.btn-mp:hover{background:var(--amh)}
-.btn-mp:disabled{opacity:0.55;cursor:not-allowed}
-.btn-ms{padding:12px 18px;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;background:transparent;color:var(--ink3);border:1.5px solid var(--line3);border-radius:var(--r);cursor:pointer;transition:all 0.15s}
-.btn-ms:hover{color:var(--ink)}
-
-.divider{height:1px;background:var(--line);margin:24px 0}
-
-@media(max-width:600px){
-  .sc-hero{grid-template-columns:1fr;gap:20px;justify-items:center}
-  .tiles{grid-template-columns:1fr 1fr}
-  .ss-grid{grid-template-columns:repeat(3,1fr)}
-  .rg{grid-template-columns:1fr}
-  .fg{grid-template-columns:1fr}
-  .rhi{flex-direction:column;align-items:flex-start}
-  .rpt-acts{width:100%}
-}
-@media print{
-  body{background:#fff}
-  .nav,.prog,.prog-row,.rpt-acts,.cta,.modal-bg,.offline{display:none!important}
-  .rptbody{background:#fff}
-}
+body{font-family:'Barlow',sans-serif;background:#0d1b2e;color:#efede9;-webkit-font-smoothing:antialiased;padding:32px 20px;min-height:100vh}
+.w{max-width:1300px;margin:0 auto}
+h1{font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:800;text-transform:uppercase;margin-bottom:4px}
+.sub{font-family:'JetBrains Mono',monospace;font-size:11px;color:#787470;margin-bottom:28px}
+.stats{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-bottom:24px}
+.stat{background:#111f30;border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:14px}
+.stat-n{font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:500;color:#e6920a;margin-bottom:3px;line-height:1}
+.stat-l{font-size:11px;color:#787470;margin-top:2px}
+.acts{display:flex;gap:10px;margin-bottom:22px;flex-wrap:wrap}
+.btn{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.05em;text-transform:uppercase;padding:9px 16px;border-radius:6px;border:none;cursor:pointer;transition:all 0.15s;display:inline-flex;align-items:center;gap:7px}
+.btn svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.btn-a{background:#e6920a;color:#1a0900}.btn-a:hover{background:#f4a21e}
+.btn-o{background:transparent;color:#b8b4ae;border:1.5px solid rgba(255,255,255,0.12)}.btn-o:hover{color:#efede9}
+.btn-r{background:rgba(214,59,59,0.1);color:#d63b3b;border:1.5px solid rgba(214,59,59,0.22)}.btn-r:hover{background:rgba(214,59,59,0.2)}
+.tw{overflow-x:auto;border-radius:10px;border:1px solid rgba(255,255,255,0.07)}
+table{width:100%;border-collapse:collapse;font-size:12px;min-width:1100px}
+thead th{background:#111f30;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.09em;text-transform:uppercase;color:#787470;padding:10px 12px;text-align:left;border-bottom:1px solid rgba(255,255,255,0.07);white-space:nowrap}
+tbody tr{border-bottom:1px solid rgba(255,255,255,0.05);transition:background 0.1s}
+tbody tr:hover{background:rgba(255,255,255,0.03)}
+td{padding:10px 12px;color:#b8b4ae;vertical-align:middle}
+.sc{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;color:#fff;flex-shrink:0}
+.tag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:9px;padding:3px 7px;border-radius:3px;font-weight:500}
+.tS{background:rgba(43,121,207,0.15);color:#2b79cf}
+.tG{background:rgba(230,146,10,0.15);color:#e6920a}
+.tE{background:rgba(26,153,88,0.15);color:#1a9958}
+.lq{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:500;padding:3px 8px;border-radius:3px;text-transform:uppercase}
+.lqC{background:rgba(120,116,112,0.15);color:#787470}
+.lqW{background:rgba(230,122,10,0.15);color:#e67a0a}
+.lqH{background:rgba(214,59,59,0.15);color:#d63b3b}
+.lqE{background:rgba(26,153,88,0.15);color:#1a9958}
+.ssbars{display:flex;gap:2px;align-items:flex-end;height:18px}
+.ssb{width:8px;border-radius:1px;transition:height 0.3s}
+.empty{text-align:center;padding:60px;color:#4e4c49;font-family:'JetBrains Mono',monospace;font-size:12px}
+.risks-cell{font-size:11px;color:#787470;line-height:1.4}
+@media(max-width:800px){.stats{grid-template-columns:repeat(3,1fr)}}
 </style>
-<!-- EmailJS — client-side email sending, no server required. https://www.emailjs.com -->
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
+<div class="w">
+  <h1>Assessment Results</h1>
+  <div class="sub" id="lastUpd">Loading…</div>
 
-<div class="offline" id="offlineBanner">⚠ No internet — results saved locally and can be exported later</div>
-
-<nav class="nav">
-  <div class="ww">
-    <div class="nav-i">
-      <a href="#" onclick="goHome();return false;" class="logo">
-        <div class="logo-box">
-          <svg viewBox="0 0 60 60" width="22" height="22" fill="none"><rect x="4" y="4" width="52" height="52" rx="4" fill="#e6920a"/><rect x="12" y="10" width="36" height="38" rx="2" fill="#0d1b2e"/><rect x="4" y="46" width="52" height="10" rx="2" fill="#0d1b2e"/></svg>
-        </div>
-        <span class="logo-word">DOCK<span>SYNC</span></span>
-      </a>
-      <span class="nav-tag">Readiness Check</span>
-    </div>
-  </div>
-</nav>
-
-<div class="prog" id="progBar"><div class="prog-f" id="progFill" style="width:0%"></div></div>
-<div class="prog-row" id="progRow">
-  <span id="progTxt">Question 1 of 10</span>
-  <div class="dots" id="progDots"></div>
-</div>
-
-<!-- LANDING -->
-<div class="scr on" id="scr-land">
-  <div class="w">
-    <div class="land">
-      <div class="eyebrow">Operational Assessment</div>
-      <h1 class="land-h1">Get your Yard &amp; Dock<br><em>Readiness Score</em><br>in 60 seconds</h1>
-      <p class="land-sub">Answer 10 quick questions and receive a one-page operational health check covering booking control, arrival visibility, supplier discipline, admin pressure and DockSync fit.</p>
-      <div class="land-chips">
-        <div class="chip"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>10 questions</div>
-        <div class="chip"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Under 3 minutes</div>
-        <div class="chip"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Instant report</div>
-        <div class="chip"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>No obligation</div>
-      </div>
-      <div>
-        <button class="btn-start" onclick="startAssessment()">
-          Start the check
-          <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </button>
-      </div>
-      <div class="land-note">Free · No account needed · Results emailed on request</div>
-      <div class="land-footer">Built by DockSync — dock scheduling software for warehouses that want precision over chaos. <a href="https://www.docksync.app">www.docksync.app</a></div>
-    </div>
-  </div>
-</div>
-
-<!-- QUESTIONS -->
-<div class="scr" id="scr-q">
-  <div class="w">
-    <div class="qwrap">
-      <div class="qn" id="qN">QUESTION 1 OF 10</div>
-      <div class="qt" id="qT"></div>
-      <div class="opts" id="qOpts"></div>
-      <div class="qnav">
-        <button class="btn-back" id="btnBack" onclick="prevQ()">
-          <svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>Back
-        </button>
-        <button class="btn-next" id="btnNext" onclick="nextQ()">
-          Continue <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- CONTACT -->
-<div class="scr" id="scr-ct">
-  <div class="w">
-    <div class="ctwrap">
-      <div class="ct-h">Almost there</div>
-      <div class="ct-s">Your personalised Readiness Report is ready. Enter your details to generate it.</div>
-      <div class="fg">
-        <div class="fld"><label>Your name *</label><input type="text" id="f-name" placeholder="Jane Smith" autocomplete="name"></div>
-        <div class="fld"><label>Job title</label><input type="text" id="f-title" placeholder="Warehouse Manager" autocomplete="organization-title"></div>
-        <div class="fld"><label>Company *</label><input type="text" id="f-company" placeholder="Acme Logistics Ltd" autocomplete="organization"></div>
-        <div class="fld"><label>Work email *</label><input type="email" id="f-email" placeholder="jane@yourwarehouse.com" autocomplete="email"></div>
-      </div>
-      <label class="consent">
-        <input type="checkbox" id="f-consent">
-        <span class="consent-t">I'm happy for DockSync to follow up about my results and how the platform may help my operation.</span>
-      </label>
-      <button class="btn-gen" onclick="generateReport()">Generate my report →</button>
-    </div>
-  </div>
-</div>
-
-<!-- LOADING -->
-<div class="scr" id="scr-ld">
-  <div class="w"><div class="ldwrap">
-    <div class="ld-sp"></div>
-    <div class="ld-t">Analysing your operation</div>
-    <div class="ld-s">Building your Readiness Report…</div>
-  </div></div>
-</div>
-
-<!-- REPORT -->
-<div class="scr" id="scr-rpt">
-  <div class="rpt-hdr">
-    <div class="ww">
-      <div class="rhi">
-        <div>
-          <div class="rh-sup">Yard &amp; Dock Readiness Report · DockSync</div>
-          <div class="rh-nm" id="rhNm">Your Report</div>
-        </div>
-        <div class="rpt-acts">
-          <button class="btn-sm btn-sm-am" onclick="openEmailModal()">
-            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Email my report
-          </button>
-          <button class="btn-sm" onclick="window.print()">
-            <svg viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>Save PDF
-          </button>
-          <button class="btn-sm" onclick="goHome()">
-            <svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>New check
-          </button>
-        </div>
-      </div>
-    </div>
+  <div class="stats">
+    <div class="stat"><div class="stat-n" id="stT">0</div><div class="stat-l">Total assessments</div></div>
+    <div class="stat"><div class="stat-n" id="stS" style="color:#2b79cf">0</div><div class="stat-l">Starter recommendations</div></div>
+    <div class="stat"><div class="stat-n" id="stG">0</div><div class="stat-l">Growth recommendations</div></div>
+    <div class="stat"><div class="stat-n" id="stE" style="color:#1a9958">0</div><div class="stat-l">Enterprise recommendations</div></div>
+    <div class="stat"><div class="stat-n" id="stH" style="color:#d63b3b">0</div><div class="stat-l">Hot leads</div></div>
+    <div class="stat"><div class="stat-n" id="stEL" style="color:#1a9958">0</div><div class="stat-l">Enterprise leads</div></div>
   </div>
 
-  <div class="rptbody">
-    <div class="ww">
-      <div class="sc-hero">
-        <div class="sc-wrap">
-          <div class="sc-ring">
-            <svg viewBox="0 0 150 150">
-              <circle class="sc-bg" cx="75" cy="75" r="62"/>
-              <circle class="sc-fill" id="scFill" cx="75" cy="75" r="62" stroke-dasharray="389.6" stroke-dashoffset="389.6"/>
-            </svg>
-            <div class="sc-in"><div class="sc-n" id="scN">0</div><div class="sc-mx">/100</div></div>
-          </div>
-          <div class="sc-lb">Readiness Score</div>
-        </div>
-        <div class="sc-dets">
-          <div><div class="scd-lb">Operational Maturity</div><div class="scd-v" id="matV">—</div></div>
-          <div><div class="scd-lb">Highest Risk Area</div><div class="scd-v" id="hrV" style="color:var(--red)">—</div></div>
-          <div><div class="scd-lb">Fastest Opportunity</div><div class="scd-v" id="foV" style="color:var(--green)">—</div></div>
-        </div>
-      </div>
-
-      <div class="tiles">
-        <div class="tile ta"><div class="tile-lb">Recommended Plan</div><div class="tile-v" id="tPlan">—</div><div class="tile-s" id="tPrice">—</div></div>
-        <div class="tile tg"><div class="tile-lb">Recommended Action</div><div class="tile-v" id="tAction">—</div></div>
-        <div class="tile tr"><div class="tile-lb">Urgency</div><div class="tile-v" id="tUrg">—</div></div>
-        <div class="tile tb"><div class="tile-lb">DockSync Fit</div><div class="tile-v" id="tFit">—</div></div>
-      </div>
-
-      <div class="sec"><div class="sec-ey">Diagnostic Sub-Scores</div><div class="ss-grid" id="ssGrid"></div></div>
-      <div class="divider"></div>
-      <div class="sec"><div class="sec-ey">Operational Diagnosis</div><div class="diag" id="diagEl"></div></div>
-      <div class="divider"></div>
-      <div class="sec"><div class="sec-ey">Top 3 Risk Areas</div><div class="rg" id="rgEl"></div></div>
-      <div class="divider"></div>
-      <div class="sec"><div class="sec-ey">Fastest Improvement Opportunity</div><div class="opp" id="oppEl"></div></div>
-      <div class="divider"></div>
-      <div class="sec"><div class="sec-ey">Recommended Plan</div><div class="plan" id="planEl"></div></div>
-      <div class="divider"></div>
-      <div class="sec"><div class="sec-ey">Suggested First 30-Day Focus</div><div class="focus" id="focusEl"></div></div>
-      <div class="divider"></div>
-      <div class="sec"><div class="sec-ey">Potential Impact</div><div class="roi"><div class="roi-t" id="roiEl"></div></div></div>
-      <div class="divider"></div>
-      <div class="cta" id="ctaEl"></div>
-    </div>
+  <div class="acts">
+    <button class="btn btn-a" onclick="exportCSV()">
+      <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Export full CSV
+    </button>
+    <button class="btn btn-a" onclick="exportHotCSV()">
+      <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Export hot leads only
+    </button>
+    <button class="btn btn-o" onclick="load()">
+      <svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg>
+      Refresh
+    </button>
+    <button class="btn btn-r" onclick="clearAll()">Clear all data</button>
   </div>
-</div>
 
-<!-- EMAIL MODAL -->
-<div class="modal-bg" id="emailModal">
-  <div class="modal">
-    <div class="modal-t">Send me my report</div>
-    <div class="modal-s">Enter your email and we'll send a copy of your Readiness Report straight to your inbox.</div>
-    <div class="modal-fld"><label>Email address</label><input type="email" id="modal-email" placeholder="jane@yourwarehouse.com"></div>
-    <div class="modal-status" id="modal-status"></div>
-    <div class="modal-btns">
-      <button class="btn-mp" onclick="sendReport()">Send report</button>
-      <button class="btn-ms" onclick="closeEmailModal()">Cancel</button>
-    </div>
+  <div class="tw">
+    <table>
+      <thead>
+        <tr>
+          <th>Date/Time</th>
+          <th>Name</th>
+          <th>Title</th>
+          <th>Company</th>
+          <th>Email</th>
+          <th>Score</th>
+          <th>Maturity</th>
+          <th>Sub-scores (BC·AV·SD·AE·SR)</th>
+          <th>Plan</th>
+          <th>Est. Cost</th>
+          <th>Top Risks</th>
+          <th>Lead</th>
+          <th>Next Action</th>
+          <th>Consent</th>
+        </tr>
+      </thead>
+      <tbody id="tbody">
+        <tr><td colspan="14" class="empty">No results yet. Complete an assessment to see data here.</td></tr>
+      </tbody>
+    </table>
   </div>
 </div>
 
 <script>
-/* ════════════════════════════════════════════════════════════════
-   EMAILJS CONFIGURATION  —  fill these three values in
-   ────────────────────────────────────────────────────────────────
-   1. Create a free account at https://www.emailjs.com
-   2. Add an Email Service (Gmail, Outlook, etc.)  → copy its Service ID
-   3. Create an Email Template                      → copy its Template ID
-   4. Account ▸ General / API Keys                  → copy your Public Key
+function sc(s){return s>=70?'#1a9958':s>=50?'#e6920a':'#d63b3b';}
 
-   In the EmailJS template, set:
-     • "To Email" field   →  {{to_email}}
-     • Subject            →  {{subject}}
-     • Body (to start)    →  {{message}}        (plain-text summary)
-   You can later use {{to_name}}, {{company}}, {{score}}, {{maturity}},
-   {{plan}} and {{plan_price}} to design a branded HTML email instead.
-   ════════════════════════════════════════════════════════════════ */
-const EMAILJS_PUBLIC_KEY  = "q9ib-iWBxQ6Bpb4B8";
-const EMAILJS_SERVICE_ID  = "service_34sbfkg";
-const EMAILJS_TEMPLATE_ID = "template_s1ewmxr";
-if (window.emailjs) { try { emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY }); } catch(e){} }
-
-const Qs=[
-  {id:1,text:"How many warehouse sites do you currently manage?",opts:[{l:"A",t:"1 site"},{l:"B",t:"2–3 sites"},{l:"C",t:"4+ sites"},{l:"D",t:"Assessing centrally across a network"}]},
-  {id:2,text:"How many active loading/unloading bays do you manage at this site?",opts:[{l:"A",t:"1–4 bays"},{l:"B",t:"5–8 bays"},{l:"C",t:"9–20 bays"},{l:"D",t:"21+ bays"}]},
-  {id:3,text:"How are inbound deliveries currently booked?",opts:[{l:"A",t:"Phone calls, emails, spreadsheets or shared inboxes"},{l:"B",t:"Shared calendar or spreadsheet with some structure"},{l:"C",t:"WMS/TMS/ERP module, but with manual workarounds"},{l:"D",t:"Dedicated dock scheduling or yard booking system"}]},
-  {id:4,text:"How much notice do you have of tomorrow's inbound delivery plan?",opts:[{l:"A",t:"Limited visibility until the day"},{l:"B",t:"Some visibility, but frequent changes"},{l:"C",t:"Mostly visible, but not always reliable"},{l:"D",t:"Clear, reliable, supplier-confirmed plan"}]},
-  {id:5,text:"How often do vehicles arrive early, late, or outside agreed windows?",opts:[{l:"A",t:"Daily"},{l:"B",t:"Several times per week"},{l:"C",t:"Occasionally"},{l:"D",t:"Rarely"}]},
-  {id:6,text:"How much admin time is spent daily on delivery bookings, supplier calls and arrival queries?",opts:[{l:"A",t:"Less than 30 minutes"},{l:"B",t:"30–90 minutes"},{l:"C",t:"1.5–3 hours"},{l:"D",t:"3+ hours"}]},
-  {id:7,text:"Do suppliers or carriers self-book delivery slots?",opts:[{l:"A",t:"No — the warehouse team manages most bookings manually"},{l:"B",t:"Some do, but not consistently"},{l:"C",t:"Most do, but still needs chasing"},{l:"D",t:"Yes — self-booking is structured and widely used"}]},
-  {id:8,text:"Can drivers check in digitally when they arrive?",opts:[{l:"A",t:"No — check-in is manual or paper-based"},{l:"B",t:"Partly, but not linked to dock bookings"},{l:"C",t:"Yes, but adoption is inconsistent"},{l:"D",t:"Yes — QR/digital check-in is part of the process"}]},
-  {id:9,text:"How well do you measure supplier/carrier performance?",opts:[{l:"A",t:"We don't measure it consistently"},{l:"B",t:"We track issues manually"},{l:"C",t:"We have reporting, but it's not easy to act on"},{l:"D",t:"We have reliable supplier performance reporting"}]},
-  {id:10,text:"Which best describes your current operation?",opts:[{l:"A",t:'"Small — we just need something simple to get organised."'},{l:"B",t:'"Growing — the current process is starting to creak."'},{l:"C",t:'"Already feeling delay, congestion or admin pressure."'},{l:"D",t:'"Operating at scale — need a formal multi-site solution."'}]}
-];
-
-let curQ=0,ans=new Array(10).fill(null),contact={},lastReport=null;
-
-window.addEventListener('offline',()=>document.getElementById('offlineBanner').classList.add('on'));
-window.addEventListener('online',()=>document.getElementById('offlineBanner').classList.remove('on'));
-if(!navigator.onLine)document.getElementById('offlineBanner').classList.add('on');
-
-function show(id){document.querySelectorAll('.scr').forEach(s=>s.classList.remove('on'));document.getElementById('scr-'+id).classList.add('on');window.scrollTo(0,0);}
-function goHome(){ans=new Array(10).fill(null);curQ=0;contact={};lastReport=null;document.getElementById('progBar').style.display='none';document.getElementById('progRow').style.display='none';show('land');}
-
-function updProg(){
-  document.getElementById('progFill').style.width=(curQ/10*100)+'%';
-  document.getElementById('progTxt').textContent=`Question ${curQ+1} of 10`;
-  const el=document.getElementById('progDots');el.innerHTML='';
-  for(let i=0;i<10;i++){const d=document.createElement('div');d.className='dot'+(i<curQ?' d':'')+(i===curQ?' c':'');el.appendChild(d);}
-}
-
-function startAssessment(){document.getElementById('progBar').style.display='block';document.getElementById('progRow').style.display='flex';curQ=0;renderQ();show('q');}
-
-function renderQ(){
-  const q=Qs[curQ];
-  document.getElementById('qN').textContent=`QUESTION ${curQ+1} OF 10`;
-  document.getElementById('qT').textContent=q.text;
-  const el=document.getElementById('qOpts');el.innerHTML='';
-  q.opts.forEach((o,i)=>{
-    const b=document.createElement('button');
-    b.className='opt'+(ans[curQ]===i?' sel':'');
-    b.innerHTML=`<span class="opt-l">${o.l}</span><span class="opt-t">${o.t}</span><span class="opt-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>`;
-    b.onclick=()=>selAns(i);el.appendChild(b);
-  });
-  document.getElementById('btnBack').style.visibility=curQ===0?'hidden':'visible';
-  const nb=document.getElementById('btnNext');
-  nb.className='btn-next'+(ans[curQ]!==null?' on':'');
-  nb.innerHTML=(curQ===9?'Continue to details':'Continue')+' <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
-  updProg();
-}
-
-function selAns(i){ans[curQ]=i;document.querySelectorAll('.opt').forEach((el,j)=>el.classList.toggle('sel',j===i));document.getElementById('btnNext').classList.add('on');}
-function nextQ(){if(ans[curQ]===null)return;if(curQ<9){curQ++;renderQ();}else show('ct');}
-function prevQ(){if(curQ>0){curQ--;renderQ();}}
-
-function generateReport(){
-  const n=document.getElementById('f-name').value.trim(),e=document.getElementById('f-email').value.trim(),c=document.getElementById('f-company').value.trim();
-  if(!n||!e||!c){alert('Please complete your name, company and email.');return;}
-  contact={name:n,email:e,company:c,title:document.getElementById('f-title').value.trim(),consent:document.getElementById('f-consent').checked};
-  show('ld');setTimeout(buildReport,2000);
-}
-
-const W={0:1.5,1:1.5,2:2.5,3:2.0,4:2.0,5:2.0,6:2.5,7:1.0,8:2.0,9:1.0};
-const RS=[[3,2,1,0],[3,2,1,0],[0,1,2,3],[0,1,2,3],[0,1,2,3],[3,2,1,0],[0,1,2,3],[0,1,2,3],[0,1,2,3],[2,1,1,2]];
-
-function calcTotal(){let w=0,mw=0;for(let i=0;i<10;i++){if(ans[i]===null)continue;w+=RS[i][ans[i]]*W[i];mw+=3*W[i];}return Math.round((w/mw)*100);}
-function calcSubs(){const sub=p=>{let w=0,mw=0;p.forEach(([qi,wt])=>{if(ans[qi]!==null){w+=RS[qi][ans[qi]]*wt;mw+=3*wt;}});return mw>0?Math.round((w/mw)*100):50;};return{bc:sub([[2,3],[6,2]]),av:sub([[3,2],[4,2]]),sd:sub([[4,2],[6,2],[8,2]]),ae:sub([[5,2],[6,1.5],[7,1]]),sr:sub([[0,1],[1,1.5],[2,1],[8,1.5]])};}
-function maturity(s){if(s>=90)return{label:'Highly Controlled',color:'#1a9958'};if(s>=75)return{label:'Strong Foundation',color:'#2b79cf'};if(s>=60)return{label:'Partially Controlled',color:'#e6920a'};if(s>=40)return{label:'Operationally Exposed',color:'#e67a0a'};return{label:'High Risk / Low Control',color:'#d63b3b'};}
-function urgency(s){if(s>=75)return'Low–Moderate';if(s>=60)return'Moderate';if(s>=40)return'High';return'Very High';}
-function scColor(s){return s>=70?'#1a9958':s>=50?'#e6920a':'#d63b3b';}
-
-function getPlan(){
-  const si=ans[0],ba=ans[1],ad=ans[5],ar=ans[4],rp=ans[8];
-  if(si>=1||ba===3)return{name:'Enterprise',price:'Custom pricing',priceSub:'— volume pricing available',priceIntel:'Custom pricing — best suited to multi-site or procurement-led deployments.',action:'Discuss a multi-site pilot',actionUrl:'mailto:hello@docksync.app?subject=Enterprise%20Pilot%20Discussion',fit:'Enterprise Fit',why:"Your answers indicate multi-site complexity or scale that warrants an Enterprise discussion. DockSync Enterprise is designed for procurement-led deployments, network standardisation and organisations managing multiple sites.",feats:['Multiple warehouse sites','Volume pricing across network','Procurement-friendly deployment','Dedicated customer success manager','API & webhook access','Custom SLA & uptime guarantee'],monthlyEst:'Custom'};
-  if(ba>=2||ad>=2||ar<=1||rp<=1)return{name:'Growth',price:'£179',priceSub:'/month + VAT · unlimited bays',priceIntel:'Estimated from £179/month + VAT.',action:'Start free 30-day trial',actionUrl:'https://www.docksync.app/contact.html',fit:'Strong Fit',why:"Your operation shows the hallmarks of a site that has outgrown informal coordination. Growth is the recommended plan for serious warehouse, logistics, 3PL, retail and distribution operations — unlimited bays, configurable booking rules, supplier accountability tools and priority support.",feats:['1 warehouse, unlimited bays','Custom booking rules & windows','Configurable supplier reminders','Supplier completion rate scoring','Priority email & chat support','Bay-level booking restrictions'],monthlyEst:'£179'};
-  return{name:'Starter',price:'£79',priceSub:'/month + VAT · up to 8 bays',priceIntel:'Estimated from £79/month + VAT.',action:'Start free 30-day trial',actionUrl:'https://www.docksync.app/contact.html',fit:'Good Fit',why:"Based on your answers, Starter is the natural entry point — replacing informal processes with controlled self-booking, a live bay view and supplier performance data, with room to scale.",feats:['1 warehouse, up to 8 bays','Supplier self-booking portal','Booking calendar (month/week/day)','QR code driver check-in','Live bay dashboard & 6 KPIs','Supplier performance reports'],monthlyEst:'£79'};
-}
-
-function getRisks(){const pool=[];if(ans[2]<=1)pool.push({s:3-ans[2]*0.8,t:'Manual Booking Dependency',d:'Delivery coordination through calls, emails and spreadsheets creates compounding errors, missed slots and admin overhead that grows with your supplier base.'});if(ans[3]<=1)pool.push({s:2-ans[3],t:'Limited Inbound Visibility',d:"Without a reliable view of tomorrow's inbound plan, resource planning is reactive and labour cannot be aligned in advance."});if(ans[4]<=1)pool.push({s:2-ans[4],t:'Weak Arrival Compliance',d:'Frequent out-of-window arrivals indicate supplier and carrier discipline is not being enforced, creating unpredictable dock demand and congestion.'});if(ans[5]>=2)pool.push({s:ans[5],t:'High Admin Overhead',d:"Daily booking admin at your current level represents a direct operational cost and creates a bottleneck that limits the team's capacity for higher-value work."});if(ans[6]<=1)pool.push({s:2-ans[6],t:'No Structured Self-Booking',d:'When suppliers cannot self-book, your team absorbs the full coordination burden for every delivery — the primary driver of booking-related admin time.'});if(ans[7]<=1)pool.push({s:2-ans[7],t:'Manual Driver Check-In',d:'Paper-based or disconnected check-in creates gatehouse bottlenecks, poor arrival data and a gap between booking records and actual arrival events.'});if(ans[8]<=1)pool.push({s:2-ans[8],t:'Reporting Blind Spots',d:'Without consistent supplier performance data, patterns of poor compliance go unaddressed and there is no objective basis for supplier accountability.'});if(ans[0]>=1)pool.push({s:ans[0]+1,t:'Multi-Site Control Gap',d:'Coordinating inbound across multiple sites without a unified booking platform increases inconsistency and reduces comparative visibility.'});if(ans[1]>=2)pool.push({s:ans[1],t:'Bay Capacity Pressure',d:'At 9 or more bays, manual scheduling creates meaningful risk of bay conflicts, unplanned delays and inefficient labour allocation during peak periods.'});pool.sort((a,b)=>b.s-a.s);return pool.slice(0,3);}
-
-function getOpp(subs){const areas=[{k:'bc',lb:'Booking Control',s:subs.bc},{k:'av',lb:'Arrival Visibility',s:subs.av},{k:'sd',lb:'Supplier Discipline',s:subs.sd},{k:'ae',lb:'Admin Efficiency',s:subs.ae},{k:'sr',lb:'Scalability',s:subs.sr}];const w=areas.sort((a,b)=>a.s-b.s)[0];const m={bc:{sl:'Booking Control',t:'Move bookings into a controlled self-booking channel',d:'Replacing email and phone-based booking with a structured supplier portal is typically the single highest-impact change — removing admin bottleneck, creating a reliable record and enabling enforcement of booking windows from day one.'},av:{sl:'Arrival Visibility',t:"Create one reliable view of tomorrow's inbound plan",d:'Establishing a confirmed, supplier-visible booking calendar eliminates the last-minute scramble for delivery information and dramatically improves labour planning and dock allocation.'},sd:{sl:'Supplier Discipline',t:'Introduce booking windows, reminders and completion tracking',d:'Supplier compliance improves quickly when expectations are formalised and tracked. Automated reminders and a visible completion rate metric can shift supplier behaviour within the first week.'},ae:{sl:'Admin Efficiency',t:'Reduce repetitive admin by enabling supplier self-booking',d:'Most daily admin time is driven by bookings suppliers could self-manage. Redirecting that coordination through an automated portal typically reduces admin time by 60–80% within the first month.'},sr:{sl:'Scalability',t:'Establish a scalable booking framework before volume increases',d:'Structuring the booking and check-in process before headcount or supplier volume grows is significantly easier than retrofitting it under pressure.'}};return{shortLabel:w.lb,...m[w.k]};}
-
-function getFocus(){const steps=[];const q3=ans[2],q4=ans[3],q5=ans[4],q6=ans[5],q7=ans[6],q9=ans[8];if(q7<=1)steps.push({w:'Week 1–2',t:'Move supplier bookings out of shared inboxes',d:'Set up your DockSync supplier portal and share booking links with your top suppliers. Most operations see full adoption within two weeks when the link is shared proactively.'});else if(q3<=2)steps.push({w:'Week 1–2',t:'Migrate existing bookings to a centralised calendar',d:'Import or recreate your active booking schedule in DockSync so the team has one authoritative view. Even basic calendar visibility reduces coordination calls immediately.'});else steps.push({w:'Week 1–2',t:"Audit your booking process against DockSync's capabilities",d:"Map your existing booking rules, time windows and bay allocations to DockSync's configuration. Identify where manual workarounds can be eliminated."});if(q4<=1||q5<=1)steps.push({w:'Week 2–3',t:'Set booking windows and activate supplier reminders',d:'Define arrival windows for each bay and supplier category. Enable automated reminders 24 and 2 hours before each booking. This typically reduces no-shows and late arrivals within the first fortnight.'});else steps.push({w:'Week 2–3',t:'Activate QR check-in and brief the gate team',d:'Deploy QR check-in at your gatehouse. Check-in data feeds directly into arrival reporting, giving you a live record from day one.'});if(q9<=1)steps.push({w:'Week 3–4',t:'Start measuring supplier completion rate and on-time arrivals',d:'Run your first supplier performance report at the end of week four. Identify the three suppliers with the lowest completion rates and use the data as the basis for a direct conversation.'});else if(q6>=2)steps.push({w:'Week 3–4',t:'Review remaining manual admin and eliminate root causes',d:'After two weeks of self-booking adoption, audit what manual coordination remains. Most residual admin is addressable through booking rule configuration or supplier communication.'});else steps.push({w:'Week 3–4',t:'Review 30-day performance data and set benchmarks',d:'Use data from your first month to establish baseline KPIs: on-time rate, completion rate, avg admin time. These become the metrics for ongoing improvement.'});return steps;}
-
-function getDiag(score,subs,plan){const paras=[];const q1=ans[0],q2=ans[1],q3=ans[2],q4=ans[3],q5=ans[4],q6=ans[5],q7=ans[6],q9=ans[8];if(score<40)paras.push(`Your answers indicate an operation running largely on informal coordination — phone calls, shared inboxes and reactive scheduling. <strong>The exposure here is real:</strong> manual processes carry hidden costs in time, errors and supplier relationships that compound over time.`);else if(score<60)paras.push(`Your operation has some structure in place, but the answers indicate meaningful gaps in inbound control. <strong>The risk at this maturity level</strong> is incremental deterioration — processes that work under normal conditions tend to fail when volume spikes or a key team member is absent.`);else if(score<75)paras.push(`The assessment suggests a reasonably controlled operation with identifiable improvement areas. You have likely invested in some scheduling structure, but gaps — probably in supplier discipline, reporting depth or advance visibility — create avoidable friction. <strong>The opportunity here is efficiency rather than crisis response.</strong>`);else paras.push(`Your answers indicate a well-run operation with strong foundational controls. DockSync is likely to add incremental value — around data quality, supplier accountability and booking workflow efficiency — rather than solving acute operational problems.`);if(q3===0)paras.push(`The booking process relies on calls, emails or spreadsheets — meaning every delivery requires active team coordination. There is no systematic record of supplier commitments, no automated reminders and no enforcement of booking windows. <strong>This is typically the highest-value problem to solve first.</strong>`);else if(q3===1)paras.push(`There is some booking structure in place, but it appears informal. The gap between having a schedule and having a controlled process is where most operational friction lives.`);else if(q3===2)paras.push(`Your WMS, TMS or ERP includes dock scheduling capability, but manual workarounds suggest a gap between what the system was designed for and what the operation actually demands — a common situation in growing operations.`);if(q4<=1&&q5<=1)paras.push(`Both inbound visibility and arrival compliance are flagged as concerns. <strong>Limited advance notice</strong> makes it structurally impossible to resource effectively. Combined with frequent out-of-window arrivals, this indicates that supplier parameters have not been effectively enforced.`);else if(q4<=1)paras.push(`Advance visibility of tomorrow's inbound plan is a weak point. Even partial visibility — a confirmed booking calendar that suppliers are held to — tends to have a significant stabilising effect within the first few weeks of adoption.`);else if(q5<=1)paras.push(`Frequent early or late arrivals suggest supplier discipline is not being actively enforced. This is typically a symptom of a booking process that does not provide automated reminders or measure compliance.`);if(q6>=2){const tl=['','','1.5–3 hours','3+ hours'][q6];paras.push(`With ${tl} of daily admin time spent on booking coordination, there is a clear and measurable cost embedded in the current process. A self-booking platform removes the majority of this workload structurally — by eliminating the need for coordination in the first place.`);}if(q9<=1)paras.push(`Supplier performance is not being measured reliably. Without consistent data, patterns of late arrivals and missed bookings go unaddressed — making it difficult to identify which supplier relationships carry the most operational risk.`);return paras;}
-
-function getROI(plan){const pts=[];if(ans[5]>=2)pts.push('reduce daily admin time spent on manual booking coordination');if(ans[6]<=1)pts.push('eliminate team coordination burden through structured supplier self-booking');if(ans[4]<=1)pts.push('improve supplier arrival compliance through confirmed booking windows');if(ans[8]<=1)pts.push('introduce supplier performance visibility to support accountability');pts.push('increase advance visibility of the inbound delivery plan');return`Based on your answers, DockSync is likely to help ${pts.slice(0,3).join(', ')}. ${plan.priceIntel} Compared with the likely hidden cost of manual coordination, the recommended plan is designed to be a low-friction operational control layer rather than a major systems project.`;}
-
-function leadQuality(){let s=0;if(ans[0]>=1)s+=3;if(ans[1]>=2)s+=2;if(ans[1]===3)s+=1;if(ans[5]>=2)s+=2;if(ans[4]<=1)s+=2;if(ans[2]===0)s+=2;if(ans[9]===2||ans[9]===3)s+=2;if(contact.title&&/(director|manager|head|vp|coo|cto|operations|logistics)/i.test(contact.title))s+=2;if(ans[0]===3)s+=2;if(ans[0]>=2||ans[1]===3)return'Enterprise';if(s>=8)return'Hot';if(s>=5)return'Warm';return'Cold';}
-
-function buildReport(){
-  const score=calcTotal(),subs=calcSubs(),mat=maturity(score),plan=getPlan(),risks=getRisks(),opp=getOpp(subs),focus=getFocus(),diag=getDiag(score,subs,plan),roi=getROI(plan),lq=leadQuality();
-  document.getElementById('rhNm').textContent=`${contact.name} · ${contact.company}`;
-  const circ=389.6,offset=circ-(score/100)*circ,fill=document.getElementById('scFill');
-  fill.style.stroke=mat.color;setTimeout(()=>{fill.style.strokeDashoffset=offset;},100);
-  let cur=0;const iv=setInterval(()=>{cur=Math.min(cur+2,score);document.getElementById('scN').textContent=cur;if(cur>=score)clearInterval(iv);},18);
-  document.getElementById('matV').textContent=mat.label;document.getElementById('matV').style.color=mat.color;
-  document.getElementById('hrV').textContent=risks[0]?risks[0].t:'—';
-  document.getElementById('foV').textContent=opp.shortLabel;
-  document.getElementById('tPlan').textContent=plan.name;
-  document.getElementById('tPrice').textContent=plan.price+(plan.name!=='Enterprise'?plan.priceSub:'');
-  document.getElementById('tAction').textContent=plan.action;
-  document.getElementById('tUrg').textContent=urgency(score);
-  document.getElementById('tFit').textContent=plan.fit;
-
-  const ssData=[{lb:'Booking Control',s:subs.bc},{lb:'Arrival Visibility',s:subs.av},{lb:'Supplier Discipline',s:subs.sd},{lb:'Admin Efficiency',s:subs.ae},{lb:'Scalability',s:subs.sr}];
-  document.getElementById('ssGrid').innerHTML=ssData.map(d=>{const c=scColor(d.s);return`<div class="ss"><div class="ss-n" style="color:${c}">${d.s}</div><div class="ss-bar"><div class="ss-bar-f" style="width:0%;background:${c}" data-w="${d.s}%"></div></div><div class="ss-lb">${d.lb}</div></div>`;}).join('');
-  setTimeout(()=>{document.querySelectorAll('.ss-bar-f').forEach(b=>{b.style.width=b.dataset.w;});},200);
-  document.getElementById('diagEl').innerHTML=diag.map(p=>`<p>${p}</p>`).join('');
-  document.getElementById('rgEl').innerHTML=risks.map(r=>`<div class="rc"><div class="rc-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><div class="rc-t">${r.t}</div><div class="rc-d">${r.d}</div></div>`).join('');
-  document.getElementById('oppEl').innerHTML=`<div class="opp-ic"><svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div><div><div class="opp-t">${opp.t}</div><div class="opp-d">${opp.d}</div></div>`;
-  document.getElementById('planEl').innerHTML=`<div class="plan-badge">Recommended for your operation</div><div class="plan-n">${plan.name}</div><div class="plan-p">${plan.name==='Enterprise'?'Custom':(plan.price+'<sub>'+plan.priceSub+'</sub>')}</div><div class="plan-why">${plan.why}</div><div class="plan-fs">${plan.feats.map(f=>`<div class="pf"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>${f}</div>`).join('')}</div><div class="plan-com">Compared with the likely hidden cost of manual coordination, the ${plan.name} plan is designed to be a low-friction operational control layer rather than a major systems project.</div>`;
-  document.getElementById('focusEl').innerHTML=`<div class="focus-steps">${focus.map(f=>`<div class="fstep"><div class="fstep-w">${f.w}</div><div><div class="fstep-t">${f.t}</div><div class="fstep-d">${f.d}</div></div></div>`).join('')}</div>`;
-  document.getElementById('roiEl').textContent=roi;
-
-  const ctaEl=document.getElementById('ctaEl');
-  if(plan.name==='Enterprise'){ctaEl.innerHTML=`<div class="cta-t">Ready to discuss a pilot?</div><div class="cta-d">Your operation suggests multi-site or procurement-led requirements. Our team can structure a pilot discussion.</div><div class="cta-bs"><a href="mailto:hello@docksync.app?subject=Enterprise%20Pilot%20-%20${encodeURIComponent(contact.company)}" class="btn-p">Discuss a multi-site pilot</a><a href="https://www.docksync.app/contact.html" class="btn-sec">Start a free trial instead</a></div><div class="cta-note">hello@docksync.app · Response within one business day</div>`;}
-  else{ctaEl.innerHTML=`<div class="cta-t">Your next step</div><div class="cta-d">Start a free 30-day trial — full access, no payment required, no automatic billing.</div><div class="cta-bs"><a href="https://www.docksync.app/contact.html" class="btn-p">Start free 30-day trial</a><a href="mailto:hello@docksync.app?subject=15-min%20Walkthrough%20-%20${encodeURIComponent(contact.company)}" class="btn-sec">Book a 15-minute walkthrough</a></div><div class="cta-note">30-day trial · No card required · No automatic billing</div>`;}
-
-  /* keep a structured snapshot for the email + admin store */
-  lastReport={score:score,maturity:mat.label,planName:plan.name,planPrice:(plan.name==='Enterprise'?'Custom pricing':(plan.price+' '+plan.priceSub)),urgency:urgency(score),fit:plan.fit,risks:risks.map(r=>r.t),opp:opp.t,oppDesc:opp.d,focus:focus.map(f=>f.w+': '+f.t),action:plan.action,subs:subs};
-
-  try{const r={timestamp:new Date().toISOString(),contact,score,subScores:subs,maturity:mat.label,plan:plan.name,monthlyEst:plan.monthlyEst,leadQuality:lq,topRisks:risks.slice(0,3).map(r=>r.t),suggestedAction:plan.action,answers:ans.map((a,i)=>({q:Qs[i].text,a:a!==null?Qs[i].opts[a].t:'—'}))};const ex=JSON.parse(localStorage.getItem('ds_r')||'[]');ex.push(r);localStorage.setItem('ds_r',JSON.stringify(ex));}catch(e){}
-
-  document.getElementById('progBar').style.display='none';
-  document.getElementById('progRow').style.display='none';
-  show('rpt');
-}
-
-function openEmailModal(){
-  document.getElementById('modal-email').value=contact.email||'';
-  const st=document.getElementById('modal-status');st.textContent='';st.style.color='var(--ink3)';
-  document.getElementById('emailModal').classList.add('on');
-}
-function closeEmailModal(){document.getElementById('emailModal').classList.remove('on');}
-
-/* Build the branded HTML report body emailed to the visitor.
-   Uses inline styles + a table layout so it renders consistently
-   across Gmail, Outlook, Apple Mail, etc. */
-function buildEmailMessage(email){
-  const r=lastReport||{};
-  const esc=s=>String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-  const sCol=(r.score>=70?'#1a9958':(r.score>=50?'#e6920a':'#d63b3b'));
-  const company=contact.company?(' for '+esc(contact.company)):'';
-  const heading=(t)=>'<div style="font-family:Arial,Helvetica,sans-serif;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#e6920a;font-weight:bold;border-bottom:1px solid #efede9;padding-bottom:6px;margin:0 0 10px 0;">'+t+'</div>';
-  const risksHtml=(r.risks||[]).map((t,i)=>'<tr><td style="padding:5px 0;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.5;color:#3d3c3a;"><span style="color:#d63b3b;font-weight:bold;">'+(i+1)+'.</span>&nbsp;'+esc(t)+'</td></tr>').join('');
-  const focusHtml=(r.focus||[]).map(f=>'<tr><td style="padding:4px 0;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.5;color:#3d3c3a;">&bull;&nbsp;'+esc(f)+'</td></tr>').join('');
-
-  return ''+
-  '<div style="background:#f7f6f3;padding:24px 12px;font-family:Arial,Helvetica,sans-serif;">'+
-   '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:600px;margin:0 auto;background:#ffffff;border-radius:12px;overflow:hidden;border:1px solid #e6e4e0;">'+
-
-    /* Header */
-    '<tr><td style="background:#0d1b2e;padding:26px 32px;">'+
-      '<div style="font-family:Arial,Helvetica,sans-serif;font-size:22px;font-weight:bold;letter-spacing:1px;color:#ffffff;">DOCK<span style="color:#e6920a;">SYNC</span></div>'+
-      '<div style="font-family:Arial,Helvetica,sans-serif;color:#e6920a;font-size:11px;letter-spacing:2px;text-transform:uppercase;margin-top:6px;">Yard &amp; Dock Readiness Report</div>'+
-    '</td></tr>'+
-
-    /* Greeting */
-    '<tr><td style="padding:26px 32px 6px 32px;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.6;color:#3d3c3a;">'+
-      'Hi '+esc(contact.name||'there')+',<br><br>'+
-      'Thank you for completing the DockSync Yard &amp; Dock Readiness Check'+company+'. Here is your personalised operational health check.'+
-    '</td></tr>'+
-
-    /* Score */
-    '<tr><td style="padding:14px 32px;">'+
-      '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f7f6f3;border-radius:10px;"><tr>'+
-        '<td style="padding:18px 22px;width:120px;vertical-align:middle;text-align:center;">'+
-          '<span style="font-family:Arial,Helvetica,sans-serif;font-size:46px;font-weight:bold;color:'+sCol+';">'+esc(r.score)+'</span>'+
-          '<span style="font-family:Arial,Helvetica,sans-serif;font-size:15px;color:#9a9894;">/100</span><br>'+
-          '<span style="font-family:Arial,Helvetica,sans-serif;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#9a9894;">Readiness Score</span>'+
-        '</td>'+
-        '<td style="padding:18px 22px;vertical-align:middle;border-left:1px solid #e6e4e0;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.7;color:#3d3c3a;">'+
-          '<strong style="color:#111010;">Operational maturity:</strong> '+esc(r.maturity)+'<br>'+
-          '<strong style="color:#111010;">Urgency:</strong> '+esc(r.urgency)+
-        '</td>'+
-      '</tr></table>'+
-    '</td></tr>'+
-
-    /* Top risks */
-    '<tr><td style="padding:14px 32px 4px 32px;">'+heading('Top 3 Risk Areas')+
-      '<table role="presentation" width="100%" cellpadding="0" cellspacing="0">'+risksHtml+'</table>'+
-    '</td></tr>'+
-
-    /* Opportunity */
-    '<tr><td style="padding:14px 32px 4px 32px;">'+heading('Fastest Improvement Opportunity')+
-      '<div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.6;color:#3d3c3a;"><strong style="color:#111010;">'+esc(r.opp)+'</strong>'+(r.oppDesc?'<br>'+esc(r.oppDesc):'')+'</div>'+
-    '</td></tr>'+
-
-    /* Recommended plan */
-    '<tr><td style="padding:14px 32px;">'+
-      '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:2px solid #e6920a;border-radius:12px;"><tr><td style="padding:18px 22px;font-family:Arial,Helvetica,sans-serif;">'+
-        '<div style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#e6920a;font-weight:bold;margin-bottom:4px;">Recommended Plan</div>'+
-        '<div style="font-size:24px;font-weight:bold;color:#111010;">'+esc(r.planName)+'</div>'+
-        '<div style="font-size:15px;color:#e6920a;font-weight:bold;margin-top:2px;">'+esc(r.planPrice)+'</div>'+
-      '</td></tr></table>'+
-    '</td></tr>'+
-
-    /* First 30 days */
-    '<tr><td style="padding:4px 32px;">'+heading('Suggested First 30 Days')+
-      '<table role="presentation" width="100%" cellpadding="0" cellspacing="0">'+focusHtml+'</table>'+
-    '</td></tr>'+
-
-    /* Next step */
-    '<tr><td style="padding:14px 32px 0 32px;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.6;color:#3d3c3a;">'+
-      '<strong style="color:#111010;">Recommended next step:</strong> '+esc(r.action)+
-    '</td></tr>'+
-
-    /* CTA */
-    '<tr><td style="padding:22px 32px 28px 32px;text-align:center;">'+
-      '<a href="https://www.docksync.app" style="display:inline-block;background:#e6920a;color:#1a0900;text-decoration:none;font-family:Arial,Helvetica,sans-serif;font-weight:bold;font-size:15px;padding:14px 34px;border-radius:8px;">Start your free 30-day trial &rarr;</a>'+
-    '</td></tr>'+
-
-    /* Footer */
-    '<tr><td style="background:#f7f6f3;padding:20px 32px;border-top:1px solid #e6e4e0;text-align:center;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:1.6;color:#9a9894;">'+
-      'Built by DockSync &mdash; dock scheduling software for warehouses that want precision over chaos.<br>'+
-      '<a href="https://www.docksync.app" style="color:#e6920a;text-decoration:none;">www.docksync.app</a>'+
-    '</td></tr>'+
-
-   '</table>'+
-  '</div>';
-}
-
-function sendReport(){
-  const email=document.getElementById('modal-email').value.trim();
-  const status=document.getElementById('modal-status');
-  const btn=document.querySelector('#emailModal .btn-mp');
-
-  if(!email||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){
-    status.style.color='var(--red)';status.textContent='Please enter a valid email address.';return;
-  }
-  contact.email=email;
-
-  // Guard: keys not yet filled in
-  if(typeof emailjs==='undefined'||EMAILJS_PUBLIC_KEY==='YOUR_PUBLIC_KEY'||EMAILJS_SERVICE_ID==='YOUR_SERVICE_ID'||EMAILJS_TEMPLATE_ID==='YOUR_TEMPLATE_ID'){
-    status.style.color='var(--red)';
-    status.textContent='Email isn\'t configured yet — add your EmailJS keys in the code. For now, use the Save PDF button.';
+function load(){
+  const R=JSON.parse(localStorage.getItem('ds_r')||'[]');
+  document.getElementById('stT').textContent=R.length;
+  if(!R.length){
+    document.getElementById('lastUpd').textContent='No results stored yet.';
+    document.getElementById('tbody').innerHTML='<tr><td colspan="14" class="empty">No results yet.</td></tr>';
     return;
   }
-  // Guard: offline
-  if(!navigator.onLine){
-    status.style.color='var(--red)';
-    status.textContent='No internet connection. Your details are saved and DockSync will follow up — or use Save PDF now.';
-    return;
-  }
+  const pc={Starter:0,Growth:0,Enterprise:0};
+  R.forEach(r=>{if(pc[r.plan]!==undefined)pc[r.plan]++;});
+  document.getElementById('stS').textContent=pc.Starter;
+  document.getElementById('stG').textContent=pc.Growth;
+  document.getElementById('stE').textContent=pc.Enterprise;
+  document.getElementById('stH').textContent=R.filter(r=>r.leadQuality==='Hot').length;
+  document.getElementById('stEL').textContent=R.filter(r=>r.leadQuality==='Enterprise').length;
+  const last=new Date(R[R.length-1].timestamp);
+  document.getElementById('lastUpd').textContent='Last submission: '+last.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'});
 
-  const r=lastReport||{};
-  const params={
-    to_email:email,
-    to_name:contact.name||'',
-    company:contact.company||'',
-    subject:'Your DockSync Readiness Report'+(r.score!=null?' — '+r.score+'/100':''),
-    score:String(r.score!=null?r.score:''),
-    maturity:r.maturity||'',
-    plan:r.planName||'',
-    plan_price:r.planPrice||'',
-    message:buildEmailMessage(email)
-  };
-
-  const orig=btn.textContent;btn.disabled=true;btn.textContent='Sending…';
-  status.style.color='var(--ink3)';status.textContent='Sending your report…';
-
-  emailjs.send(EMAILJS_SERVICE_ID,EMAILJS_TEMPLATE_ID,params).then(function(){
-    btn.disabled=false;btn.textContent=orig;
-    closeEmailModal();
-    alert('Your report is on its way to '+email+'.\n\nPlease check your inbox (and your spam folder, just in case).');
-  }).catch(function(err){
-    btn.disabled=false;btn.textContent=orig;
-    status.style.color='var(--red)';
-    status.textContent='Sorry — something went wrong sending the email. Please try again, or use Save PDF.';
-    console.error('EmailJS error:',err);
-  });
+  document.getElementById('tbody').innerHTML=R.slice().reverse().map(r=>{
+    const d=new Date(r.timestamp);
+    const ds=d.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+    const ts=d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
+    const col=sc(r.score);
+    const ss=r.subScores||{};
+    const bars=['bc','av','sd','ae','sr'].map(k=>{
+      const v=ss[k]||50,c=sc(v),h=Math.max(4,Math.round(v/100*18));
+      return`<div class="ssb" style="height:${h}px;background:${c}" title="${k.toUpperCase()}: ${v}"></div>`;
+    }).join('');
+    const risks=(r.topRisks||[]).join('<br>');
+    const lqCls={Cold:'lqC',Warm:'lqW',Hot:'lqH',Enterprise:'lqE'}[r.leadQuality]||'lqC';
+    const planCls={Starter:'tS',Growth:'tG',Enterprise:'tE'}[r.plan]||'tS';
+    return`<tr>
+      <td style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#4e4c49;white-space:nowrap">${ds}<br>${ts}</td>
+      <td style="color:#efede9;font-weight:500;white-space:nowrap">${r.contact.name}</td>
+      <td style="font-size:11px;color:#4e4c49">${r.contact.title||'—'}</td>
+      <td style="white-space:nowrap">${r.contact.company}</td>
+      <td style="font-family:'JetBrains Mono',monospace;font-size:10px"><a href="mailto:${r.contact.email}" style="color:#e6920a;text-decoration:none">${r.contact.email}</a></td>
+      <td><div class="sc" style="background:${col}">${r.score}</div></td>
+      <td style="font-size:11px">${r.maturity||'—'}</td>
+      <td><div class="ssbars" title="BC·AV·SD·AE·SR">${bars}</div><div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#4e4c49;margin-top:3px">${['bc','av','sd','ae','sr'].map(k=>ss[k]||'?').join('·')}</div></td>
+      <td><span class="tag ${planCls}">${r.plan}</span></td>
+      <td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#e6920a">${r.monthlyEst||'—'}</td>
+      <td class="risks-cell">${risks||'—'}</td>
+      <td><span class="lq ${lqCls}">${r.leadQuality||'—'}</span></td>
+      <td style="font-size:11px;color:#b8b4ae">${r.suggestedAction||'—'}</td>
+      <td style="color:${r.contact.consent?'#1a9958':'#4e4c49'}">${r.contact.consent?'✓':'—'}</td>
+    </tr>`;
+  }).join('');
 }
 
-document.getElementById('emailModal').addEventListener('click',function(ev){if(ev.target===this)closeEmailModal();});
+function buildCSV(rows){
+  const hdrs=['Timestamp','Name','Title','Company','Email','Score','Maturity',
+    'Booking Control','Arrival Visibility','Supplier Discipline','Admin Efficiency','Scalability',
+    'Plan','Monthly Est','Top Risk 1','Top Risk 2','Top Risk 3',
+    'Lead Quality','Suggested Action','Consent',
+    'Q1 Sites','Q2 Bays','Q3 Booking','Q4 Visibility','Q5 Arrivals',
+    'Q6 Admin Time','Q7 Self-Book','Q8 Check-In','Q9 Reporting','Q10 Context'];
+  const body=rows.map(r=>{
+    const ss=r.subScores||{};
+    const tr=r.topRisks||[];
+    const aq=r.answers||[];
+    return[
+      r.timestamp,r.contact.name,r.contact.title||'',r.contact.company,r.contact.email,
+      r.score,r.maturity||'',
+      ss.bc||'',ss.av||'',ss.sd||'',ss.ae||'',ss.sr||'',
+      r.plan,r.monthlyEst||'',
+      tr[0]||'',tr[1]||'',tr[2]||'',
+      r.leadQuality||'',r.suggestedAction||'',r.contact.consent?'Yes':'No',
+      ...aq.map(a=>a.a||'')
+    ];
+  });
+  return[hdrs,...body].map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(',')).join('\n');
+}
+
+function exportCSV(){
+  const R=JSON.parse(localStorage.getItem('ds_r')||'[]');
+  if(!R.length){alert('No results to export.');return;}
+  dl(buildCSV(R),`docksync-assessments-${new Date().toISOString().slice(0,10)}.csv`);
+}
+function exportHotCSV(){
+  const R=JSON.parse(localStorage.getItem('ds_r')||'[]').filter(r=>r.leadQuality==='Hot'||r.leadQuality==='Enterprise');
+  if(!R.length){alert('No hot or enterprise leads to export.');return;}
+  dl(buildCSV(R),`docksync-hot-leads-${new Date().toISOString().slice(0,10)}.csv`);
+}
+function dl(csv,name){
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
+  a.download=name;a.click();
+}
+function clearAll(){
+  if(confirm('Delete ALL stored assessment results? This cannot be undone.')){
+    localStorage.removeItem('ds_r');load();
+  }
+}
+load();
 </script>
 </body>
 </html>
