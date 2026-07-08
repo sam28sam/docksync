@@ -11,7 +11,7 @@
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'><rect x='4' y='4' width='52' height='52' rx='4' fill='%23e6920a'/><rect x='12' y='10' width='36' height='38' rx='2' fill='%230d1b2e'/><rect x='4' y='46' width='52' height='10' rx='2' fill='%230d1b2e'/></svg>">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'><rect x='6' y='6' width='48' height='48' rx='13' fill='none' stroke='%23f5a623' stroke-width='6'/><rect x='18' y='17' width='24' height='18' rx='4' fill='%23111010'/><rect x='20' y='38' width='20' height='5' rx='2' fill='%23111010'/></svg>">
 <title>DockSync Walkthrough — Your Onboarding Manual</title>
 <meta name="description" content="The complete DockSync onboarding manual. Follow every step from your welcome invite to supplier booking, driver QR check-in, texting drivers, marking loads complete, and managing suppliers and carriers on live data.">
 <link rel="canonical" href="https://www.docksync.app/demo.html">
@@ -31,7 +31,7 @@ a:hover{text-decoration:underline}
 .nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,0.96);backdrop-filter:blur(14px);border-bottom:1px solid rgba(0,0,0,0.08);box-shadow:0 1px 20px rgba(0,0,0,0.06)}
 .nav-i{display:flex;align-items:center;height:62px;gap:6px}
 .logo{display:flex;align-items:center;gap:9px;margin-right:28px;text-decoration:none}
-.logo-box{width:28px;height:28px;border:1.5px solid #e6920a;border-radius:5px;display:flex;align-items:center;justify-content:center;background:#fff}
+.logo-box{width:30px;height:30px;border:none;display:flex;align-items:center;justify-content:center;background:transparent}
 .logo-word{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:800;letter-spacing:0.05em;text-transform:uppercase;color:#111010}
 .nav-links{display:flex;align-items:center;gap:2px;flex:1}
 .nl{font-size:13px;color:#6a6860;padding:6px 11px;border-radius:6px;transition:all 0.15s;text-decoration:none;display:inline-block}
@@ -63,7 +63,7 @@ a:hover{text-decoration:underline}
 
 /* STEP COUNTER */
 .step-counter{background:#f7f6f3;padding:16px 0;border-bottom:1px solid rgba(0,0,0,0.08);position:sticky;top:62px;z-index:100}
-.sc-inner{display:flex;align-items:center;gap:0;overflow-x:auto;scrollbar-width:none}
+.sc-inner{display:flex;align-items:center;gap:0;overflow-x:auto;scrollbar-width:none;scroll-behavior:smooth;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 16px,#000 calc(100% - 46px),transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 16px,#000 calc(100% - 46px),transparent 100%)}
 .sc-inner::-webkit-scrollbar{display:none}
 .sc-step{display:flex;align-items:center;gap:8px;padding:8px 14px;cursor:pointer;white-space:nowrap;border-radius:8px;transition:all 0.2s;text-decoration:none}
 .sc-step:hover{background:rgba(0,0,0,0.04);text-decoration:none}
@@ -113,9 +113,10 @@ a:hover{text-decoration:underline}
 .app-mock{display:grid;grid-template-columns:196px 1fr;min-height:470px}
 .app-sidebar{background:#fff;border-right:1px solid rgba(0,0,0,0.08);padding:12px 10px;display:flex;flex-direction:column;gap:2px}
 .app-sidebar-logo{padding:6px 8px 14px;font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:800;color:#111010;display:flex;align-items:center;gap:8px;border-bottom:1px solid rgba(0,0,0,0.07);margin-bottom:8px}
-.app-sidebar-logo span{color:#e6920a}
-.lbox{width:26px;height:26px;background:#111010;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.lbox svg{width:15px;height:15px}
+.app-sidebar-logo .wm{color:#111010}
+.app-sidebar-logo .wm span{color:#e6920a}
+.lbox{width:28px;height:28px;background:transparent;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.lbox svg{width:28px;height:28px}
 .app-nav-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;font-size:12.5px;color:#5a5854;cursor:pointer;transition:all 0.15s;white-space:nowrap}
 .app-nav-item svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
 .app-nav-item:hover{background:#f4f3f0;color:#111}
@@ -272,6 +273,7 @@ a:hover{text-decoration:underline}
 
 /* TWO COL */
 .two{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
+.two.t10{grid-template-columns:1.9fr 1fr}
 .two-flip{direction:rtl}.two-flip>*{direction:ltr}
 .side-h{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;text-transform:uppercase;color:#111010;margin-bottom:12px}
 .side-p{font-size:15px;color:#6a6860;line-height:1.75;margin-bottom:18px}
@@ -312,7 +314,7 @@ a:hover{text-decoration:underline}
 
 @media(max-width:900px){
   .nav-links{display:none}
-  .two{grid-template-columns:1fr;gap:32px}.two-flip{direction:ltr}
+  .two{grid-template-columns:1fr;gap:32px}.two.t10{grid-template-columns:1fr}.two-flip{direction:ltr}
   .app-mock{min-width:820px}
   .kpi-row{grid-template-columns:repeat(3,1fr)}
   .hero-stats{grid-template-columns:1fr 1fr}.hs{border-bottom:1px solid rgba(255,255,255,0.08)}
@@ -331,7 +333,7 @@ a:hover{text-decoration:underline}
   <div class="w"><div class="nav-i">
     <a href="index.html" class="logo">
       <div class="logo-box">
-        <svg viewBox="0 0 60 60" width="22" height="22" fill="none"><rect x="4" y="4" width="52" height="52" rx="4" fill="#e6920a"/><rect x="12" y="10" width="36" height="38" rx="2" fill="#0d1b2e"/><rect x="4" y="46" width="52" height="10" rx="2" fill="#0d1b2e"/></svg>
+        <svg viewBox="0 0 60 60" width="28" height="28" fill="none"><rect x="6" y="6" width="48" height="48" rx="13" stroke="#f5a623" stroke-width="5"/><rect x="18" y="17" width="24" height="18" rx="4" fill="#111010"/><rect x="20" y="38.5" width="20" height="4" rx="2" fill="#111010"/></svg>
       </div>
       <span class="logo-word"><span style="color:#111010">DOCK</span><span style="color:#e6920a">SYNC</span></span>
     </a>
@@ -358,12 +360,12 @@ a:hover{text-decoration:underline}
     <div class="bc"><a href="index.html">Home</a> <span style="color:#4e4c49">/</span> Walkthrough</div>
     <div class="hero-eye">Your onboarding manual</div>
     <h1 class="hero-h1">Everything, from<br>invite to <em>running<br>on data.</em></h1>
-    <p class="hero-desc">A complete, step-by-step walkthrough of DockSync — the same journey a new warehouse team follows on day one. Set up your schedule and bays, invite suppliers and carriers, take bookings, check drivers in by QR, text them from the dashboard, mark loads complete, and manage every supplier on real performance data.</p>
+    <p class="hero-desc">A complete, step-by-step walkthrough of DockSync — the same journey a new warehouse team follows on day one. Set up your schedule and bays, invite suppliers and carriers, take bookings, check drivers in by QR, text them from the dashboard, mark loads complete, and manage every supplier on real performance data. Each step takes a minute or two, and DockSync guides you the whole way — you'll be set up and taking bookings before you know it.</p>
     <div class="hero-stats">
-      <div class="hs"><div class="hs-num">14</div><div class="hs-lbl">Steps, start to finish</div></div>
+      <div class="hs"><div class="hs-num">Today</div><div class="hs-lbl">Up and running &mdash; guided all the way</div></div>
       <div class="hs"><div class="hs-num">2</div><div class="hs-lbl">Deliveries &amp; collections</div></div>
       <div class="hs"><div class="hs-num">0</div><div class="hs-lbl">Driver apps to install</div></div>
-      <div class="hs"><div class="hs-num">1</div><div class="hs-lbl">Live screen for the dock</div></div>
+      <div class="hs"><div class="hs-num">1</div><div class="hs-lbl">Live screen for the whole dock</div></div>
     </div>
   </div>
 </div>
@@ -442,7 +444,7 @@ a:hover{text-decoration:underline}
     <div class="mock-wrap"><div class="mock-bar"><div class="mock-dots"><div class="mock-dot" style="background:#f06058"></div><div class="mock-dot" style="background:#ffc130"></div><div class="mock-dot" style="background:#27c840"></div></div><div class="mock-url">app.docksync.app/operating-schedule</div></div>
       <div class="mock-scroll"><div class="app-mock">
         <div class="app-sidebar">
-          <div class="app-sidebar-logo"><div class="lbox"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="12" rx="1.5" fill="#fff"/><path d="M7 17v2M17 17v2M8 9h8M8 12h8" stroke="#111010" stroke-width="1.6" stroke-linecap="round"/></svg></div>Dock<span>Sync</span></div>
+          <div class="app-sidebar-logo"><div class="lbox"><svg viewBox="0 0 60 60" fill="none"><rect x="6" y="6" width="48" height="48" rx="13" stroke="#f5a623" stroke-width="5"/><rect x="18" y="17" width="24" height="18" rx="4" fill="#111010"/><rect x="20" y="38.5" width="20" height="4" rx="2" fill="#111010"/></svg></div><span class="wm">Dock<span>Sync</span></span></div>
           <div class="app-nav-item"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Dashboard</div>
           <div class="app-nav-item"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>Bookings</div>
           <div class="app-nav-item"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Calendar</div>
@@ -509,7 +511,7 @@ a:hover{text-decoration:underline}
     <div class="mock-wrap"><div class="mock-bar"><div class="mock-dots"><div class="mock-dot" style="background:#f06058"></div><div class="mock-dot" style="background:#ffc130"></div><div class="mock-dot" style="background:#27c840"></div></div><div class="mock-url">app.docksync.app/bay-management</div></div>
       <div class="mock-scroll"><div class="app-mock">
         <div class="app-sidebar">
-          <div class="app-sidebar-logo"><div class="lbox"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="12" rx="1.5" fill="#fff"/><path d="M7 17v2M17 17v2M8 9h8M8 12h8" stroke="#111010" stroke-width="1.6" stroke-linecap="round"/></svg></div>Dock<span>Sync</span></div>
+          <div class="app-sidebar-logo"><div class="lbox"><svg viewBox="0 0 60 60" fill="none"><rect x="6" y="6" width="48" height="48" rx="13" stroke="#f5a623" stroke-width="5"/><rect x="18" y="17" width="24" height="18" rx="4" fill="#111010"/><rect x="20" y="38.5" width="20" height="4" rx="2" fill="#111010"/></svg></div><span class="wm">Dock<span>Sync</span></span></div>
           <div class="app-nav-item"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Dashboard</div>
           <div class="app-nav-item"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>Bookings</div>
           <div class="app-nav-item"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Calendar</div>
@@ -557,7 +559,7 @@ a:hover{text-decoration:underline}
     <div class="mock-wrap"><div class="mock-bar"><div class="mock-dots"><div class="mock-dot" style="background:#f06058"></div><div class="mock-dot" style="background:#ffc130"></div><div class="mock-dot" style="background:#27c840"></div></div><div class="mock-url">app.docksync.app/users</div></div>
       <div class="mock-scroll"><div class="app-mock">
         <div class="app-sidebar">
-          <div class="app-sidebar-logo"><div class="lbox"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="12" rx="1.5" fill="#fff"/><path d="M7 17v2M17 17v2M8 9h8M8 12h8" stroke="#111010" stroke-width="1.6" stroke-linecap="round"/></svg></div>Dock<span>Sync</span></div>
+          <div class="app-sidebar-logo"><div class="lbox"><svg viewBox="0 0 60 60" fill="none"><rect x="6" y="6" width="48" height="48" rx="13" stroke="#f5a623" stroke-width="5"/><rect x="18" y="17" width="24" height="18" rx="4" fill="#111010"/><rect x="20" y="38.5" width="20" height="4" rx="2" fill="#111010"/></svg></div><span class="wm">Dock<span>Sync</span></span></div>
           <div class="app-nav-item"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Dashboard</div>
           <div class="app-nav-item"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>Bookings</div>
           <div class="app-nav-item"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Calendar</div>
@@ -598,7 +600,7 @@ a:hover{text-decoration:underline}
     <div class="mock-wrap"><div class="mock-bar"><div class="mock-dots"><div class="mock-dot" style="background:#f06058"></div><div class="mock-dot" style="background:#ffc130"></div><div class="mock-dot" style="background:#27c840"></div></div><div class="mock-url">app.docksync.app/suppliers</div></div>
       <div class="mock-scroll"><div class="app-mock">
         <div class="app-sidebar">
-          <div class="app-sidebar-logo"><div class="lbox"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="12" rx="1.5" fill="#fff"/><path d="M7 17v2M17 17v2M8 9h8M8 12h8" stroke="#111010" stroke-width="1.6" stroke-linecap="round"/></svg></div>Dock<span>Sync</span></div>
+          <div class="app-sidebar-logo"><div class="lbox"><svg viewBox="0 0 60 60" fill="none"><rect x="6" y="6" width="48" height="48" rx="13" stroke="#f5a623" stroke-width="5"/><rect x="18" y="17" width="24" height="18" rx="4" fill="#111010"/><rect x="20" y="38.5" width="20" height="4" rx="2" fill="#111010"/></svg></div><span class="wm">Dock<span>Sync</span></span></div>
           <div class="app-nav-item"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Dashboard</div>
           <div class="app-nav-item"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>Bookings</div>
           <div class="app-nav-item"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Calendar</div>
@@ -656,7 +658,7 @@ a:hover{text-decoration:underline}
     <div class="two">
       <div class="portal-mock">
         <div class="portal-header">
-          <svg viewBox="0 0 60 60" width="18" height="18" fill="none"><rect x="4" y="4" width="52" height="52" rx="4" fill="#e6920a"/><rect x="12" y="10" width="36" height="38" rx="2" fill="#0d1b2e"/><rect x="4" y="46" width="52" height="10" rx="2" fill="#0d1b2e"/></svg>
+          <svg viewBox="0 0 60 60" width="22" height="22" fill="none"><rect x="6" y="6" width="48" height="48" rx="13" stroke="#f5a623" stroke-width="5"/><rect x="18" y="17" width="24" height="18" rx="4" fill="#efede9"/><rect x="20" y="38.5" width="20" height="4" rx="2" fill="#efede9"/></svg>
           <div class="portal-logo">DOCK<span>SYNC</span> &mdash; Booking Portal</div>
         </div>
         <div class="portal-body">
@@ -757,7 +759,7 @@ a:hover{text-decoration:underline}
     <div class="mock-wrap"><div class="mock-bar"><div class="mock-dots"><div class="mock-dot" style="background:#f06058"></div><div class="mock-dot" style="background:#ffc130"></div><div class="mock-dot" style="background:#27c840"></div></div><div class="mock-url">app.docksync.app/calendar</div></div>
       <div class="mock-scroll"><div class="app-mock">
         <div class="app-sidebar">
-          <div class="app-sidebar-logo"><div class="lbox"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="12" rx="1.5" fill="#fff"/><path d="M7 17v2M17 17v2M8 9h8M8 12h8" stroke="#111010" stroke-width="1.6" stroke-linecap="round"/></svg></div>Dock<span>Sync</span></div>
+          <div class="app-sidebar-logo"><div class="lbox"><svg viewBox="0 0 60 60" fill="none"><rect x="6" y="6" width="48" height="48" rx="13" stroke="#f5a623" stroke-width="5"/><rect x="18" y="17" width="24" height="18" rx="4" fill="#111010"/><rect x="20" y="38.5" width="20" height="4" rx="2" fill="#111010"/></svg></div><span class="wm">Dock<span>Sync</span></span></div>
           <div class="app-nav-item"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Dashboard</div>
           <div class="app-nav-item"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>Bookings</div>
           <div class="app-nav-item active"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Calendar</div>
@@ -880,7 +882,7 @@ a:hover{text-decoration:underline}
 
 <!-- STEP 10 -->
 <div class="step-block" id="s10">
-  <div class="wc">
+  <div class="w">
     <div class="step-header">
       <div class="step-badge">Step 10</div>
       <div>
@@ -889,11 +891,11 @@ a:hover{text-decoration:underline}
         <div class="tip"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg><p>The text action is <strong>only available once a driver has checked in</strong> — that's how DockSync has their mobile number to message.</p></div>
       </div>
     </div>
-    <div class="two">
+    <div class="two t10">
       <div class="mock-wrap"><div class="mock-bar"><div class="mock-dots"><div class="mock-dot" style="background:#f06058"></div><div class="mock-dot" style="background:#ffc130"></div><div class="mock-dot" style="background:#27c840"></div></div><div class="mock-url">app.docksync.app/bookings</div></div>
         <div style="padding:16px;background:#f7f8fa">
           <div class="sec-lbl">Deliveries</div>
-          <div class="mock-scroll"><table class="app-table" style="min-width:560px">
+          <div class="mock-scroll"><table class="app-table" style="width:100%">
             <thead><tr><th>Booking ID</th><th>Company</th><th>Bay</th><th>Time Slot</th><th>Status</th><th>Actions</th></tr></thead>
             <tbody>
               <tr class="hot"><td><strong>BK-72</strong></td><td>Zepto</td><td>B2</td><td>11:00 &ndash; 12:00</td><td><span class="status-pill s-approved">Checked in</span></td><td><div class="act"><div class="act-ic" title="Document"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div class="act-ic msg" title="Text driver"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div><div class="act-ic" title="Edit"><svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.1 2.1 0 013 3L12 15l-4 1 1-4z"/></svg></div></div></td></tr>
@@ -959,7 +961,7 @@ a:hover{text-decoration:underline}
     <div class="mock-wrap"><div class="mock-bar"><div class="mock-dots"><div class="mock-dot" style="background:#f06058"></div><div class="mock-dot" style="background:#ffc130"></div><div class="mock-dot" style="background:#27c840"></div></div><div class="mock-url">app.docksync.app/dashboard</div></div>
       <div class="mock-scroll"><div class="app-mock">
         <div class="app-sidebar">
-          <div class="app-sidebar-logo"><div class="lbox"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="12" rx="1.5" fill="#fff"/><path d="M7 17v2M17 17v2M8 9h8M8 12h8" stroke="#111010" stroke-width="1.6" stroke-linecap="round"/></svg></div>Dock<span>Sync</span></div>
+          <div class="app-sidebar-logo"><div class="lbox"><svg viewBox="0 0 60 60" fill="none"><rect x="6" y="6" width="48" height="48" rx="13" stroke="#f5a623" stroke-width="5"/><rect x="18" y="17" width="24" height="18" rx="4" fill="#111010"/><rect x="20" y="38.5" width="20" height="4" rx="2" fill="#111010"/></svg></div><span class="wm">Dock<span>Sync</span></span></div>
           <div class="app-nav-item active"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Dashboard</div>
           <div class="app-nav-item"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>Bookings</div>
           <div class="app-nav-item"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Calendar</div>
@@ -1152,6 +1154,19 @@ document.addEventListener('DOMContentLoaded',function(){
     }
     var steps=['s1','s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14'];
     var scSteps=document.querySelectorAll('.sc-step');
+    var scInner=document.querySelector('.sc-inner');
+    var lastActive=-1;
+    function centerStep(idx){
+      try{
+        if(!scInner||!scSteps[idx])return;
+        var el=scSteps[idx];
+        var target=el.offsetLeft-(scInner.clientWidth/2)+(el.clientWidth/2);
+        var max=scInner.scrollWidth-scInner.clientWidth;
+        if(target<0)target=0; if(target>max)target=max;
+        if(scInner.scrollTo){scInner.scrollTo({left:target,behavior:'smooth'});}
+        else{scInner.scrollLeft=target;}
+      }catch(e){}
+    }
     if(scSteps&&scSteps.length>0){
       window.addEventListener('scroll',function(){
         try{
@@ -1162,6 +1177,7 @@ document.addEventListener('DOMContentLoaded',function(){
               scSteps.forEach(function(s){s.classList.remove('active','done');});
               for(var j=0;j<i;j++){if(scSteps[j])scSteps[j].classList.add('done');}
               if(scSteps[i])scSteps[i].classList.add('active');
+              if(i!==lastActive){lastActive=i;centerStep(i);}
               break;
             }
           }
