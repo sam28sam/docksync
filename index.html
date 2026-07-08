@@ -13,8 +13,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'><rect x='4' y='4' width='52' height='52' rx='4' fill='%23e6920a'/><rect x='12' y='10' width='36' height='38' rx='2' fill='%230d1b2e'/><rect x='4' y='46' width='52' height='10' rx='2' fill='%230d1b2e'/></svg>">
-<title>DockSync — Dock Scheduling Software | Stop Missed Slots & Waiting Trucks</title>
-<meta name="description" content="Replace spreadsheets, phone calls and missed delivery slots with one intelligent dock scheduling platform. Supplier self-booking, bay management, QR driver check-in, live reporting. Free 30-day trial.">
+<title>Dock Scheduling Software for Deliveries &amp; Collections | DockSync</title>
+<meta name="description" content="DockSync helps warehouses schedule deliveries and collections, manage bays, let suppliers self-book, check drivers in by QR code, send SMS instructions and export performance reports.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Barlow:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -156,6 +156,7 @@ section{padding:80px 0}
 .ppt p{font-size:14px;color:var(--dw3);line-height:1.6}
 
 /* ── APP MOCKUP ── */
+.app-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:var(--rl)}
 .app-frame{background:var(--dk3);border-radius:var(--rl);border:1px solid var(--dkline2);overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.3)}
 .app-chrome{background:var(--dk4);padding:9px 13px;border-bottom:1px solid var(--dkline);display:flex;align-items:center;gap:7px}
 .app-dots{display:flex;gap:5px}
@@ -163,17 +164,18 @@ section{padding:80px 0}
 .app-addr{flex:1;background:var(--dk5);border-radius:4px;margin:0 8px;padding:4px 10px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--dw4);display:flex;align-items:center;gap:5px}
 .app-addr svg{width:9px;height:9px;stroke:var(--green);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .app-inner{display:flex;height:420px;overflow:hidden}
-.app-sidebar{width:174px;background:var(--dk2);border-right:1px solid var(--dkline);flex-shrink:0;padding:10px 8px;display:flex;flex-direction:column;gap:2px}
-.app-logo-row{display:flex;align-items:center;gap:6px;padding:6px 8px 12px;border-bottom:1px solid var(--dkline);margin-bottom:6px}
-.app-logo-box{width:22px;height:22px;background:#4f46e5;border-radius:4px;display:flex;align-items:center;justify-content:center}
-.app-logo-box svg{width:11px;height:11px;stroke:#fff;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
-.app-logo-txt{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--dw)}
-.app-nav{display:flex;align-items:center;gap:7px;padding:7px 9px;border-radius:5px;font-size:11px;color:var(--dw3);cursor:pointer;transition:all .15s;white-space:nowrap}
+.app-sidebar{width:178px;background:#fff;border-right:1px solid rgba(0,0,0,.08);flex-shrink:0;padding:10px 8px;display:flex;flex-direction:column;gap:2px}
+.app-logo-row{display:flex;align-items:center;gap:6px;padding:6px 8px 12px;border-bottom:1px solid rgba(0,0,0,.07);margin-bottom:6px}
+.app-logo-box{width:22px;height:22px;background:#111010;border-radius:5px;display:flex;align-items:center;justify-content:center}
+.app-logo-box svg{width:12px;height:12px}
+.app-logo-txt{font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:800;letter-spacing:.02em;color:#111010}
+.app-logo-txt em{font-style:normal;color:var(--amber)}
+.app-nav{display:flex;align-items:center;gap:8px;padding:7px 9px;border-radius:6px;font-size:11px;color:#5a5854;cursor:pointer;transition:all .15s;white-space:nowrap}
 .app-nav svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
-.app-nav:hover{background:var(--dk3);color:var(--dw2)}
-.app-nav.sel{background:#4f46e5;color:#fff}
-.app-main{flex:1;background:#f0f2f5;overflow-y:auto;padding:14px 16px}
-.app-page-title{font-size:16px;font-weight:600;color:#111;margin-bottom:12px;font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.03em}
+.app-nav:hover{background:#f4f3f0;color:#111}
+.app-nav.sel{background:var(--amber);color:#fff}
+.app-main{flex:1;background:#f7f8fa;overflow:auto;padding:14px 16px}
+.app-page-title{font-size:17px;font-weight:700;color:#111;margin-bottom:12px;font-family:'Barlow Condensed',sans-serif}
 .kpi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:10px}
 .kpi-card{background:#fff;border-radius:7px;padding:9px 11px;border:1px solid rgba(0,0,0,.07);display:flex;align-items:center;gap:9px}
 .kpi-icon{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
@@ -181,7 +183,7 @@ section{padding:80px 0}
 .kpi-lbl{font-size:9px;color:#9a9894;margin-bottom:2px;letter-spacing:.03em}
 .kpi-val{font-size:14px;font-weight:600;color:#111}
 .app-sec-title{font-size:11px;font-weight:600;color:#3d3c3a;margin-bottom:5px;text-transform:uppercase;letter-spacing:.06em;font-family:'JetBrains Mono',monospace}
-.app-table{width:100%;border-collapse:collapse;background:#fff;border-radius:7px;overflow:hidden;border:1px solid rgba(0,0,0,.07)}
+.app-table{width:100%;min-width:540px;border-collapse:collapse;background:#fff;border-radius:7px;overflow:hidden;border:1px solid rgba(0,0,0,.07)}
 .app-table th{background:#f7f8fa;font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:#9a9894;padding:6px 9px;text-align:left;border-bottom:1px solid rgba(0,0,0,.07)}
 .app-table td{font-size:11px;color:#3d3c3a;padding:6px 9px;border-bottom:1px solid rgba(0,0,0,.05)}
 .app-table tr:last-child td{border-bottom:none}
@@ -189,6 +191,8 @@ section{padding:80px 0}
 .app-badge-g{background:#d4f3e6;color:#076640}
 .app-badge-a{background:#fff3d4;color:#9a6800}
 .app-badge-b{background:#dbeafe;color:#1d4ed8}
+.app-badge-n{background:#ecebe8;color:#6a6860}
+.app-badge-r{background:#fbe0e0;color:#b5341f}
 
 /* ── FEATURES ── */
 .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:52px}
@@ -272,7 +276,7 @@ section{padding:80px 0}
 .faq-item.open .faq-tog{background:var(--amberbg);border-color:var(--amberbdr)}
 .faq-item.open .faq-tog svg{stroke:var(--amber);transform:rotate(45deg)}
 .faq-a{font-size:15px;color:var(--ink3);line-height:1.7;max-height:0;overflow:hidden;transition:max-height .35s ease,padding .2s;padding-left:42px}
-.faq-item.open .faq-a{max-height:240px;padding-bottom:18px}
+.faq-item.open .faq-a{max-height:360px;padding-bottom:18px}
 
 /* ── FINAL CTA ── */
 .fc-inner{display:grid;grid-template-columns:1fr 400px;gap:64px;align-items:start}
@@ -311,6 +315,25 @@ section{padding:80px 0}
 .footer-btm-links a{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--dw4);transition:color .15s}
 .footer-btm-links a:hover{color:var(--dw2)}
 
+/* ── QR BULLETS ── */
+.qr-bullets{list-style:none;display:flex;flex-direction:column;gap:9px;margin:0 0 18px}
+.qr-bullets li{display:flex;align-items:center;gap:9px;font-size:14px;color:var(--ink2)}
+.qr-bullets li svg{width:13px;height:13px;stroke:var(--green);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+
+/* ── REPORTING ── */
+.rep-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:40px}
+.rep-item{display:flex;align-items:center;gap:10px;background:var(--bg);border:1px solid var(--line2);border-radius:var(--rl);padding:14px 16px;font-size:13px;color:var(--ink2);line-height:1.4}
+.rep-item svg{width:15px;height:15px;stroke:var(--amber);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.rep-punch{margin-top:26px;font-family:'Barlow Condensed',sans-serif;font-size:clamp(20px,2.4vw,26px);font-weight:700;text-transform:uppercase;color:var(--ink);line-height:1.15;max-width:760px}
+
+/* ── PRODUCT-PROOF (WHAT CHANGES) ── */
+.change-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:44px}
+.change-card{background:var(--bg);border-radius:var(--rl);border:1px solid var(--line2);padding:22px;display:flex;flex-direction:column;gap:8px}
+.change-ic{width:34px;height:34px;border-radius:var(--r);background:var(--amberbg);border:1px solid var(--amberbdr);display:flex;align-items:center;justify-content:center;margin-bottom:4px}
+.change-ic svg{width:16px;height:16px;stroke:var(--amber);fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.change-card h3{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;text-transform:uppercase;color:var(--ink)}
+.change-card p{font-size:13px;color:var(--ink3);line-height:1.6}
+
 /* ── SCROLL REVEAL ── */
 .rv{opacity:0;transform:translateY(20px);transition:opacity .55s ease,transform .55s ease}
 .rv.in{opacity:1;transform:translateY(0)}
@@ -321,17 +344,18 @@ section{padding:80px 0}
   .hero-stats{grid-template-columns:repeat(2,1fr)}
   .hstat:nth-child(2){border-right:none}
   .hstat:nth-child(n+3){border-top:1px solid var(--line)}
-  .prob-grid,.feat-grid,.proof-grid,.team-grid{grid-template-columns:1fr 1fr}
+  .prob-grid,.feat-grid,.proof-grid,.team-grid,.change-grid{grid-template-columns:1fr 1fr}
+  .rep-grid{grid-template-columns:1fr 1fr}
   .pricing-grid{grid-template-columns:1fr;max-width:400px;margin-left:auto;margin-right:auto}
   .qr-highlight{grid-template-columns:1fr}
   .footer-top{grid-template-columns:1fr 1fr}
   .nav-links{display:none}
-  .app-sidebar{display:none}
+  .app-frame{min-width:760px}
 }
 @media(max-width:600px){
   section{padding:56px 0}
   .dark-zone{padding:56px 0}
-  .prob-grid,.feat-grid,.proof-grid,.team-grid{grid-template-columns:1fr}
+  .prob-grid,.feat-grid,.proof-grid,.team-grid,.change-grid,.rep-grid{grid-template-columns:1fr}
   .footer-top{grid-template-columns:1fr}
 }
 </style>
@@ -366,10 +390,10 @@ section{padding:80px 0}
       <div class="hero-cols">
         <div>
           <div class="eyebrow">Dock scheduling software</div>
-          <h1 class="d-xl hero-h1">Zero<br>missed<br><em>slots.</em></h1>
-          <p class="hero-desc">Replace spreadsheets, phone calls and manual coordination with one intelligent dock scheduling platform. Every bay. Every booking. In real time.</p>
+          <h1 class="d-xl hero-h1">Stop running<br>your dock<br>from an <em>inbox.</em></h1>
+          <p class="hero-desc">Create bookings, let suppliers self-book, manage deliveries and collections, check drivers in by QR code, send arrival instructions by SMS, and see every bay from one live screen.</p>
           <div class="hero-ctas">
-            <a href="contact.html" class="btn btn-amber btn-lg">Start free — 30 days</a>
+            <a href="contact.html" class="btn btn-amber btn-lg">Start free for 30 days</a>
             <a href="demo.html" class="btn btn-outline btn-lg">
               <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16" fill="currentColor" stroke="none"/></svg>
               See the product
@@ -377,8 +401,9 @@ section{padding:80px 0}
           </div>
           <div class="hero-micro">
             <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>No card needed</span>
-            <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Live in 5 minutes</span>
-            <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>No IT required</span>
+            <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Live quickly</span>
+            <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>No IT project</span>
+            <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Built for real warehouse teams</span>
           </div>
         </div>
         <!-- HERO FORM -->
@@ -404,10 +429,10 @@ section{padding:80px 0}
       </div>
       <!-- STATS BAR -->
       <div class="hero-stats">
-        <div class="hstat"><div class="hstat-num">400<em>+</em></div><div class="hstat-lbl">EMEA Warehouse<br>teams consulted</div></div>
         <div class="hstat"><div class="hstat-num">4.2<em>h</em></div><div class="hstat-lbl">Admin saved per<br>team, per day</div></div>
-        <div class="hstat"><div class="hstat-num">98<em>%</em></div><div class="hstat-lbl">On-time accuracy<br>after 30 days¹</div></div>
         <div class="hstat"><div class="hstat-num">&lt;5<em>min</em></div><div class="hstat-lbl">Setup to first<br>live booking</div></div>
+        <div class="hstat"><div class="hstat-num">0</div><div class="hstat-lbl">Spreadsheets<br>needed</div></div>
+        <div class="hstat"><div class="hstat-num">1</div><div class="hstat-lbl">Screen for<br>every bay</div></div>
       </div>
     </div>
   </div>
@@ -415,7 +440,7 @@ section{padding:80px 0}
 
 <!-- MARQUEE -->
 <div class="mq-sec" aria-hidden="true">
-  <p class="mq-label">Industries using DockSync</p>
+  <p class="mq-label">Built for operations like these</p>
   <div class="mq-track">
     <div class="mq-items">
       <div class="mq-item">Retail &amp; FMCG</div><div class="mq-item">Pharmaceutical</div>
@@ -436,12 +461,12 @@ section{padding:80px 0}
 <section class="rv" style="background:var(--bg)">
   <div class="wrap">
     <div class="eyebrow">The problem</div>
-    <h2 class="d-lg" style="max-width:560px">Manual scheduling costs you every day</h2>
+    <h2 class="d-lg" style="max-width:640px">This is what dock chaos looks like.</h2>
     <div class="prob-grid">
-      <div class="prob-cell"><div class="prob-n">01 / 04</div><div class="prob-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><h3>Missed &amp; late slots</h3><p>Manual booking creates missed time slots, idle drivers queuing at your gate, and constant rescheduling that costs money every single day.</p></div>
-      <div class="prob-cell"><div class="prob-n">02 / 04</div><div class="prob-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><h3>Unpredictable inbound</h3><p>Peaks and gaps create bottlenecks, under-utilised labour, and operational stress your team cannot plan around. Visibility ends at the inbox.</p></div>
-      <div class="prob-cell"><div class="prob-n">03 / 04</div><div class="prob-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><h3>Email &amp; phone chaos</h3><p>Your team is a human switchboard. Endless supplier back-and-forth wastes hours daily and creates errors no spreadsheet can catch in time.</p></div>
-      <div class="prob-cell"><div class="prob-n">04 / 04</div><div class="prob-icon"><svg viewBox="0 0 24 24"><path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z"/><polyline points="13 2 13 9 20 9"/></svg></div><h3>Zero data &amp; visibility</h3><p>No reporting. No KPIs. No way to know if today is better than last week. Your dock runs on instinct when it should run on data.</p></div>
+      <div class="prob-cell"><div class="prob-n">01 / 04</div><div class="prob-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><h3>Outlook is not a dock schedule</h3><p>Bookings arrive by email, phone, WhatsApp and supplier chase-ups. Nobody knows which version is the real plan.</p></div>
+      <div class="prob-cell"><div class="prob-n">02 / 04</div><div class="prob-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><h3>Deliveries and collections collide</h3><p>Inbound, outbound and collections all compete for the same bays. Peaks appear too late and the yard absorbs the mess.</p></div>
+      <div class="prob-cell"><div class="prob-n">03 / 04</div><div class="prob-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg></div><h3>Gatehouse pressure never stops</h3><p>Drivers arrive early, late or together. Your team is stuck answering calls instead of controlling the flow.</p></div>
+      <div class="prob-cell"><div class="prob-n">04 / 04</div><div class="prob-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><h3>No data. No supplier accountability.</h3><p>If it is not tracked, it becomes opinion. Missed slots, delays, unload times and supplier behaviour stay hidden.</p></div>
     </div>
   </div>
 </section>
@@ -452,15 +477,17 @@ section{padding:80px 0}
     <div class="prod-header">
       <div>
         <div class="eyebrow" style="color:var(--amber)">The platform</div>
-        <h2 class="d-lg" style="color:var(--dw)">One screen.<br>Total control.</h2>
+        <h2 class="d-lg" style="color:var(--dw)">One live<br>dock control<br>screen.</h2>
+        <p style="font-size:15px;color:var(--dw3);line-height:1.7;margin-top:16px;max-width:440px">DockSync replaces the inbox, spreadsheet and whiteboard with one live dock control screen. Create the booking yourself, let suppliers book controlled slots, check drivers in by QR code, message them after arrival, and report on what actually happened.</p>
       </div>
       <div class="ppts">
-        <div class="ppt"><div class="ppt-n">01</div><div><h4>Live bay dashboard</h4><p>6 KPIs on login: avg unload time, bookings today, occupancy rate, pending actions, missed and delayed bookings.</p></div></div>
-        <div class="ppt"><div class="ppt-n">02</div><div><h4>Full booking management</h4><p>Every booking tracked by ID, supplier, bay, pallet count, date, time slot, approval status, and schedule track.</p></div></div>
-        <div class="ppt"><div class="ppt-n">03</div><div><h4>Supplier performance data</h4><p>On-time %, completion rates, and activity history for every supplier. Data for real conversations.</p></div></div>
+        <div class="ppt"><div class="ppt-n">01</div><div><h4>Deliveries &amp; collections in one view</h4><p>Inbound goods-in and outbound collections booked against the same live bay schedule — nothing hidden in an inbox.</p></div></div>
+        <div class="ppt"><div class="ppt-n">02</div><div><h4>QR check-in &amp; driver SMS</h4><p>Drivers scan on arrival, check-in is logged instantly, and your team sends short SMS instructions straight from the dashboard.</p></div></div>
+        <div class="ppt"><div class="ppt-n">03</div><div><h4>Supplier performance reporting</h4><p>On-time %, completion rates, delays and activity history for every supplier — with CSV export when you need it.</p></div></div>
       </div>
     </div>
     <!-- APP MOCKUP — replicating real DockSync UI -->
+    <div class="app-scroll">
     <div class="app-frame">
       <div class="app-chrome">
         <div class="app-dots">
@@ -476,44 +503,46 @@ section{padding:80px 0}
       <div class="app-inner">
         <div class="app-sidebar">
           <div class="app-logo-row">
-            <div class="app-logo-box"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" width="22" height="20" rx="1.5" fill="#0d1b2e" stroke="#0d1b2e"/><rect x="4" y="3" width="16" height="15" rx="1" fill="white"/><rect x="8" y="6" width="8" height="2" rx="1" fill="#2b79cf"/><rect x="6" y="10" width="10" height="2" rx="1" fill="#2b79cf"/><rect x="8" y="14" width="8" height="2" rx="1" fill="#2b79cf"/><path d="M8 18 L12 22 L16 18" fill="#0d1b2e"/></svg></div>
-            <span class="app-logo-txt">DockSync</span>
+            <div class="app-logo-box"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="4" width="18" height="14" rx="1.5" fill="#fff"/><path d="M7 18v2M17 18v2M9 8h6M8 12h8" stroke="#111010" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            <span class="app-logo-txt">Dock<em>Sync</em></span>
           </div>
-          <div class="app-nav sel"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Dashboard</div>
-          <div class="app-nav"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Bookings</div>
+          <div class="app-nav"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Dashboard</div>
+          <div class="app-nav sel"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>Bookings</div>
           <div class="app-nav"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Calendar</div>
-          <div class="app-nav"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="1"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/></svg>Bay Mgmt</div>
-          <div class="app-nav"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/></svg>Suppliers</div>
-          <div class="app-nav"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Schedule</div>
+          <div class="app-nav"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="1"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/></svg>Bay Management</div>
+          <div class="app-nav"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="1"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>Suppliers</div>
+          <div class="app-nav"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Operating Schedule</div>
           <div class="app-nav"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Reports</div>
           <div class="app-nav"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 10-16 0"/></svg>My Account</div>
         </div>
         <div class="app-main">
-          <div class="app-page-title">Dashboard</div>
+          <div class="app-page-title">Booking Management</div>
           <div class="kpi-grid">
-            <div class="kpi-card"><div class="kpi-icon" style="background:#e8f4fd"><svg viewBox="0 0 24 24" style="stroke:#2e7dd1"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><div class="kpi-lbl">Avg Unloading Time</div><div class="kpi-val">18 mins</div></div></div>
-            <div class="kpi-card"><div class="kpi-icon" style="background:#d4f3e6"><svg viewBox="0 0 24 24" style="stroke:#1e9e5e"><rect x="1" y="3" width="15" height="13" rx="1"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/></svg></div><div><div class="kpi-lbl">Incoming Today</div><div class="kpi-val">8</div></div></div>
-            <div class="kpi-card"><div class="kpi-icon" style="background:#f0e6fd"><svg viewBox="0 0 24 24" style="stroke:#7c3aed"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></div><div><div class="kpi-lbl">Occupancy Rate</div><div class="kpi-val">73.5%</div></div></div>
+            <div class="kpi-card"><div class="kpi-icon" style="background:#fde7cf"><svg viewBox="0 0 24 24" style="stroke:#c47f0a"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/></svg></div><div><div class="kpi-lbl">Total Bookings</div><div class="kpi-val">15</div></div></div>
+            <div class="kpi-card"><div class="kpi-icon" style="background:#d4f3e6"><svg viewBox="0 0 24 24" style="stroke:#1e9e5e"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg></div><div><div class="kpi-lbl">Upcoming Bookings</div><div class="kpi-val">0</div></div></div>
+            <div class="kpi-card"><div class="kpi-icon" style="background:#fde7cf"><svg viewBox="0 0 24 24" style="stroke:#c47f0a"><path d="M6 2h12M6 22h12M6 2c0 4 6 6 6 10 0-4 6-6 6-10M6 22c0-4 6-6 6-10 0 4 6 6 6 10"/></svg></div><div><div class="kpi-lbl">Pending Approvals</div><div class="kpi-val">4</div></div></div>
           </div>
           <div class="kpi-grid" style="margin-bottom:12px">
-            <div class="kpi-card"><div class="kpi-icon" style="background:#fff3d4"><svg viewBox="0 0 24 24" style="stroke:#d97706"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div><div class="kpi-lbl">Pending Actions</div><div class="kpi-val">3</div></div></div>
-            <div class="kpi-card"><div class="kpi-icon" style="background:#fee2e2"><svg viewBox="0 0 24 24" style="stroke:#d63b3b"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/></svg></div><div><div class="kpi-lbl">Missed Bookings</div><div class="kpi-val">0</div></div></div>
-            <div class="kpi-card"><div class="kpi-icon" style="background:#fff3d4"><svg viewBox="0 0 24 24" style="stroke:#e8960c"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><div class="kpi-lbl">Delayed Bookings</div><div class="kpi-val">1</div></div></div>
+            <div class="kpi-card"><div class="kpi-icon" style="background:#d4f3e6"><svg viewBox="0 0 24 24" style="stroke:#1e9e5e"><circle cx="12" cy="12" r="10"/><polyline points="9 12 11.5 14.5 16 9.5"/></svg></div><div><div class="kpi-lbl">Completed Bookings</div><div class="kpi-val">0</div></div></div>
+            <div class="kpi-card"><div class="kpi-icon" style="background:#fde7cf"><svg viewBox="0 0 24 24" style="stroke:#c47f0a"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 3v4h6V3"/><circle cx="12" cy="13" r="3"/><line x1="12" y1="13" x2="13.5" y2="14"/></svg></div><div><div class="kpi-lbl">Delayed Booking</div><div class="kpi-val">0</div></div></div>
+            <div class="kpi-card"><div class="kpi-icon" style="background:#fbe0e0"><svg viewBox="0 0 24 24" style="stroke:#d63b3b"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="12 7 17 7 17 12"/><line x1="7" y1="7" x2="11" y2="11"/></svg></div><div><div class="kpi-lbl">Missed Booking</div><div class="kpi-val">6</div></div></div>
           </div>
-          <div class="app-sec-title">Bay Status</div>
+          <div class="app-sec-title">Deliveries</div>
           <table class="app-table">
-            <thead><tr><th>Bay</th><th>Bookings</th><th>Track Schedule</th><th>Status</th></tr></thead>
+            <thead><tr><th>Booking ID</th><th>Supplier</th><th>Bay</th><th>Pallets</th><th>PO</th><th>Date</th><th>Time slot</th><th>Status</th><th>Schedule</th></tr></thead>
             <tbody>
-              <tr><td>b1</td><td>3</td><td><span class="app-badge app-badge-g">On Track</span></td><td><span class="app-badge app-badge-g">Available</span></td></tr>
-              <tr><td>b2</td><td>2</td><td style="color:#9a9894;font-size:11px">N/A</td><td><span class="app-badge app-badge-g">Available</span></td></tr>
-              <tr><td>b3</td><td>4</td><td><span class="app-badge app-badge-g">On Track</span></td><td><span class="app-badge app-badge-g">Available</span></td></tr>
-              <tr><td>b4</td><td>1</td><td><span class="app-badge app-badge-a">Pending</span></td><td><span class="app-badge app-badge-g">Available</span></td></tr>
+              <tr><td><strong>BK-17</strong></td><td>Aeyla</td><td>1</td><td>26</td><td>P070</td><td>Jul 9, 2026</td><td>09:07 AM</td><td><span class="app-badge app-badge-a">Pending</span></td><td><span class="app-badge app-badge-g">On Track</span></td></tr>
+              <tr><td><strong>BK-16</strong></td><td>Aeyla</td><td>1</td><td>26</td><td>PO69</td><td>Jul 3, 2026</td><td>12:07 PM</td><td><span class="app-badge app-badge-a">Pending</span></td><td><span class="app-badge app-badge-g">On Track</span></td></tr>
+              <tr><td><strong>BK-14</strong></td><td>Aeyla</td><td>&ndash;</td><td>26</td><td>&ndash;</td><td>Jul 7, 2026</td><td>09:07 AM</td><td><span class="app-badge app-badge-n">Cancelled</span></td><td><span class="app-badge app-badge-g">On Track</span></td></tr>
+              <tr><td><strong>BK-13</strong></td><td>Aeyla</td><td>1</td><td>26</td><td>&ndash;</td><td>Jul 2, 2026</td><td>12:07 PM</td><td><span class="app-badge app-badge-a">Approved</span></td><td><span class="app-badge app-badge-r">Missed</span></td></tr>
+              <tr><td><strong>BK-10</strong></td><td>Pet Gently</td><td>1</td><td>4</td><td>&ndash;</td><td>Jun 30, 2026</td><td>12:06 PM</td><td><span class="app-badge app-badge-a">Approved</span></td><td><span class="app-badge app-badge-r">Missed</span></td></tr>
             </tbody>
           </table>
         </div>
       </div>
     </div>
-    <p style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--dw4);margin-top:12px;text-align:center">Live dashboard — bookings, bays, performance all in one view</p>
+    </div>
+    <p style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--dw4);margin-top:12px;text-align:center">The actual DockSync booking screen — deliveries, collections, bays and supplier status in one place</p>
   </div>
 </div>
 
@@ -521,22 +550,31 @@ section{padding:80px 0}
 <section class="rv" id="features" style="background:var(--bg2)">
   <div class="wrap">
     <div class="eyebrow">Capabilities</div>
-    <h2 class="d-lg" style="max-width:480px;margin-bottom:0">Built for dock operators</h2>
+    <h2 class="d-lg" style="max-width:560px;margin-bottom:0">Everything you need to control the dock</h2>
     <div class="feat-grid">
-      <div class="feat"><div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/></svg></div><h3>Supplier self-booking</h3><p>Suppliers book their own slots via a dedicated portal. No emails, no calls. Your rules enforced automatically from day one.</p></div>
-      <div class="feat"><div class="feat-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><h3>Booking calendar</h3><p>Month, week and day views colour-coded by supplier. Instant visual overview of your entire inbound schedule.</p></div>
-      <div class="feat"><div class="feat-icon"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="1"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/></svg></div><h3>Bay management</h3><p>Add, name and toggle bays active or inactive in seconds. Inactive bays are hidden from suppliers automatically.</p></div>
-      <div class="feat"><div class="feat-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><h3>Supplier reports</h3><p>On-time %, completion rate, delivery count, and last activity for every supplier. Data-led supplier conversations.</p></div>
-      <div class="feat"><div class="feat-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><h3>Operating schedule</h3><p>Working days, open/close times, restricted hours, and blackout dates. Supplier reminders sent automatically.</p></div>
-      <div class="feat"><div class="feat-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div><h3>Browser-based</h3><p>Zero installation. Runs in Chrome, Edge or Safari. No app, no IT project. Live in under 5 minutes.</p></div>
+      <div class="feat"><div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12h14"/></svg></div><h3>Create bookings yourself</h3><p>Schedule deliveries, collections or planned dock activity directly from the warehouse dashboard.</p></div>
+      <div class="feat"><div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/></svg></div><h3>Let suppliers book controlled slots</h3><p>Give suppliers a simple booking flow while your team controls availability, bays and operating rules.</p></div>
+      <div class="feat"><div class="feat-icon"><svg viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 014-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg></div><h3>Manage inbound and outbound</h3><p>Use DockSync for goods-in, dispatch, collections, returns and any planned bay activity.</p></div>
+      <div class="feat"><div class="feat-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="16" y1="3" x2="16" y2="7"/><rect x="8" y="12" width="4" height="4"/></svg></div><h3>Check drivers in by QR</h3><p>Drivers scan on arrival. No app required. Arrival time is logged and the dashboard updates instantly.</p></div>
+      <div class="feat"><div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div><h3>Send drivers clear instructions</h3><p>After check-in, send short SMS instructions such as where to wait or which bay to use.</p></div>
+      <div class="feat"><div class="feat-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></div><h3>See every bay in real time</h3><p>Know what is booked, what has arrived, what is late and which bay is free.</p></div>
+      <div class="feat"><div class="feat-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><h3>Hold suppliers accountable</h3><p>Track on-time percentage, completion rates, activity history, delays and missed bookings.</p></div>
+      <div class="feat"><div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div><h3>Export the data when you need it</h3><p>Download booking and supplier reports to CSV for Excel, management reviews or operational analysis.</p></div>
+      <div class="feat"><div class="feat-icon"><svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg></div><h3>Recurring bookings</h3><p>Create standing slots once and repeat them automatically for regular suppliers or carriers.</p></div>
     </div>
     <!-- QR CHECK-IN HIGHLIGHT -->
     <div class="qr-highlight rv">
       <div>
-        <div class="eyebrow">Unique feature</div>
-        <h3>QR code driver check-in</h3>
-        <p>Print your unique QR code at the gatehouse. Drivers scan on arrival — bay assigned instantly, check-in time logged, dashboard updated. No paperwork. No queues. No phone calls.</p>
-        <p style="font-size:13px;color:var(--ink4)">Generates from My Account → QR Code. Regenerate anytime. Works on any smartphone, no app required.</p>
+        <div class="eyebrow">QR check-in</div>
+        <h3>QR check-in that does more than log arrivals</h3>
+        <p>Print your unique QR code at the gatehouse or goods-in point. Drivers scan on arrival, enter their booking token and mobile number, and your team can send clear SMS instructions from the dashboard.</p>
+        <ul class="qr-bullets">
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>No driver app</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Arrival time logged</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Booking status updated</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>SMS instructions after check-in</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Less gatehouse chasing</li>
+        </ul>
         <a href="features.html" class="btn btn-dark">See all features</a>
       </div>
       <div class="qr-mock">
@@ -563,6 +601,27 @@ section{padding:80px 0}
   </div>
 </section>
 
+<!-- REPORTING -->
+<section class="rv" style="background:var(--bg)">
+  <div class="wrap">
+    <div class="eyebrow">Reporting</div>
+    <h2 class="d-lg" style="max-width:560px">Turn dock activity into data.</h2>
+    <p style="font-size:16px;color:var(--ink3);max-width:560px;line-height:1.65;margin-top:12px">DockSync gives warehouse managers the data they normally have to rebuild manually in spreadsheets.</p>
+    <div class="rep-grid">
+      <div class="rep-item"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Bookings by day, week and month</div>
+      <div class="rep-item"><svg viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 014-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg>Delivery and collection history</div>
+      <div class="rep-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/></svg>Supplier activity</div>
+      <div class="rep-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>On-time performance</div>
+      <div class="rep-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Completion rates</div>
+      <div class="rep-item"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Missed and delayed bookings</div>
+      <div class="rep-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Average unload / turnaround time</div>
+      <div class="rep-item"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Bay occupancy</div>
+      <div class="rep-item"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>CSV export for bookings and supplier reports</div>
+    </div>
+    <p class="rep-punch">Stop arguing from memory. See which suppliers arrive late, which bays are under pressure and where the day actually went.</p>
+  </div>
+</section>
+
 <!-- PRICING -->
 <section class="rv" id="pricing" style="background:var(--bg)">
   <div class="wrap">
@@ -580,20 +639,22 @@ section{padding:80px 0}
       <!-- STARTER -->
       <div class="plan">
         <div class="plan-name">Starter</div>
-        <div class="plan-desc">Single site, up to 8 bays. Get off spreadsheets fast.</div>
+        <div class="plan-desc">Single warehouse, up to 8 bays. For teams ready to move bookings out of spreadsheets.</div>
         <div class="plan-pn" id="starter-price"><sup>£</sup>79<sub>/mo</sub></div>
         <div class="plan-per" id="starter-period">Billed monthly · up to 8 bays</div>
         <div class="ann-save" id="starter-save">Save £190/year</div>
         <div class="plan-div"></div>
         <ul class="plan-ul">
           <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>1 warehouse, up to 8 bays</li>
-          <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Supplier self-booking portal</li>
+          <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Warehouse-created bookings</li>
+          <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Supplier self-booking</li>
+          <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Deliveries and collections</li>
           <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Booking calendar (month/week/day)</li>
-          <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>QR code driver check-in</li>
-          <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Live bay dashboard &amp; 6 KPIs</li>
+          <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>QR driver check-in</li>
+          <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Driver SMS after check-in</li>
+          <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Live dashboard &amp; KPIs</li>
           <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Operating schedule &amp; blackouts</li>
-          <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Supplier performance reports</li>
-          <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Email support</li>
+          <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Supplier reports &amp; CSV export</li>
           <li class="no"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Custom booking rules</li>
           <li class="no"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>API access</li>
         </ul>
@@ -604,22 +665,23 @@ section{padding:80px 0}
       <div class="plan plan-featured">
         <div class="plan-badge">Most popular</div>
         <div class="plan-name" style="color:var(--amber)">Growth</div>
-        <div class="plan-desc">Unlimited bays. Full control of inbound operations.</div>
+        <div class="plan-desc">Unlimited bays for one warehouse. Full control of dock scheduling, suppliers and reporting.</div>
         <div class="plan-pn" id="growth-price"><sup>£</sup>179<sub>/mo</sub></div>
         <div class="plan-per" id="growth-period">Billed monthly · unlimited bays</div>
         <div class="ann-save" id="growth-save">Save £430/year</div>
         <div class="plan-div"></div>
         <ul class="plan-ul">
-          <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>1 warehouse,<strong>unlimited bays</strong></li>
           <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Everything in Starter</li>
+          <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>1 warehouse,<strong>unlimited bays</strong></li>
+          <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Recurring bookings</li>
           <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Custom booking rules &amp; windows</li>
+          <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Configurable reminders</li>
+          <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Supplier performance scoring</li>
+          <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>CSV exports</li>
           <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Dedicated onboarding call</li>
-          <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Discounted rate for additional warehouses</li>
-          <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Configurable supplier reminders</li>
-          <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Supplier completion rate scoring</li>
           <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Priority email &amp; chat support</li>
           <li class="no"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>API access</li>
-          <li class="no"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Multi-warehouse (roadmap)</li>
+          <li class="no"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Multi-warehouse rollout <span style="color:var(--ink4)">(Enterprise)</span></li>
         </ul>
         <a href="contact.html" class="plan-cta pc-amber">Start free trial</a>
         <p class="plan-note">30-day trial · No card required</p>
@@ -627,19 +689,21 @@ section{padding:80px 0}
       <!-- ENTERPRISE -->
       <div class="plan">
         <div class="plan-name">Enterprise</div>
-        <div class="plan-desc">Multiple warehouses &amp; large-scale operations.</div>
+        <div class="plan-desc">Multiple warehouses, more users and procurement-friendly rollout.</div>
         <div class="plan-custom" style="margin-top:-8px">Custom</div>
         <div class="plan-per">Tailored to your operation</div>
         <div class="plan-div"></div>
         <ul class="plan-ul">
-          <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Multiple warehouses (volume pricing)</li>
           <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Everything in Growth</li>
+          <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Multiple warehouses (volume pricing)</li>
+          <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Multi-user per warehouse</li>
+          <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Super-admin seat control</li>
           <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>API &amp; webhook access</li>
           <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>SSO &amp; SAML integration</li>
-          <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Custom SLA &amp; uptime guarantee</li>
-          <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Dedicated customer success mgr</li>
-          <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>DPA, security review, ISO docs</li>
+          <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>DPA &amp; security review</li>
           <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>PO-based billing available</li>
+          <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Custom SLA &amp; uptime guarantee</li>
+          <li class="ok"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Dedicated customer success</li>
         </ul>
         <a href="mailto:hello@docksync.app" class="plan-cta pc-dark" style="margin-top:auto">Contact sales</a>
         <p class="plan-note">Pilot available · Procurement-friendly</p>
@@ -647,7 +711,7 @@ section{padding:80px 0}
     </div>
     <div class="pnote rv">
       <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-      <p><strong style="color:var(--ink)">Every plan starts with a free 30-day trial</strong> — full access, no payment required, no auto-billing at the end. One warehouse per account; Enterprise covers multiple sites with volume pricing. All prices exclude VAT. ¹ Based on 90-day usage data across 40+ customer sites.</p>
+      <p><strong style="color:var(--ink)">Every plan starts with a free 30-day trial</strong> — full access, no payment required, no auto-billing at the end. One warehouse per account; Enterprise covers multiple sites with volume pricing. All prices exclude VAT.</p>
     </div>
   </div>
 </section>
@@ -655,12 +719,13 @@ section{padding:80px 0}
 <!-- TESTIMONIALS -->
 <section class="rv" style="background:var(--bg2)">
   <div class="wrap">
-    <div class="eyebrow">Customer results</div>
-    <h2 class="d-lg" style="margin-bottom:0">Real warehouses.<br>Real numbers.</h2>
-    <div class="proof-grid">
-      <div class="testi"><div class="testi-stars">★★★★★</div><p class="testi-q">Cut dock admin time by over 3 hours a day in the first week. Drivers no longer queue at the gate — they know exactly when and where to go before they leave the depot.</p><div class="testi-by"><div class="testi-av" style="background:#2e7dd1">TH</div><div><div class="testi-nm">Tom H.</div><div class="testi-rl">Warehouse Manager · Retail DC, Birmingham</div></div></div></div>
-      <div class="testi"><div class="testi-stars">★★★★★</div><p class="testi-q">The supplier self-booking portal alone was worth the switch. Team stopped playing phone tag immediately. Setup genuinely took less than 10 minutes start to finish.</p><div class="testi-by"><div class="testi-av" style="background:var(--amber);color:#1a0a00">MW</div><div><div class="testi-nm">Maria W.</div><div class="testi-rl">Operations Director · Pharma Distributor</div></div></div></div>
-      <div class="testi"><div class="testi-stars">★★★★★</div><p class="testi-q">Visibility across all 18 bays without chasing anyone. On-time rate went from 71% to 96% in 30 days. The QR check-in alone saved an hour of gatehouse admin every morning.</p><div class="testi-by"><div class="testi-av" style="background:var(--green)">DP</div><div><div class="testi-nm">Dave P.</div><div class="testi-rl">Head of Logistics · Automotive Parts, Coventry</div></div></div></div>
+    <div class="eyebrow">The difference</div>
+    <h2 class="d-lg" style="max-width:640px;margin-bottom:0">What changes when the dock is controlled</h2>
+    <div class="change-grid">
+      <div class="change-card"><div class="change-ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><polyline points="9 15 11 17 15 13"/></svg></div><h3>Fewer missed slots</h3><p>Bookings sit in one live schedule instead of scattered across inboxes and spreadsheets.</p></div>
+      <div class="change-card"><div class="change-ic"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div><h3>Less gatehouse noise</h3><p>QR check-in and SMS instructions reduce repeated calls about where drivers should go.</p></div>
+      <div class="change-card"><div class="change-ic"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/></svg></div><h3>Better supplier conversations</h3><p>Reports show on-time performance, completion rates and activity history instead of relying on memory.</p></div>
+      <div class="change-card"><div class="change-ic"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div><h3>Cleaner management reporting</h3><p>Export CSV data for reviews, weekly reports and operational analysis.</p></div>
     </div>
   </div>
 </section>
@@ -669,12 +734,12 @@ section{padding:80px 0}
 <section class="rv" style="background:var(--bg)">
   <div class="wrap">
     <div class="eyebrow">Built by operators</div>
-    <h2 class="d-lg" style="max-width:540px">Warehouse experience<br>in our DNA</h2>
-    <p style="font-size:16px;color:var(--ink3);max-width:480px;margin-top:12px;line-height:1.7">Built by people who've stood on the dock floor — not software engineers guessing what warehouses need.</p>
+    <h2 class="d-lg" style="max-width:620px">Built by people who know the dock floor.</h2>
+    <p style="font-size:16px;color:var(--ink3);max-width:620px;margin-top:12px;line-height:1.7">DockSync was built around the real problems warehouse teams deal with every morning: late arrivals, overloaded bays, supplier chasing, collections turning up early, and managers trying to make decisions from yesterday's spreadsheet.</p>
     <div class="team-grid">
       <div style="background:#f7f6f3;border-radius:12px;border:1px solid rgba(0,0,0,0.08);padding:22px;transition:border-color .2s"><div style="width:42px;height:42px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:800;color:#fff;margin-bottom:12px;background:#2b79cf">OP</div><h4 style="font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;text-transform:uppercase;color:#111010;margin-bottom:2px">Retail Distribution</h4><div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#e6920a;margin-bottom:8px">Senior Operations Manager · Major UK Grocery Retailer</div><p style="font-size:13px;color:#6a6860;line-height:1.65">Managed high-volume inbound operations across a national distribution network. First-hand experience of what broken dock scheduling costs in labour, time, and supplier relationships every single day.</p><div style="display:inline-flex;align-items:center;gap:5px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#9a9790;margin-top:10px">— Grocery · Inbound Ops</div></div>
       <div style="background:#f7f6f3;border-radius:12px;border:1px solid rgba(0,0,0,0.08);padding:22px;transition:border-color .2s"><div style="width:42px;height:42px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:800;color:#fff;margin-bottom:12px;background:#1a9958">OP</div><h4 style="font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;text-transform:uppercase;color:#111010;margin-bottom:2px">Aviation &amp; Luxury Operations</h4><div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#e6920a;margin-bottom:8px">Europe Operations Manager · Major European Airline</div><p style="font-size:13px;color:#6a6860;line-height:1.65">Precision scheduling at scale — applied aviation-grade arrival and turnaround discipline to ground operations across Europe. The same logic that keeps runways moving is what DockSync brings to dock doors.</p><div style="display:inline-flex;align-items:center;gap:5px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#9a9790;margin-top:10px">— Aviation · Precision Scheduling</div></div>
-      <div style="background:#f7f6f3;border-radius:12px;border:1px solid rgba(0,0,0,0.08);padding:22px;transition:border-color .2s"><div style="width:42px;height:42px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:800;color:#1a0900;margin-bottom:12px;background:#e6920a">OP</div><h4 style="font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;text-transform:uppercase;color:#111010;margin-bottom:2px">Global Logistics</h4><div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#e6920a;margin-bottom:8px">Global Logistics Manager · International Retail Group</div><p style="font-size:13px;color:#6a6860;line-height:1.65">Coordinated inbound freight across global supplier networks at scale. Built DockSync to solve the exact problems that made this role harder than it needed to be — missed slots, phone tag, and zero visibility.</p><div style="display:inline-flex;align-items:center;gap:5px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#9a9790;margin-top:10px">— Global Retail · Supplier Networks</div></div>
+      <div style="background:#f7f6f3;border-radius:12px;border:1px solid rgba(0,0,0,0.08);padding:22px;transition:border-color .2s"><div style="width:42px;height:42px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:800;color:#fff;margin-bottom:12px;background:#e6920a">OP</div><h4 style="font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;text-transform:uppercase;color:#111010;margin-bottom:2px">Global Logistics</h4><div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#e6920a;margin-bottom:8px">Global Logistics Manager · International Retail Group</div><p style="font-size:13px;color:#6a6860;line-height:1.65">Coordinated inbound freight across global supplier networks at scale. Built DockSync to solve the exact problems that made this role harder than it needed to be — missed slots, phone tag, and zero visibility.</p><div style="display:inline-flex;align-items:center;gap:5px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#9a9790;margin-top:10px">— Global Retail · Supplier Networks</div></div>
     </div>
   </div>
 </section>
@@ -685,12 +750,16 @@ section{padding:80px 0}
     <div class="eyebrow">FAQ</div>
     <h2 class="d-lg" style="margin-bottom:0">Questions before<br>you start?</h2>
     <div class="faq-list">
-      <div class="faq-item open"><div class="faq-q" onclick="toggleFaq(this)"><span class="faq-qn">01</span><span class="faq-qt">How long does it take to get started?</span><div class="faq-tog"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="faq-a">Under 5 minutes. Add your bays, set operating hours and booking rules, then share your supplier booking link. Most teams have their first live booking within an hour of signing up.</div></div>
-      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span class="faq-qn">02</span><span class="faq-qt">Will my suppliers need training?</span><div class="faq-tog"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="faq-a">No. The supplier portal requires no account or login, and takes under 2 minutes to use. We'll send your suppliers a one-page onboarding email on your behalf if you'd like.</div></div>
-      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span class="faq-qn">03</span><span class="faq-qt">Can I manage multiple warehouses?</span><div class="faq-tog"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="faq-a">Each warehouse runs as a separate account — which many operations managers prefer as it keeps each site focused. Enterprise customers with multiple sites get volume pricing. A unified multi-warehouse dashboard is on the roadmap.</div></div>
-      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span class="faq-qn">04</span><span class="faq-qt">Is the 30-day trial truly free?</span><div class="faq-tog"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="faq-a">Yes. Full access, no payment details required, no automatic billing at the end. You decide when you're ready to subscribe — no pressure, no sales calls.</div></div>
-      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span class="faq-qn">05</span><span class="faq-qt">Do I need IT support to set up DockSync?</span><div class="faq-tog"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="faq-a">No. DockSync runs entirely in your browser — Chrome, Edge, or Safari. Nothing to install or maintain. Your IT team doesn't need to be involved at all for the standard setup.</div></div>
-      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span class="faq-qn">06</span><span class="faq-qt">How does the QR code driver check-in work?</span><div class="faq-tog"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="faq-a">From My Account → QR Code, download your unique code and display or print it at the gatehouse. Drivers scan it on arrival (no app needed). The system logs check-in time, confirms their bay, and updates your dashboard in real time.</div></div>
+      <div class="faq-item open"><div class="faq-q" onclick="toggleFaq(this)"><span class="faq-qn">01</span><span class="faq-qt">How quickly can we get started?</span><div class="faq-tog"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="faq-a">Most teams can set up their first live schedule quickly: add bays, set operating hours, create bookings or share supplier booking access, then display the QR code for driver check-in.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span class="faq-qn">02</span><span class="faq-qt">Can the warehouse create bookings itself?</span><div class="faq-tog"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="faq-a">Yes. DockSync is not limited to supplier self-booking. Your team can create bookings directly for deliveries, collections or planned dock activity.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span class="faq-qn">03</span><span class="faq-qt">Is DockSync only for inbound deliveries?</span><div class="faq-tog"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="faq-a">No. DockSync can manage inbound deliveries, outbound collections, returns and wider dock scheduling activity.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span class="faq-qn">04</span><span class="faq-qt">Do suppliers need a login?</span><div class="faq-tog"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="faq-a">No. Suppliers use a simple controlled booking link — no account to create and no password to manage. Your team keeps control of availability, bays and operating rules.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span class="faq-qn">05</span><span class="faq-qt">Do drivers need an app?</span><div class="faq-tog"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="faq-a">No. Drivers scan a QR code from their smartphone.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span class="faq-qn">06</span><span class="faq-qt">Can we text the driver after check-in?</span><div class="faq-tog"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="faq-a">Yes. Once the driver checks in and provides their mobile number, the warehouse can send short SMS instructions from the dashboard.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span class="faq-qn">07</span><span class="faq-qt">Can we export our data?</span><div class="faq-tog"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="faq-a">Yes. DockSync supports CSV export for bookings and supplier reports, so teams can analyse or share the data outside the platform.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span class="faq-qn">08</span><span class="faq-qt">What reporting does DockSync provide?</span><div class="faq-tog"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="faq-a">DockSync gives visibility over bookings, deliveries, collections, supplier performance, on-time rates, completion rates, missed bookings, delays, check-ins, bay activity and operational trends.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span class="faq-qn">09</span><span class="faq-qt">Does DockSync replace our WMS?</span><div class="faq-tog"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="faq-a">No. DockSync sits before and around the WMS by controlling booking, arrival, bay scheduling and supplier visibility. It can complement existing warehouse systems.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span class="faq-qn">10</span><span class="faq-qt">Is the 30-day trial really free?</span><div class="faq-tog"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="faq-a">Yes. No payment required, no card needed and no automatic billing at the end.</div></div>
     </div>
   </div>
 </section>
@@ -701,14 +770,14 @@ section{padding:80px 0}
     <div class="fc-inner">
       <div class="fc-left">
         <div class="eyebrow" style="color:var(--amber)">Get started today</div>
-        <h2 class="d-lg">Take control<br>of your dock</h2>
-        <p>Start your free 30-day trial and eliminate booking chaos from day one. Full access. No payment required. No commitment.</p>
+        <h2 class="d-lg">Take control of your next delivery window.</h2>
+        <p>Start with one warehouse, one schedule and one live view of every delivery, collection and driver arrival.</p>
         <ul class="fc-list">
-          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Every feature included — not a limited demo</li>
-          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Live in under 5 minutes</li>
-          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>No credit card, no automatic billing</li>
-          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>We'll help onboard your first suppliers</li>
-          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Cancel anytime, no questions asked</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Full platform access</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>No payment required</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>No card needed</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Set up quickly</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Built for real warehouse operations</li>
         </ul>
       </div>
       <div class="fc-form">
