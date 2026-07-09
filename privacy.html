@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
   <!-- Google tag (gtag.js) -->
@@ -8,7 +7,6 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-7ZDH5LR6QH');
 </script>
 <meta charset="UTF-8">
@@ -19,7 +17,7 @@
 <link rel="canonical" href="https://www.docksync.app/privacy.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;font-size:16px}
@@ -28,20 +26,43 @@ a{color:#e6920a;text-decoration:none}
 a:hover{text-decoration:underline}
 .w{max-width:1140px;margin:0 auto;padding:0 28px}
 .wc{max-width:760px;margin:0 auto;padding:0 28px}
-.nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,0.96);backdrop-filter:blur(14px);border-bottom:1px solid rgba(0,0,0,0.08);box-shadow:0 1px 20px rgba(0,0,0,0.06)}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,0.96);backdrop-filter:blur(14px);border-bottom:1px solid transparent;box-shadow:0 1px 20px rgba(0,0,0,0);transition:border-color 0.25s,box-shadow 0.25s}
+.nav.sc{border-bottom-color:rgba(0,0,0,0.08);box-shadow:0 1px 20px rgba(0,0,0,0.06)}
 .nav-i{display:flex;align-items:center;height:62px;gap:6px}
 .logo{display:flex;align-items:center;gap:9px;margin-right:28px;text-decoration:none}
 .logo-box{width:28px;height:28px;border:1.5px solid #e6920a;border-radius:5px;display:flex;align-items:center;justify-content:center;background:#fff}
-.logo-word{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:800;letter-spacing:0.05em;text-transform:uppercase;color:#111010}
+.logo-box svg{width:14px;height:14px;stroke:#e8960c;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.logo-word{font-family:'Barlow Condensed',sans-serif;font-size:19px;font-weight:800;letter-spacing:0.05em;text-transform:uppercase;color:#111010}
 .nav-links{display:flex;align-items:center;gap:2px;flex:1}
-.nl{font-size:13px;color:#6a6860;padding:6px 11px;border-radius:6px;transition:all 0.15s;text-decoration:none;display:inline-block}
-.nl:hover{color:#3b3a37;background:#f7f6f3;text-decoration:none}
+.nl{position:relative;font-size:13px;color:#6a6860;padding:6px 2px;margin:0 9px;transition:color 0.15s;text-decoration:none;display:inline-block}
+.nl:first-child{margin-left:0}
+.nl::after{content:'';position:absolute;left:0;right:0;bottom:-3px;height:2px;background:#e6920a;border-radius:2px;transform:scaleX(0);transform-origin:center;transition:transform 0.22s ease}
+.nl:hover{color:#111010;text-decoration:none}
+.nl:hover::after{transform:scaleX(1)}
+.nl.active{color:#111010;font-weight:500}
+.nl.active::after{transform:scaleX(1)}
 .nav-right{display:flex;align-items:center;gap:10px;margin-left:auto}
 .nav-util{font-size:12px;color:#9a9790;transition:color 0.15s;text-decoration:none}
 .nav-util:hover{color:#6a6860}
 .nav-sep{width:1px;height:16px;background:rgba(0,0,0,0.14)}
 .btn-nav{display:inline-flex;align-items:center;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.05em;text-transform:uppercase;padding:8px 16px;border-radius:6px;border:none;cursor:pointer;background:#e6920a;color:#1a0900;transition:all 0.17s;text-decoration:none}
 .btn-nav:hover{background:#f4a21e;text-decoration:none}
+.nav-burger{display:none;flex-direction:column;justify-content:center;gap:4px;width:38px;height:38px;padding:8px;border:none;background:transparent;cursor:pointer}
+.nav-burger span{display:block;width:100%;height:2px;background:#3b3a37;border-radius:2px;transition:transform 0.25s,opacity 0.2s}
+.nav-burger.open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.nav-burger.open span:nth-child(2){opacity:0}
+.nav-burger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+.mobile-menu{display:none;flex-direction:column;position:fixed;top:62px;left:0;right:0;background:#fff;border-bottom:1px solid rgba(0,0,0,0.08);box-shadow:0 14px 26px rgba(0,0,0,0.09);padding:8px 28px 18px;z-index:190;opacity:0;transform:translateY(-8px);pointer-events:none;transition:opacity 0.2s ease,transform 0.2s ease}
+.mobile-menu.open{opacity:1;transform:translateY(0);pointer-events:auto}
+.mobile-menu a{padding:13px 0;font-size:15px;color:#3b3a37;border-bottom:1px solid rgba(0,0,0,0.06);text-decoration:none;transition:color 0.15s}
+.mobile-menu a:hover{color:#e6920a}
+.mm-sep{height:6px;border:none}
+.mm-cta{margin-top:14px;background:#e6920a;color:#1a0900 !important;border-bottom:none !important;text-align:center;border-radius:6px;padding:13px 0 !important;font-family:'Barlow Condensed',sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:0.05em}
+.mm-cta:hover{background:#f4a21e;color:#1a0900 !important}
+
+/* PAGE HERO */
 .page-hero{padding:110px 0 52px;background:#f7f6f3;border-bottom:1px solid rgba(0,0,0,0.08)}
 .bc{font-family:'JetBrains Mono',monospace;font-size:11px;color:#9a9790;margin-bottom:16px;display:flex;align-items:center;gap:5px}
 .bc a{color:#e6920a;text-decoration:none}
@@ -81,44 +102,56 @@ a:hover{text-decoration:underline}
 .cbox h3{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;text-transform:uppercase;color:#efede9;margin-bottom:8px}
 .cbox p{font-size:14px;color:#b6b2ac;line-height:1.7;margin-bottom:4px}
 .cbox a{color:#e6920a}
+
+/* FOOTER */
 .footer{background:#131415;padding:52px 0 28px;border-top:1px solid rgba(255,255,255,0.07)}
 .ftop{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:44px;padding-bottom:36px;border-bottom:1px solid rgba(255,255,255,0.07)}
 .fbrand{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;color:#efede9;margin-bottom:8px}
-.fdesc{font-size:13px;color:#4e4c49;line-height:1.65;max-width:220px}
-.fbadge{display:inline-flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#4e4c49;margin-top:14px;letter-spacing:0.05em}
+.fdesc{font-size:13px;color:#6a6763;line-height:1.65;max-width:230px}
+.fbadge{display:inline-flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#6a6763;margin-top:14px;letter-spacing:0.05em}
 .fbadge svg{width:11px;height:11px;stroke:#1a9958;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.fcolt{font-family:'JetBrains Mono',monospace;font-size:10px;color:#4e4c49;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:14px}
-.fcol a{display:block;font-size:13px;color:#4e4c49;margin-bottom:9px;transition:color 0.15s;text-decoration:none}
+.fcolt{font-family:'JetBrains Mono',monospace;font-size:10px;color:#6a6763;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:14px}
+.fcol a{display:block;font-size:13px;color:#8a8782;margin-bottom:9px;transition:color 0.15s;text-decoration:none}
 .fcol a:hover{color:#b6b2ac}
 .fbtm{padding-top:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
-.fbtm p{font-family:'JetBrains Mono',monospace;font-size:11px;color:#4e4c49;letter-spacing:0.04em}
+.fbtm p{font-family:'JetBrains Mono',monospace;font-size:11px;color:#6a6763;letter-spacing:0.04em}
 .flinks{display:flex;gap:18px}
-.flinks a{font-family:'JetBrains Mono',monospace;font-size:11px;color:#4e4c49;transition:color 0.15s;text-decoration:none}
+.flinks a{font-family:'JetBrains Mono',monospace;font-size:11px;color:#6a6763;transition:color 0.15s;text-decoration:none}
 .flinks a:hover{color:#b6b2ac}
-@media(max-width:900px){.nav-links{display:none}.ftop{grid-template-columns:1fr 1fr}.toc-list{grid-template-columns:1fr}}
+
+@media(max-width:900px){.nav-links{display:none}.nav-burger{display:flex}.mobile-menu{display:flex}.nav-right .nav-util,.nav-right .nav-sep{display:none}.ftop{grid-template-columns:1fr 1fr}.toc-list{grid-template-columns:1fr}}
 @media(max-width:600px){.ftop{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto !important}.nl::after{transition:none}.nav-burger span{transition:none}}
 </style>
 </head>
 <body>
-<nav class="nav">
+<nav class="nav" id="nav">
   <div class="w"><div class="nav-i">
-    <a href="index.html" class="logo">
-      <div class="logo-box"><svg viewBox="0 0 60 60" width="22" height="22" fill="none"><rect x="4" y="4" width="52" height="52" rx="4" fill="#e6920a"/><rect x="12" y="10" width="36" height="38" rx="2" fill="#0d1b2e"/><rect x="4" y="46" width="52" height="10" rx="2" fill="#0d1b2e"/></svg></div>
-      <span class="logo-word"><span style="color:#111010">DOCK</span><span style="color:#e6920a">SYNC</span></span>
-    </a>
+    <a href="index.html" class="logo"><div class="logo-box" style="width:28px;height:28px;border:1.5px solid #e6920a;border-radius:5px;display:flex;align-items:center;justify-content:center;background:#fff"><svg viewBox="0 0 60 60" width="22" height="22" fill="none"><rect x="4" y="4" width="52" height="52" rx="4" fill="#e6920a"/><rect x="12" y="10" width="36" height="38" rx="2" fill="#0d1b2e"/><rect x="4" y="46" width="52" height="10" rx="2" fill="#0d1b2e"/></svg></div><span class="logo-word"><span style="color:#111010">DOCK</span><span style="color:#e6920a">SYNC</span></span></a>
     <div class="nav-links">
-      <a href="index.html" class="nl">Product</a>
-      <a href="features.html" class="nl">Features</a>
+      <a href="demo.html" class="nl">Product</a>
+      <a href="features.html" class="nl">Why DockSync</a>
       <a href="pricing.html" class="nl">Pricing</a>
       <a href="index.html#faq" class="nl">FAQ</a>
     </div>
     <div class="nav-right">
       <a href="https://app.docksync.app" class="nav-util">Warehouse login</a>
       <div class="nav-sep"></div>
-      <a href="demo.html#s5" class="nav-util">Carrier login</a>
+      <a href="demo.html#s6" class="nav-util">Carrier login</a>
       <a href="contact.html" class="btn-nav">Start free trial</a>
+      <button class="nav-burger" id="burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </div></div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="demo.html">Product</a>
+    <a href="features.html">Why DockSync</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="index.html#faq">FAQ</a>
+    <div class="mm-sep"></div>
+    <a href="https://app.docksync.app">Warehouse login</a>
+    <a href="demo.html#s6">Carrier login</a>
+    <a href="contact.html" class="mm-cta">Start free trial</a>
+  </div>
 </nav>
 <div class="page-hero">
   <div class="wc">
@@ -341,17 +374,39 @@ a:hover{text-decoration:underline}
       <div>
         <div class="fbrand">DockSync</div>
         <p class="fdesc">Dock scheduling software for warehouses that want precision over chaos.</p>
-        <div class="fbadge"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>SSL · GDPR · UK-hosted</div>
+        <div class="fbadge"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>SSL &middot; GDPR &middot; UK-hosted</div>
       </div>
-      <div><div class="fcolt">Product</div><div class="fcol"><a href="demo.html">Product overview</a><a href="features.html">Features</a><a href="pricing.html">Pricing</a><a href="index.html#faq">FAQ</a></div></div>
+      <div><div class="fcolt">Product</div><div class="fcol"><a href="demo.html">Walkthrough</a><a href="features.html">Why DockSync</a><a href="pricing.html">Pricing</a><a href="index.html#faq">FAQ</a></div></div>
       <div><div class="fcolt">Industries</div><div class="fcol"><a href="industries.html#retail">Retail &amp; FMCG</a><a href="industries.html#pharma">Pharmaceutical</a><a href="industries.html#automotive">Automotive</a><a href="industries.html#logistics">3PL &amp; Logistics</a></div></div>
       <div><div class="fcolt">Company</div><div class="fcol"><a href="contact.html">About us</a><a href="mailto:hello@docksync.app">hello@docksync.app</a><a href="privacy.html">Privacy policy</a><a href="terms.html">Terms of service</a></div></div>
     </div>
     <div class="fbtm">
-      <p>© 2026 DockSync Ltd · All rights reserved</p>
+      <p>&copy; 2026 DockSync Ltd &middot; All rights reserved</p>
       <div class="flinks"><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="#">Cookies</a></div>
     </div>
   </div>
 </footer>
+
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+  // Nav border/shadow on scroll
+  var nav=document.getElementById('nav');
+  window.addEventListener('scroll',function(){ if(nav) nav.classList.toggle('sc',window.scrollY>10); },{passive:true});
+  // Mobile menu
+  var burger=document.getElementById('burger'), mm=document.getElementById('mobileMenu');
+  if(burger&&mm){
+    burger.addEventListener('click',function(){
+      var open=mm.classList.toggle('open');
+      burger.classList.toggle('open',open);
+      burger.setAttribute('aria-expanded',open);
+    });
+    mm.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click',function(){
+        mm.classList.remove('open'); burger.classList.remove('open'); burger.setAttribute('aria-expanded','false');
+      });
+    });
+  }
+});
+</script>
 </body>
 </html>
