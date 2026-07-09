@@ -28,21 +28,39 @@ a:hover{text-decoration:underline}
 .wm{max-width:680px;margin:0 auto;padding:0 28px}
 
 /* NAV */
-.nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,0.96);backdrop-filter:blur(14px);border-bottom:1px solid rgba(0,0,0,0.08);box-shadow:0 1px 20px rgba(0,0,0,0.06)}
+.nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,0.96);backdrop-filter:blur(14px);border-bottom:1px solid transparent;box-shadow:0 1px 20px rgba(0,0,0,0);transition:border-color 0.25s,box-shadow 0.25s}
+.nav.sc{border-bottom-color:rgba(0,0,0,0.08);box-shadow:0 1px 20px rgba(0,0,0,0.06)}
 .nav-i{display:flex;align-items:center;height:62px;gap:6px}
 .logo{display:flex;align-items:center;gap:9px;margin-right:28px;text-decoration:none}
 .logo-box{width:28px;height:28px;border:1.5px solid #e6920a;border-radius:5px;display:flex;align-items:center;justify-content:center;background:#fff}
 .logo-box svg{width:14px;height:14px;stroke:#e8960c;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 .logo-word{font-family:'Barlow Condensed',sans-serif;font-size:19px;font-weight:800;letter-spacing:0.05em;text-transform:uppercase;color:#111010}
 .nav-links{display:flex;align-items:center;gap:2px;flex:1}
-.nl{font-size:13px;color:#6a6860;padding:6px 11px;border-radius:6px;transition:all 0.15s;text-decoration:none}
-.nl:hover{color:#3b3a37;background:#f7f6f3;text-decoration:none}
+.nl{position:relative;font-size:13px;color:#6a6860;padding:6px 2px;margin:0 9px;transition:color 0.15s;text-decoration:none}
+.nl:first-child{margin-left:0}
+.nl::after{content:'';position:absolute;left:0;right:0;bottom:-3px;height:2px;background:#e6920a;border-radius:2px;transform:scaleX(0);transform-origin:center;transition:transform 0.22s ease}
+.nl:hover{color:#111010;text-decoration:none}
+.nl:hover::after{transform:scaleX(1)}
+.nl.active{color:#111010;font-weight:500}
+.nl.active::after{transform:scaleX(1)}
 .nav-right{display:flex;align-items:center;gap:10px;margin-left:auto}
 .nav-util{font-size:12px;color:#9a9790;transition:color 0.15s;text-decoration:none}
 .nav-util:hover{color:#6a6860}
 .nav-sep{width:1px;height:16px;background:rgba(0,0,0,0.14)}
 .btn-nav{display:inline-flex;align-items:center;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.05em;text-transform:uppercase;padding:8px 16px;border-radius:6px;border:none;cursor:pointer;background:#e6920a;color:#1a0900;transition:all 0.17s;text-decoration:none}
 .btn-nav:hover{background:#f4a21e;text-decoration:none}
+.nav-burger{display:none;flex-direction:column;justify-content:center;gap:4px;width:38px;height:38px;padding:8px;border:none;background:transparent;cursor:pointer}
+.nav-burger span{display:block;width:100%;height:2px;background:#3b3a37;border-radius:2px;transition:transform 0.25s,opacity 0.2s}
+.nav-burger.open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.nav-burger.open span:nth-child(2){opacity:0}
+.nav-burger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+.mobile-menu{display:none;flex-direction:column;position:fixed;top:62px;left:0;right:0;background:#fff;border-bottom:1px solid rgba(0,0,0,0.08);box-shadow:0 14px 26px rgba(0,0,0,0.09);padding:8px 28px 18px;z-index:190;opacity:0;transform:translateY(-8px);pointer-events:none;transition:opacity 0.2s ease,transform 0.2s ease}
+.mobile-menu.open{opacity:1;transform:translateY(0);pointer-events:auto}
+.mobile-menu a{padding:13px 0;font-size:15px;color:#3b3a37;border-bottom:1px solid rgba(0,0,0,0.06);text-decoration:none;transition:color 0.15s}
+.mobile-menu a:hover{color:#e6920a}
+.mm-sep{height:6px;border:none}
+.mm-cta{margin-top:14px;background:#e6920a;color:#1a0900 !important;border-bottom:none !important;text-align:center;border-radius:6px;padding:13px 0 !important;font-family:'Barlow Condensed',sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:0.05em}
+.mm-cta:hover{background:#f4a21e;color:#1a0900 !important}
 
 /* HERO */
 .hero{padding:110px 0 64px;background:#0d0e0e;position:relative;overflow:hidden;text-align:center}
@@ -166,6 +184,9 @@ a:hover{text-decoration:underline}
 
 @media(max-width:900px){
 .nav-links{display:none}
+.nav-burger{display:flex}
+.mobile-menu{display:flex}
+.nav-right .nav-util,.nav-right .nav-sep{display:none}
 .form-row{grid-template-columns:1fr}
 .steps-grid{grid-template-columns:1fr;gap:24px}
 .sstep{border-right:none;padding:0}
@@ -190,7 +211,7 @@ a:hover{text-decoration:underline}
 <body>
 
 <!-- NAV -->
-<nav class="nav">
+<nav class="nav" id="nav">
   <div class="w"><div class="nav-i">
     <a href="index.html" class="logo"><div class="logo-box" style="width:28px;height:28px;border:1.5px solid #e6920a;border-radius:5px;display:flex;align-items:center;justify-content:center;background:#fff"><svg viewBox="0 0 60 60" width="22" height="22" fill="none"><rect x="4" y="4" width="52" height="52" rx="4" fill="#e6920a"/><rect x="12" y="10" width="36" height="38" rx="2" fill="#0d1b2e"/><rect x="4" y="46" width="52" height="10" rx="2" fill="#0d1b2e"/></svg></div><span class="logo-word"><span style="color:#111010">DOCK</span><span style="color:#e6920a">SYNC</span></span></a>
     <div class="nav-links">
@@ -204,8 +225,19 @@ a:hover{text-decoration:underline}
       <div class="nav-sep"></div>
       <a href="demo.html#s6" class="nav-util">Carrier login</a>
       <a href="#form" class="btn-nav">Start free trial</a>
+      <button class="nav-burger" id="burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </div></div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="demo.html">Product</a>
+    <a href="features.html">Why DockSync</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="index.html#faq">FAQ</a>
+    <div class="mm-sep"></div>
+    <a href="https://app.docksync.app">Warehouse login</a>
+    <a href="demo.html#s6">Carrier login</a>
+    <a href="#form" class="mm-cta">Start free trial</a>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -405,6 +437,25 @@ document.addEventListener('DOMContentLoaded',function(){
     es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); ro.unobserve(e.target); } });
   },{threshold:0.08});
   document.querySelectorAll('.rv').forEach(function(el){ ro.observe(el); });
+
+  // Nav border/shadow on scroll
+  var nav=document.getElementById('nav');
+  window.addEventListener('scroll',function(){ if(nav) nav.classList.toggle('sc',window.scrollY>10); },{passive:true});
+
+  // Mobile menu
+  var burger=document.getElementById('burger'), mm=document.getElementById('mobileMenu');
+  if(burger&&mm){
+    burger.addEventListener('click',function(){
+      var open=mm.classList.toggle('open');
+      burger.classList.toggle('open',open);
+      burger.setAttribute('aria-expanded',open);
+    });
+    mm.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click',function(){
+        mm.classList.remove('open'); burger.classList.remove('open'); burger.setAttribute('aria-expanded','false');
+      });
+    });
+  }
 });
 </script>
 <script type="text/javascript">
