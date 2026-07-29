@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- ══════════════════════════════════════════════════════════════════════
+       PUBLISH ORDER MATTERS. This page describes a consent banner and says
+       optional cookies are off until accepted. That is not yet true on
+       docksync.app: there is no banner, and the LinkedIn Insight Tag fires on
+       load. Before publishing, either:
+
+         A) remove the LinkedIn pixel (then delete the marked rows in
+            section 3 and the whole of section 4), or
+         B) upload consent.js to the DockSync root, uncomment the line below,
+            gate the LinkedIn tag behind advertising consent, and correct the
+            four passages in privacy.html.
+
+       Without one of those, the two "cookie settings" controls on this page
+       have nothing to open.
+
+       <script src="/consent.js"></script>
+       ══════════════════════════════════════════════════════════════════════ -->
+
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7ZDH5LR6QH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-7ZDH5LR6QH');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'><rect x='4' y='4' width='52' height='52' rx='4' fill='%23e6920a'/><rect x='12' y='10' width='36' height='38' rx='2' fill='%230d1b2e'/><rect x='4' y='46' width='52' height='10' rx='2' fill='%230d1b2e'/></svg>">
+<title>Cookies Policy | DockSync — Dock Scheduling Software</title>
+<meta name="description" content="DockSync Cookies Policy. What cookies we set on the website and in the application, what each one does, how long they last, and how to manage or refuse them.">
+<link rel="canonical" href="https://www.docksync.app/cookies.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ffffff;--bg2:#f7f6f3;--bg3:#efede9;
+  --bdr:rgba(0,0,0,0.08);--bdr2:rgba(0,0,0,0.14);
+  --ink:#111010;--ink2:#3b3a37;--ink3:#6a6860;--ink4:#9a9790;
+  --dk:#0d0e0e;--dk2:#131415;--dkl:rgba(255,255,255,0.07);--dkl2:rgba(255,255,255,0.13);
+  --dw:#efede9;--dw2:#b6b2ac;--dw4:#4e4c49;
+  --amber:#e6920a;--amberh:#f4a21e;--abg:rgba(230,146,10,0.10);--abdr:rgba(230,146,10,0.25);
+  --green:#1a9958;--gbg:rgba(26,153,88,0.10);
+  --blue:#2b79cf;--bbg:rgba(43,121,207,0.10);
+  --disp:'Barlow Condensed',sans-serif;--body:'Barlow',sans-serif;--mono:'JetBrains Mono',monospace;
+  --r:6px;--rl:12px;--rxl:18px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:var(--body);color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;overflow-x:hidden;line-height:1.6}
+a{color:var(--amber);text-decoration:none}
+a:hover{text-decoration:underline}
+.w{max-width:1140px;margin:0 auto;padding:0 28px}
+.wc{max-width:760px;margin:0 auto;padding:0 28px}
+.nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.96);backdrop-filter:blur(14px);border-bottom:1px solid transparent;box-shadow:0 1px 20px rgba(0,0,0,0);transition:border-color .25s,box-shadow .25s}
+.nav.sc{border-bottom-color:var(--bdr);box-shadow:0 1px 20px rgba(0,0,0,.06)}
+.nav-i{display:flex;align-items:center;height:62px;gap:6px}
+.logo{display:flex;align-items:center;gap:9px;margin-right:28px;text-decoration:none}
+.logo-box{width:28px;height:28px;border:1.5px solid #e6920a;border-radius:5px;display:flex;align-items:center;justify-content:center;background:#fff}
+.logo-box svg{width:14px;height:14px;stroke:var(--amber);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.logo-word{font-family:var(--disp);font-size:19px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--ink)}
+.nav-links{display:flex;align-items:center;gap:2px;flex:1}
+.nl{position:relative;font-family:var(--body);font-size:13px;color:var(--ink3);padding:6px 2px;margin:0 9px;transition:color .15s;cursor:pointer;text-decoration:none}
+.nl:first-child{margin-left:0}
+.nl::after{content:'';position:absolute;left:0;right:0;bottom:-3px;height:2px;background:var(--amber);border-radius:2px;transform:scaleX(0);transform-origin:center;transition:transform .22s ease}
+.nl:hover{color:var(--ink);text-decoration:none}
+.nl:hover::after{transform:scaleX(1)}
+.nl.active{color:var(--ink);font-weight:500}
+.nl.active::after{transform:scaleX(1)}
+.nav-right{display:flex;align-items:center;gap:10px;margin-left:auto}
+.nav-util{font-size:12px;color:var(--ink4);cursor:pointer;transition:color .15s;text-decoration:none}
+.nav-util:hover{color:var(--ink3)}
+.nav-sep{width:1px;height:16px;background:var(--bdr2)}
+.btn-nav{display:inline-flex;align-items:center;font-family:var(--disp);font-weight:700;font-size:13px;letter-spacing:.05em;text-transform:uppercase;padding:8px 16px;border-radius:var(--r);border:none;cursor:pointer;background:var(--amber);color:#1a0900;transition:all .17s;text-decoration:none}
+.btn-nav:hover{background:var(--amberh)}
+.nav-burger{display:none;flex-direction:column;justify-content:center;gap:4px;width:38px;height:38px;padding:8px;border:none;background:transparent;cursor:pointer}
+.nav-burger span{display:block;width:100%;height:2px;background:var(--ink2);border-radius:2px;transition:transform .25s,opacity .2s}
+.nav-burger.open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.nav-burger.open span:nth-child(2){opacity:0}
+.nav-burger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+.mobile-menu{display:none;flex-direction:column;position:fixed;top:62px;left:0;right:0;background:#fff;border-bottom:1px solid var(--bdr);box-shadow:0 14px 26px rgba(0,0,0,.09);padding:8px 28px 18px;z-index:190;opacity:0;transform:translateY(-8px);pointer-events:none;transition:opacity .2s ease,transform .2s ease}
+.mobile-menu.open{opacity:1;transform:translateY(0);pointer-events:auto}
+.mobile-menu a{padding:13px 0;font-size:15px;color:var(--ink2);border-bottom:1px solid var(--bdr);text-decoration:none;transition:color .15s}
+.mobile-menu a:hover{color:var(--amber)}
+.mm-sep{height:6px;border:none}
+.mm-cta{margin-top:14px;background:var(--amber);color:#1a0900 !important;border-bottom:none !important;text-align:center;border-radius:var(--r);padding:13px 0 !important;font-family:var(--disp);font-weight:800;text-transform:uppercase;letter-spacing:.05em}
+.mm-cta:hover{background:var(--amberh);color:#1a0900 !important}
+.page-hero{padding:110px 0 52px;background:var(--bg2);border-bottom:1px solid var(--bdr)}
+.bc{font-family:var(--mono);font-size:11px;color:var(--ink4);margin-bottom:16px;display:flex;align-items:center;gap:5px}
+.bc a{color:var(--amber);text-decoration:none}
+.bc a:hover{text-decoration:underline}
+.eye{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);margin-bottom:14px}
+.eye::before{content:'';width:18px;height:1px;background:var(--amber);flex-shrink:0}
+.dlg{font-family:var(--disp);font-weight:800;line-height:.95;letter-spacing:-.01em;text-transform:uppercase;font-size:clamp(30px,4.5vw,52px)}
+.page-meta{font-family:var(--mono);font-size:11px;color:var(--ink4);margin-top:14px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.badge{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:10px;font-weight:500;padding:3px 9px;border-radius:20px}
+.badge svg{width:10px;height:10px;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.b-green{background:var(--gbg);color:var(--green)}
+.b-green svg{stroke:var(--green)}
+.b-blue{background:var(--bbg);color:var(--blue)}
+.b-blue svg{stroke:var(--blue)}
+.content{padding:60px 0 80px}
+.toc{background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--rl);padding:24px 28px;margin-bottom:48px}
+.toc-title{font-family:var(--disp);font-size:16px;font-weight:700;text-transform:uppercase;color:var(--ink);margin-bottom:14px}
+.toc-list{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:4px 24px}
+.toc-list li a{font-size:13px;color:var(--amber);text-decoration:none;display:flex;align-items:center;gap:6px;padding:4px 0;transition:color .15s}
+.toc-list li a::before{content:'';width:14px;height:1px;background:var(--amber);flex-shrink:0}
+.toc-list li a:hover{color:var(--amberh)}
+.section{margin-bottom:48px;scroll-margin-top:80px}
+.section h2{font-family:var(--disp);font-size:clamp(22px,2.5vw,30px);font-weight:800;text-transform:uppercase;color:var(--ink);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--bdr)}
+.section h3{font-family:var(--disp);font-size:clamp(16px,1.8vw,20px);font-weight:700;text-transform:uppercase;color:var(--ink2);margin:20px 0 8px}
+.section p{font-size:15px;color:var(--ink3);line-height:1.75;margin-bottom:14px}
+.section p strong{color:var(--ink2);font-weight:500}
+.section ul{list-style:none;margin:0 0 16px;display:flex;flex-direction:column;gap:7px}
+.section ul li{display:flex;align-items:flex-start;gap:9px;font-size:14px;color:var(--ink3);line-height:1.6}
+.section ul li::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--amber);flex-shrink:0;margin-top:7px}
+.highlight{background:var(--bg2);border-left:3px solid var(--amber);border-radius:0 var(--r) var(--r) 0;padding:14px 18px;margin:16px 0}
+.highlight p{margin:0;font-size:14px;color:var(--ink2)}
+.warn-box{background:#fef3c7;border-left:3px solid #d97706;border-radius:0 var(--r) var(--r) 0;padding:14px 18px;margin:16px 0}
+.warn-box p{margin:0;font-size:14px;color:#92400e}
+.data-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13px}
+.data-table th{background:var(--bg3);font-family:var(--disp);font-size:13px;font-weight:700;text-transform:uppercase;padding:10px 14px;text-align:left;border-bottom:1px solid var(--bdr2);color:var(--ink2)}
+.data-table td{padding:10px 14px;border-bottom:1px solid var(--bdr);color:var(--ink3);vertical-align:top;line-height:1.55}
+.data-table tr:last-child td{border-bottom:none}
+.data-table tr:nth-child(even) td{background:var(--bg2)}
+.contact-box{background:var(--dk2);border-radius:var(--rxl);padding:28px 32px;margin-top:32px}
+.contact-box h3{font-family:var(--disp);font-size:22px;font-weight:800;text-transform:uppercase;color:var(--dw);margin-bottom:8px}
+.contact-box p{font-size:14px;color:var(--dw2);line-height:1.7;margin-bottom:4px}
+.contact-box a{color:var(--amber)}
+.footer{background:var(--dk2);padding:52px 0 28px;border-top:1px solid var(--dkl)}
+.ftop{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:44px;padding-bottom:36px;border-bottom:1px solid var(--dkl)}
+.fbrand{font-family:var(--disp);font-size:20px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--dw);margin-bottom:8px}
+.fdesc{font-size:13px;color:#6a6763;line-height:1.65;max-width:230px}
+.fbadge{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:10px;color:#6a6763;margin-top:14px;letter-spacing:.05em}
+.fbadge svg{width:11px;height:11px;stroke:var(--green);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.fcolt{font-family:var(--mono);font-size:10px;color:#6a6763;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
+.fcol a{display:block;font-size:13px;color:#8a8782;margin-bottom:9px;transition:color .15s;text-decoration:none}
+.fcol a:hover{color:var(--dw2)}
+.fbtm{padding-top:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.fbtm p{font-family:var(--mono);font-size:11px;color:#6a6763;letter-spacing:.04em}
+.flinks{display:flex;gap:18px}
+.flinks a{font-family:var(--mono);font-size:11px;color:#6a6763;transition:color .15s;text-decoration:none}
+.flinks a:hover{color:var(--dw2)}
+/* ── ADDED FOR THIS PAGE ONLY: cookie-settings controls, styled from the
+      existing tokens so they sit inline with the links around them. ── */
+.flinks button{font-family:var(--mono);font-size:11px;color:#6a6763;background:none;border:none;padding:0;cursor:pointer;transition:color .15s}
+.flinks button:hover{color:var(--dw2)}
+.ck-btn{font-family:var(--body);font-size:15px;color:var(--amber);background:none;border:none;padding:0;cursor:pointer;border-bottom:1px solid var(--abdr)}
+.ck-btn:hover{border-bottom-color:var(--amber)}
+@media(max-width:900px){.nav-links{display:none}.nav-burger{display:flex}.mobile-menu{display:flex}.nav-right .nav-util,.nav-right .nav-sep{display:none}.ftop{grid-template-columns:1fr 1fr}.toc-list{grid-template-columns:1fr}}
+@media(max-width:600px){.ftop{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto !important}.nl::after{transition:none}.nav-burger span{transition:none}}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="w"><div class="nav-i">
+    <a href="index.html" class="logo"><div class="logo-box" style="width:28px;height:28px;border:1.5px solid #e6920a;border-radius:5px;display:flex;align-items:center;justify-content:center;background:#fff"><svg viewBox="0 0 60 60" width="22" height="22" fill="none"><rect x="4" y="4" width="52" height="52" rx="4" fill="#e6920a"/><rect x="12" y="10" width="36" height="38" rx="2" fill="#0d1b2e"/><rect x="4" y="46" width="52" height="10" rx="2" fill="#0d1b2e"/></svg></div><span class="logo-word"><span style="color:#111010">DOCK</span><span style="color:#e6920a">SYNC</span></span></a>
+    <div class="nav-links">
+      <a href="demo.html" class="nl">Product</a>
+      <a href="features.html" class="nl">Why DockSync</a>
+      <a href="pricing.html" class="nl">Pricing</a>
+      <a href="index.html#faq" class="nl">FAQ</a>
+    </div>
+    <div class="nav-right">
+      <a href="https://app.docksync.app" class="nav-util">Warehouse login</a>
+      <div class="nav-sep"></div>
+      <a href="demo.html#s6" class="nav-util">Carrier login</a>
+      <a href="contact.html" class="btn-nav">Start free trial</a>
+      <button class="nav-burger" id="burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div></div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="demo.html">Product</a>
+    <a href="features.html">Why DockSync</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="index.html#faq">FAQ</a>
+    <div class="mm-sep"></div>
+    <a href="https://app.docksync.app">Warehouse login</a>
+    <a href="demo.html#s6">Carrier login</a>
+    <a href="contact.html" class="mm-cta">Start free trial</a>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="wc">
+    <div class="bc"><a href="index.html">Home</a> <span>/</span> Cookies Policy</div>
+    <div class="eye">Legal</div>
+    <h1 class="dlg">Cookies Policy</h1>
+    <div class="page-meta">
+      <span>Last updated: July 2026</span>
+      <span class="badge b-green"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>UK GDPR &amp; PECR</span>
+      <span class="badge b-blue"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>UK-Hosted Data</span>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+  <div class="wc">
+
+<div class="toc">
+  <div class="toc-title">Contents</div>
+  <ul class="toc-list">
+    <li><a href="#what-cookies-are">1. What cookies are</a></li>
+    <li><a href="#our-approach">2. Our approach</a></li>
+    <li><a href="#website-cookies">3. Cookies on this website</a></li>
+    <li><a href="#advertising">4. Advertising &amp; analytics</a></li>
+    <li><a href="#app-cookies">5. Cookies in the application</a></li>
+    <li><a href="#third-parties">6. Third-party services</a></li>
+    <li><a href="#managing">7. Managing cookies</a></li>
+    <li><a href="#dnt">8. Do Not Track &amp; GPC</a></li>
+    <li><a href="#retention">9. How long we keep consent</a></li>
+    <li><a href="#changes">10. Changes to this policy</a></li>
+    <li><a href="#contact">11. Contact &amp; complaints</a></li>
+  </ul>
+</div>
+
+<div class="highlight">
+  <p><strong>Plain English summary:</strong> DockSync uses the small number of cookies needed to keep you signed in and run the platform. Anything beyond that is optional and asks first — say no and nothing changes about how the product works. We don't sell your data, and your booking and operational data is never used for advertising. Questions? Email <a href="mailto:privacy@docksync.app">privacy@docksync.app</a>.</p>
+</div>
+
+<div class="section" id="what-cookies-are">
+  <h2>1. What cookies are</h2>
+  <p>A cookie is a small text file a website stores on your device. Cookies let a site remember things between page loads and between visits — that you're signed in, which calendar view you last used, or that you've already answered a question about cookies.</p>
+  <p>Some cookies are <strong>strictly necessary</strong>: without them the service doesn't function at all. Others are optional, used for measurement or advertising. Under the UK Privacy and Electronic Communications Regulations (PECR), strictly necessary cookies don't require consent. Everything else does, and must stay switched off until you say otherwise.</p>
+</div>
+
+<div class="section" id="our-approach">
+  <h2>2. Our approach</h2>
+  <p>DockSync is a paid B2B platform, not an advertising business. Our revenue comes from subscriptions, so we have no commercial reason to build behavioural profiles of the people who use the product.</p>
+  <p>In practice that means <strong>essential cookies only inside the application</strong>, and on this marketing website nothing optional is set until you've been asked.</p>
+  <div class="highlight">
+    <p>Declining optional cookies has no effect on the platform. Every feature — bookings, supplier self-booking, QR check-in, SMS, reporting, CSV export — works identically either way.</p>
+  </div>
+</div>
+
+<div class="section" id="website-cookies">
+  <h2>3. Cookies on this website</h2>
+  <p>These may be set when you browse <strong>www.docksync.app</strong>:</p>
+  <table class="data-table">
+    <thead><tr><th>Cookie</th><th>Purpose</th><th>Category</th><th>Duration</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>pk_consent</strong></td>
+        <td>Records your cookie choice so you aren't asked again on every page. Stores the categories you agreed to, a timestamp and a version number. No identifiers.</td>
+        <td>Strictly necessary</td>
+        <td>6 months</td>
+      </tr>
+      <tr>
+        <td><strong>_ga</strong></td>
+        <td>Google Analytics. Distinguishes one visitor from another so visits can be counted. Set only if you accept analytics cookies.</td>
+        <td>Analytics (optional)</td>
+        <td>2 years</td>
+      </tr>
+      <tr>
+        <td><strong>_ga_7ZDH5LR6QH</strong></td>
+        <td>Google Analytics. Maintains session state for this property. Set only if you accept analytics cookies.</td>
+        <td>Analytics (optional)</td>
+        <td>2 years</td>
+      </tr>
+      <!-- ▼▼▼ LINKEDIN ROWS — see section 4. Delete both rows if you remove the
+               Insight Tag from the site. Keep them if the pixel stays. ▼▼▼ -->
+      <tr>
+        <td><strong>bcookie, lidc, li_sugr, li_gc</strong></td>
+        <td>Set by LinkedIn via the Insight Tag. Used to measure advertising performance and build remarketing audiences on LinkedIn. Set only if you accept advertising cookies.</td>
+        <td>Advertising (optional)</td>
+        <td>Up to 2 years</td>
+      </tr>
+      <tr>
+        <td><strong>UserMatchHistory, AnalyticsSyncHistory</strong></td>
+        <td>Set by LinkedIn to synchronise advertising identifiers between LinkedIn and this website. Set only if you accept advertising cookies.</td>
+        <td>Advertising (optional)</td>
+        <td>30 days</td>
+      </tr>
+      <!-- ▲▲▲ END LINKEDIN ROWS ▲▲▲ -->
+    </tbody>
+  </table>
+  <p>If you decline analytics, Google Analytics still runs in a cookieless mode that reports anonymous aggregated totals with no identifier stored on your device and no tracking between visits.</p>
+</div>
+
+<div class="section" id="advertising">
+  <h2>4. Advertising and analytics</h2>
+
+  <!-- ══════════════════════════════════════════════════════════════════════
+       READ BEFORE PUBLISHING.
+
+       The LinkedIn Insight Tag is live on the DockSync homepage:
+         https://px.ads.linkedin.com/collect/?pid=9025874&fmt=gif
+
+       Your Privacy Policy states four times that DockSync uses no advertising
+       networks, no remarketing platforms and no third-party marketing pixels
+       (plain English summary, section 3, section 6, section 10.1). Both
+       statements cannot be true at once.
+
+       A) REMOVE THE PIXEL — delete the LinkedIn rows in section 3 and this
+          entire section. privacy.html then becomes accurate with no edits.
+
+       B) KEEP THE PIXEL — deploy the consent banner, stop the tag firing until
+          advertising consent is given, keep the text below, and correct those
+          four passages in privacy.html.
+       ══════════════════════════════════════════════════════════════════════ -->
+
+  <h3>4.1 Google Analytics</h3>
+  <p>We use Google Analytics 4 on this marketing website to understand which pages are useful and where visitors come from. It is not used inside the application, and it is never connected to your account, bookings or supplier records.</p>
+
+  <h3>4.2 LinkedIn Insight Tag</h3>
+  <p>We use the <strong>LinkedIn Insight Tag</strong> on this marketing website to measure whether our LinkedIn advertising leads to trial sign-ups, and to build remarketing audiences on LinkedIn.</p>
+  <p>This is <strong>not enabled by default.</strong> It activates only if you accept advertising cookies. If you decline, the tag is never loaded and no LinkedIn cookies are set.</p>
+  <p>The Insight Tag is not present in the DockSync application at app.docksync.app. Your booking data, supplier data and operational data are never used for advertising, and are never shared with LinkedIn or any other advertising platform.</p>
+  <p>You can review how LinkedIn handles this data in the <a href="https://www.linkedin.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer">LinkedIn Privacy Policy</a>, and opt out of LinkedIn advertising in your LinkedIn account settings.</p>
+</div>
+
+<div class="section" id="app-cookies">
+  <h2>5. Cookies in the application</h2>
+  <p>When you sign in at <strong>app.docksync.app</strong>, cookies are used to run your session. The application is built on Bubble.io, which sets the following:</p>
+  <table class="data-table">
+    <thead><tr><th>Type</th><th>Purpose</th><th>Category</th><th>Duration</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Session</strong></td><td>Keeps you signed in as you move between screens during a visit.</td><td>Strictly necessary</td><td>Session</td></tr>
+      <tr><td><strong>Authentication</strong></td><td>Remembers your signed-in state so you don't re-enter credentials on every page.</td><td>Strictly necessary</td><td>30 days</td></tr>
+      <tr><td><strong>Preferences</strong></td><td>Remembers display choices such as your default calendar view.</td><td>Functional</td><td>1 year</td></tr>
+    </tbody>
+  </table>
+  <p>Blocking essential cookies will prevent you signing in to DockSync. Suppliers and carriers using a booking link don't need an account, and no advertising cookies are set on the supplier booking flow or the QR driver check-in flow.</p>
+  <div class="highlight">
+    <p><strong>Note for warehouse customers:</strong> where DockSync acts as processor for data your suppliers and drivers enter, cookie use inside the application is limited to the essential and functional cookies above. If your compliance team needs this in writing for a supplier assessment, email <a href="mailto:privacy@docksync.app">privacy@docksync.app</a> and we'll provide it.</p>
+  </div>
+</div>
+
+<div class="section" id="third-parties">
+  <h2>6. Third-party services</h2>
+  <p>Some actions take place on another company's platform rather than ours. Those providers set their own cookies under their own policies:</p>
+  <ul>
+    <li><strong>Stripe</strong> — payment processing and fraud prevention at subscription checkout. See <a href="https://stripe.com/gb/privacy" target="_blank" rel="noopener noreferrer">Stripe's privacy policy</a></li>
+    <li><strong>Bubble.io</strong> — the infrastructure the application runs on, responsible for the session and authentication cookies in section 5</li>
+    <li><strong>Google</strong> — Analytics on the marketing website, and Google Fonts, which sets no cookies but does receive your IP address as part of serving the typefaces</li>
+    <li><strong>LinkedIn</strong> — advertising measurement, only where you have accepted advertising cookies. See section 4</li>
+  </ul>
+  <p>Each processor is bound by a Data Processing Agreement. The full list, including what data each receives and where it is held, is in section 6 of our <a href="privacy.html">Privacy Policy</a>.</p>
+</div>
+
+<div class="section" id="managing">
+  <h2>7. Managing cookies</h2>
+  <h3>7.1 On this site</h3>
+  <p>You can review or change your choice at any time: <button type="button" class="ck-btn" data-cookie-settings>open cookie settings</button>. The same control sits in the footer of every page. Withdrawing consent is exactly as straightforward as giving it — that's a requirement, not a courtesy.</p>
+  <h3>7.2 In your browser</h3>
+  <ul>
+    <li><strong>Chrome:</strong> Settings → Privacy and security → Third-party cookies</li>
+    <li><strong>Safari (Mac):</strong> Safari → Settings → Privacy → Block all cookies</li>
+    <li><strong>Safari (iOS):</strong> Settings → Safari → Block All Cookies</li>
+    <li><strong>Firefox:</strong> Settings → Privacy &amp; Security → Cookies and Site Data</li>
+    <li><strong>Edge:</strong> Settings → Cookies and site permissions → Manage and delete cookies</li>
+  </ul>
+  <p>Clearing your cookies removes the saved preference, so you'll be asked again on your next visit. Blocking all cookies will stop you being able to sign in to the application.</p>
+</div>
+
+<div class="section" id="dnt">
+  <h2>8. Do Not Track and Global Privacy Control</h2>
+  <p>Some browsers and extensions send an automatic opt-out signal, either the older Do Not Track header or the newer Global Privacy Control. <strong>We respect both.</strong> Where either signal is present, optional cookies stay switched off and you won't be shown a consent prompt at all.</p>
+  <p>You can still enable analytics deliberately through the cookie settings control if you want to — a browser-level signal is treated as a refusal, not as a permanent lock.</p>
+</div>
+
+<div class="section" id="retention">
+  <h2>9. How long we keep your consent</h2>
+  <p>Your choice is stored for <strong>six months</strong>, then we ask again. Consent that's assumed indefinitely isn't really consent, and browsers, tools and third parties all change over that kind of timescale.</p>
+  <p>We also reset consent whenever the categories or the third parties behind them change materially, so you're asked afresh rather than carried over on an answer you gave about something different.</p>
+</div>
+
+<div class="section" id="changes">
+  <h2>10. Changes to this policy</h2>
+  <p>If we change how we use cookies we'll update this page and the date at the top. Material changes — adding a category, or adding a new third-party service — will also invalidate existing consent so you're asked again.</p>
+  <p>This policy should be read alongside our <a href="privacy.html">Privacy Policy</a> and <a href="terms.html">Terms of Service</a>.</p>
+</div>
+
+<div class="section" id="contact">
+  <h2>11. Contact and complaints</h2>
+  <div class="contact-box">
+    <h3>Get in touch</h3>
+    <p><strong style="color:var(--dw)">Privacy &amp; cookies:</strong> <a href="mailto:privacy@docksync.app">privacy@docksync.app</a></p>
+    <p><strong style="color:var(--dw)">General enquiries:</strong> <a href="mailto:hello@docksync.app">hello@docksync.app</a></p>
+    <p><strong style="color:var(--dw)">Response time:</strong> we aim to reply within 30 days, and usually much sooner.</p>
+    <p style="margin-top:14px">Not satisfied with how we handle your data? You can complain to the UK Information Commissioner's Office at <a href="https://ico.org.uk" target="_blank" rel="noopener noreferrer">ico.org.uk</a> or on 0303 123 1113.</p>
+    <p style="margin-top:14px;color:var(--dw4)">DockSync Ltd · All rights reserved</p>
+  </div>
+</div>
+
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="w">
+    <div class="ftop">
+      <div>
+        <div class="fbrand">DockSync</div>
+        <p class="fdesc">Dock scheduling software for warehouses that want precision over chaos.</p>
+        <div class="fbadge"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>SSL &middot; GDPR &middot; UK-hosted</div>
+      </div>
+      <div><div class="fcolt">Product</div><div class="fcol"><a href="demo.html">Walkthrough</a><a href="features.html">Why DockSync</a><a href="pricing.html">Pricing</a><a href="index.html#faq">FAQ</a></div></div>
+      <div><div class="fcolt">Industries</div><div class="fcol"><a href="industries.html#retail">Retail &amp; FMCG</a><a href="industries.html#pharma">Pharmaceutical</a><a href="industries.html#automotive">Automotive</a><a href="industries.html#logistics">3PL &amp; Logistics</a></div></div>
+      <div><div class="fcolt">Company</div><div class="fcol"><a href="contact.html">About us</a><a href="mailto:hello@docksync.app">hello@docksync.app</a><a href="privacy.html">Privacy policy</a><a href="terms.html">Terms of service</a></div></div>
+    </div>
+    <div class="fbtm">
+      <p>&copy; 2026 DockSync Ltd &middot; All rights reserved</p>
+      <div class="flinks"><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="cookies.html">Cookies</a><button type="button" data-cookie-settings>Cookie settings</button></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+  var nav=document.getElementById('nav');
+  window.addEventListener('scroll',function(){ if(nav) nav.classList.toggle('sc',window.scrollY>10); },{passive:true});
+  var burger=document.getElementById('burger'), mm=document.getElementById('mobileMenu');
+  if(burger&&mm){
+    burger.addEventListener('click',function(){
+      var open=mm.classList.toggle('open');
+      burger.classList.toggle('open',open);
+      burger.setAttribute('aria-expanded',open);
+    });
+    mm.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click',function(){
+        mm.classList.remove('open'); burger.classList.remove('open'); burger.setAttribute('aria-expanded','false');
+      });
+    });
+  }
+});
+</script>
+</body>
+</html>
