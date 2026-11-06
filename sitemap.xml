@@ -48,4 +48,19 @@
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
+  <url>
+    <loc>https://www.docksync.app/guides/</loc>
+  </url>
+  <url>
+    <loc>https://www.docksync.app/guides/manual-delivery-slot-booking-cost/</loc>
+  </url>
+  <url>
+    <loc>https://www.docksync.app/guides/dock-scheduling-vs-yard-management/</loc>
+  </url>
+  <url>
+    <loc>https://www.docksync.app/guides/warehouse-delivery-slot-capacity/</loc>
+  </url>
+  <url>
+    <loc>https://www.docksync.app/guides/carrier-supplier-self-booking-rollout/</loc>
+  </url>
 </urlset>
